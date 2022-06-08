@@ -1,2 +1,2 @@
-# crowd-simulation
+# Crowd-Simulation
 
