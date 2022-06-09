@@ -1,1 +1,1 @@
-add_library(include Actor.cpp)
+add_library(include Actor.cpp Room.cpp)
