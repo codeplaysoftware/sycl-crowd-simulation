@@ -13,6 +13,11 @@ private:
     float radius;
 public:    
     Actor(std::array<float, 2> pPos, std::array<float, 2> pVelocity, std::array<float, 2> pDesiredVelocity, float pMass, float pRadius);
+    std::array<float, 2> getPos();
+    std::array<float, 2> getVelocity();
+    std::array<float, 2> getDesiredVelocity();
+    float getMass();
+    float getRadius();
 };
 
 #endif

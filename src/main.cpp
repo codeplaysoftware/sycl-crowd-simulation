@@ -7,15 +7,15 @@ const int WIDTH = 8; // metres
 const int HEIGHT = 6; // metres
 const int SCALE = 100;
 
-void init(SDL_Window* win, SDL_Renderer* render, std::vector<Actor> &actors) {
+void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     SDL_Init(SDL_INIT_VIDEO);
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    actors.push_back(Actor{{1,2}, {3,4}, {5,6}, 3, 4});
+    actors.push_back(Actor{{1,2}, {3,4}, {5,6}, 50, 0.05});
 }
 
-void drawCircle(SDL_Renderer* render, SDL_Point center, int radius, SDL_Color color) {
+void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
     SDL_SetRenderDrawColor(render, color.r, color.g, color.b, color.a);
     for (int w = 0; w < radius * 2; w++) {
         for (int h = 0; h < radius * 2; h++) {
@@ -28,11 +28,15 @@ void drawCircle(SDL_Renderer* render, SDL_Point center, int radius, SDL_Color co
     }
 }
 
-void draw(SDL_Renderer* render, std::vector<Actor> &actors) {
+void draw(SDL_Renderer* &render, std::vector<Actor> actors) {
     SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
     SDL_RenderClear(render);
 
-
+    SDL_Color red = {255, 0, 0, 255};
+    for (Actor actor : actors) {
+        SDL_Point pos = {int(actor.getPos()[0] * SCALE), int(actor.getPos()[1] * SCALE)};
+        drawCircle(render, pos, actor.getRadius() * SCALE, red);
+    }
 
     SDL_RenderPresent(render);
 }
@@ -53,8 +57,6 @@ int main() {
 
     draw(render, actors);
 
-    Actor test = Actor({0, 2}, {3, 4}, {5,6}, 12, 3);
-
     bool isQuit = false;
     SDL_Event event;
 
@@ -65,7 +67,7 @@ int main() {
             }
         }
 
-        draw(render, actors);
+        //draw(render, actors);
     }
 
     close(win);
