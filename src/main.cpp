@@ -4,6 +4,7 @@
 
 #include "Actor.hpp"
 #include "Room.hpp"
+#include "MathHelper.hpp"
 
 const int WIDTH = 8; // metres
 const int HEIGHT = 6; // metres
@@ -15,7 +16,8 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    actors.push_back(Actor{{1, 2}, {0.01, 0.01}, {0.02, 0.02}, 50, 0.05});
+    actors.push_back(Actor{{4, 0}, {0.01, 0.01}, {0.02, 0.02}, {1, 2}, 50, 0.05});
+    actors.push_back(Actor{{8, 6}, {-0.02, -0.02}, {-0.03, -0.03}, {1, 2}, 60, 0.08});
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -53,6 +55,9 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
         SDL_RenderDrawLine(render, wall[0] * SCALE, wall[1] * SCALE, wall[2] * SCALE, wall[3] * SCALE);
     }
 
+    SDL_SetRenderDrawColor(render, 0, 255, 0, 255);
+    SDL_RenderDrawPoint(render, 100, 200);
+
     SDL_RenderPresent(render);
 }
 
@@ -67,9 +72,12 @@ int main() {
     SDL_Renderer* render = NULL;
 
     std::vector<Actor> actors;
-    Room room = Room({{0.5, 0.5, 0.5, 1.5}, {0.5, 2.5, 0.5, 5.5}, {0.5, 5.5, 7.5, 5.5}, {7.5, 5.5, 7.5, 0.5}, {7.5, 0.5, 0.5, 0.5}}, {});
+    Room room = Room({{0.5, 0.5, 0.5, 1.5}, {0.5, 2.5, 0.5, 5.5}, {0.5, 5.5, 7.5, 5.5}, {7.5, 5.5, 7.5, 0.5}, {7.5, 0.5, 0.5, 0.5}});
 
     init(win, render, actors);
+
+    // Make actor move towards destination
+    actors[0].setVelocity(velToPoint(0.01, actors[0].getPos(), actors[0].getDestination()));
 
     draw(render, actors, room);
 

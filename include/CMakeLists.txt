@@ -1,1 +1,1 @@
-add_library(include Actor.cpp Room.cpp)
+add_library(include Actor.cpp Room.cpp MathHelper.cpp)
