@@ -1,7 +1,9 @@
 #include <CL/sycl.hpp>
 #include <SDL2/SDL.h>
-#include "Actor.hpp"
 #include <iostream>
+
+#include "Actor.hpp"
+#include "Room.hpp"
 
 const int WIDTH = 8; // metres
 const int HEIGHT = 6; // metres
@@ -13,7 +15,7 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    actors.push_back(Actor{{1, 2}, {0.01, 0}, {0.02, 0.02}, 50, 0.05});
+    actors.push_back(Actor{{1, 2}, {0.01, 0.01}, {0.02, 0.02}, 50, 0.05});
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -36,7 +38,7 @@ void update(std::vector<Actor> &actors) {
     }
 }
 
-void draw(SDL_Renderer* &render, std::vector<Actor> actors) {
+void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
     SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
     SDL_RenderClear(render);
 
@@ -44,6 +46,11 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors) {
     for (Actor actor : actors) {
         SDL_Point pos = {int(actor.getPos()[0] * SCALE), int(actor.getPos()[1] * SCALE)};
         drawCircle(render, pos, actor.getRadius() * SCALE, red);
+    }
+
+    SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+    for (std::array<float, 4> wall : room.getWalls()) {
+        SDL_RenderDrawLine(render, wall[0] * SCALE, wall[1] * SCALE, wall[2] * SCALE, wall[3] * SCALE);
     }
 
     SDL_RenderPresent(render);
@@ -60,10 +67,11 @@ int main() {
     SDL_Renderer* render = NULL;
 
     std::vector<Actor> actors;
+    Room room = Room({{0.5, 0.5, 0.5, 1.5}, {0.5, 2.5, 0.5, 5.5}, {0.5, 5.5, 7.5, 5.5}, {7.5, 5.5, 7.5, 0.5}, {7.5, 0.5, 0.5, 0.5}}, {});
 
     init(win, render, actors);
 
-    draw(render, actors);
+    draw(render, actors, room);
 
     int delayCounter = 0;
     bool isQuit = false;
@@ -78,7 +86,7 @@ int main() {
         if (delayCounter >= DELAY) {
             delayCounter = 0;
             update(actors);
-            draw(render, actors);
+            draw(render, actors, room);
         }
         else {
             delayCounter++;
