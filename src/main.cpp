@@ -6,13 +6,14 @@
 const int WIDTH = 8; // metres
 const int HEIGHT = 6; // metres
 const int SCALE = 100;
+const int DELAY = 10000;
 
 void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     SDL_Init(SDL_INIT_VIDEO);
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    actors.push_back(Actor{{1,2}, {3,4}, {5,6}, 50, 0.05});
+    actors.push_back(Actor{{1, 2}, {0.01, 0}, {0.02, 0.02}, 50, 0.05});
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -25,6 +26,13 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
                 SDL_RenderDrawPoint(render, center.x + dx, center.y + dy);
             }
         }
+    }
+}
+
+void update(std::vector<Actor> &actors) {
+    for (auto &actor : actors) {
+        actor.setPos({actor.getPos()[0] + actor.getVelocity()[0],
+                      actor.getPos()[1] + actor.getVelocity()[1]});
     }
 }
 
@@ -57,6 +65,7 @@ int main() {
 
     draw(render, actors);
 
+    int delayCounter = 0;
     bool isQuit = false;
     SDL_Event event;
 
@@ -66,8 +75,14 @@ int main() {
                 isQuit = true;
             }
         }
-
-        //draw(render, actors);
+        if (delayCounter >= DELAY) {
+            delayCounter = 0;
+            update(actors);
+            draw(render, actors);
+        }
+        else {
+            delayCounter++;
+        }
     }
 
     close(win);

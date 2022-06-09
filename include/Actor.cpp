@@ -29,3 +29,15 @@ float Actor::getMass() {
 float Actor::getRadius() {
     return radius;
 }
+
+void Actor::setPos(std::array<float, 2> newPos) {
+    pos = newPos;
+}
+
+void Actor::setVelocity(std::array<float, 2> newVelocity) {
+    velocity = newVelocity;
+}
+
+void Actor::setDesiredVelocity(std::array<float, 2> newDesiredVelocity) {
+    desiredVelocity = newDesiredVelocity;
+}
