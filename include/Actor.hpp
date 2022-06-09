@@ -3,17 +3,16 @@
 
 #include<iostream>
 #include <array>
-using namespace std;
 
 class Actor {
 private:
-    array<float, 2> pos;
-    array<float, 2> velocity;
-    array<float, 2> desiredVelocity;
+    std::array<float, 2> pos;
+    std::array<float, 2> velocity;
+    std::array<float, 2> desiredVelocity;
     float mass;
     float radius;
 public:    
-    Actor(array<float, 2> pPos, array<float, 2> pVelocity, array<float, 2> pDesiredVelocity, float pMass, float pRadius);
+    Actor(std::array<float, 2> pPos, std::array<float, 2> pVelocity, std::array<float, 2> pDesiredVelocity, float pMass, float pRadius);
 };
 
 #endif
