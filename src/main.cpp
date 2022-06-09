@@ -1,5 +1,6 @@
 #include <CL/sycl.hpp>
 #include <SDL2/SDL.h>
+#include "Actor.hpp"
 #include <iostream>
 using namespace std;
 
@@ -32,6 +33,8 @@ int main() {
     init();
 
     draw();
+
+    Actor test = Actor({0, 2}, {3, 4}, {5,6}, 12, 3);
 
     bool isQuit = false;
     SDL_Event event;
