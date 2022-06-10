@@ -1,10 +1,11 @@
-#include <CL/sycl.hpp>
+#include <sycl/sycl.hpp>
 #include <SDL2/SDL.h>
 #include <iostream>
 
 #include "Actor.hpp"
 #include "Room.hpp"
 #include "MathHelper.hpp"
+#include "DifferentialEq.hpp"
 
 const int WIDTH = 8; // metres
 const int HEIGHT = 6; // metres
@@ -34,10 +35,19 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
 }
 
 void update(std::vector<Actor> &actors) {
-    for (auto &actor : actors) {
-        actor.setPos({actor.getPos()[0] + actor.getVelocity()[0],
-                      actor.getPos()[1] + actor.getVelocity()[1]});
-    }
+    sycl::queue myQueue{sycl::gpu_selector()};
+
+    auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
+
+    myQueue.submit([&](sycl::handler& cgh) {
+        auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+
+        cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
+            Actor current = actorAcc[index];
+            actorAcc[index].setPos({current.getPos()[0] + current.getVelocity()[0],
+                            current.getPos()[1] + current.getVelocity()[1]});
+        }); 
+    }).wait();
 }
 
 void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
@@ -54,9 +64,6 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
     for (std::array<float, 4> wall : room.getWalls()) {
         SDL_RenderDrawLine(render, wall[0] * SCALE, wall[1] * SCALE, wall[2] * SCALE, wall[3] * SCALE);
     }
-
-    SDL_SetRenderDrawColor(render, 0, 255, 0, 255);
-    SDL_RenderDrawPoint(render, 100, 200);
 
     SDL_RenderPresent(render);
 }
@@ -77,7 +84,7 @@ int main() {
     init(win, render, actors);
 
     // Make actor move towards destination
-    actors[0].setVelocity(velToPoint(0.01, actors[0].getPos(), actors[0].getDestination()));
+    actors[0].setVelocity(velToPoint(0.008, actors[0].getPos(), actors[0].getDestination()));
 
     draw(render, actors, room);
 

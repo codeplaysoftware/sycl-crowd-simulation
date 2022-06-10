@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <array>
+#include <sycl/sycl.hpp>
 
 class Actor {
 private:
@@ -15,14 +16,14 @@ private:
 public:    
     Actor(std::array<float, 2> pPos, std::array<float, 2> pVelocity, std::array<float, 2> pDesiredVelocity, std::array<float, 2> pDestination, float pMass, float pRadius);
     
-    std::array<float, 2> getPos();
-    std::array<float, 2> getVelocity();
+    SYCL_EXTERNAL std::array<float, 2> getPos();
+    SYCL_EXTERNAL std::array<float, 2> getVelocity();
     std::array<float, 2> getDesiredVelocity();
     std::array<float, 2> getDestination();
     float getMass();
     float getRadius();
 
-    void setPos(std::array<float, 2> newPos);
+    SYCL_EXTERNAL void setPos(std::array<float, 2> newPos);
     void setVelocity(std::array<float, 2> newVelocity);
     void setDesiredVelocity(std::array<float, 2> newDesiredVelocity);
     void setDestination(std::array<float, 2> newDestination);

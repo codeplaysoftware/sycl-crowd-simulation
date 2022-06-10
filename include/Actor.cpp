@@ -1,6 +1,7 @@
 #include "Actor.hpp"
 #include <iostream>
 #include <array>
+#include <sycl/sycl.hpp>
 
 Actor::Actor(std::array<float, 2> pPos, std::array<float, 2> pVelocity, std::array<float, 2> pDesiredVelocity, std::array<float, 2> pDestination, float pMass, float pRadius) {
     pos = pPos;
@@ -15,7 +16,7 @@ std::array<float, 2> Actor::getPos() {
     return pos;
 }
 
-std::array<float, 2> Actor::getVelocity() {
+SYCL_EXTERNAL std::array<float, 2> Actor::getVelocity() {
     return velocity;
 }
 
