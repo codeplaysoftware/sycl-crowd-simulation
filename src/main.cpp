@@ -65,7 +65,7 @@ void update(std::vector<Actor> &actors) {
         auto out = sycl::stream{1024, 120, cgh};
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
-            differentialEq(actorAcc[index], actorAcc, peopleForcesAcc, wallForcesAcc);
+            differentialEq(actorAcc[index], actorAcc);
         });
     }).wait();
 

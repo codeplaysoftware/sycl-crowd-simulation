@@ -17,6 +17,8 @@ public:
     SYCL_EXTERNAL void operator=(std::array<float, 2> newContents);
 };
 
+SYCL_EXTERNAL GeometricVector getZeroFromVector(GeometricVector a);
+
 SYCL_EXTERNAL GeometricVector operator*=(GeometricVector& a, GeometricVector b);
 SYCL_EXTERNAL GeometricVector operator*(GeometricVector a, GeometricVector b);
 

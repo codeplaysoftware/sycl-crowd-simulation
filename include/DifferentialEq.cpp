@@ -7,13 +7,15 @@
 #include "Room.hpp"
 #include "MathHelper.hpp"
 
-SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, sycl::accessor<GeometricVector, 1> peopleForces, sycl::accessor<GeometricVector, 1> wallForces) {
+SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors) {
     auto mi = i.getMass();
     auto v0i = 1.5;
     auto e0i = getDirectionVector(i.getPos(), i.getDestination());
     auto vi = i.getVelocity();
 
     auto personalImpulse = ((v0i * e0i) - vi) / ti;
+
+    auto peopleForces = getZeroFromVector(e0i);
     for (int x = 0; x < actors.size(); x++) {
         auto j = actors[x];
         if (&j != &i) {
@@ -25,7 +27,7 @@ SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, syc
             auto g = dij > sij ? 0 : sij - dij;
             auto deltavtij = dotProduct((j.getVelocity() - i.getVelocity()), tij);
 
-            peopleForces[0] += (Ai * exp((sij - dij) / Bi) + k1 * g) * nij + (k2 * g * deltavtij * tij);
+            peopleForces += (Ai * exp((sij - dij) / Bi) + k1 * g) * nij + (k2 * g * deltavtij * tij);
         }
     }
 }

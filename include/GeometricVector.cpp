@@ -12,6 +12,10 @@ GeometricVector::GeometricVector(std::array<float, 2> pContents) {
     contents = pContents;
 }
 
+SYCL_EXTERNAL GeometricVector getZeroFromVector(GeometricVector a) {
+    return a - a;
+}
+
 SYCL_EXTERNAL float& GeometricVector::operator[](int index) {
     return contents[index];
 }
