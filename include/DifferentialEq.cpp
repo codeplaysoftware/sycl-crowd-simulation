@@ -7,7 +7,7 @@
 #include "Room.hpp"
 #include "MathHelper.hpp"
 
-SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors) {
+SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, sycl::accessor<Room, 1> room) {
     auto mi = i.getMass();
     auto v0i = 1.5;
     auto e0i = getDirectionVector(i.getPos(), i.getDestination());
@@ -30,4 +30,6 @@ SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors) {
             peopleForces += (Ai * exp((sij - dij) / Bi) + k1 * g) * nij + (k2 * g * deltavtij * tij);
         }
     }
+
+    auto wallForces = getZeroFromVector(e0i);
 }

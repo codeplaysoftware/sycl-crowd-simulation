@@ -47,25 +47,22 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
     }
 }
 
-void update(std::vector<Actor> &actors) {
+void update(std::vector<Actor> &actors, Room room) {
     sycl::queue myQueue{sycl::gpu_selector()};
 
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
-    GeometricVector peopleForces;
-    auto peopleForcesBuf = sycl::buffer<GeometricVector>(&peopleForces, 1);
-    GeometricVector wallForces;
-    auto wallForcesBuf = sycl::buffer<GeometricVector>(&wallForces, 1);
+    auto roomBuf = sycl::buffer<Room>(&room, 1);
 
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
-        auto peopleForcesAcc = peopleForcesBuf.get_access<sycl::access::mode::read_write>(cgh);
-        auto wallForcesAcc = wallForcesBuf.get_access<sycl::access::mode::read_write>(cgh);
+
+        auto roomAcc = roomBuf.get_access<sycl::access::mode::read_write>(cgh);
 
         auto out = sycl::stream{1024, 120, cgh};
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
-            differentialEq(actorAcc[index], actorAcc);
+            differentialEq(actorAcc[index], actorAcc, roomAcc);
         });
     }).wait();
 
@@ -90,8 +87,9 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
     }
 
     SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
-    for (std::array<float, 4> wall : room.getWalls()) {
-        SDL_RenderDrawLine(render, wall[0] * SCALE, wall[1] * SCALE, wall[2] * SCALE, wall[3] * SCALE);
+    auto walls = room.getWalls();
+    for (int x = 0; x < walls.size(); x++) {
+        SDL_RenderDrawLine(render, walls[x][0][0] * SCALE, walls[x][0][1] * SCALE, walls[x][1][0] * SCALE, walls[x][1][1] * SCALE);
     }
 
     SDL_RenderPresent(render);
@@ -108,7 +106,12 @@ int main() {
     SDL_Renderer* render = NULL;
 
     std::vector<Actor> actors;
-    Room room = Room({{0.5, 0.5, 0.5, 1.5}, {0.5, 2.5, 0.5, 5.5}, {0.5, 5.5, 7.5, 5.5}, {7.5, 5.5, 7.5, 0.5}, {7.5, 0.5, 0.5, 0.5}});
+    Room room = Room({{GeometricVector({0.5, 0.5}), GeometricVector({0.5, 1.5})}, 
+                      {GeometricVector({0.5, 2.5}), GeometricVector({0.5, 5.5})}, 
+                      {GeometricVector({0.5, 5.5}), GeometricVector({7.5, 5.5})},
+                      {GeometricVector({7.5, 5.5}), GeometricVector({7.5, 0.5})}, 
+                      {GeometricVector({7.5, 0.5}), GeometricVector({0.5, 0.5})}
+    });
 
     init(win, render, actors);
 
@@ -126,7 +129,7 @@ int main() {
         }
         if (delayCounter >= DELAY) {
             delayCounter = 0;
-            update(actors);
+            update(actors, room);
             draw(render, actors, room);
         }
         else {
