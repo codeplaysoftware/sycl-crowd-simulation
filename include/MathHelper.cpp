@@ -24,3 +24,9 @@ SYCL_EXTERNAL float magnitude(GeometricVector inp) {
 SYCL_EXTERNAL float dotProduct(GeometricVector a, GeometricVector b) {
     return (a[0] * b[0]) + (a[1] * b[1]);
 }
+
+SYCL_EXTERNAL float distanceToWall(GeometricVector a, std::array<GeometricVector, 2> w) {
+    float numerator = std::fabs(((w[1][0] - w[0][0]) * (w[0][1] - a[1])) - ((w[0][0] - a[0]) * (w[1][1] - w[0][1])));
+    float denominator = sqrt(pow((w[1][0] - w[0][0]), 2) + pow((w[1][1] - w[0][1]), 2));
+    return float(numerator / denominator);
+}

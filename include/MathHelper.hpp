@@ -17,4 +17,6 @@ SYCL_EXTERNAL float magnitude(GeometricVector inp);
 
 SYCL_EXTERNAL float dotProduct(GeometricVector a, GeometricVector b);
 
+SYCL_EXTERNAL float distanceToWall(GeometricVector a, std::array<GeometricVector, 2> w);
+
 #endif

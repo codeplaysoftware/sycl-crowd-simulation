@@ -32,4 +32,5 @@ SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, syc
     }
 
     auto wallForces = getZeroFromVector(e0i);
+    
 }
