@@ -5,18 +5,18 @@
 #include <cmath>
 #include <sycl/sycl.hpp>
 
-SYCL_EXTERNAL std::array<float, 2> getDirectionVector(std::array<float, 2> a, std::array<float, 2> b) {
-    return {float(b[0] - a[0]), float(b[1] - a[1])};
+SYCL_EXTERNAL GeometricVector getDirectionVector(GeometricVector a, GeometricVector b) {
+    return b - a;
 }
 
-std::array<float, 2> velFromSpeedAndDir(float s, std::array<float, 2> d) {
-    return {(s / magnitude(d)) * d[0], (s / magnitude(d)) * d[1]};
+GeometricVector velFromSpeedAndDir(float s, GeometricVector d) {
+    return d * (s / magnitude(d));
 }
 
-std::array<float, 2> velToPoint(float s, std::array<float, 2> pos, std::array<float, 2> destination) {
+GeometricVector velToPoint(float s, GeometricVector pos, GeometricVector destination) {
     return velFromSpeedAndDir(s, getDirectionVector(pos, destination));
 }
 
-float magnitude(std::array<float, 2> inp) {
+float magnitude(GeometricVector inp) {
     return std::sqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
 }

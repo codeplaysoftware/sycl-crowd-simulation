@@ -4,29 +4,30 @@
 #include <iostream>
 #include <array>
 #include <sycl/sycl.hpp>
+#include "GeometricVector.hpp"
 
 class Actor {
 private:
-    std::array<float, 2> pos;
-    std::array<float, 2> velocity;
-    std::array<float, 2> desiredVelocity;
-    std::array<float, 2> destination;
+    GeometricVector pos;
+    GeometricVector velocity;
+    GeometricVector desiredVelocity;
+    GeometricVector destination;
     float mass;
     float radius;
 public:    
-    Actor(std::array<float, 2> pPos, std::array<float, 2> pVelocity, std::array<float, 2> pDesiredVelocity, std::array<float, 2> pDestination, float pMass, float pRadius);
+    Actor(GeometricVector pPos, GeometricVector pVelocity, GeometricVector pDesiredVelocity, GeometricVector pDestination, float pMass, float pRadius);
     
-    SYCL_EXTERNAL std::array<float, 2> getPos();
-    SYCL_EXTERNAL std::array<float, 2> getVelocity();
-    SYCL_EXTERNAL std::array<float, 2> getDesiredVelocity();
-    SYCL_EXTERNAL std::array<float, 2> getDestination();
+    SYCL_EXTERNAL GeometricVector getPos();
+    SYCL_EXTERNAL GeometricVector getVelocity();
+    SYCL_EXTERNAL GeometricVector getDesiredVelocity();
+    SYCL_EXTERNAL GeometricVector getDestination();
     SYCL_EXTERNAL float getMass();
     SYCL_EXTERNAL float getRadius();
 
-    SYCL_EXTERNAL void setPos(std::array<float, 2> newPos);
-    SYCL_EXTERNAL void setVelocity(std::array<float, 2> newVelocity);
-    SYCL_EXTERNAL void setDesiredVelocity(std::array<float, 2> newDesiredVelocity);
-    SYCL_EXTERNAL void setDestination(std::array<float, 2> newDestination);
+    SYCL_EXTERNAL void setPos(GeometricVector newPos);
+    SYCL_EXTERNAL void setVelocity(GeometricVector newVelocity);
+    SYCL_EXTERNAL void setDesiredVelocity(GeometricVector newDesiredVelocity);
+    SYCL_EXTERNAL void setDestination(GeometricVector newDestination);
 };
 
 #endif

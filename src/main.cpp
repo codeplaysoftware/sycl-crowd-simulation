@@ -6,6 +6,7 @@
 #include "Room.hpp"
 #include "MathHelper.hpp"
 #include "DifferentialEq.hpp"
+#include "GeometricVector.hpp"
 
 constexpr int WIDTH = 8; // metres
 constexpr int HEIGHT = 6; // metres
@@ -17,8 +18,16 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    actors.push_back(Actor{{4, 0}, {0.01, 0.01}, {0.02, 0.02}, {1, 2}, 50, 0.05});
-    actors.push_back(Actor{{8, 6}, {-0.02, -0.02}, {-0.03, -0.03}, {1, 2}, 60, 0.08});
+    actors.push_back(Actor{GeometricVector({4, 0}),
+                           GeometricVector({0.01, 0.01}), 
+                           GeometricVector({0.02, 0.02}),
+                           GeometricVector({1, 2}),
+                           50, 0.05});
+    actors.push_back(Actor{GeometricVector({8, 6}), 
+                           GeometricVector({-0.02, -0.02}),
+                           GeometricVector({-0.03, -0.03}),
+                           GeometricVector({1, 2}),
+                           60, 0.08});
 
     // Make actor move towards destination
     actors[0].setVelocity(velToPoint(0.008, actors[0].getPos(), actors[0].getDestination()));
@@ -58,9 +67,8 @@ void update(std::vector<Actor> &actors) {
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
             Actor current = actorAcc[index];
-            actorAcc[index].setPos({current.getPos()[0] + current.getVelocity()[0],
-                            current.getPos()[1] + current.getVelocity()[1]});
-        }); 
+            actorAcc[index].setPos(current.getPos() + current.getVelocity());
+        });
     }).wait();
 }
 
