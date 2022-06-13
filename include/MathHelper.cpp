@@ -9,14 +9,18 @@ SYCL_EXTERNAL GeometricVector getDirectionVector(GeometricVector a, GeometricVec
     return b - a;
 }
 
-GeometricVector velFromSpeedAndDir(float s, GeometricVector d) {
+SYCL_EXTERNAL GeometricVector velFromSpeedAndDir(float s, GeometricVector d) {
     return d * (s / magnitude(d));
 }
 
-GeometricVector velToPoint(float s, GeometricVector pos, GeometricVector destination) {
+SYCL_EXTERNAL GeometricVector velToPoint(float s, GeometricVector pos, GeometricVector destination) {
     return velFromSpeedAndDir(s, getDirectionVector(pos, destination));
 }
 
-float magnitude(GeometricVector inp) {
+SYCL_EXTERNAL float magnitude(GeometricVector inp) {
     return std::sqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
+}
+
+SYCL_EXTERNAL float dotProduct(GeometricVector a, GeometricVector b) {
+    return (a[0] * b[0]) + (a[1] * b[1]);
 }

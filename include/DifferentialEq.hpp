@@ -8,13 +8,14 @@
 #include "Actor.hpp"
 #include "Room.hpp"
 #include "MathHelper.hpp"
+#include "GeometricVector.hpp"
 
-const float Ai = 2000;
-const float Bi = 0.08;
-const float k1 = 125000;
-const float k2 = 240000;
-const float ti = 0.5;
+constexpr float Ai = 2000;
+constexpr float Bi = 0.08;
+constexpr float k1 = 125000;
+constexpr float k2 = 240000;
+constexpr float ti = 0.5;
 
-SYCL_EXTERNAL void personalImpulse(Actor &actor);
+SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, sycl::accessor<GeometricVector, 1> peopleForces, sycl::accessor<GeometricVector, 1> wallForces);
 
 #endif

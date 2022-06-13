@@ -52,13 +52,20 @@ void update(std::vector<Actor> &actors) {
 
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
+    GeometricVector peopleForces;
+    auto peopleForcesBuf = sycl::buffer<GeometricVector>(&peopleForces, 1);
+    GeometricVector wallForces;
+    auto wallForcesBuf = sycl::buffer<GeometricVector>(&wallForces, 1);
+
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+        auto peopleForcesAcc = peopleForcesBuf.get_access<sycl::access::mode::read_write>(cgh);
+        auto wallForcesAcc = wallForcesBuf.get_access<sycl::access::mode::read_write>(cgh);
 
         auto out = sycl::stream{1024, 120, cgh};
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
-            personalImpulse(actorAcc[index]);
+            differentialEq(actorAcc[index], actorAcc, peopleForcesAcc, wallForcesAcc);
         });
     }).wait();
 

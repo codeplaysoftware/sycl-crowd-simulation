@@ -69,3 +69,13 @@ SYCL_EXTERNAL GeometricVector operator*=(float s, GeometricVector& a) {
 SYCL_EXTERNAL GeometricVector operator*(float s, GeometricVector a) {
     return a *= s;
 }
+
+SYCL_EXTERNAL GeometricVector operator/=(GeometricVector& a, float s) {
+    a[0] /= s;
+    a[1] /= s;
+    return a;
+}
+
+SYCL_EXTERNAL GeometricVector operator/(GeometricVector a, float s) {
+    return a *= s;
+}

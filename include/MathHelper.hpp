@@ -9,10 +9,12 @@
 
 SYCL_EXTERNAL GeometricVector getDirectionVector(GeometricVector a, GeometricVector b);
 
-GeometricVector velFromSpeedAndDir(float s, GeometricVector d);
+SYCL_EXTERNAL GeometricVector velFromSpeedAndDir(float s, GeometricVector d);
 
-GeometricVector velToPoint(float s, GeometricVector pos, GeometricVector destination);
+SYCL_EXTERNAL GeometricVector velToPoint(float s, GeometricVector pos, GeometricVector destination);
 
-float magnitude(GeometricVector inp);
+SYCL_EXTERNAL float magnitude(GeometricVector inp);
+
+SYCL_EXTERNAL float dotProduct(GeometricVector a, GeometricVector b);
 
 #endif

@@ -7,11 +7,25 @@
 #include "Room.hpp"
 #include "MathHelper.hpp"
 
-SYCL_EXTERNAL void personalImpulse(Actor &actor) {
-    auto mass = actor.getMass();
-    auto desiredSpeed = 1.5;
-    auto desiredDirection = getDirectionVector(actor.getPos(), actor.getDestination());
-    auto actualVelocity = actor.getVelocity();
+SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, sycl::accessor<GeometricVector, 1> peopleForces, sycl::accessor<GeometricVector, 1> wallForces) {
+    auto mi = i.getMass();
+    auto v0i = 1.5;
+    auto e0i = getDirectionVector(i.getPos(), i.getDestination());
+    auto vi = i.getVelocity();
 
-    //return ((desiredSpeed * desiredDirection) - actualVelocity) / ti
-};
+    auto personalImpulse = ((v0i * e0i) - vi) / ti;
+    for (int x = 0; x < actors.size(); x++) {
+        auto j = actors[x];
+        if (&j != &i) {
+            auto sij = j.getRadius() + i.getRadius();
+            auto dij = magnitude(i.getPos() - j.getPos());
+            auto nij = (i.getPos() - j.getPos()) / dij;
+            auto tij = nij;
+            tij = {-nij[1], nij[0]};
+            auto g = dij > sij ? 0 : sij - dij;
+            auto deltavtij = dotProduct((j.getVelocity() - i.getVelocity()), tij);
+
+            peopleForces[0] += (Ai * exp((sij - dij) / Bi) + k1 * g) * nij + (k2 * g * deltavtij * tij);
+        }
+    }
+}
