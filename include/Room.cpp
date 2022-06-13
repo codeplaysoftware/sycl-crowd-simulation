@@ -3,10 +3,10 @@
 #include <vector>
 #include <array>
 
-Room::Room(std::vector<std::array<GeometricVector, 2>> pWalls) {
+Room::Room(std::vector<std::array<float, 4>> pWalls) {
     walls = pWalls;
 }
 
-std::vector<std::array<GeometricVector, 2>> Room::getWalls() {
+SYCL_EXTERNAL std::vector<std::array<float, 4>> Room::getWalls() {
     return walls;
 }

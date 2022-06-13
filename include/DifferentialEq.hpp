@@ -16,6 +16,6 @@ constexpr float k1 = 125000;
 constexpr float k2 = 240000;
 constexpr float ti = 0.5;
 
-SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, sycl::accessor<Room, 1> room);
+SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, sycl::accessor<std::array<float, 4>, 1> walls);
 
 #endif

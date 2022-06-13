@@ -4,15 +4,15 @@
 #include <iostream>
 #include <vector>
 #include <array>
-#include "GeometricVector.hpp"
+#include <sycl/sycl.hpp>
 
 class Room {
 private:
-    std::vector<std::array<GeometricVector, 2>> walls;
+    std::vector<std::array<float, 4>> walls;
 public:    
-    Room(std::vector<std::array<GeometricVector, 2>> pWalls);
+    Room(std::vector<std::array<float, 4>> pWalls);
 
-    std::vector<std::array<GeometricVector, 2>> getWalls();
+    SYCL_EXTERNAL std::vector<std::array<float, 4>> getWalls();
 };
 
 #endif

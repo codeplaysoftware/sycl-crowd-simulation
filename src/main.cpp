@@ -30,7 +30,7 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
                            60, 0.08});
 
     // Make actor move towards destination
-    actors[0].setVelocity(velToPoint(0.008, actors[0].getPos(), actors[0].getDestination()));
+    actors[0].setVelocity(velToPoint(0.01, actors[0].getPos(), actors[0].getDestination()));
     actors[1].setVelocity(velToPoint(0.008, actors[1].getPos(), actors[1].getDestination()));
 }
 
@@ -52,17 +52,18 @@ void update(std::vector<Actor> &actors, Room room) {
 
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
-    auto roomBuf = sycl::buffer<Room>(&room, 1);
+    auto walls = room.getWalls();
+    auto wallsBuf = sycl::buffer<std::array<float, 4>>(walls.data(), walls.size());
 
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-        auto roomAcc = roomBuf.get_access<sycl::access::mode::read_write>(cgh);
+        auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read_write>(cgh);
 
         auto out = sycl::stream{1024, 120, cgh};
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
-            differentialEq(actorAcc[index], actorAcc, roomAcc);
+            differentialEq(actorAcc[index], actorAcc, wallsAcc);
         });
     }).wait();
 
@@ -89,7 +90,7 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
     SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
     auto walls = room.getWalls();
     for (int x = 0; x < walls.size(); x++) {
-        SDL_RenderDrawLine(render, walls[x][0][0] * SCALE, walls[x][0][1] * SCALE, walls[x][1][0] * SCALE, walls[x][1][1] * SCALE);
+        SDL_RenderDrawLine(render, walls[x][0] * SCALE, walls[x][1] * SCALE, walls[x][2] * SCALE, walls[x][3] * SCALE);
     }
 
     SDL_RenderPresent(render);
@@ -106,11 +107,11 @@ int main() {
     SDL_Renderer* render = NULL;
 
     std::vector<Actor> actors;
-    Room room = Room({{GeometricVector({0.5, 0.5}), GeometricVector({0.5, 1.5})}, 
-                      {GeometricVector({0.5, 2.5}), GeometricVector({0.5, 5.5})}, 
-                      {GeometricVector({0.5, 5.5}), GeometricVector({7.5, 5.5})},
-                      {GeometricVector({7.5, 5.5}), GeometricVector({7.5, 0.5})}, 
-                      {GeometricVector({7.5, 0.5}), GeometricVector({0.5, 0.5})}
+    Room room = Room({{0.5, 0.5, 0.5, 1.5}, 
+                      {0.5, 2.5, 0.5, 5.5}, 
+                      {0.5, 5.5, 7.5, 5.5},
+                      {7.5, 5.5, 7.5, 0.5}, 
+                      {7.5, 0.5, 0.5, 0.5}
     });
 
     init(win, render, actors);
@@ -120,6 +121,8 @@ int main() {
     int delayCounter = 0;
     bool isQuit = false;
     SDL_Event event;
+
+    std::cout << distanceToWall(GeometricVector({-2, 4}), {1, 2, 4, 0});
 
     while(!isQuit) {
         if (SDL_PollEvent(&event)) {
