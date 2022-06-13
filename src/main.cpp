@@ -7,10 +7,10 @@
 #include "MathHelper.hpp"
 #include "DifferentialEq.hpp"
 
-const int WIDTH = 8; // metres
-const int HEIGHT = 6; // metres
-const int SCALE = 100;
-const int DELAY = 10000;
+constexpr int WIDTH = 8; // metres
+constexpr int HEIGHT = 6; // metres
+constexpr int SCALE = 100;
+constexpr int DELAY = 10000;
 
 void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     SDL_Init(SDL_INIT_VIDEO);
@@ -19,6 +19,10 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
 
     actors.push_back(Actor{{4, 0}, {0.01, 0.01}, {0.02, 0.02}, {1, 2}, 50, 0.05});
     actors.push_back(Actor{{8, 6}, {-0.02, -0.02}, {-0.03, -0.03}, {1, 2}, 60, 0.08});
+
+    // Make actor move towards destination
+    actors[0].setVelocity(velToPoint(0.008, actors[0].getPos(), actors[0].getDestination()));
+    actors[1].setVelocity(velToPoint(0.008, actors[1].getPos(), actors[1].getDestination()));
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -82,9 +86,6 @@ int main() {
     Room room = Room({{0.5, 0.5, 0.5, 1.5}, {0.5, 2.5, 0.5, 5.5}, {0.5, 5.5, 7.5, 5.5}, {7.5, 5.5, 7.5, 0.5}, {7.5, 0.5, 0.5, 0.5}});
 
     init(win, render, actors);
-
-    // Make actor move towards destination
-    actors[0].setVelocity(velToPoint(0.008, actors[0].getPos(), actors[0].getDestination()));
 
     draw(render, actors, room);
 
