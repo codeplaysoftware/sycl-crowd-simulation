@@ -18,15 +18,15 @@ public:
     
     SYCL_EXTERNAL std::array<float, 2> getPos();
     SYCL_EXTERNAL std::array<float, 2> getVelocity();
-    std::array<float, 2> getDesiredVelocity();
-    std::array<float, 2> getDestination();
-    float getMass();
-    float getRadius();
+    SYCL_EXTERNAL std::array<float, 2> getDesiredVelocity();
+    SYCL_EXTERNAL std::array<float, 2> getDestination();
+    SYCL_EXTERNAL float getMass();
+    SYCL_EXTERNAL float getRadius();
 
     SYCL_EXTERNAL void setPos(std::array<float, 2> newPos);
-    void setVelocity(std::array<float, 2> newVelocity);
-    void setDesiredVelocity(std::array<float, 2> newDesiredVelocity);
-    void setDestination(std::array<float, 2> newDestination);
+    SYCL_EXTERNAL void setVelocity(std::array<float, 2> newVelocity);
+    SYCL_EXTERNAL void setDesiredVelocity(std::array<float, 2> newDesiredVelocity);
+    SYCL_EXTERNAL void setDestination(std::array<float, 2> newDestination);
 };
 
 #endif

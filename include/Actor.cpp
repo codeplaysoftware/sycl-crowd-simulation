@@ -12,7 +12,7 @@ Actor::Actor(std::array<float, 2> pPos, std::array<float, 2> pVelocity, std::arr
     radius = pRadius;
 }
 
-std::array<float, 2> Actor::getPos() {
+SYCL_EXTERNAL std::array<float, 2> Actor::getPos() {
     return pos;
 }
 
@@ -20,34 +20,34 @@ SYCL_EXTERNAL std::array<float, 2> Actor::getVelocity() {
     return velocity;
 }
 
-std::array<float, 2> Actor::getDesiredVelocity() {
+SYCL_EXTERNAL std::array<float, 2> Actor::getDesiredVelocity() {
     return desiredVelocity;
 }
 
-std::array<float, 2> Actor::getDestination() {
+SYCL_EXTERNAL std::array<float, 2> Actor::getDestination() {
     return destination;
 }
 
-float Actor::getMass() {
+SYCL_EXTERNAL float Actor::getMass() {
     return mass;
 }
 
-float Actor::getRadius() {
+SYCL_EXTERNAL float Actor::getRadius() {
     return radius;
 }
 
-void Actor::setPos(std::array<float, 2> newPos) {
+SYCL_EXTERNAL void Actor::setPos(std::array<float, 2> newPos) {
     pos = newPos;
 }
 
-void Actor::setVelocity(std::array<float, 2> newVelocity) {
+SYCL_EXTERNAL void Actor::setVelocity(std::array<float, 2> newVelocity) {
     velocity = newVelocity;
 }
 
-void Actor::setDesiredVelocity(std::array<float, 2> newDesiredVelocity) {
+SYCL_EXTERNAL void Actor::setDesiredVelocity(std::array<float, 2> newDesiredVelocity) {
     desiredVelocity = newDesiredVelocity;
 }
 
-void Actor::setDestination(std::array<float, 2> newDestination) {
+SYCL_EXTERNAL void Actor::setDestination(std::array<float, 2> newDestination) {
     destination = newDestination;
 }

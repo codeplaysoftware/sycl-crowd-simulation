@@ -3,8 +3,9 @@
 #include <vector>
 #include <array>
 #include <cmath>
+#include <sycl/sycl.hpp>
 
-std::array<float, 2> getDirectionVector(std::array<float, 2> a, std::array<float, 2> b) {
+SYCL_EXTERNAL std::array<float, 2> getDirectionVector(std::array<float, 2> a, std::array<float, 2> b) {
     return {float(b[0] - a[0]), float(b[1] - a[1])};
 }
 

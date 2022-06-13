@@ -4,8 +4,9 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include <sycl/sycl.hpp>
 
-std::array<float, 2> getDirectionVector(std::array<float, 2> a, std::array<float, 2> b);
+SYCL_EXTERNAL std::array<float, 2> getDirectionVector(std::array<float, 2> a, std::array<float, 2> b);
 
 std::array<float, 2> velFromSpeedAndDir(float s, std::array<float, 2> d);
 

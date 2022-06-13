@@ -46,6 +46,16 @@ void update(std::vector<Actor> &actors) {
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
+        auto out = sycl::stream{1024, 120, cgh};
+
+        cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
+            personalImpulse(actorAcc[index]);
+        });
+    }).wait();
+
+    myQueue.submit([&](sycl::handler& cgh) {
+        auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
             Actor current = actorAcc[index];
             actorAcc[index].setPos({current.getPos()[0] + current.getVelocity()[0],
