@@ -7,7 +7,7 @@
 #include "Room.hpp"
 #include "MathHelper.hpp"
 
-SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, sycl::accessor<std::array<float, 4>> walls) {
+SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, sycl::accessor<std::array<GeometricVector, 2>> walls) {
     auto mi = i.getMass();
     auto v0i = 1.5;
     auto e0i = getDirectionVector(i.getPos(), i.getDestination());

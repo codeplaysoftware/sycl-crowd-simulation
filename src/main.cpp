@@ -53,7 +53,7 @@ void update(std::vector<Actor> &actors, Room room) {
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
     auto walls = room.getWalls();
-    auto wallsBuf = sycl::buffer<std::array<float, 4>>(walls.data(), walls.size());
+    auto wallsBuf = sycl::buffer<std::array<GeometricVector, 2>>(walls.data(), walls.size());
 
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
@@ -89,8 +89,8 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
 
     SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
     auto walls = room.getWalls();
-    for (int x = 0; x < walls.size(); x++) {
-        SDL_RenderDrawLine(render, walls[x][0] * SCALE, walls[x][1] * SCALE, walls[x][2] * SCALE, walls[x][3] * SCALE);
+    for (auto wall : walls) {
+        SDL_RenderDrawLine(render, wall[0][0] * SCALE, wall[0][1] * SCALE, wall[1][0] * SCALE, wall[1][1] * SCALE);
     }
 
     SDL_RenderPresent(render);
@@ -107,11 +107,11 @@ int main() {
     SDL_Renderer* render = NULL;
 
     std::vector<Actor> actors;
-    Room room = Room({{0.5, 0.5, 0.5, 1.5}, 
-                      {0.5, 2.5, 0.5, 5.5}, 
-                      {0.5, 5.5, 7.5, 5.5},
-                      {7.5, 5.5, 7.5, 0.5}, 
-                      {7.5, 0.5, 0.5, 0.5}
+    Room room = Room({{GeometricVector({0.5, 0.5}), GeometricVector({0.5, 1.5})}, 
+                      {GeometricVector({0.5, 2.5}), GeometricVector({0.5, 5.5})}, 
+                      {GeometricVector({0.5, 5.5}), GeometricVector({7.5, 5.5})},
+                      {GeometricVector({7.5, 5.5}), GeometricVector({7.5, 0.5})}, 
+                      {GeometricVector({7.5, 0.5}), GeometricVector({0.5, 0.5})}
     });
 
     init(win, render, actors);
@@ -122,7 +122,7 @@ int main() {
     bool isQuit = false;
     SDL_Event event;
 
-    std::cout << distanceToWall(GeometricVector({-2, 4}), {1, 2, 4, 0});
+    std::cout << distanceToWall(GeometricVector({-2, 4}), {GeometricVector({1, 2}), GeometricVector({4, 0})});
 
     while(!isQuit) {
         if (SDL_PollEvent(&event)) {
