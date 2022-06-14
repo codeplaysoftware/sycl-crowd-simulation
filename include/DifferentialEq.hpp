@@ -16,6 +16,6 @@ constexpr float k1 = 125000;
 constexpr float k2 = 240000;
 constexpr float ti = 0.5;
 
-SYCL_EXTERNAL void differentialEq(Actor &i, sycl::accessor<Actor, 1> actors, sycl::accessor<std::array<GeometricVector, 2>> walls);
+SYCL_EXTERNAL GeometricVector differentialEq(int x, sycl::accessor<Actor, 1, sycl::access::mode::read> actors, sycl::accessor<std::array<GeometricVector, 2>, 1, sycl::access::mode::read> walls, sycl::stream out);
 
 #endif

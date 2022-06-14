@@ -11,7 +11,7 @@
 constexpr int WIDTH = 8; // metres
 constexpr int HEIGHT = 6; // metres
 constexpr int SCALE = 100;
-constexpr int DELAY = 10000;
+constexpr int DELAY = 5000;
 
 void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     SDL_Init(SDL_INIT_VIDEO);
@@ -55,15 +55,20 @@ void update(std::vector<Actor> &actors, Room room) {
     auto walls = room.getWalls();
     auto wallsBuf = sycl::buffer<std::array<GeometricVector, 2>>(walls.data(), walls.size());
 
-    myQueue.submit([&](sycl::handler& cgh) {
-        auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+    std::vector<GeometricVector> results;
+    auto resultsBuf = sycl::buffer<GeometricVector>(results.data(), actors.size());
 
-        auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read_write>(cgh);
+    myQueue.submit([&](sycl::handler& cgh) {
+        auto actorAcc = actorBuf.get_access<sycl::access::mode::read>(cgh);
+
+        auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
+
+        auto resultsAcc = resultsBuf.get_access<sycl::access::mode::read_write>(cgh);
 
         auto out = sycl::stream{1024, 120, cgh};
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
-            differentialEq(actorAcc[index], actorAcc, wallsAcc);
+            resultsAcc[index] = differentialEq(index, actorAcc, wallsAcc, out);
         });
     }).wait();
 
@@ -122,7 +127,7 @@ int main() {
     bool isQuit = false;
     SDL_Event event;
 
-    std::cout << distanceToWall(GeometricVector({-2, 4}), {GeometricVector({1, 2}), GeometricVector({4, 0})});
+    //std::cout << distanceToWall(GeometricVector({-3, 1}), {GeometricVector({1, 2}), GeometricVector({4, 0})});
 
     while(!isQuit) {
         if (SDL_PollEvent(&event)) {
