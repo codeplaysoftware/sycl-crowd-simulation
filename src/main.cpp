@@ -47,8 +47,7 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
     }
 }
 
-void update(std::vector<Actor> &actors, Room room) {
-    sycl::queue myQueue{sycl::gpu_selector()};
+void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
 
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
@@ -119,6 +118,8 @@ int main() {
                       {GeometricVector({7.5, 0.5}), GeometricVector({0.5, 0.5})}
     });
 
+    sycl::queue myQueue{sycl::gpu_selector()};
+
     init(win, render, actors);
 
     draw(render, actors, room);
@@ -137,7 +138,7 @@ int main() {
         }
         if (delayCounter >= DELAY) {
             delayCounter = 0;
-            update(actors, room);
+            update(myQueue, actors, room);
             draw(render, actors, room);
         }
         else {

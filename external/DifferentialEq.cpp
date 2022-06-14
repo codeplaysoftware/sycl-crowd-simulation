@@ -15,7 +15,7 @@ SYCL_EXTERNAL GeometricVector differentialEq(int x, sycl::accessor<Actor, 1, syc
     auto e0i = getDirectionVector(i.getPos(), i.getDestination());
     auto vi = i.getVelocity();
 
-    auto personalImpulse = mi * (((v0i * e0i) - vi) / ti);
+    auto personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
 
     auto peopleForces = getZeroFromVector(e0i);
     for (int x = 0; x < actors.size(); x++) {
@@ -29,7 +29,7 @@ SYCL_EXTERNAL GeometricVector differentialEq(int x, sycl::accessor<Actor, 1, syc
             auto g = dij > rij ? 0 : rij - dij;
             auto deltavtij = dotProduct((j.getVelocity() - i.getVelocity()), tij);
 
-            peopleForces += (Ai * exp((rij - dij) / Bi) + k1 * g) * nij + (k2 * g * deltavtij * tij);
+            peopleForces += (Ai * exp((rij - dij) / Bi) + K1 * g) * nij + (K2 * g * deltavtij * tij);
         }
     }
 
@@ -43,7 +43,7 @@ SYCL_EXTERNAL GeometricVector differentialEq(int x, sycl::accessor<Actor, 1, syc
         auto tiw = niw;
         tiw = {-niw[1], niw[0]};
 
-        wallForces += (Ai * exp((ri - diw) / Bi) + k1 * g) * niw - (k2 * g * dotProduct(vi, tiw) * tiw);
+        wallForces += (Ai * exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
     }
 
     return (personalImpulse + peopleForces + wallForces) / mi;
