@@ -7,7 +7,7 @@
 #include "Room.hpp"
 #include "MathHelper.hpp"
 
-SYCL_EXTERNAL void differentialEq(int z, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<GeometricVector, 2>, 1, sycl::access::mode::read> walls, sycl::stream out) {
+SYCL_EXTERNAL void differentialEq(int z, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::stream out) {
     Actor* i = &actors[z];
      
     auto mi = i->getMass();
@@ -19,7 +19,7 @@ SYCL_EXTERNAL void differentialEq(int z, sycl::accessor<Actor, 1, sycl::access::
     auto personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
     out << "Personal Impulse: (" << personalImpulse[0] << ", " << personalImpulse[1] << ")    " << z << sycl::endl << sycl::endl;
 
-    auto peopleForces = getZeroFromVector(e0i);
+    vecType peopleForces = {0, 0};
     for (int x = 0; x < actors.size(); x++) {
         auto j = actors[x];
         if (z != x) {
@@ -35,7 +35,7 @@ SYCL_EXTERNAL void differentialEq(int z, sycl::accessor<Actor, 1, sycl::access::
         }
     }
 
-    auto wallForces = getZeroFromVector(e0i);
+    vecType wallForces = {0, 0};
     for (int x = 0; x < walls.size(); x++) {
         auto w = walls[x];
         auto ri = i->getRadius();
@@ -48,7 +48,7 @@ SYCL_EXTERNAL void differentialEq(int z, sycl::accessor<Actor, 1, sycl::access::
         wallForces += (Ai * exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
     }
 
-    auto forceSum = getZeroFromVector(e0i);
+    vecType forceSum = {0, 0};
     forceSum += personalImpulse;
     forceSum += peopleForces;
     forceSum += wallForces;
@@ -59,6 +59,6 @@ SYCL_EXTERNAL void differentialEq(int z, sycl::accessor<Actor, 1, sycl::access::
     out << "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ")    " << z << sycl::endl;
     out << "-----------------------" << sycl::endl;
 
-    i->setVelocity(i->getVelocity() + forceSum * 0.001);
-    i->setPos(i->getPos() + i->getVelocity() * 0.001);
+    i->setVelocity(i->getVelocity() + forceSum * 0.01);
+    i->setPos(i->getPos() + i->getVelocity() * 0.01);
 }

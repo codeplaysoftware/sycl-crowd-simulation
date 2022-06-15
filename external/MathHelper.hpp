@@ -5,24 +5,26 @@
 #include <vector>
 #include <array>
 #include <sycl/sycl.hpp>
-#include "GeometricVector.hpp"
+#include "VectorMaths.hpp"
 
-SYCL_EXTERNAL GeometricVector getDirectionVector(GeometricVector a, GeometricVector b);
+using vecType = std::array<float, 2>;
 
-SYCL_EXTERNAL GeometricVector velFromSpeedAndDir(float s, GeometricVector d);
+SYCL_EXTERNAL vecType getDirectionVector(vecType a, vecType b);
 
-SYCL_EXTERNAL GeometricVector velToPoint(float s, GeometricVector pos, GeometricVector destination);
+SYCL_EXTERNAL vecType velFromSpeedAndDir(float s, vecType d);
 
-SYCL_EXTERNAL float magnitude(GeometricVector inp);
+SYCL_EXTERNAL vecType velToPoint(float s, vecType pos, vecType destination);
 
-SYCL_EXTERNAL float dotProduct(GeometricVector a, GeometricVector b);
+SYCL_EXTERNAL float magnitude(vecType inp);
 
-SYCL_EXTERNAL float distance(GeometricVector a, GeometricVector b);
+SYCL_EXTERNAL float dotProduct(vecType a, vecType b);
 
-SYCL_EXTERNAL float distanceToWall(GeometricVector a, std::array<GeometricVector, 2> w);
+SYCL_EXTERNAL float distance(vecType a, vecType b);
 
-SYCL_EXTERNAL GeometricVector normalize(GeometricVector inp);
+SYCL_EXTERNAL float distanceToWall(vecType a, std::array<vecType, 2> w);
 
-SYCL_EXTERNAL GeometricVector getniw(GeometricVector a, std::array<GeometricVector, 2> w);
+SYCL_EXTERNAL vecType normalize(vecType inp);
+
+SYCL_EXTERNAL vecType getniw(vecType a, std::array<vecType, 2> w);
 
 #endif

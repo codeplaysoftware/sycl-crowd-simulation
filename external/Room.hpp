@@ -5,15 +5,17 @@
 #include <vector>
 #include <array>
 #include <sycl/sycl.hpp>
-#include "GeometricVector.hpp"
+#include "VectorMaths.hpp"
+
+using vecType = std::array<float, 2>;
 
 class Room {
 private:
-    std::vector<std::array<GeometricVector, 2>> walls;
+    std::vector<std::array<vecType, 2>> walls;
 public:    
-    Room(std::vector<std::array<GeometricVector, 2>> pWalls);
+    Room(std::vector<std::array<vecType, 2>> pWalls);
 
-    std::vector<std::array<GeometricVector, 2>> getWalls();
+    std::vector<std::array<vecType, 2>> getWalls();
 };
 
 #endif

@@ -6,27 +6,29 @@
 #include "Room.hpp"
 #include "MathHelper.hpp"
 #include "DifferentialEq.hpp"
-#include "GeometricVector.hpp"
+#include "VectorMaths.hpp"
 
 constexpr int WIDTH = 8; // metres
 constexpr int HEIGHT = 6; // metres
 constexpr int SCALE = 100;
 constexpr int DELAY = 5000;
 
+using vecType = std::array<float, 2>;
+
 void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     SDL_Init(SDL_INIT_VIDEO);
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    actors.push_back(Actor{GeometricVector({4, 2}),
-                           GeometricVector({0.01, 0.01}), 
-                           GeometricVector({0.02, 0.02}),
-                           GeometricVector({7, 2}),
+    actors.push_back(Actor{{4, 2},
+                           {0.01, 0.01}, 
+                           {0.02, 0.02},
+                           {8, 2},
                            50, 0.05});
-    actors.push_back(Actor{GeometricVector({4.5, 2}), 
-                           GeometricVector({-0.02, -0.02}),
-                           GeometricVector({-0.03, -0.03}),
-                           GeometricVector({1, 2}),
+    actors.push_back(Actor{{4.5, 2}, 
+                           {-0.02, -0.02},
+                           {-0.03, -0.03},
+                           {1, 2},
                            60, 0.08});
 
     // Make actor move towards destination
@@ -51,7 +53,7 @@ void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
     auto walls = room.getWalls();
-    auto wallsBuf = sycl::buffer<std::array<GeometricVector, 2>>(walls.data(), walls.size());
+    auto wallsBuf = sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
 
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
@@ -112,11 +114,11 @@ int main() {
     SDL_Renderer* render = NULL;
 
     std::vector<Actor> actors;
-    Room room = Room({{GeometricVector({0.5, 0.5}), GeometricVector({0.5, 1.5})}, 
-                      {GeometricVector({0.5, 2.5}), GeometricVector({0.5, 5.5})}, 
-                      {GeometricVector({0.5, 5.5}), GeometricVector({7.5, 5.5})},
-                      {GeometricVector({7.5, 5.5}), GeometricVector({7.5, 0.5})}, 
-                      {GeometricVector({7.5, 0.5}), GeometricVector({0.5, 0.5})}
+    Room room = Room({{vecType{0.5, 0.5}, vecType{0.5, 1.5}}, 
+                      {vecType{0.5, 2.5}, vecType{0.5, 5.5}}, 
+                      {vecType{0.5, 5.5}, vecType{7.5, 5.5}},
+                      {vecType{7.5, 5.5}, vecType{7.5, 0.5}}, 
+                      {vecType{7.5, 0.5}, vecType{0.5, 0.5}}
     });
 
     sycl::queue myQueue{sycl::gpu_selector()};
@@ -131,8 +133,10 @@ int main() {
 
     //std::cout << distanceToWall(GeometricVector({-3, 1}), {GeometricVector({1, 2}), GeometricVector({4, 0})});
 
-    auto test = 50 * (((GeometricVector({9, 0}) - GeometricVector({0.01, 0}))) / 0.5);
-    std::cout << test[0] << ", " << test[1];
+    vecType s = {0.01, 5.2};
+    vecType r = {8.7, 9.9};
+    vecType opp = s / 0.5;
+    std::cout << opp[0] << ", " << opp[1] << std::endl << std::endl;
 
     while(!isQuit) {
         if (SDL_PollEvent(&event)) {
