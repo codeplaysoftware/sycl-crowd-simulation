@@ -15,6 +15,7 @@ public:
 
     SYCL_EXTERNAL float& operator[](int index);
     SYCL_EXTERNAL void operator=(std::array<float, 2> newContents);
+    SYCL_EXTERNAL void swapElements();
 };
 
 SYCL_EXTERNAL GeometricVector getZeroFromVector(GeometricVector a);

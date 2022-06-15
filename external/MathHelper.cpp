@@ -41,6 +41,10 @@ SYCL_EXTERNAL float distanceToWall(GeometricVector point, std::array<GeometricVe
     return distance(point, projection);
 }
 
+SYCL_EXTERNAL GeometricVector normalize(GeometricVector inp) {
+    return inp / magnitude(inp);
+}
+
 SYCL_EXTERNAL GeometricVector getniw(GeometricVector point, std::array<GeometricVector, 2> wall) {
     float lSquared = pow(magnitude(wall[1] - wall[0]), 2);
     if (lSquared == 0.0) {
@@ -48,5 +52,5 @@ SYCL_EXTERNAL GeometricVector getniw(GeometricVector point, std::array<Geometric
     }
     float t = std::max(float(0.0), std::min(float(1.0), dotProduct(point - wall[0], wall[1] - wall[0]) / lSquared));
     auto projection = wall[0] + t * (wall[1] - wall[0]);
-    return projection / magnitude(projection);
+    return normalize(projection);
 }

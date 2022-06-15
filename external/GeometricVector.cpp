@@ -12,6 +12,10 @@ GeometricVector::GeometricVector(std::array<float, 2> pContents) {
     contents = pContents;
 }
 
+SYCL_EXTERNAL void GeometricVector::swapElements() {
+    std::swap(contents[0], contents[1]);
+}
+
 SYCL_EXTERNAL GeometricVector getZeroFromVector(GeometricVector a) {
     return a - a;
 }

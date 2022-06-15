@@ -21,6 +21,8 @@ SYCL_EXTERNAL float distance(GeometricVector a, GeometricVector b);
 
 SYCL_EXTERNAL float distanceToWall(GeometricVector a, std::array<GeometricVector, 2> w);
 
+SYCL_EXTERNAL GeometricVector normalize(GeometricVector inp);
+
 SYCL_EXTERNAL GeometricVector getniw(GeometricVector a, std::array<GeometricVector, 2> w);
 
 #endif

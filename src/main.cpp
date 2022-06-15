@@ -18,20 +18,20 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    actors.push_back(Actor{GeometricVector({4, 0}),
+    actors.push_back(Actor{GeometricVector({4, 2}),
                            GeometricVector({0.01, 0.01}), 
                            GeometricVector({0.02, 0.02}),
-                           GeometricVector({1, 2}),
+                           GeometricVector({7, 2}),
                            50, 0.05});
-    actors.push_back(Actor{GeometricVector({8, 6}), 
+    actors.push_back(Actor{GeometricVector({4.5, 2}), 
                            GeometricVector({-0.02, -0.02}),
                            GeometricVector({-0.03, -0.03}),
                            GeometricVector({1, 2}),
                            60, 0.08});
 
     // Make actor move towards destination
-    actors[0].setVelocity(velToPoint(0.01, actors[0].getPos(), actors[0].getDestination()));
-    actors[1].setVelocity(velToPoint(0.008, actors[1].getPos(), actors[1].getDestination()));
+    //actors[0].setVelocity(velToPoint(0.01, actors[0].getPos(), actors[0].getDestination()));
+    //actors[1].setVelocity(velToPoint(0.008, actors[1].getPos(), actors[1].getDestination()));
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -48,37 +48,31 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
 }
 
 void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
-
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
     auto walls = room.getWalls();
     auto wallsBuf = sycl::buffer<std::array<GeometricVector, 2>>(walls.data(), walls.size());
 
-    std::vector<GeometricVector> results;
-    auto resultsBuf = sycl::buffer<GeometricVector>(results.data(), actors.size());
-
-    myQueue.submit([&](sycl::handler& cgh) {
-        auto actorAcc = actorBuf.get_access<sycl::access::mode::read>(cgh);
-
-        auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
-
-        auto resultsAcc = resultsBuf.get_access<sycl::access::mode::read_write>(cgh);
-
-        auto out = sycl::stream{1024, 120, cgh};
-
-        cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
-            resultsAcc[index] = differentialEq(index, actorAcc, wallsAcc, out);
-        });
-    }).wait();
-
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
+        auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
+
+        auto out = sycl::stream{1024, 768, cgh};
+
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
-            Actor current = actorAcc[index];
-            actorAcc[index].setPos(current.getPos() + current.getVelocity());
+            differentialEq(index, actorAcc, wallsAcc, out);
         });
     }).wait();
+
+    // myQueue.submit([&](sycl::handler& cgh) {
+    //     auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+
+    //     cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
+    //         Actor current = actorAcc[index];
+    //         actorAcc[index].setPos(current.getPos() + current.getVelocity());
+    //     });
+    // }).wait();
 }
 
 void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
@@ -96,6 +90,13 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
     for (auto wall : walls) {
         SDL_RenderDrawLine(render, wall[0][0] * SCALE, wall[0][1] * SCALE, wall[1][0] * SCALE, wall[1][1] * SCALE);
     }
+
+    SDL_SetRenderDrawColor(render, 0, 255, 0, 255);
+    SDL_Rect r;
+    r.x = 690; r.y = 190; r.w = 20; r.h = 20;
+    SDL_RenderDrawRect(render, &r);
+    r.x = 90; r.y = 190; r.w = 20; r.h = 20;
+    SDL_RenderDrawRect(render, &r);
 
     SDL_RenderPresent(render);
 }
@@ -129,6 +130,9 @@ int main() {
     SDL_Event event;
 
     //std::cout << distanceToWall(GeometricVector({-3, 1}), {GeometricVector({1, 2}), GeometricVector({4, 0})});
+
+    auto test = 50 * (((GeometricVector({9, 0}) - GeometricVector({0.01, 0}))) / 0.5);
+    std::cout << test[0] << ", " << test[1];
 
     while(!isQuit) {
         if (SDL_PollEvent(&event)) {
