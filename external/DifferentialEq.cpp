@@ -54,8 +54,9 @@ SYCL_EXTERNAL void differentialEq(int z, sycl::accessor<Actor, 1, sycl::access::
     vecType newPos = i->getPos();
     vecType destination = i->getDestination();
 
-    if (newPos[0] <= destination[0] + 0.01 && newPos[0] >= destination[0] - 0.01
-        && pos[1] <= destination[1] + 0.01 && pos[1] >= destination[1] - 0.01) {
+    std::array<float, 4> destinationBoundingBox = {destination[0] + 0.01f, destination[0] - 0.01f, destination[1] + 0.01f, destination[1] - 0.01f};
+    if (newPos[0] <= destinationBoundingBox[0] && newPos[0] >= destinationBoundingBox[1]
+        && pos[1] <= destinationBoundingBox[2] && pos[1] >= destinationBoundingBox[3]) {
             i->setAtDestination(true);
         }
 }

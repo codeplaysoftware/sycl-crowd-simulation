@@ -11,35 +11,35 @@ Actor::Actor(vecType pPos, vecType pVelocity, vecType pDesiredVelocity, vecType 
     color = pColor;
 }
 
-SYCL_EXTERNAL vecType Actor::getPos() {
+SYCL_EXTERNAL vecType Actor::getPos() const {
     return pos;
 }
 
-SYCL_EXTERNAL vecType Actor::getVelocity() {
+SYCL_EXTERNAL vecType Actor::getVelocity() const {
     return velocity;
 }
 
-SYCL_EXTERNAL vecType Actor::getDesiredVelocity() {
+SYCL_EXTERNAL vecType Actor::getDesiredVelocity() const {
     return desiredVelocity;
 }
 
-SYCL_EXTERNAL vecType Actor::getDestination() {
+SYCL_EXTERNAL vecType Actor::getDestination() const {
     return destination;
 }
 
-SYCL_EXTERNAL float Actor::getMass() {
+SYCL_EXTERNAL float Actor::getMass() const {
     return mass;
 }
 
-SYCL_EXTERNAL float Actor::getRadius() {
+SYCL_EXTERNAL float Actor::getRadius() const {
     return radius;
 }
 
-SYCL_EXTERNAL bool Actor::getAtDestination() {
+SYCL_EXTERNAL bool Actor::getAtDestination() const {
     return atDestination;
 }
 
-SYCL_EXTERNAL std::array<int, 3> Actor::getColor() {
+SYCL_EXTERNAL std::array<int, 3> Actor::getColor() const {
     return color;
 }
 

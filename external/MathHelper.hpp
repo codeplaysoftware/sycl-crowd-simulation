@@ -10,11 +10,13 @@ using vecType = std::array<float, 2>;
 
 SYCL_EXTERNAL vecType getDirectionVector(vecType a, vecType b);
 
-SYCL_EXTERNAL vecType velFromSpeedAndDir(float s, vecType d);
+SYCL_EXTERNAL vecType velFromSpeedAndDir(float speed, vecType direction);
 
-SYCL_EXTERNAL vecType velToPoint(float s, vecType pos, vecType destination);
+SYCL_EXTERNAL vecType velToPoint(float speed, vecType pos, vecType destination);
 
 SYCL_EXTERNAL float magnitude(vecType inp);
+
+SYCL_EXTERNAL float inverseMagnitude(vecType inp);
 
 SYCL_EXTERNAL float dotProduct(vecType a, vecType b);
 

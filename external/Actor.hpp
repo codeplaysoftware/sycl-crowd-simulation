@@ -22,14 +22,14 @@ private:
 public:    
     Actor(vecType pPos, vecType pVelocity, vecType pDesiredVelocity, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor);
     
-    SYCL_EXTERNAL vecType getPos();
-    SYCL_EXTERNAL vecType getVelocity();
-    SYCL_EXTERNAL vecType getDesiredVelocity();
-    SYCL_EXTERNAL vecType getDestination();
-    SYCL_EXTERNAL float getMass();
-    SYCL_EXTERNAL float getRadius();
-    SYCL_EXTERNAL bool getAtDestination();
-    SYCL_EXTERNAL std::array<int, 3> getColor();
+    SYCL_EXTERNAL vecType getPos() const;
+    SYCL_EXTERNAL vecType getVelocity() const;
+    SYCL_EXTERNAL vecType getDesiredVelocity() const;
+    SYCL_EXTERNAL vecType getDestination() const;
+    SYCL_EXTERNAL float getMass() const;
+    SYCL_EXTERNAL float getRadius() const;
+    SYCL_EXTERNAL bool getAtDestination() const;
+    SYCL_EXTERNAL std::array<int, 3> getColor() const;
 
     SYCL_EXTERNAL void setPos(vecType newPos);
     SYCL_EXTERNAL void setVelocity(vecType newVelocity);

@@ -1,6 +1,7 @@
 #include <sycl/sycl.hpp>
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <chrono>
 
 #include "Actor.hpp"
 #include "Room.hpp"
