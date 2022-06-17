@@ -51,8 +51,8 @@ SYCL_EXTERNAL vecType operator*(float s, vecType a) {
 }
 
 SYCL_EXTERNAL vecType operator/=(vecType& a, float s) {
-    a[0] /= float(s);
-    a[1] /= float(s);
+    a[0] /= s;
+    a[1] /= s;
     return a;
 }
 

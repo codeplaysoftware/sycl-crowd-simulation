@@ -48,7 +48,7 @@ SYCL_EXTERNAL std::pair<float, vecType> getDistanceAndNiw(vecType point, std::ar
         if (lSquared == 0.0) {
             return {0, {0, 0}};
         }
-        float t = std::max(float(0.0), std::min(float(1.0), dotProduct(AP, AB) / lSquared));
+        float t = std::max(0.0f, std::min(1.0f, dotProduct(AP, AB) / lSquared));
         auto projection = t * AB;
         
         return {distance(AP, projection), normalize(AP - projection)};

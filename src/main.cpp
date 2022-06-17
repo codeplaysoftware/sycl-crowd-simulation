@@ -22,40 +22,40 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
 
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            actors.push_back(Actor{{float(0.5 + (i * 0.5)), float(0.5 + (j * 0.5))},
+            actors.push_back(Actor{{0.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
                     {0.01, 0.01}, 
                     {0.02, 0.02},
-                    {float(6.5 + (i * 0.5)), float(6.5 + (j * 0.5))},
+                    {6.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
                     50, 0.05, false, {255, 0, 0}});
         }
     }
 
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            actors.push_back(Actor{{float(6.5 + (i * 0.5)), float(0.5 + (j * 0.5))},
+            actors.push_back(Actor{{6.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
                     {0.01, 0.01}, 
                     {0.02, 0.02},
-                    {float(0.5 + (i * 0.5)), float(6.5 + (j * 0.5))},
+                    {0.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
                     50, 0.05, false, {0, 255, 0}});
         }
     }
 
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            actors.push_back(Actor{{float(6.5 + (i * 0.5)), float(6.5 + (j * 0.5))},
+            actors.push_back(Actor{{6.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
                     {0.01, 0.01}, 
                     {0.02, 0.02},
-                    {float(0.5 + (i * 0.5)), float(0.5 + (j * 0.5))},
+                    {0.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
                     50, 0.05, false, {0, 0, 255}});
         }
     }
 
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            actors.push_back(Actor{{float(0.5 + (i * 0.5)), float(6.5 + (j * 0.5))},
+            actors.push_back(Actor{{0.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
                     {0.01, 0.01}, 
                     {0.02, 0.02},
-                    {float(6.5 + (i * 0.5)), float(0.5 + (j * 0.5))},
+                    {6.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
                     50, 0.05, false, {150, 150, 150}});
         }
     }
