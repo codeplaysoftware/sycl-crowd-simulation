@@ -2,11 +2,9 @@
 #define DifferentialEqu_hpp
 
 #include <iostream>
-#include <vector>
 #include <array>
 #include <sycl/sycl.hpp>
 #include "Actor.hpp"
-#include "Room.hpp"
 #include "MathHelper.hpp"
 #include "VectorMaths.hpp"
 

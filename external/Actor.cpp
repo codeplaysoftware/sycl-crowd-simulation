@@ -1,7 +1,4 @@
 #include "Actor.hpp"
-#include <iostream>
-#include <array>
-#include <sycl/sycl.hpp>
 
 Actor::Actor(vecType pPos, vecType pVelocity, vecType pDesiredVelocity, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor) {
     pos = pPos;

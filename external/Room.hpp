@@ -2,7 +2,6 @@
 #define Room_hpp
 
 #include <iostream>
-#include <vector>
 #include <array>
 #include <sycl/sycl.hpp>
 #include "VectorMaths.hpp"

@@ -111,11 +111,6 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
         SDL_RenderDrawLine(render, wall[0][0] * SCALE, wall[0][1] * SCALE, wall[1][0] * SCALE, wall[1][1] * SCALE);
     }
 
-    SDL_SetRenderDrawColor(render, 0, 255, 0, 255);
-    SDL_Rect r;
-    r.x = 35; r.y = 195; r.w = 10; r.h = 10;
-    SDL_RenderDrawRect(render, &r);
-
     SDL_RenderPresent(render);
 }
 
@@ -130,22 +125,25 @@ int main() {
     SDL_Renderer* render = NULL;
 
     std::vector<Actor> actors;
-    Room room = Room({{vecType{3, 3}, vecType{4.25, 3}}, 
-                      {vecType{4.25, 3}, vecType{4.25, 4.25}}, 
-                      {vecType{4.25, 4.25}, vecType{3, 4.25}},
-                      {vecType{3, 4.25}, vecType{3, 3}}, 
-                      {vecType{4.75, 3}, vecType{6, 3}},
-                      {vecType{6, 3}, vecType{6, 4.25}},
-                      {vecType{6, 4.25}, vecType{4.75, 4.25}},
-                      {vecType{4.75, 4.25}, vecType{4.75, 3}},
-                      {vecType{3, 4.75}, vecType{4.25, 4.75}},
-                      {vecType{4.25, 4.75}, vecType{4.25, 6}},
-                      {vecType{4.25, 6}, vecType{3, 6}},
-                      {vecType{3, 6}, vecType{3, 4.75}},
-                      {vecType{4.75, 4.75}, vecType{6, 4.75}},
-                      {vecType{6, 4.75}, vecType{6, 6}},
-                      {vecType{6, 6}, vecType{4.75, 6}},
-                      {vecType{4.75, 6}, vecType{4.75, 4.75}},
+    Room room = Room({{vecType{3.15, 3.15}, vecType{4.25, 3.15}}, 
+                      {vecType{4.25, 3.15}, vecType{4.25, 4.25}}, 
+                      {vecType{4.25, 4.25}, vecType{3.15, 4.25}},
+                      {vecType{3.15, 4.25}, vecType{3.15, 3.15}}, 
+
+                      {vecType{4.75, 3.15}, vecType{5.85, 3.15}},
+                      {vecType{5.85, 3.15}, vecType{5.85, 4.25}},
+                      {vecType{5.85, 4.25}, vecType{4.75, 4.25}},
+                      {vecType{4.75, 4.25}, vecType{4.75, 3.15}},
+
+                      {vecType{3.15, 4.75}, vecType{4.25, 4.75}},
+                      {vecType{4.25, 4.75}, vecType{4.25, 5.85}},
+                      {vecType{4.25, 5.85}, vecType{3.15, 5.85}},
+                      {vecType{3.15, 5.85}, vecType{3.15, 4.75}},
+
+                      {vecType{4.75, 4.75}, vecType{5.85, 4.75}},
+                      {vecType{5.85, 4.75}, vecType{5.85, 5.85}},
+                      {vecType{5.85, 5.85}, vecType{4.75, 5.85}},
+                      {vecType{4.75, 5.85}, vecType{4.75, 4.75}},
     });
     // Room room = Room({{vecType{2, 3.5}, vecType{6, 3.5}}});
     // Room room = Room({{vecType{3.5, 0.5}, vecType{4.5, 5.5}}});

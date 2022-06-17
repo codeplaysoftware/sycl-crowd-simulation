@@ -1,7 +1,3 @@
-#include <iostream>
-#include <cmath>
-#include <sycl/sycl.hpp>
-#include <array>
 #include "VectorMaths.hpp"
 
 SYCL_EXTERNAL vecType operator*=(vecType& a, vecType b) {
