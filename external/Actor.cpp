@@ -3,13 +3,15 @@
 #include <array>
 #include <sycl/sycl.hpp>
 
-Actor::Actor(vecType pPos, vecType pVelocity, vecType pDesiredVelocity, vecType pDestination, float pMass, float pRadius) {
+Actor::Actor(vecType pPos, vecType pVelocity, vecType pDesiredVelocity, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor) {
     pos = pPos;
     velocity = pVelocity;
     desiredVelocity = pDesiredVelocity;
     destination = pDestination;
     mass = pMass;
     radius = pRadius;
+    atDestination = pAtDestination;
+    color = pColor;
 }
 
 SYCL_EXTERNAL vecType Actor::getPos() {
@@ -36,6 +38,14 @@ SYCL_EXTERNAL float Actor::getRadius() {
     return radius;
 }
 
+SYCL_EXTERNAL bool Actor::getAtDestination() {
+    return atDestination;
+}
+
+SYCL_EXTERNAL std::array<int, 3> Actor::getColor() {
+    return color;
+}
+
 SYCL_EXTERNAL void Actor::setPos(vecType newPos) {
     pos = newPos;
 }
@@ -50,4 +60,8 @@ SYCL_EXTERNAL void Actor::setDesiredVelocity(vecType newDesiredVelocity) {
 
 SYCL_EXTERNAL void Actor::setDestination(vecType newDestination) {
     destination = newDestination;
+}
+
+SYCL_EXTERNAL void Actor::setAtDestination(bool param) {
+    atDestination = param;
 }

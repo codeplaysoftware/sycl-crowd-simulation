@@ -10,7 +10,7 @@
 #include "MathHelper.hpp"
 #include "VectorMaths.hpp"
 
-constexpr float Ai = 2000;
+constexpr float Ai = 200;
 constexpr float Bi = 0.08;
 constexpr float K1 = 125000;
 constexpr float K2 = 240000;
