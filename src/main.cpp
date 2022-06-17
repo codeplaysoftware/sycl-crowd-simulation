@@ -115,14 +115,14 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
     SDL_RenderPresent(render);
 }
 
-void close(SDL_Window* win) {
+void close(SDL_Window* win, SDL_Renderer* render) {
+    SDL_DestroyRenderer(render);
     SDL_DestroyWindow(win);
     SDL_Quit();
 }
 
 int main() {
     SDL_Window* win = NULL;
-    SDL_Surface* surface = NULL;
     SDL_Renderer* render = NULL;
 
     std::vector<Actor> actors;
@@ -175,6 +175,6 @@ int main() {
         }
     }
 
-    close(win);
+    close(win, render);
     return 0;
 }

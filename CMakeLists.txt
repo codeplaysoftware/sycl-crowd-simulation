@@ -18,5 +18,3 @@ add_subdirectory(external)
 
 target_link_libraries(crowdsim PUBLIC ${SDL2_LIBRARIES} external) 
 target_include_directories(crowdsim PUBLIC "${PROJECT_BINARY_DIR}" "${PROJECT_SOURCE_DIR}/external")
-
-
