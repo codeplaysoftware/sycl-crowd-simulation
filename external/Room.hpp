@@ -15,6 +15,8 @@ public:
     Room(std::vector<std::array<vecType, 2>> pWalls);
 
     std::vector<std::array<vecType, 2>> getWalls() const;
+
+    void setWalls(std::vector<std::array<vecType, 2>> newWalls);
 };
 
 #endif
