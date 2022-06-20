@@ -16,6 +16,6 @@ constexpr float Ti = 0.5;
 
 using vecType = std::array<float, 2>;
 
-SYCL_EXTERNAL void differentialEq(int x, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::stream out);
+SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::stream out);
 
 #endif
