@@ -36,6 +36,8 @@ public:
     SYCL_EXTERNAL void setDesiredVelocity(vecType newDesiredVelocity);
     SYCL_EXTERNAL void setDestination(vecType newDestination);
     SYCL_EXTERNAL void setAtDestination(bool param);
+
+    SYCL_EXTERNAL void checkAtDestination();
 };
 
 #endif

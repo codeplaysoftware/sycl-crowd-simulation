@@ -52,12 +52,5 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     currentActor->setVelocity(vi + acceleration * TIMESTEP);
     currentActor->setPos(pos + currentActor->getVelocity() * TIMESTEP);
 
-    vecType newPos = currentActor->getPos();
-    vecType destination = currentActor->getDestination();
-
-    std::array<float, 4> destinationBoundingBox = {destination[0] + 0.01f, destination[0] - 0.01f, destination[1] + 0.01f, destination[1] - 0.01f};
-    if (newPos[0] <= destinationBoundingBox[0] && newPos[0] >= destinationBoundingBox[1]
-        && pos[1] <= destinationBoundingBox[2] && pos[1] >= destinationBoundingBox[3]) {
-            currentActor->setAtDestination(true);
-        }
+    currentActor->checkAtDestination();
 }
