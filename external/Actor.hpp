@@ -6,8 +6,6 @@
 #include <sycl/sycl.hpp>
 #include "VectorMaths.hpp"
 
-using vecType = std::array<float, 2>;
-
 class Actor {
 private:
     vecType pos;

@@ -7,6 +7,7 @@
 #include <sycl/sycl.hpp>
 #include "Room.hpp"
 #include "Actor.hpp"
+#include "VectorMaths.hpp"
 
 enum class RoomConfgurations {fourSquare, evacuateRoom};
 

@@ -6,8 +6,6 @@
 #include <sycl/sycl.hpp>
 #include "VectorMaths.hpp"
 
-using vecType = std::array<float, 2>;
-
 class Room {
 private:
     std::vector<std::array<vecType, 2>> walls;

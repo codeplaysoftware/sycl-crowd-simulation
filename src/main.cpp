@@ -15,8 +15,6 @@ constexpr int HEIGHT = 9; // metres
 constexpr int SCALE = 100;
 constexpr int DELAY = 0;
 
-using vecType = std::array<float, 2>;
-
 void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, Room &room) {
     SDL_Init(SDL_INIT_VIDEO);
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
