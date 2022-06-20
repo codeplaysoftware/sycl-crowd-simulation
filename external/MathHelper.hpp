@@ -26,4 +26,6 @@ SYCL_EXTERNAL vecType normalize(vecType inp);
 
 SYCL_EXTERNAL std::pair<float, vecType> getDistanceAndNiw(vecType point, std::array<vecType, 2> wall);
 
+SYCL_EXTERNAL vecType getTangentialVector(vecType normal);
+
 #endif

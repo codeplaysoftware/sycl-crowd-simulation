@@ -20,7 +20,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
             vecType currentToNeighbour = pos - neighbour.getPos();
             float dij = magnitude(currentToNeighbour);
             vecType nij = (currentToNeighbour) / dij;
-            vecType tij = {-nij[1], nij[0]};
+            vecType tij = getTangentialVector(nij);
             float g = dij > rij ? 0 : rij - dij;
             float deltavtij = dotProduct((neighbour.getVelocity() - currentActor->getVelocity()), tij);
 
@@ -36,7 +36,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
         float diw = dAndn.first;
         float g = diw > ri ? 0 : ri - diw;
         vecType niw = dAndn.second;
-        vecType tiw = {-niw[1], niw[0]};
+        vecType tiw = getTangentialVector(niw);
 
         wallForces += (Ai * exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
     }

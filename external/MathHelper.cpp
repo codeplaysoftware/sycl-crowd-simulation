@@ -64,3 +64,7 @@ SYCL_EXTERNAL std::pair<float, vecType> getDistanceAndNiw(vecType point, std::ar
         return {distance(AP, projection), normalize(AP - projection)};
     }
 }
+
+SYCL_EXTERNAL vecType getTangentialVector(vecType normal) {
+    return {-normal[1], normal[0]};
+}
