@@ -1,15 +1,9 @@
 #include "Actor.hpp"
 
-Actor::Actor(vecType pPos, vecType pVelocity, vecType pDesiredVelocity, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor) {
-    pos = pPos;
-    velocity = pVelocity;
-    desiredVelocity = pDesiredVelocity;
-    destination = pDestination;
-    mass = pMass;
-    radius = pRadius;
-    atDestination = pAtDestination;
-    color = pColor;
-}
+Actor::Actor(vecType pPos, vecType pVelocity, vecType pDesiredVelocity, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor):
+    pos(pPos), velocity(pVelocity), desiredVelocity(pDesiredVelocity),
+    destination(pDestination), mass(pMass), radius(pRadius), atDestination(pAtDestination),
+    color(pColor) {}
 
 SYCL_EXTERNAL vecType Actor::getPos() const {
     return pos;

@@ -17,13 +17,7 @@ SYCL_EXTERNAL float magnitude(vecType inp) {
 }
 
 SYCL_EXTERNAL float inverseMagnitude(vecType inp) {
-    float x = (inp[0] * inp[0]) + (inp[1] * inp[1]);
-    float y = x;
-    uint32_t *i = reinterpret_cast<uint32_t *>(&y);
-    const uint32_t expMask = 0x7F800000;
-    const uint32_t magicNumber = 0x5F000000;
-    *i = magicNumber - ((*i >> 1) & expMask);
-    return (x * y * y + 1) / (2 * x * y);
+    return sycl::rsqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
 }
 
 SYCL_EXTERNAL float dotProduct(vecType a, vecType b) {
