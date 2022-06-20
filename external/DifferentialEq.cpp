@@ -49,8 +49,8 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     //out << "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ")    " << z << sycl::endl;
     //out << "-----------------------" << sycl::endl;
 
-    currentActor->setVelocity(vi + acceleration * 0.001);
-    currentActor->setPos(pos + currentActor->getVelocity() * 0.001);
+    currentActor->setVelocity(vi + acceleration * TIMESTEP);
+    currentActor->setPos(pos + currentActor->getVelocity() * TIMESTEP);
 
     vecType newPos = currentActor->getPos();
     vecType destination = currentActor->getDestination();
