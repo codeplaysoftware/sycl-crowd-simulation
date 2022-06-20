@@ -22,7 +22,7 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, R
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    createEnv(room, actors, RoomConfgurations::fourSquare);
+    createEnv(room, actors, RoomConfgurations::evacuateRoom);
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {

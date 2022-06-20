@@ -43,12 +43,14 @@ SYCL_EXTERNAL void differentialEq(int z, sycl::accessor<Actor, 1, sycl::access::
     vecType forceSum = personalImpulse + peopleForces + wallForces;
     vecType acceleration = forceSum / mi;
 
+
+
     //out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1] << ")    " << z << sycl::endl;
     //out << "Wall Forces: (" << wallForces[0] << ", " << wallForces[1] << ")    " << z << sycl::endl;
     //out << "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ")    " << z << sycl::endl;
     //out << "-----------------------" << sycl::endl;
 
-    i->setVelocity(vi + forceSum * 0.001);
+    i->setVelocity(vi + acceleration * 0.001);
     i->setPos(pos + i->getVelocity() * 0.001);
 
     vecType newPos = i->getPos();

@@ -10,6 +10,7 @@ using vecType = std::array<float, 2>;
 
 class Room {
 private:
+    typedef sycl::usm_allocator<std::array<vecType, 2>, sycl::usm::alloc::shared> vectorAlloc;
     std::vector<std::array<vecType, 2>> walls;
 public:    
     Room(std::vector<std::array<vecType, 2>> pWalls);

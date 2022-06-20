@@ -42,25 +42,46 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
             }
         }
 
-        room.setWalls({{vecType{3.15, 3.15}, vecType{4.25, 3.15}}, 
-                      {vecType{4.25, 3.15}, vecType{4.25, 4.25}}, 
-                      {vecType{4.25, 4.25}, vecType{3.15, 4.25}},
-                      {vecType{3.15, 4.25}, vecType{3.15, 3.15}}, 
+        room.setWalls({
+            {vecType{3.15, 3.15}, vecType{4.25, 3.15}}, 
+            {vecType{4.25, 3.15}, vecType{4.25, 4.25}}, 
+            {vecType{4.25, 4.25}, vecType{3.15, 4.25}},
+            {vecType{3.15, 4.25}, vecType{3.15, 3.15}}, 
 
-                      {vecType{4.75, 3.15}, vecType{5.85, 3.15}},
-                      {vecType{5.85, 3.15}, vecType{5.85, 4.25}},
-                      {vecType{5.85, 4.25}, vecType{4.75, 4.25}},
-                      {vecType{4.75, 4.25}, vecType{4.75, 3.15}},
+            {vecType{4.75, 3.15}, vecType{5.85, 3.15}},
+            {vecType{5.85, 3.15}, vecType{5.85, 4.25}},
+            {vecType{5.85, 4.25}, vecType{4.75, 4.25}},
+            {vecType{4.75, 4.25}, vecType{4.75, 3.15}},
 
-                      {vecType{3.15, 4.75}, vecType{4.25, 4.75}},
-                      {vecType{4.25, 4.75}, vecType{4.25, 5.85}},
-                      {vecType{4.25, 5.85}, vecType{3.15, 5.85}},
-                      {vecType{3.15, 5.85}, vecType{3.15, 4.75}},
+            {vecType{3.15, 4.75}, vecType{4.25, 4.75}},
+            {vecType{4.25, 4.75}, vecType{4.25, 5.85}},
+            {vecType{4.25, 5.85}, vecType{3.15, 5.85}},
+            {vecType{3.15, 5.85}, vecType{3.15, 4.75}},
 
-                      {vecType{4.75, 4.75}, vecType{5.85, 4.75}},
-                      {vecType{5.85, 4.75}, vecType{5.85, 5.85}},
-                      {vecType{5.85, 5.85}, vecType{4.75, 5.85}},
-                      {vecType{4.75, 5.85}, vecType{4.75, 4.75}},
+            {vecType{4.75, 4.75}, vecType{5.85, 4.75}},
+            {vecType{5.85, 4.75}, vecType{5.85, 5.85}},
+            {vecType{5.85, 5.85}, vecType{4.75, 5.85}},
+            {vecType{4.75, 5.85}, vecType{4.75, 4.75}},
+        });
+    }
+
+    else if (type == RoomConfgurations::evacuateRoom) {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 30; j++) {
+                actors.push_back(Actor(vecType({4 + (i * 0.2f), 1 + (j * 0.2f)}),
+                                    vecType({0.01, 0.01}), 
+                                    vecType({0.02, 0.02}), 
+                                    vecType({-1, 4.1}), 
+                                    50, 0.05, false, {255, 0, 0}));
+            }
+        }
+        
+        room.setWalls({
+            {vecType({0.5, 0.5}), vecType({8.5, 0.5})},
+            {vecType({8.5, 0.5}), vecType({8.5, 8.5})},
+            {vecType({8.5, 8.5}), vecType({0.5, 8.5})},
+            {vecType({0.5, 8.5}), vecType({0.5, 4.2})},
+            {vecType({0.5, 3.8}), vecType({0.5, 0.5})},
         });
     }
 }

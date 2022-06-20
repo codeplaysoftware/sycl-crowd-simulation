@@ -8,7 +8,7 @@
 #include "Room.hpp"
 #include "Actor.hpp"
 
-enum class RoomConfgurations {fourSquare};
+enum class RoomConfgurations {fourSquare, evacuateRoom};
 
 void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type);
 
