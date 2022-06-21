@@ -68,7 +68,7 @@ SYCL_EXTERNAL void Actor::setAtDestination(bool param) {
 }
 
 SYCL_EXTERNAL void Actor::checkAtDestination() {
-    std::array<float, 4> destinationBoundingBox = {destination[0] + 0.01f, destination[0] - 0.01f, destination[1] + 0.01f, destination[1] - 0.01f};
+    std::array<float, 4> destinationBoundingBox = {destination[0] + 0.1f, destination[0] - 0.1f, destination[1] + 0.1f, destination[1] - 0.1f};
     if (pos[0] <= destinationBoundingBox[0] && pos[0] >= destinationBoundingBox[1]
         && pos[1] <= destinationBoundingBox[2] && pos[1] >= destinationBoundingBox[3]) {
             this->setAtDestination(true);

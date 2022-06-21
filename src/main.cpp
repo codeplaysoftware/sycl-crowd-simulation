@@ -11,7 +11,7 @@
 #include "VectorMaths.hpp"
 #include "CreateEnv.hpp"
 
-constexpr int WIDTH = 9; // metres
+constexpr int WIDTH = 14; // metres
 constexpr int HEIGHT = 9; // metres
 constexpr int SCALE = 100;
 constexpr int DELAY = 0;
@@ -21,7 +21,7 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, R
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    createEnv(room, actors, RoomConfgurations::fourSquare);
+    createEnv(room, actors, RoomConfgurations::twoExitstwoGroups);
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -40,14 +40,6 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
 void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
     for (auto &a : actors) {
         a.refreshVariation();
-        // if (a.getPos() == actors[0].getPos()) {
-        //     std::cout << a.getVariation()[0] << ", " << a.getVariation()[1] << std::endl;
-        // }
-    }
-    for (auto x : actors) {
-        if (x.getPos() == actors[0].getPos()) {
-            std::cout << x.getVariation()[0] << ", " << x.getVariation()[1] << std::endl;
-        } 
     }
 
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
