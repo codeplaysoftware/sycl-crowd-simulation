@@ -1,24 +1,65 @@
 #include <sycl/sycl.hpp>
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <chrono>
 
 #include "Actor.hpp"
 #include "Room.hpp"
 #include "MathHelper.hpp"
 #include "DifferentialEq.hpp"
+#include "VectorMaths.hpp"
 
-const int WIDTH = 8; // metres
-const int HEIGHT = 6; // metres
-const int SCALE = 100;
-const int DELAY = 10000;
+constexpr int WIDTH = 9; // metres
+constexpr int HEIGHT = 9; // metres
+constexpr int SCALE = 100;
+constexpr int DELAY = 0;
+
+using vecType = std::array<float, 2>;
 
 void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
     SDL_Init(SDL_INIT_VIDEO);
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    actors.push_back(Actor{{4, 0}, {0.01, 0.01}, {0.02, 0.02}, {1, 2}, 50, 0.05});
-    actors.push_back(Actor{{8, 6}, {-0.02, -0.02}, {-0.03, -0.03}, {1, 2}, 60, 0.08});
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            actors.push_back(Actor{{0.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
+                    {0.01, 0.01}, 
+                    {0.02, 0.02},
+                    {6.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
+                    50, 0.05, false, {255, 0, 0}});
+        }
+    }
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            actors.push_back(Actor{{6.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
+                    {0.01, 0.01}, 
+                    {0.02, 0.02},
+                    {0.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
+                    50, 0.05, false, {0, 255, 0}});
+        }
+    }
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            actors.push_back(Actor{{6.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
+                    {0.01, 0.01}, 
+                    {0.02, 0.02},
+                    {0.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
+                    50, 0.05, false, {0, 0, 255}});
+        }
+    }
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            actors.push_back(Actor{{0.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
+                    {0.01, 0.01}, 
+                    {0.02, 0.02},
+                    {6.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
+                    50, 0.05, false, {150, 150, 150}});
+        }
+    }
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -34,19 +75,24 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
     }
 }
 
-void update(std::vector<Actor> &actors) {
-    sycl::queue myQueue{sycl::gpu_selector()};
-
+void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
+
+    auto walls = room.getWalls();
+    auto wallsBuf = sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
 
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
+        auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
+
+        auto out = sycl::stream{1024, 768, cgh};
+
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
-            Actor current = actorAcc[index];
-            actorAcc[index].setPos({current.getPos()[0] + current.getVelocity()[0],
-                            current.getPos()[1] + current.getVelocity()[1]});
-        }); 
+            if (!actorAcc[index].getAtDestination()) {
+                differentialEq(index, actorAcc, wallsAcc, out);
+            }
+        });
     }).wait();
 }
 
@@ -54,37 +100,58 @@ void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
     SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
     SDL_RenderClear(render);
 
-    SDL_Color red = {255, 0, 0, 255};
     for (Actor actor : actors) {
         SDL_Point pos = {int(actor.getPos()[0] * SCALE), int(actor.getPos()[1] * SCALE)};
-        drawCircle(render, pos, actor.getRadius() * SCALE, red);
+        SDL_Color actorColor = {Uint8(actor.getColor()[0]), Uint8(actor.getColor()[1]), Uint8(actor.getColor()[2]), 255};
+        drawCircle(render, pos, actor.getRadius() * SCALE, actorColor);
     }
 
     SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
-    for (std::array<float, 4> wall : room.getWalls()) {
-        SDL_RenderDrawLine(render, wall[0] * SCALE, wall[1] * SCALE, wall[2] * SCALE, wall[3] * SCALE);
+    auto walls = room.getWalls();
+    for (auto wall : walls) {
+        SDL_RenderDrawLine(render, wall[0][0] * SCALE, wall[0][1] * SCALE, wall[1][0] * SCALE, wall[1][1] * SCALE);
     }
 
     SDL_RenderPresent(render);
 }
 
-void close(SDL_Window* win) {
+void close(SDL_Window* win, SDL_Renderer* render) {
+    SDL_DestroyRenderer(render);
     SDL_DestroyWindow(win);
     SDL_Quit();
 }
 
 int main() {
     SDL_Window* win = NULL;
-    SDL_Surface* surface = NULL;
     SDL_Renderer* render = NULL;
 
     std::vector<Actor> actors;
-    Room room = Room({{0.5, 0.5, 0.5, 1.5}, {0.5, 2.5, 0.5, 5.5}, {0.5, 5.5, 7.5, 5.5}, {7.5, 5.5, 7.5, 0.5}, {7.5, 0.5, 0.5, 0.5}});
+    Room room = Room({{vecType{3.15, 3.15}, vecType{4.25, 3.15}}, 
+                      {vecType{4.25, 3.15}, vecType{4.25, 4.25}}, 
+                      {vecType{4.25, 4.25}, vecType{3.15, 4.25}},
+                      {vecType{3.15, 4.25}, vecType{3.15, 3.15}}, 
+
+                      {vecType{4.75, 3.15}, vecType{5.85, 3.15}},
+                      {vecType{5.85, 3.15}, vecType{5.85, 4.25}},
+                      {vecType{5.85, 4.25}, vecType{4.75, 4.25}},
+                      {vecType{4.75, 4.25}, vecType{4.75, 3.15}},
+
+                      {vecType{3.15, 4.75}, vecType{4.25, 4.75}},
+                      {vecType{4.25, 4.75}, vecType{4.25, 5.85}},
+                      {vecType{4.25, 5.85}, vecType{3.15, 5.85}},
+                      {vecType{3.15, 5.85}, vecType{3.15, 4.75}},
+
+                      {vecType{4.75, 4.75}, vecType{5.85, 4.75}},
+                      {vecType{5.85, 4.75}, vecType{5.85, 5.85}},
+                      {vecType{5.85, 5.85}, vecType{4.75, 5.85}},
+                      {vecType{4.75, 5.85}, vecType{4.75, 4.75}},
+    });
+    // Room room = Room({{vecType{2, 3.5}, vecType{6, 3.5}}});
+    // Room room = Room({{vecType{3.5, 0.5}, vecType{4.5, 5.5}}});
+
+    sycl::queue myQueue{sycl::gpu_selector()};
 
     init(win, render, actors);
-
-    // Make actor move towards destination
-    actors[0].setVelocity(velToPoint(0.008, actors[0].getPos(), actors[0].getDestination()));
 
     draw(render, actors, room);
 
@@ -100,7 +167,7 @@ int main() {
         }
         if (delayCounter >= DELAY) {
             delayCounter = 0;
-            update(actors);
+            update(myQueue, actors, room);
             draw(render, actors, room);
         }
         else {
@@ -108,6 +175,6 @@ int main() {
         }
     }
 
-    close(win);
+    close(win, render);
     return 0;
 }
