@@ -11,7 +11,7 @@ class Actor {
 private:
     vecType pos;
     vecType velocity;
-    vecType desiredVelocity;
+    float desiredSpeed;
     vecType destination;
     vecType variation;
     float mass;
@@ -20,11 +20,11 @@ private:
     std::array<int, 3> color;
 
 public:    
-    Actor(vecType pPos, vecType pVelocity, vecType pDesiredVelocity, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor);
+    Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor);
     
     SYCL_EXTERNAL vecType getPos() const;
     SYCL_EXTERNAL vecType getVelocity() const;
-    SYCL_EXTERNAL vecType getDesiredVelocity() const;
+    SYCL_EXTERNAL float getDesiredSpeed() const;
     SYCL_EXTERNAL vecType getDestination() const;
     SYCL_EXTERNAL vecType getVariation() const;
     SYCL_EXTERNAL float getMass() const;
@@ -34,7 +34,7 @@ public:
 
     SYCL_EXTERNAL void setPos(vecType newPos);
     SYCL_EXTERNAL void setVelocity(vecType newVelocity);
-    SYCL_EXTERNAL void setDesiredVelocity(vecType newDesiredVelocity);
+    SYCL_EXTERNAL void setDesiredSpeed(float newDesiredSpeed);
     SYCL_EXTERNAL void setDestination(vecType newDestination);
     SYCL_EXTERNAL void setVariation(vecType newVariation);
     SYCL_EXTERNAL void setAtDestination(bool param);

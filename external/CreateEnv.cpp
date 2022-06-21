@@ -6,7 +6,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
             for (int j = 0; j < 5; j++) {
                 actors.push_back(Actor{{0.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
                         {0.01, 0.01}, 
-                        {0.02, 0.02},
+                        2.0f,
                         {6.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
                         50, 0.05, false, {255, 0, 0}});
             }
@@ -16,7 +16,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
             for (int j = 0; j < 5; j++) {
                 actors.push_back(Actor{{6.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
                         {0.01, 0.01}, 
-                        {0.02, 0.02},
+                        2.0f,
                         {0.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
                         50, 0.05, false, {0, 255, 0}});
             }
@@ -26,7 +26,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
             for (int j = 0; j < 5; j++) {
                 actors.push_back(Actor{{6.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
                         {0.01, 0.01}, 
-                        {0.02, 0.02},
+                        2.0f,
                         {0.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
                         50, 0.05, false, {0, 0, 255}});
             }
@@ -36,7 +36,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
             for (int j = 0; j < 5; j++) {
                 actors.push_back(Actor{{0.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
                         {0.01, 0.01}, 
-                        {0.02, 0.02},
+                        2.0f,
                         {6.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
                         50, 0.05, false, {150, 150, 150}});
             }
@@ -70,7 +70,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
             for (int j = 0; j < 30; j++) {
                 actors.push_back(Actor(vecType({4 + (i * 0.2f), 1 + (j * 0.2f)}),
                                     vecType({0.01, 0.01}), 
-                                    vecType({0.02, 0.02}), 
+                                    2.0f, 
                                     vecType({-1, 4.1}), 
                                     50, 0.05, false, {255, 0, 0}));
             }
@@ -90,7 +90,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
             for (int j = 0; j < 30; j++) {
                 actors.push_back(Actor(vecType({6.5f + (i * 0.2f), 1 + (j * 0.2f)}),
                                     vecType({0.01, 0.01}), 
-                                    vecType({0.02, 0.02}), 
+                                    2.0f, 
                                     vecType({-1, 4.1}), 
                                     50, 0.05, false, {255, 0, 0}));
             }
@@ -100,7 +100,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
             for (int j = 0; j < 30; j++) {
                 actors.push_back(Actor(vecType({0.8f + (i * 0.2f), 1 + (j * 0.2f)}),
                                     vecType({0.01, 0.01}), 
-                                    vecType({0.02, 0.02}), 
+                                    2.0f, 
                                     vecType({10, 6.2}), 
                                     50, 0.05, false, {0, 255, 0}));
             }

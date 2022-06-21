@@ -6,7 +6,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     vecType pos = currentActor->getPos();
 
     float mi = currentActor->getMass();
-    float v0i = 2.0f;
+    float v0i = currentActor->getDesiredSpeed();
     vecType e0i = normalize(getDirectionVector(currentActor->getPos(), currentActor->getDestination()));
     vecType vi = currentActor->getVelocity();
 

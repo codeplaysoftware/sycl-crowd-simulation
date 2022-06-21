@@ -1,7 +1,7 @@
 #include "Actor.hpp"
 
-Actor::Actor(vecType pPos, vecType pVelocity, vecType pDesiredVelocity, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor):
-    pos(pPos), velocity(pVelocity), desiredVelocity(pDesiredVelocity),
+Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor):
+    pos(pPos), velocity(pVelocity), desiredSpeed(pDesiredSpeed),
     destination(pDestination), mass(pMass), radius(pRadius), 
     atDestination(pAtDestination), color(pColor) {
         variation = {0, 0};
@@ -15,8 +15,8 @@ SYCL_EXTERNAL vecType Actor::getVelocity() const {
     return velocity;
 }
 
-SYCL_EXTERNAL vecType Actor::getDesiredVelocity() const {
-    return desiredVelocity;
+SYCL_EXTERNAL float Actor::getDesiredSpeed() const {
+    return desiredSpeed;
 }
 
 SYCL_EXTERNAL vecType Actor::getDestination() const {
@@ -51,8 +51,8 @@ SYCL_EXTERNAL void Actor::setVelocity(vecType newVelocity) {
     velocity = newVelocity;
 }
 
-SYCL_EXTERNAL void Actor::setDesiredVelocity(vecType newDesiredVelocity) {
-    desiredVelocity = newDesiredVelocity;
+SYCL_EXTERNAL void Actor::setDesiredSpeed(float newDesiredSpeed) {
+    desiredSpeed = newDesiredSpeed;
 }
 
 SYCL_EXTERNAL void Actor::setDestination(vecType newDestination) {
