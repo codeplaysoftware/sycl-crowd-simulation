@@ -9,7 +9,7 @@
 #include "Actor.hpp"
 #include "VectorMaths.hpp"
 
-enum class RoomConfgurations {fourSquare, evacuateRoom};
+enum class RoomConfgurations {fourSquare, evacuateRoom, twoExitstwoGroups};
 
 void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type);
 

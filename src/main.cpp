@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <chrono>
+#include <random>
 
 #include "Actor.hpp"
 #include "Room.hpp"
@@ -42,16 +43,27 @@ void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
     auto walls = room.getWalls();
     auto wallsBuf = sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
 
+    std::vector<float> variations;
+    std::random_device rd;
+    for (int i = 0; i < actors.size(); i++) {
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distr(-1000, 1000);
+        variations.push_back(distr(gen) / 10000.0f);
+    }
+    auto variationsBuf = sycl::buffer<float>(variations.data(), variations.size());
+
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
         auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
 
+        auto variationsAcc = variationsBuf.get_access<sycl::access::mode::read>(cgh);
+
         auto out = sycl::stream{1024, 768, cgh};
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
             if (!actorAcc[index].getAtDestination()) {
-                differentialEq(index, actorAcc, wallsAcc, out);
+                differentialEq(index, actorAcc, wallsAcc, variationsAcc, out);
             }
         });
     }).wait();

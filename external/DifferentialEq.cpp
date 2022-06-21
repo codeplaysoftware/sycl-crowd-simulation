@@ -1,6 +1,6 @@
 #include "DifferentialEq.hpp"
 
-SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::stream out) {
+SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::accessor<float, 1, sycl::access::mode::read> variations, sycl::stream out) {
     Actor* currentActor = &actors[currentIndex];
 
     vecType pos = currentActor->getPos();
@@ -24,7 +24,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
             float g = dij > rij ? 0 : rij - dij;
             float deltavtij = dotProduct((neighbour.getVelocity() - currentActor->getVelocity()), tij);
 
-            peopleForces += (Ai * exp((rij - dij) / Bi) + K1 * g) * nij + (K2 * g * deltavtij * tij);
+            peopleForces += (Ai * sycl::exp((rij - dij) / Bi) + K1 * g) * nij + (K2 * g * deltavtij * tij);
         }
     }
 
@@ -38,10 +38,11 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
         vecType niw = dAndn.second;
         vecType tiw = getTangentialVector(niw);
 
-        wallForces += (Ai * exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
+        wallForces += (Ai * sycl::exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
     }
 
     vecType forceSum = personalImpulse + peopleForces + wallForces;
+    forceSum += {variations[currentIndex], variations[currentIndex]};
     vecType acceleration = forceSum / mi;
 
     //out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1] << ")    " << z << sycl::endl;

@@ -84,4 +84,35 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
             {vecType({0.5, 3.8}), vecType({0.5, 0.5})},
         });
     }
+
+    else if (type == RoomConfgurations::twoExitstwoGroups) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 30; j++) {
+                actors.push_back(Actor(vecType({6.5f + (i * 0.2f), 1 + (j * 0.2f)}),
+                                    vecType({0.01, 0.01}), 
+                                    vecType({0.02, 0.02}), 
+                                    vecType({-1, 4.1}), 
+                                    50, 0.05, false, {255, 0, 0}));
+            }
+        }
+        
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 30; j++) {
+                actors.push_back(Actor(vecType({0.8f + (i * 0.2f), 1 + (j * 0.2f)}),
+                                    vecType({0.01, 0.01}), 
+                                    vecType({0.02, 0.02}), 
+                                    vecType({10, 6.2}), 
+                                    50, 0.05, false, {0, 255, 0}));
+            }
+        }
+
+        room.setWalls({
+            {vecType({0.5, 0.5}), vecType({8.5, 0.5})},
+            {vecType({8.5, 0.5}), vecType({8.5, 6})},
+            {vecType({8.5, 6.4}), vecType({8.5, 8.5})},
+            {vecType({8.5, 8.5}), vecType({0.5, 8.5})},
+            {vecType({0.5, 8.5}), vecType({0.5, 4.2})},
+            {vecType({0.5, 3.8}), vecType({0.5, 0.5})},
+        });
+    }
 }

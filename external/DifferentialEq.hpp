@@ -16,6 +16,6 @@ constexpr float Ti = 0.5;
 
 constexpr float TIMESTEP = 0.001;
 
-SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::stream out);
+SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::accessor<float, 1, sycl::access::mode::read> variations, sycl::stream out);
 
 #endif
