@@ -11,7 +11,7 @@
 #include "VectorMaths.hpp"
 #include "CreateEnv.hpp"
 
-constexpr int WIDTH = 14; // metres
+constexpr int WIDTH = 9; // metres
 constexpr int HEIGHT = 9; // metres
 constexpr int SCALE = 100;
 constexpr int DELAY = 0;

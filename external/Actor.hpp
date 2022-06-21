@@ -38,6 +38,7 @@ public:
     SYCL_EXTERNAL void setDestination(vecType newDestination);
     SYCL_EXTERNAL void setVariation(vecType newVariation);
     SYCL_EXTERNAL void setAtDestination(bool param);
+    SYCL_EXTERNAL void setColor(std::array<int, 3> newColor);
 
     SYCL_EXTERNAL void checkAtDestination();
     void refreshVariation();

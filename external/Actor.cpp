@@ -67,6 +67,10 @@ SYCL_EXTERNAL void Actor::setAtDestination(bool param) {
     atDestination = param;
 }
 
+SYCL_EXTERNAL void Actor::setColor(std::array<int, 3> newColor) {
+    color = newColor;
+}
+
 SYCL_EXTERNAL void Actor::checkAtDestination() {
     std::array<float, 4> destinationBoundingBox = {destination[0] + 0.1f, destination[0] - 0.1f, destination[1] + 0.1f, destination[1] - 0.1f};
     if (pos[0] <= destinationBoundingBox[0] && pos[0] >= destinationBoundingBox[1]

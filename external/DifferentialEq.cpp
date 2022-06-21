@@ -43,6 +43,14 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
 
     vecType forceSum = personalImpulse + peopleForces + wallForces;
     forceSum += currentActor->getVariation();
+
+    if (HEATMAPENABLED) {
+        auto colorVal = std::fabs((forceSum[0] + forceSum[1]) / 700.0f);
+        if (colorVal > 1) { colorVal = 1.0f; }
+        auto color = findColor(colorVal);
+        currentActor->setColor({int(color[0]), int(color[1]), int(color[2])});
+    }
+
     vecType acceleration = forceSum / mi;
 
     //out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1] << ")    " << z << sycl::endl;
