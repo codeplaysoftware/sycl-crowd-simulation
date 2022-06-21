@@ -21,7 +21,7 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, R
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    createEnv(room, actors, RoomConfgurations::evacuateRoom);
+    createEnv(room, actors, RoomConfgurations::fourSquare);
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -38,32 +38,33 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
 }
 
 void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
+    for (auto &a : actors) {
+        a.refreshVariation();
+        // if (a.getPos() == actors[0].getPos()) {
+        //     std::cout << a.getVariation()[0] << ", " << a.getVariation()[1] << std::endl;
+        // }
+    }
+    for (auto x : actors) {
+        if (x.getPos() == actors[0].getPos()) {
+            std::cout << x.getVariation()[0] << ", " << x.getVariation()[1] << std::endl;
+        } 
+    }
+
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
     auto walls = room.getWalls();
     auto wallsBuf = sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
-
-    std::vector<float> variations;
-    std::random_device rd;
-    for (int i = 0; i < actors.size(); i++) {
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> distr(-1000, 1000);
-        variations.push_back(distr(gen) / 10000.0f);
-    }
-    auto variationsBuf = sycl::buffer<float>(variations.data(), variations.size());
 
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
         auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
 
-        auto variationsAcc = variationsBuf.get_access<sycl::access::mode::read>(cgh);
-
         auto out = sycl::stream{1024, 768, cgh};
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
             if (!actorAcc[index].getAtDestination()) {
-                differentialEq(index, actorAcc, wallsAcc, variationsAcc, out);
+                differentialEq(index, actorAcc, wallsAcc, out);
             }
         });
     }).wait();

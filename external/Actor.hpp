@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <array>
+#include <random>
 #include <sycl/sycl.hpp>
 #include "VectorMaths.hpp"
 
@@ -12,6 +13,7 @@ private:
     vecType velocity;
     vecType desiredVelocity;
     vecType destination;
+    vecType variation;
     float mass;
     float radius;
     bool atDestination;
@@ -24,6 +26,7 @@ public:
     SYCL_EXTERNAL vecType getVelocity() const;
     SYCL_EXTERNAL vecType getDesiredVelocity() const;
     SYCL_EXTERNAL vecType getDestination() const;
+    SYCL_EXTERNAL vecType getVariation() const;
     SYCL_EXTERNAL float getMass() const;
     SYCL_EXTERNAL float getRadius() const;
     SYCL_EXTERNAL bool getAtDestination() const;
@@ -33,9 +36,11 @@ public:
     SYCL_EXTERNAL void setVelocity(vecType newVelocity);
     SYCL_EXTERNAL void setDesiredVelocity(vecType newDesiredVelocity);
     SYCL_EXTERNAL void setDestination(vecType newDestination);
+    SYCL_EXTERNAL void setVariation(vecType newVariation);
     SYCL_EXTERNAL void setAtDestination(bool param);
 
     SYCL_EXTERNAL void checkAtDestination();
+    void refreshVariation();
 };
 
 #endif

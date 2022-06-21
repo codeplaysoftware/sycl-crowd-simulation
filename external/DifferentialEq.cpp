@@ -1,6 +1,6 @@
 #include "DifferentialEq.hpp"
 
-SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::accessor<float, 1, sycl::access::mode::read> variations, sycl::stream out) {
+SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::stream out) {
     Actor* currentActor = &actors[currentIndex];
 
     vecType pos = currentActor->getPos();
@@ -42,7 +42,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     }
 
     vecType forceSum = personalImpulse + peopleForces + wallForces;
-    forceSum += {variations[currentIndex], variations[currentIndex]};
+    forceSum += currentActor->getVariation();
     vecType acceleration = forceSum / mi;
 
     //out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1] << ")    " << z << sycl::endl;
