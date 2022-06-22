@@ -12,11 +12,12 @@ void validateParameters(rapidjson::Document& jsonDoc) {
     }
     else {
         auto& config = jsonDoc["config"];
-        if (!config.HasMember("width")) missingParameters += "width ";
-        if (!config.HasMember("height")) missingParameters += "height ";
-        if (!config.HasMember("scale")) missingParameters += "scale ";
-        if (!config.HasMember("delay")) missingParameters += "delay ";
-        if (!config.HasMember("heatmap")) missingParameters += "heatmap ";
+        auto configParams = {
+            "width", "height", "scale", "delay", "heatmap"
+        };
+        for (auto p : configParams) {
+            if (!config.HasMember(p)) missingParameters += std::string(p) + " ";
+        }
 
         if (!jsonDoc["environment"].HasMember("walls")) missingParameters += "walls ";
 
