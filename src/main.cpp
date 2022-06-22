@@ -11,18 +11,22 @@
 #include "DifferentialEq.hpp"
 #include "VectorMaths.hpp"
 #include "CreateEnv.hpp"
+#include "ParseInputFile.hpp"
 
 constexpr int WIDTH = 9; // metres
 constexpr int HEIGHT = 9; // metres
 constexpr int SCALE = 100;
 constexpr int DELAY = 0;
 
-void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, Room &room) {
+void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, Room &room, int argc, char **argv) {
     SDL_Init(SDL_INIT_VIDEO);
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    createEnv(room, actors, RoomConfgurations::evacuateRoom);
+    if (argc > 1) {
+        std::string inputPath = argv[1];
+        parseInputFile(inputPath, actors, room);
+    }
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -88,7 +92,7 @@ void close(SDL_Window* win, SDL_Renderer* render) {
     SDL_Quit();
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     SDL_Window* win = NULL;
     SDL_Renderer* render = NULL;
 
@@ -97,7 +101,7 @@ int main() {
 
     sycl::queue myQueue{sycl::gpu_selector()};
 
-    init(win, render, actors, room);
+    init(win, render, actors, room, argc, argv);
 
     draw(render, actors, room);
 
