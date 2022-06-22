@@ -1,10 +1,11 @@
 #include "Actor.hpp"
 
-Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, vecType pDestination, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor):
+Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, std::array<vecType, PATHALLOCATIONSIZE> pPath, int pPathSize, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor):
     pos(pPos), velocity(pVelocity), desiredSpeed(pDesiredSpeed),
-    destination(pDestination), mass(pMass), radius(pRadius), 
+    path(pPath), pathSize(pPathSize), mass(pMass), radius(pRadius), 
     atDestination(pAtDestination), color(pColor) {
         variation = {0, 0};
+        destinationIndex = 0;
     }
 
 SYCL_EXTERNAL vecType Actor::getPos() const {
@@ -19,8 +20,12 @@ SYCL_EXTERNAL float Actor::getDesiredSpeed() const {
     return desiredSpeed;
 }
 
+SYCL_EXTERNAL std::array<vecType, PATHALLOCATIONSIZE> Actor::getPath() const {
+    return path;
+}
+
 SYCL_EXTERNAL vecType Actor::getDestination() const {
-    return destination;
+    return path[destinationIndex];
 }
 
 SYCL_EXTERNAL vecType Actor::getVariation() const {
@@ -55,8 +60,8 @@ SYCL_EXTERNAL void Actor::setDesiredSpeed(float newDesiredSpeed) {
     desiredSpeed = newDesiredSpeed;
 }
 
-SYCL_EXTERNAL void Actor::setDestination(vecType newDestination) {
-    destination = newDestination;
+SYCL_EXTERNAL void Actor::setPath(std::array<vecType, PATHALLOCATIONSIZE> newPath) {
+    path = newPath;
 }
 
 SYCL_EXTERNAL void Actor::setVariation(vecType newVariation) {
@@ -72,10 +77,18 @@ SYCL_EXTERNAL void Actor::setColor(std::array<int, 3> newColor) {
 }
 
 SYCL_EXTERNAL void Actor::checkAtDestination() {
-    std::array<float, 4> destinationBoundingBox = {destination[0] + 0.1f, destination[0] - 0.1f, destination[1] + 0.1f, destination[1] - 0.1f};
+    std::array<float, 4> destinationBoundingBox = {path[destinationIndex][0] + 0.2f, 
+                                                   path[destinationIndex][0] - 0.2f,
+                                                   path[destinationIndex][1] + 0.2f, 
+                                                   path[destinationIndex][1] - 0.2f};
     if (pos[0] <= destinationBoundingBox[0] && pos[0] >= destinationBoundingBox[1]
         && pos[1] <= destinationBoundingBox[2] && pos[1] >= destinationBoundingBox[3]) {
-            this->setAtDestination(true);
+            if (destinationIndex >= PATHALLOCATIONSIZE - 1 || destinationIndex >= pathSize - 1) {
+                this->setAtDestination(true);
+            }
+            else {
+                destinationIndex++;
+            }
         }
 }
 

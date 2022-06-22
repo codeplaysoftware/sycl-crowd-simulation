@@ -3,6 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <random>
+#include <memory>
 
 #include "Actor.hpp"
 #include "Room.hpp"
@@ -21,7 +22,7 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, R
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 
-    createEnv(room, actors, RoomConfgurations::twoExitstwoGroups);
+    createEnv(room, actors, RoomConfgurations::evacuateRoom);
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -93,8 +94,6 @@ int main() {
 
     std::vector<Actor> actors;
     Room room = Room({});
-    // Room room = Room({{vecType{2, 3.5}, vecType{6, 3.5}}});
-    // Room room = Room({{vecType{3.5, 0.5}, vecType{4.5, 5.5}}});
 
     sycl::queue myQueue{sycl::gpu_selector()};
 
@@ -106,12 +105,34 @@ int main() {
     bool isQuit = false;
     SDL_Event event;
 
+    const float dt = 0.00001f;
+    float accumulator = 0.0f;
+    float currentTime = SDL_GetTicks();
+
     while(!isQuit) {
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 isQuit = true;
             }
         }
+
+        // float newTime = SDL_GetTicks();
+        // float frameTime = newTime - currentTime;
+        // currentTime = 0.2f * newTime;
+        // accumulator += frameTime;
+
+        // while (accumulator >= dt) {
+        //     if (SDL_PollEvent(&event)) {
+        //         if (event.type == SDL_QUIT) {
+        //             isQuit = true;
+        //             break;
+        //         }
+        //     }
+        //     update(myQueue, actors, room);
+        //     draw(render, actors, room);
+        //     accumulator -= dt;
+        // }
+
         if (delayCounter >= DELAY) {
             delayCounter = 0;
             update(myQueue, actors, room);
