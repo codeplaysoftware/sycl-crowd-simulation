@@ -1,7 +1,48 @@
 #include "ParseInputFile.hpp"
 
+void validateParameters(rapidjson::Document& jsonDoc) {
+    std::string missingParameters = "";
+
+    if (!jsonDoc.HasMember("config")) missingParameters += "config ";
+    if (!jsonDoc.HasMember("environment")) missingParameters += "environment ";
+    if (!jsonDoc.HasMember("actors")) missingParameters += "actors ";
+    
+    if (missingParameters != "") {
+        throw JSONException("Missing these parameters: " + missingParameters);
+    }
+    else {
+        auto& config = jsonDoc["config"];
+        if (!config.HasMember("width")) missingParameters += "width ";
+        if (!config.HasMember("height")) missingParameters += "height ";
+        if (!config.HasMember("scale")) missingParameters += "scale ";
+        if (!config.HasMember("delay")) missingParameters += "delay ";
+        if (!config.HasMember("heatmap")) missingParameters += "heatmap ";
+
+        if (!jsonDoc["environment"].HasMember("walls")) missingParameters += "walls ";
+
+        if (jsonDoc["actors"].GetArray().Size() > 0) {
+            auto actorParams = {
+                "pos", "velocity", "desiredSpeed", "path",
+                "pathSize", "mass", "radius"
+            };
+            for (auto& a : jsonDoc["actors"].GetArray()) { 
+                for (auto p : actorParams) {
+                    if (!a.HasMember(p)) missingParameters += std::string(p) + " ";
+                }
+            }
+        }
+
+        if (missingParameters != "") {
+            throw JSONException("Missing these parameters: " + missingParameters);
+        }
+    }
+}
+
 void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room) {
     std::ifstream jsonFile(filename);
+    if (!jsonFile.is_open()) {
+        throw JSONException("Error opening file " + filename);
+    }
 
     std::stringstream jsonContents;
     jsonContents << jsonFile.rdbuf();
@@ -9,12 +50,15 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room
     rapidjson::Document jsonDoc;
     jsonDoc.Parse(jsonContents.str().c_str());
 
+    validateParameters(jsonDoc);
+
     // Config
-    int width = jsonDoc["config"]["width"].GetInt();
-    int height = jsonDoc["config"]["height"].GetInt();
-    int scale = jsonDoc["config"]["scale"].GetInt();
-    int delay = jsonDoc["config"]["delay"].GetInt();
-    bool heatmap = jsonDoc["config"]["heatmap"].GetBool();
+    auto& config = jsonDoc["config"];
+    int width = config["width"].GetInt();
+    int height = config["height"].GetInt();
+    int scale = config["scale"].GetInt();
+    int delay = config["delay"].GetInt();
+    bool heatmap = config["heatmap"].GetBool();
 
     // Environment
     auto jsonWalls = jsonDoc["environment"]["walls"].GetArray();
