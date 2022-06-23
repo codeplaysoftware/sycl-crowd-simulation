@@ -4,7 +4,7 @@ void validateParameters(rapidjson::Document& jsonDoc) {
     std::string missingParameters = "";
 
     if (!jsonDoc.HasMember("config")) missingParameters += "config ";
-    if (!jsonDoc.HasMember("environment")) missingParameters += "environment ";
+    if (!jsonDoc.HasMember("room")) missingParameters += "room ";
     if (!jsonDoc.HasMember("actors")) missingParameters += "actors ";
     
     if (missingParameters != "") {
@@ -19,12 +19,12 @@ void validateParameters(rapidjson::Document& jsonDoc) {
             if (!config.HasMember(p)) missingParameters += std::string(p) + " ";
         }
 
-        if (!jsonDoc["environment"].HasMember("walls")) missingParameters += "walls ";
+        if (!jsonDoc["room"].HasMember("walls")) missingParameters += "walls ";
 
         if (jsonDoc["actors"].GetArray().Size() > 0) {
             auto actorParams = {
                 "pos", "velocity", "desiredSpeed", "path",
-                "pathSize", "mass", "radius", "heatmapEnabled"
+                "mass", "radius", "heatmapEnabled"
             };
             for (auto& a : jsonDoc["actors"].GetArray()) { 
                 for (auto p : actorParams) {
@@ -60,8 +60,8 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room
     SCALE = config["scale"].GetInt();
     DELAY = config["delay"].GetInt();
 
-    // Environment
-    auto jsonWalls = jsonDoc["environment"]["walls"].GetArray();
+    // Room
+    auto jsonWalls = jsonDoc["room"]["walls"].GetArray();
     std::vector<std::array<vecType, 2>> walls;
     for (auto& w : jsonWalls) {
         walls.push_back({vecType({w[0].GetFloat(), w[1].GetFloat()}), vecType({w[2].GetFloat(), w[3].GetFloat()})});
@@ -81,7 +81,7 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room
             path[x] = {jsonPath[x][0].GetFloat(), jsonPath[x][1].GetFloat()};
         }
 
-        int pathSize = a["pathSize"].GetInt();
+        int pathSize = jsonPath.Size();
         int mass = a["mass"].GetInt();
         float radius = a["radius"].GetFloat();
         bool atDestination = a["atDestination"].GetBool();
