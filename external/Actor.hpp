@@ -23,9 +23,10 @@ private:
     float radius;
     bool atDestination;
     std::array<int, 3> color;
+    bool heatmapEnabled;
 
 public:    
-    Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, std::array<vecType, PATHALLOCATIONSIZE> pPath, int pathSize, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor);
+    Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, std::array<vecType, PATHALLOCATIONSIZE> pPath, int pathSize, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor, bool pHeatmapEnabled);
     
     SYCL_EXTERNAL vecType getPos() const;
     SYCL_EXTERNAL vecType getVelocity() const;
@@ -37,6 +38,7 @@ public:
     SYCL_EXTERNAL float getRadius() const;
     SYCL_EXTERNAL bool getAtDestination() const;
     SYCL_EXTERNAL std::array<int, 3> getColor() const;
+    SYCL_EXTERNAL bool getHeatmapEnabled() const;
 
     SYCL_EXTERNAL void setPos(vecType newPos);
     SYCL_EXTERNAL void setVelocity(vecType newVelocity);

@@ -44,7 +44,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     vecType forceSum = personalImpulse + peopleForces + wallForces;
     forceSum += currentActor->getVariation();
 
-    if (HEATMAPENABLED) {
+    if (currentActor->getHeatmapEnabled()) {
         auto colorVal = std::fabs((forceSum[0] + forceSum[1]) / 700.0f);
         if (colorVal > 1) { colorVal = 1.0f; }
         auto color = findColor(colorVal);

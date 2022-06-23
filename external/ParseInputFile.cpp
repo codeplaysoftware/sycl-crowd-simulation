@@ -13,7 +13,7 @@ void validateParameters(rapidjson::Document& jsonDoc) {
     else {
         auto& config = jsonDoc["config"];
         auto configParams = {
-            "width", "height", "scale", "delay", "heatmap"
+            "width", "height", "scale", "delay"
         };
         for (auto p : configParams) {
             if (!config.HasMember(p)) missingParameters += std::string(p) + " ";
@@ -24,7 +24,7 @@ void validateParameters(rapidjson::Document& jsonDoc) {
         if (jsonDoc["actors"].GetArray().Size() > 0) {
             auto actorParams = {
                 "pos", "velocity", "desiredSpeed", "path",
-                "pathSize", "mass", "radius"
+                "pathSize", "mass", "radius", "heatmapEnabled"
             };
             for (auto& a : jsonDoc["actors"].GetArray()) { 
                 for (auto p : actorParams) {
@@ -39,7 +39,7 @@ void validateParameters(rapidjson::Document& jsonDoc) {
     }
 }
 
-void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room) {
+void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room, int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY) {
     std::ifstream jsonFile(filename);
     if (!jsonFile.is_open()) {
         throw JSONException("Error opening file " + filename);
@@ -55,11 +55,10 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room
 
     // Config
     auto& config = jsonDoc["config"];
-    int width = config["width"].GetInt();
-    int height = config["height"].GetInt();
-    int scale = config["scale"].GetInt();
-    int delay = config["delay"].GetInt();
-    bool heatmap = config["heatmap"].GetBool();
+    WIDTH = config["width"].GetInt();
+    HEIGHT = config["height"].GetInt();
+    SCALE = config["scale"].GetInt();
+    DELAY = config["delay"].GetInt();
 
     // Environment
     auto jsonWalls = jsonDoc["environment"]["walls"].GetArray();
@@ -90,23 +89,8 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room
         auto jsonColor = a["color"].GetArray();
         std::array<int, 3> color = {jsonColor[0].GetInt(), jsonColor[1].GetInt(), jsonColor[2].GetInt()};
 
-        actors.push_back(Actor(pos, velocity, desiredSpeed, path, pathSize, mass, radius, atDestination, color));
+        bool heatmapEnabled = a["heatmapEnabled"].GetBool();
+
+        actors.push_back(Actor(pos, velocity, desiredSpeed, path, pathSize, mass, radius, atDestination, color, heatmapEnabled));
     }
-
-    // std::cout << "Config: " << std::endl;
-    // std::cout << "width: " << width << ", height: " << height << ", scale: " << scale << ", delay: " << delay << ", heatmap: " << heatmap << std::endl << std::endl;
-
-    // std::cout << "Environment:" << std::endl;
-    // for (auto w : walls) {
-    //     std::cout << "{{" << w[0][0] << ", " << w[0][1] << "}, {" << w[1][0] << ", " << w[1][1] << "}}" << std::endl;
-    // }
-
-    // std::cout << std::endl << "Actors:" << std::endl;
-    // for (auto a : actors) {
-    //     std::cout << "pos: {" << a.getPos()[0] << ", " << a.getPos()[1] << "}, velocity: {" << a.getVelocity()[0] << ", " << a.getVelocity()[1] << "}, desiredSpeed: " << a.getDesiredSpeed() << ", path: ";
-    //     for (auto p : a.getPath()) {
-    //         std::cout << "{" << p[0] << ", " << p[1] << "}, ";
-    //     }
-    //     std::cout << std::endl << ", mass: " << a.getMass() << ", radius: " << a.getRadius() << ", atDestination: " << a.getAtDestination() << ", color: [" << a.getColor()[0] << ", " << a.getColor()[1] << ", " << a.getColor()[2] << "]" << std::endl;
-    // }
 }   

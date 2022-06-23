@@ -20,6 +20,6 @@ public:
 
 void validateParameters(rapidjson::Document& jsonDoc);
 
-void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room);
+void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room, int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY);
 
 #endif

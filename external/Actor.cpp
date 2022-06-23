@@ -1,9 +1,9 @@
 #include "Actor.hpp"
 
-Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, std::array<vecType, PATHALLOCATIONSIZE> pPath, int pPathSize, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor):
+Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, std::array<vecType, PATHALLOCATIONSIZE> pPath, int pPathSize, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor, bool pHeatmapEnabled):
     pos(pPos), velocity(pVelocity), desiredSpeed(pDesiredSpeed),
     path(pPath), pathSize(pPathSize), mass(pMass), radius(pRadius), 
-    atDestination(pAtDestination), color(pColor) {
+    atDestination(pAtDestination), color(pColor), heatmapEnabled(pHeatmapEnabled) {
         variation = {0, 0};
         destinationIndex = 0;
     }
@@ -46,6 +46,10 @@ SYCL_EXTERNAL bool Actor::getAtDestination() const {
 
 SYCL_EXTERNAL std::array<int, 3> Actor::getColor() const {
     return color;
+}
+
+SYCL_EXTERNAL bool Actor::getHeatmapEnabled() const {
+    return heatmapEnabled;
 }
 
 SYCL_EXTERNAL void Actor::setPos(vecType newPos) {

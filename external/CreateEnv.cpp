@@ -9,7 +9,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
                         2.0f,
                         {{6.5f + (i * 0.5f), 6.5f + (j * 0.5f)}},
                         1,
-                        50, 0.05, false, {255, 0, 0}});
+                        50, 0.05, false, {255, 0, 0}, true});
             }
         }
 
@@ -20,7 +20,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
                         2.0f,
                         {{0.5f + (i * 0.5f), 6.5f + (j * 0.5f)}},
                         1,
-                        50, 0.05, false, {0, 255, 0}});
+                        50, 0.05, false, {0, 255, 0}, true});
             }
         }
 
@@ -31,7 +31,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
                         2.0f,
                         {{0.5f + (i * 0.5f), 0.5f + (j * 0.5f)}},
                         1,
-                        50, 0.05, false, {0, 0, 255}});
+                        50, 0.05, false, {0, 0, 255}, true});
             }
         }
 
@@ -42,7 +42,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
                         2.0f,
                         {{6.5f + (i * 0.5f), 0.5f + (j * 0.5f)}},
                         1,
-                        50, 0.05, false, {150, 150, 150}});
+                        50, 0.05, false, {150, 150, 150}, true});
             }
         }
 
@@ -77,7 +77,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
                                     2.0f, 
                                     {vecType({0.5, 4.1}), vecType({-5, 4.1})}, 
                                     2,
-                                    50, 0.05, false, {255, 0, 0}));
+                                    50, 0.05, false, {255, 0, 0}, true));
             }
         }
         
@@ -98,7 +98,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
                                     2.0f, 
                                     {vecType({-1, 4.1})}, 
                                     1,
-                                    50, 0.05, false, {255, 0, 0}));
+                                    50, 0.05, false, {255, 0, 0}, true));
             }
         }
         
@@ -109,7 +109,7 @@ void createEnv(Room &room, std::vector<Actor> &actors, RoomConfgurations type) {
                                     2.0f, 
                                     {vecType({10, 6.2})}, 
                                     1,
-                                    50, 0.05, false, {0, 255, 0}));
+                                    50, 0.05, false, {0, 255, 0}, true));
             }
         }
 
