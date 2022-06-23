@@ -10,7 +10,6 @@
 #include "MathHelper.hpp"
 #include "DifferentialEq.hpp"
 #include "VectorMaths.hpp"
-#include "CreateEnv.hpp"
 #include "ParseInputFile.hpp"
 
 int WIDTH; // metres
