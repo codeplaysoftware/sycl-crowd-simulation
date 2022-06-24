@@ -1,17 +1,20 @@
 #include "DifferentialEq.hpp"
 
-SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::stream out) {
+SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::accessor<Path, 1, sycl::access::mode::read> paths, sycl::stream out) {
     Actor* currentActor = &actors[currentIndex];
 
     vecType pos = currentActor->getPos();
 
     float mi = currentActor->getMass();
     float v0i = currentActor->getDesiredSpeed();
-    vecType e0i = normalize(getDirectionVector(currentActor->getPos(), currentActor->getDestination()));
+    vecType destination = paths[currentActor->getPathId()].getCheckpoints()[currentActor->getDestinationIndex()];
+    vecType e0i = normalize(getDirectionVector(currentActor->getPos(), destination));
     vecType vi = currentActor->getVelocity();
 
     vecType personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
 
+    out << pos[0] << ", " << pos[1] << "   ->   " << destination[0] << ", " << destination[1] << sycl::endl;
+    
     vecType peopleForces = {0, 0};
     for (int x = 0; x < actors.size(); x++) {
         Actor neighbour = actors[x];
@@ -61,5 +64,5 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     currentActor->setVelocity(vi + acceleration * TIMESTEP);
     currentActor->setPos(pos + currentActor->getVelocity() * TIMESTEP);
 
-    currentActor->checkAtDestination();
+    currentActor->checkAtDestination(destination, paths[currentActor->getPathId()].getPathSize());
 }

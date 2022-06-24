@@ -1,8 +1,8 @@
 #include "Actor.hpp"
 
-Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, std::array<vecType, PATHALLOCATIONSIZE> pPath, int pPathSize, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor, bool pHeatmapEnabled):
+Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, int pPathId, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor, bool pHeatmapEnabled):
     pos(pPos), velocity(pVelocity), desiredSpeed(pDesiredSpeed),
-    path(pPath), pathSize(pPathSize), mass(pMass), radius(pRadius), 
+    pathId(pPathId), mass(pMass), radius(pRadius), 
     atDestination(pAtDestination), color(pColor), heatmapEnabled(pHeatmapEnabled) {
         variation = {0, 0};
         destinationIndex = 0;
@@ -20,12 +20,12 @@ SYCL_EXTERNAL float Actor::getDesiredSpeed() const {
     return desiredSpeed;
 }
 
-SYCL_EXTERNAL std::array<vecType, PATHALLOCATIONSIZE> Actor::getPath() const {
-    return path;
+SYCL_EXTERNAL int Actor::getPathId() const {
+    return pathId;
 }
 
-SYCL_EXTERNAL vecType Actor::getDestination() const {
-    return path[destinationIndex];
+SYCL_EXTERNAL int Actor::getDestinationIndex() const {
+    return destinationIndex;
 }
 
 SYCL_EXTERNAL vecType Actor::getVariation() const {
@@ -64,10 +64,6 @@ SYCL_EXTERNAL void Actor::setDesiredSpeed(float newDesiredSpeed) {
     desiredSpeed = newDesiredSpeed;
 }
 
-SYCL_EXTERNAL void Actor::setPath(std::array<vecType, PATHALLOCATIONSIZE> newPath) {
-    path = newPath;
-}
-
 SYCL_EXTERNAL void Actor::setVariation(vecType newVariation) {
     variation = newVariation;
 }
@@ -80,11 +76,11 @@ SYCL_EXTERNAL void Actor::setColor(std::array<int, 3> newColor) {
     color = newColor;
 }
 
-SYCL_EXTERNAL void Actor::checkAtDestination() {
-    std::array<float, 4> destinationBoundingBox = {path[destinationIndex][0] + 0.2f, 
-                                                   path[destinationIndex][0] - 0.2f,
-                                                   path[destinationIndex][1] + 0.2f, 
-                                                   path[destinationIndex][1] - 0.2f};
+SYCL_EXTERNAL void Actor::checkAtDestination(vecType destination, int pathSize) {
+    std::array<float, 4> destinationBoundingBox = {destination[0] + 0.2f, 
+                                                   destination[0] - 0.2f,
+                                                   destination[1] + 0.2f, 
+                                                   destination[1] - 0.2f};
     if (pos[0] <= destinationBoundingBox[0] && pos[0] >= destinationBoundingBox[1]
         && pos[1] <= destinationBoundingBox[2] && pos[1] >= destinationBoundingBox[3]) {
             if (destinationIndex >= PATHALLOCATIONSIZE - 1 || destinationIndex >= pathSize - 1) {

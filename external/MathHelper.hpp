@@ -6,6 +6,7 @@
 #include <sycl/sycl.hpp>
 #include "VectorMaths.hpp"
 
+
 SYCL_EXTERNAL vecType getDirectionVector(vecType a, vecType b);
 
 SYCL_EXTERNAL vecType velFromSpeedAndDir(float speed, vecType direction);

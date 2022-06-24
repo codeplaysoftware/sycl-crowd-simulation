@@ -6,6 +6,7 @@ void validateParameters(rapidjson::Document& jsonDoc) {
     if (!jsonDoc.HasMember("config")) missingParameters += "config ";
     if (!jsonDoc.HasMember("room")) missingParameters += "room ";
     if (!jsonDoc.HasMember("actors")) missingParameters += "actors ";
+    if (!jsonDoc.HasMember("paths")) missingParameters += "paths ";
     
     if (missingParameters != "") {
         throw JSONException("Missing these parameters: " + missingParameters);
@@ -21,16 +22,19 @@ void validateParameters(rapidjson::Document& jsonDoc) {
 
         if (!jsonDoc["room"].HasMember("walls")) missingParameters += "walls ";
 
-        if (jsonDoc["actors"].GetArray().Size() > 0) {
-            auto actorParams = {
-                "pos", "velocity", "desiredSpeed", "path",
-                "mass", "radius", "heatmapEnabled"
-            };
-            for (auto& a : jsonDoc["actors"].GetArray()) { 
-                for (auto p : actorParams) {
-                    if (!a.HasMember(p)) missingParameters += std::string(p) + " ";
-                }
+        auto actorParams = {
+            "pos", "velocity", "desiredSpeed", "pathId", "mass",
+            "radius", "atDestination", "color", "heatmapEnabled"
+        };
+        for (auto& a : jsonDoc["actors"].GetArray()) { 
+            for (auto p : actorParams) {
+                if (!a.HasMember(p)) missingParameters += std::string(p) + " ";
             }
+        }
+        
+        for (auto& p : jsonDoc["paths"].GetArray()) {
+            if (!p.HasMember("id")) missingParameters += "id ";
+            if (!p.HasMember("checkpoints")) missingParameters += "checkpoints ";
         }
 
         if (missingParameters != "") {
@@ -39,7 +43,7 @@ void validateParameters(rapidjson::Document& jsonDoc) {
     }
 }
 
-void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room, int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY) {
+void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room, std::vector<Path> &paths, int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY) {
     std::ifstream jsonFile(filename);
     if (!jsonFile.is_open()) {
         throw JSONException("Error opening file " + filename);
@@ -68,20 +72,27 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room
     }
     room.setWalls(walls);
 
+    // Paths
+    auto jsonPaths = jsonDoc["paths"].GetArray();
+    for (auto& p : jsonPaths) {
+        int id = p["id"].GetInt();
+        auto jsonCheckpoints = p["checkpoints"].GetArray();
+        std::array<vecType, PATHALLOCATIONSIZE> checkpoints;
+        for (int i = 0; i < jsonCheckpoints.Size(); i++) {
+            checkpoints[i] = vecType({jsonCheckpoints[i][0].GetFloat(), jsonCheckpoints[i][1].GetFloat()});
+        }
+        int pathSize = jsonCheckpoints.Size();
+        paths.push_back(Path(id, checkpoints, pathSize));
+    }
+
     // Actor
     auto jsonActors = jsonDoc["actors"].GetArray();
     for (auto& a : jsonActors) {
         vecType pos = {a["pos"][0].GetFloat(), a["pos"][1].GetFloat()};
         vecType velocity = {a["velocity"][0].GetFloat(), a["velocity"][1].GetFloat()};
         float desiredSpeed = a["desiredSpeed"].GetFloat();
-        
-        auto jsonPath = a["path"].GetArray();
-        std::array<vecType, PATHALLOCATIONSIZE> path;
-        for (int x = 0; x < jsonPath.Size(); x++) {
-            path[x] = {jsonPath[x][0].GetFloat(), jsonPath[x][1].GetFloat()};
-        }
-
-        int pathSize = jsonPath.Size();
+        int pathId = a["pathId"].GetInt();
+        int pathSize = paths[pathId].getPathSize();
         int mass = a["mass"].GetInt();
         float radius = a["radius"].GetFloat();
         bool atDestination = a["atDestination"].GetBool();
@@ -91,6 +102,6 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room
 
         bool heatmapEnabled = a["heatmapEnabled"].GetBool();
 
-        actors.push_back(Actor(pos, velocity, desiredSpeed, path, pathSize, mass, radius, atDestination, color, heatmapEnabled));
+        actors.push_back(Actor(pos, velocity, desiredSpeed, pathId, mass, radius, atDestination, color, heatmapEnabled));
     }
 }   

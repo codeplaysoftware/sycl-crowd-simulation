@@ -11,16 +11,17 @@
 #include "DifferentialEq.hpp"
 #include "VectorMaths.hpp"
 #include "ParseInputFile.hpp"
+#include "Path.hpp"
 
 int WIDTH; // metres
 int HEIGHT; // metres
 int SCALE;
 int DELAY;
 
-void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, Room &room, int argc, char **argv) {
+void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, Room &room, std::vector<Path> &paths, int argc, char **argv) {
     if (argc > 1) {
         std::string inputPath = argv[1];
-        parseInputFile(inputPath, actors, room, WIDTH, HEIGHT, SCALE, DELAY);
+        parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE, DELAY);
     }
     
     SDL_Init(SDL_INIT_VIDEO);
@@ -41,7 +42,7 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
     }
 }
 
-void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
+void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room, std::vector<Path> paths) {
     for (auto &a : actors) {
         a.refreshVariation();
     }
@@ -51,16 +52,20 @@ void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
     auto walls = room.getWalls();
     auto wallsBuf = sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
 
+    auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
+
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
         auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
 
+        auto pathsAcc = pathsBuf.get_access<sycl::access::mode::read>(cgh);
+
         auto out = sycl::stream{1024, 768, cgh};
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
             if (!actorAcc[index].getAtDestination()) {
-                differentialEq(index, actorAcc, wallsAcc, out);
+                differentialEq(index, actorAcc, wallsAcc, pathsAcc, out);
             }
         });
     }).wait();
@@ -97,10 +102,11 @@ int main(int argc, char *argv[]) {
 
     std::vector<Actor> actors;
     Room room = Room({});
+    std::vector<Path> paths;
 
     sycl::queue myQueue{sycl::gpu_selector()};
 
-    init(win, render, actors, room, argc, argv);
+    init(win, render, actors, room, paths, argc, argv);
 
     draw(render, actors, room);
 
@@ -138,7 +144,7 @@ int main(int argc, char *argv[]) {
 
         if (delayCounter >= DELAY) {
             delayCounter = 0;
-            update(myQueue, actors, room);
+            update(myQueue, actors, room, paths);
             draw(render, actors, room);
         }
         else {

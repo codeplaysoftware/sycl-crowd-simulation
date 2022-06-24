@@ -12,6 +12,7 @@
 #include "VectorMaths.hpp"
 #include "Actor.hpp"
 #include "Room.hpp"
+#include "Path.hpp"
 
 class JSONException : public std::runtime_error {
 public:
@@ -20,6 +21,6 @@ public:
 
 void validateParameters(rapidjson::Document& jsonDoc);
 
-void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room, int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY);
+void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room, std::vector<Path> &paths, int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY);
 
 #endif
