@@ -5,6 +5,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
 
     vecType pos = currentActor->getPos();
 
+    // Calculate personal impulse
     float mi = currentActor->getMass();
     float v0i = currentActor->getDesiredSpeed();
     vecType destination = paths[currentActor->getPathId()].getCheckpoints()[currentActor->getDestinationIndex()];
@@ -12,9 +13,8 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     vecType vi = currentActor->getVelocity();
 
     vecType personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
-
-    out << pos[0] << ", " << pos[1] << "   ->   " << destination[0] << ", " << destination[1] << sycl::endl;
     
+    // Calculate forces applied by neighbouring actors
     vecType peopleForces = {0, 0};
     for (int x = 0; x < actors.size(); x++) {
         Actor neighbour = actors[x];
@@ -31,6 +31,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
         }
     }
 
+    // Calculate forces applied by walls
     vecType wallForces = {0, 0};
     for (int x = 0; x < walls.size(); x++) {
         std::array<vecType, 2> currentWall = walls[x];
@@ -45,22 +46,24 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     }
 
     vecType forceSum = personalImpulse + peopleForces + wallForces;
+
+    // Apply random force variations
     forceSum += currentActor->getVariation();
 
+    // Color actor according to heatmap
     if (currentActor->getHeatmapEnabled()) {
-        auto colorVal = std::fabs((forceSum[0] + forceSum[1]) / 700.0f);
+        auto colorVal = sycl::fabs((forceSum[0] + forceSum[1]) / 700.0f);
         if (colorVal > 1) { colorVal = 1.0f; }
         auto color = findColor(colorVal);
         currentActor->setColor({int(color[0]), int(color[1]), int(color[2])});
     }
 
+    // out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1] << ")    " << z << sycl::endl;
+    // out << "Wall Forces: (" << wallForces[0] << ", " << wallForces[1] << ")    " << z << sycl::endl;
+    // out << "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ")    " << z << sycl::endl;
+    // out << "-----------------------" << sycl::endl;
+
     vecType acceleration = forceSum / mi;
-
-    //out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1] << ")    " << z << sycl::endl;
-    //out << "Wall Forces: (" << wallForces[0] << ", " << wallForces[1] << ")    " << z << sycl::endl;
-    //out << "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ")    " << z << sycl::endl;
-    //out << "-----------------------" << sycl::endl;
-
     currentActor->setVelocity(vi + acceleration * TIMESTEP);
     currentActor->setPos(pos + currentActor->getVelocity() * TIMESTEP);
 

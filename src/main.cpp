@@ -19,11 +19,13 @@ int SCALE;
 int DELAY;
 
 void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, Room &room, std::vector<Path> &paths, int argc, char **argv) {
+    // Read from input file path JSON
     if (argc > 1) {
         std::string inputPath = argv[1];
         parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE, DELAY);
     }
     
+    // Initialise SDL
     SDL_Init(SDL_INIT_VIDEO);
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
@@ -97,8 +99,8 @@ void close(SDL_Window* win, SDL_Renderer* render) {
 }
 
 int main(int argc, char *argv[]) {
-    SDL_Window* win = NULL;
-    SDL_Renderer* render = NULL;
+    SDL_Window* win;
+    SDL_Renderer* render;
 
     std::vector<Actor> actors;
     Room room = Room({});
@@ -114,33 +116,12 @@ int main(int argc, char *argv[]) {
     bool isQuit = false;
     SDL_Event event;
 
-    // const float dt = 0.00001f;
-    // float accumulator = 0.0f;
-    // float currentTime = SDL_GetTicks();
-
     while(!isQuit) {
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 isQuit = true;
             }
         }
-
-        // float newTime = SDL_GetTicks();
-        // float frameTime = newTime - currentTime;
-        // currentTime = 0.2f * newTime;
-        // accumulator += frameTime;
-
-        // while (accumulator >= dt) {
-        //     if (SDL_PollEvent(&event)) {
-        //         if (event.type == SDL_QUIT) {
-        //             isQuit = true;
-        //             break;
-        //         }
-        //     }
-        //     update(myQueue, actors, room);
-        //     draw(render, actors, room);
-        //     accumulator -= dt;
-        // }
 
         if (delayCounter >= DELAY) {
             delayCounter = 0;

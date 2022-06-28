@@ -2,8 +2,8 @@
 
 SYCL_EXTERNAL std::array<float, 3> HSVtoRGB(float h, float s, float v) {
     float c = v * s;
-    float scaledH = std::fmod(h / 60.0, 6);
-    float x = c * (1 - std::fabs(std::fmod(scaledH, 2) - 1));
+    double scaledH = sycl::fmod(h / 60.0, 6.0);
+    float x = c * (1 - sycl::fabs(sycl::fmod(scaledH, 2.0) - 1));
     float m = v - c;
 
     std::array<float, 3> rgb = {};
@@ -15,7 +15,7 @@ SYCL_EXTERNAL std::array<float, 3> HSVtoRGB(float h, float s, float v) {
     else if (4 <= scaledH && scaledH < 5) { rgb[0] = x; rgb[1] = 0; rgb[2] = c; }
     else if (5 <= scaledH && scaledH < 6) { rgb[0] = c; rgb[1] = 0; rgb[2] = x; }
     else { rgb[0] = 0; rgb[1] = 0; rgb[2] = 0; }
-
+    
     return rgb;
 }
 
