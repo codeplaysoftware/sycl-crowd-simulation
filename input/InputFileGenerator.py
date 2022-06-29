@@ -4,12 +4,13 @@ import sys
 
 # Available configurations:
 # - fourSquare
-# - evacuateRoom
 # - twoExitsTwoGroups
+# - evacuateRoom
+# - evacuateRoomLarge
 
 def main(argv):
     if len(argv) == 0:
-        toGenerate = ["fourSquare", "evacuateRoom", "twoExitsTwoGroups"]
+        toGenerate = ["fourSquare", "evacuateRoom", "twoExitsTwoGroups", "evacuateRoomLarge"]
     else:
         toGenerate = argv
     
@@ -72,40 +73,6 @@ def main(argv):
 
             print("Finished Generating ../input/fourSquare.json")
 
-        elif config == "evacuateRoom":
-            evacuateRoom = {}
-            evacuateRoom["config"] = {"width": 9, "height": 9, "scale": 100, "delay": 0}
-
-            evacuateRoom["room"] = {"walls": [
-                [0.5, 0.5, 8.5, 0.5],
-                [8.5, 0.5, 8.5, 8.5],
-                [8.5, 8.5, 0.5, 8.5],
-                [0.5, 8.5, 0.5, 4.2],
-                [0.5, 3.8, 0.5, 0.5]
-            ]}
-
-            actorList = []
-            for i in range(0, 20):
-                for j in range(0, 35):
-                    actorList.append({
-                        "pos": [4 + (i * 0.2), 1 + (j * 0.2)],
-                        "velocity": [0.01, 0.01],
-                        "desiredSpeed": 2.0,
-                        "pathId": 0,
-                        "mass": 50,
-                        "radius": 0.05,
-                        "atDestination": False,
-                        "color": [255, 0, 0],
-                        "heatmapEnabled": True
-                    })
-            evacuateRoom["paths"] = [{"id": 0, "checkpoints": [[0.5, 4.1], [-10, 4.1]]}]
-            evacuateRoom["actors"] = actorList
-
-            with open("evacuateRoom.json", "w") as out:
-                json.dump(evacuateRoom, out, ensure_ascii=False, indent=4)
-            
-            print("Finished Generating ../input/evacuateRoom.json")
-
         elif config == "twoExitsTwoGroups":
             twoExitsTwoGroups = {}
             twoExitsTwoGroups["config"] = {"width": 9, "height": 9, "scale": 100, "delay": 0}
@@ -154,6 +121,74 @@ def main(argv):
                 json.dump(twoExitsTwoGroups, out, ensure_ascii=False, indent=4)
             
             print("Finished Generating ../input/twoExitsTwoGroups.json")
+        
+        elif config == "evacuateRoom":
+            evacuateRoom = {}
+            evacuateRoom["config"] = {"width": 9, "height": 9, "scale": 100, "delay": 0}
+
+            evacuateRoom["room"] = {"walls": [
+                [0.5, 0.5, 8.5, 0.5],
+                [8.5, 0.5, 8.5, 8.5],
+                [8.5, 8.5, 0.5, 8.5],
+                [0.5, 8.5, 0.5, 4.2],
+                [0.5, 3.8, 0.5, 0.5]
+            ]}
+
+            actorList = []
+            for i in range(0, 20):
+                for j in range(0, 35):
+                    actorList.append({
+                        "pos": [4 + (i * 0.2), 1 + (j * 0.2)],
+                        "velocity": [0.01, 0.01],
+                        "desiredSpeed": 2.0,
+                        "pathId": 0,
+                        "mass": 50,
+                        "radius": 0.05,
+                        "atDestination": False,
+                        "color": [255, 0, 0],
+                        "heatmapEnabled": True
+                    })
+            evacuateRoom["paths"] = [{"id": 0, "checkpoints": [[0.5, 4.1], [-10, 4.1]]}]
+            evacuateRoom["actors"] = actorList
+
+            with open("evacuateRoom.json", "w") as out:
+                json.dump(evacuateRoom, out, ensure_ascii=False, indent=4)
+            
+            print("Finished Generating ../input/evacuateRoom.json")
+        
+        elif config == "evacuateRoomLarge":
+            evacuateRoomLarge = {}
+            evacuateRoomLarge["config"] = {"width": 30, "height": 19, "scale": 50, "delay": 0}
+
+            evacuateRoomLarge["room"] = {"walls": [
+                [0.5, 0.5, 29.5, 0.5],
+                [29.5, 0.5, 29.5, 18.5],
+                [29.5, 18.5, 0.5, 18.5],
+                [0.5, 18.5, 0.5, 9.7],
+                [0.5, 9.3, 0.5, 0.5]
+            ]}
+
+            actorList = []
+            for i in range(0, 120):
+                for j in range(0, 85):
+                    actorList.append({
+                        "pos": [4 + (i * 0.2), 1 + (j * 0.2)],
+                        "velocity": [0.01, 0.01],
+                        "desiredSpeed": 2.0,
+                        "pathId": 0,
+                        "mass": 50,
+                        "radius": 0.05,
+                        "atDestination": False,
+                        "color": [255, 0, 0],
+                        "heatmapEnabled": True
+                    })
+            evacuateRoomLarge["paths"] = [{"id": 0, "checkpoints": [[0.5, 9.5], [-10, 9.5]]}]
+            evacuateRoomLarge["actors"] = actorList
+
+            with open("evacuateRoomLarge.json", "w") as out:
+                json.dump(evacuateRoomLarge, out, ensure_ascii=False, indent=4)
+            
+            print("Finished Generating ../input/evacuateRoomLarge.json")
 
 if __name__ == "__main__":
     main(sys.argv[1:])

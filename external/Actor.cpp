@@ -6,6 +6,7 @@ Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, int pPathId, 
     atDestination(pAtDestination), color(pColor), heatmapEnabled(pHeatmapEnabled) {
         variation = {0, 0};
         destinationIndex = 0;
+        bBox = {0, 0};
     }
 
 SYCL_EXTERNAL vecType Actor::getPos() const {
@@ -52,6 +53,10 @@ SYCL_EXTERNAL bool Actor::getHeatmapEnabled() const {
     return heatmapEnabled;
 }
 
+SYCL_EXTERNAL std::array<int, 2> Actor::getBBox() const {
+    return bBox;
+}
+
 SYCL_EXTERNAL void Actor::setPos(vecType newPos) {
     pos = newPos;
 }
@@ -74,6 +79,10 @@ SYCL_EXTERNAL void Actor::setAtDestination(bool param) {
 
 SYCL_EXTERNAL void Actor::setColor(std::array<int, 3> newColor) {
     color = newColor;
+}
+
+SYCL_EXTERNAL void Actor::setBBox(std::array<int, 2> newBBox) {
+    bBox = newBBox;
 }
 
 SYCL_EXTERNAL void Actor::checkAtDestination(vecType destination, int pathSize) {

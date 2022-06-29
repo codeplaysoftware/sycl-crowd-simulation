@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <array>
+#include <algorithm>
 #include <sycl/sycl.hpp>
 #include "Actor.hpp"
 #include "MathHelper.hpp"

@@ -14,14 +14,32 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
 
     vecType personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
     
+    std::array<int, 2> currentBBox = currentActor->getBBox();
+    std::array<std::array<int, 2>, 9> neighbourBoxes = {{
+        {currentBBox},
+        {currentBBox[0] - 1, currentBBox[1] - 1},
+        {currentBBox[0] - 1, currentBBox[1]},
+        {currentBBox[0] - 1, currentBBox[1] + 1},
+        {currentBBox[0], currentBBox[1] + 1},
+        {currentBBox[0], currentBBox[1] - 1},
+        {currentBBox[0] + 1, currentBBox[1] - 1},
+        {currentBBox[0] + 1, currentBBox[1]},
+        {currentBBox[0] + 1, currentBBox[1] + 1},
+    }};
+
     // Calculate forces applied by neighbouring actors
     vecType peopleForces = {0, 0};
     for (int x = 0; x < actors.size(); x++) {
         Actor neighbour = actors[x];
-        if (currentIndex != x && !neighbour.getAtDestination()) {
-            float rij = neighbour.getRadius() + currentActor->getRadius();
+        
+        bool bBoxFlag = std::any_of(neighbourBoxes.begin(), neighbourBoxes.end(), [neighbour](std::array<int, 2> i){
+            return i[0] == neighbour.getBBox()[0] && i[1] == neighbour.getBBox()[1];
+        });
+        
+        if (currentIndex != x && !neighbour.getAtDestination() /*&& bBoxFlag*/) {
             vecType currentToNeighbour = pos - neighbour.getPos();
             float dij = magnitude(currentToNeighbour);
+            float rij = neighbour.getRadius() + currentActor->getRadius();
             vecType nij = (currentToNeighbour) / dij;
             vecType tij = getTangentialVector(nij);
             float g = dij > rij ? 0 : rij - dij;

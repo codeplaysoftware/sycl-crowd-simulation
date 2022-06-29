@@ -22,6 +22,7 @@ private:
     bool atDestination;
     std::array<int, 3> color;
     bool heatmapEnabled;
+    std::array<int, 2> bBox;
 
 public:
     Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, int pPathId, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor, bool pHeatmapEnabled);
@@ -37,6 +38,7 @@ public:
     SYCL_EXTERNAL bool getAtDestination() const;
     SYCL_EXTERNAL std::array<int, 3> getColor() const;
     SYCL_EXTERNAL bool getHeatmapEnabled() const;
+    SYCL_EXTERNAL std::array<int, 2> getBBox() const;
 
     SYCL_EXTERNAL void setPos(vecType newPos);
     SYCL_EXTERNAL void setVelocity(vecType newVelocity);
@@ -44,6 +46,7 @@ public:
     SYCL_EXTERNAL void setVariation(vecType newVariation);
     SYCL_EXTERNAL void setAtDestination(bool param);
     SYCL_EXTERNAL void setColor(std::array<int, 3> newColor);
+    SYCL_EXTERNAL void setBBox(std::array<int, 2> newBBox);
 
     SYCL_EXTERNAL void checkAtDestination(vecType destination, int pathSize);
     void refreshVariation();

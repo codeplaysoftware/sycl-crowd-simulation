@@ -3,6 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <random>
+#include <numeric>
 #include <memory>
 
 #include "Actor.hpp"
@@ -73,6 +74,28 @@ void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room, std::vec
     }).wait();
 }
 
+void updateBBox(sycl::queue myQueue, std::vector<Actor> &actors) {
+    auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
+
+    auto widthBuf = sycl::buffer<int>(&WIDTH, 1);
+    auto heightBuf = sycl::buffer<int>(&HEIGHT, 1);
+
+    myQueue.submit([&](sycl::handler& cgh) {
+        auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+
+        auto widthAcc = widthBuf.get_access<sycl::access::mode::read>(cgh);
+        auto heightAcc = heightBuf.get_access<sycl::access::mode::read>(cgh);
+
+        cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
+            Actor* currentActor = &actorAcc[index];
+            vecType pos = currentActor->getPos();
+            int row = sycl::floor(pos[0]);
+            int col = sycl::floor(pos[1]);
+            currentActor->setBBox({row, col});
+        });
+    }).wait();
+}
+
 void draw(SDL_Renderer* &render, std::vector<Actor> actors, Room room) {
     SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
     SDL_RenderClear(render);
@@ -113,8 +136,11 @@ int main(int argc, char *argv[]) {
     draw(render, actors, room);
 
     int delayCounter = 0;
+    int updateBBoxCounter = 0;
     bool isQuit = false;
     SDL_Event event;
+
+    std::vector<int> executionTimes;
 
     while(!isQuit) {
         if (SDL_PollEvent(&event)) {
@@ -124,14 +150,28 @@ int main(int argc, char *argv[]) {
         }
 
         if (delayCounter >= DELAY) {
+            if (updateBBoxCounter <= 0) {
+                updateBBox(myQueue, actors);
+                updateBBoxCounter = 20;
+            }
             delayCounter = 0;
+            auto start = std::chrono::high_resolution_clock::now();
             update(myQueue, actors, room, paths);
+            auto end = std::chrono::high_resolution_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+            executionTimes.push_back(duration.count());
             draw(render, actors, room);
         }
         else {
             delayCounter++;
+            updateBBoxCounter--;
         }
     }
+
+    executionTimes.erase(executionTimes.begin());
+    auto count = static_cast<float>(executionTimes.size());
+    float mean = std::accumulate(executionTimes.begin(), executionTimes.end(), 0.0) / count;
+    std::cout << mean << std::endl;
 
     close(win, render);
     return 0;
