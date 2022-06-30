@@ -6,12 +6,14 @@ import sys
 # - fourSquare
 # - twoExitsTwoGroups
 # - tightCorner
+# - laneFiltering
 # - evacuateRoom
 # - evacuateRoomLarge
 
 def main(argv):
     if len(argv) == 0:
-        toGenerate = ["fourSquare", "twoExitsTwoGroups", "tightCorner", "evacuateRoom", "evacuateRoomLarge"]
+        toGenerate = ["fourSquare", "twoExitsTwoGroups", "tightCorner", "laneFiltering",
+                      "evacuateRoom", "evacuateRoomLarge"]
     else:
         toGenerate = argv
     
@@ -161,6 +163,59 @@ def main(argv):
                 json.dump(tightCorner, out, ensure_ascii=False, indent=4)
             
             print("Finished Generating ../input/tightCorner.json")
+        
+        elif config == "laneFiltering":
+            laneFiltering = {}
+            laneFiltering["config"] = {"width": 11, "height": 9, "scale": 100, "delay": 0}
+
+            laneFiltering["room"] = {"walls":  [
+                [0.5, 0.5, 10.5, 0.5],
+                [10.5, 0.5, 10.5, 4.3],
+                [10.5, 4.7, 10.5, 8.5],
+                [10.5, 8.5, 0.5, 8.5],
+                [0.5, 8.5, 0.5, 0.5],
+
+                [8.5, 0.5, 8.5, 3],
+                [8.5, 3, 8.7, 3],
+                [8.7, 3, 8.7, 0.5],
+
+                [8.5, 3.3, 8.7, 3.3],
+                [8.5, 3.6, 8.7, 3.6],
+                [8.5, 3.9, 8.7, 3.9],
+                [8.5, 4.2, 8.7, 4.2],
+                [8.5, 4.5, 8.7, 4.5],
+                [8.5, 4.8, 8.7, 4.8],
+                [8.5, 5.1, 8.7, 5.1],
+                [8.5, 5.4, 8.7, 5.4],
+                [8.5, 5.7, 8.7, 5.7],
+
+                [8.5, 6, 8.7, 6],
+                [8.5, 6, 8.5, 8.5],
+                [8.7, 6, 8.7, 8.5]
+            ]}
+
+            actorList = []
+            for i in range(0, 20):
+                for j in range(0, 35):
+                    actorList.append({
+                        "pos": [1 + (i * 0.2), 1 + (j * 0.2)],
+                        "velocity": [0, 0],
+                        "desiredSpeed": 1.0,
+                        "pathId": 0,
+                        "mass": 50,
+                        "radius": 0.05,
+                        "atDestination": False,
+                        "color": [255, 0, 0],
+                        "heatmapEnabled": True
+                    })
+            
+            laneFiltering["paths"] = [{"id": 0, "checkpoints": [[10.5, 4.5], [15, 4.5]]}]
+            laneFiltering["actors"] = actorList
+
+            with open("laneFiltering.json", "w") as out:
+                json.dump(laneFiltering, out, ensure_ascii=False, indent=4)
+            
+            print("Finished Generating ../input/laneFiltering.json")            
         
         elif config == "evacuateRoom":
             evacuateRoom = {}
