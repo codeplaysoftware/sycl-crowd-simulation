@@ -21,7 +21,7 @@ int HEIGHT; // metres
 int SCALE;
 int DELAY;
 
-uint SEED;
+uint RNGSEED;
 
 void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, Room &room, std::vector<Path> &paths, int argc, char **argv) {
     // Read from input file path JSON
@@ -30,7 +30,7 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, R
         parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE, DELAY);
     }
 
-    SEED = uint(time(0));
+    RNGSEED = uint(time(0));
     
     // Initialise SDL
     SDL_Init(SDL_INIT_VIDEO);
@@ -79,7 +79,7 @@ void update(sycl::queue &myQueue, std::vector<Actor> &actors, Room room, std::ve
 void updateVariations(sycl::queue &myQueue, std::vector<Actor> &actors) {
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
-    auto seedBuf = sycl::buffer<uint>(&SEED, 1);
+    auto seedBuf = sycl::buffer<uint>(&RNGSEED, 1);
 
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
@@ -88,10 +88,10 @@ void updateVariations(sycl::queue &myQueue, std::vector<Actor> &actors) {
 
         cgh.parallel_for(sycl::range<1>{actorAcc.size()}, [=](sycl::item<1> item) {
             seedAcc[0] = randXorShift(seedAcc[0]);
-            float rand = float(seedAcc[0]) * (1.0f / 4294967296.0f);
+            float randX = float(seedAcc[0]) * (1.0f / 4294967296.0f);
             seedAcc[0] = randXorShift(seedAcc[0]);
-            float rand2 = float(seedAcc[0]) * (1.0f / 4294967296.0f);
-            actorAcc[item.get_id()].setVariation({rand, rand2});
+            float randY = float(seedAcc[0]) * (1.0f / 4294967296.0f);
+            actorAcc[item.get_id()].setVariation({randX, randY});
         });
     });
 }
@@ -166,17 +166,22 @@ int main(int argc, char *argv[]) {
         }
 
         if (delayCounter >= DELAY) {
+            delayCounter = 0;
+            auto start = std::chrono::high_resolution_clock::now();
+
             if (updateBBoxCounter <= 0) {
                 updateBBox(myQueue, actors);
                 updateBBoxCounter = 20;
             }
-            delayCounter = 0;
-            auto start = std::chrono::high_resolution_clock::now();
+
+            updateVariations(myQueue, actors);
             update(myQueue, actors, room, paths);
+
             auto end = std::chrono::high_resolution_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
             executionTimes.push_back(duration.count());
-            std::cout << "fps: " << (1000.0f / duration.count()) << std::endl;
+            //std::cout << "fps: " << (1000.0f / duration.count()) << std::endl;
+
             draw(render, actors, room);
             updateBBoxCounter--;
         }
@@ -188,6 +193,7 @@ int main(int argc, char *argv[]) {
     // For VTune
     // for (int x = 0; x < 500; x++) {
     //     updateBBox(myQueue, actors);
+    //     updateVariations(myQueue, actors);
     //     update(myQueue, actors, room, paths);
     // }
 
