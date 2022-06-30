@@ -10,7 +10,7 @@ import sys
 
 def main(argv):
     if len(argv) == 0:
-        toGenerate = ["fourSquare", "evacuateRoom", "twoExitsTwoGroups", "evacuateRoomLarge"]
+        toGenerate = ["fourSquare", "evacuateRoom", "twoExitsTwoGroups", "evacuateRoomLarge", "test"]
     else:
         toGenerate = argv
     
@@ -56,7 +56,7 @@ def main(argv):
                         actorList.append({
                             "pos": [offsets[o][0] + (i * 0.5), offsets[o][1] + (j * 0.5)],
                             "velocity": [0.01, 0.01],
-                            "desiredSpeed": 2.0,
+                            "desiredSpeed": 0.6,
                             "pathId": idCounter,
                             "mass": 50,
                             "radius": 0.05,
@@ -92,7 +92,7 @@ def main(argv):
                     actorList.append({
                         "pos": [6.5 + (i * 0.2), 1 + (j * 0.2)],
                         "velocity": [0.01, 0.01],
-                        "desiredSpeed": 2.0,
+                        "desiredSpeed": 1.0,
                         "pathId": 0,
                         "mass": 50,
                         "radius": 0.05,
@@ -105,7 +105,7 @@ def main(argv):
                     actorList.append({
                         "pos": [0.8 + (i * 0.2), 1 + (j * 0.2)],
                         "velocity": [0.01, 0.01],
-                        "desiredSpeed": 2.0,
+                        "desiredSpeed": 1.0,
                         "pathId": 1,
                         "mass": 50,
                         "radius": 0.05,
@@ -128,19 +128,19 @@ def main(argv):
 
             evacuateRoom["room"] = {"walls": [
                 [0.5, 0.5, 8.5, 0.5],
-                [8.5, 0.5, 8.5, 8.5],
+                [8.5, 0.5, 8.5, 3.8],
+                [8.5, 4.2, 8.5, 8.5],
                 [8.5, 8.5, 0.5, 8.5],
-                [0.5, 8.5, 0.5, 4.2],
-                [0.5, 3.8, 0.5, 0.5]
+                [0.5, 8.5, 0.5, 0.5]
             ]}
 
             actorList = []
             for i in range(0, 20):
                 for j in range(0, 35):
                     actorList.append({
-                        "pos": [4 + (i * 0.2), 1 + (j * 0.2)],
+                        "pos": [1 + (i * 0.2), 1 + (j * 0.2)],
                         "velocity": [0.01, 0.01],
-                        "desiredSpeed": 2.0,
+                        "desiredSpeed": 1.0,
                         "pathId": 0,
                         "mass": 50,
                         "radius": 0.05,
@@ -148,7 +148,7 @@ def main(argv):
                         "color": [255, 0, 0],
                         "heatmapEnabled": True
                     })
-            evacuateRoom["paths"] = [{"id": 0, "checkpoints": [[0.5, 4.1], [-10, 4.1]]}]
+            evacuateRoom["paths"] = [{"id": 0, "checkpoints": [[8.5, 4.1], [15, 4.1]]}]
             evacuateRoom["actors"] = actorList
 
             with open("evacuateRoom.json", "w") as out:
@@ -170,7 +170,7 @@ def main(argv):
 
             actorList = []
             for i in range(0, 120):
-                for j in range(0, 85):
+                for j in range(0, 40):
                     actorList.append({
                         "pos": [4 + (i * 0.2), 1 + (j * 0.2)],
                         "velocity": [0.01, 0.01],
@@ -189,6 +189,24 @@ def main(argv):
                 json.dump(evacuateRoomLarge, out, ensure_ascii=False, indent=4)
             
             print("Finished Generating ../input/evacuateRoomLarge.json")
+
+        elif config == "test":
+            test = {}
+            test["config"] = {"width": 9, "height": 9, "scale": 100, "delay": 0}
+
+            test["room"] = {"walls":[[0, 0, 9, 0]]}
+
+            test["paths"] = [{"id": 0, "checkpoints": [[8.5, 4.5]]}, {"id": 1, "checkpoints": [[0.5, 4.5]]}]
+
+            test["actors"] = [{"pos": [0.5, 4.5], "velocity": [0.01, 0.01], "desiredSpeed": 0.6,
+                               "pathId": 0, "mass": 50, "radius": 0.05, "atDestination": False,
+                               "color": [255, 0, 0], "heatmapEnabled": False},
+                              {"pos": [8.5, 4.5], "velocity": [0.01, 0.01], "desiredSpeed": 0.6,
+                               "pathId": 1, "mass": 50, "radius": 0.05, "atDestination": False,
+                               "color": [0, 255, 0], "heatmapEnabled": False}]
+
+            with open("test.json", "w") as out:
+                json.dump(test, out, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
     main(sys.argv[1:])

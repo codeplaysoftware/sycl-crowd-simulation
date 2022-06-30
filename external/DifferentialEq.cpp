@@ -36,7 +36,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
             return i[0] == neighbour.getBBox()[0] && i[1] == neighbour.getBBox()[1];
         });
         
-        if (currentIndex != x && !neighbour.getAtDestination() /*&& bBoxFlag*/) {
+        if (currentIndex != x && !neighbour.getAtDestination() && bBoxFlag) {
             vecType currentToNeighbour = pos - neighbour.getPos();
             float dij = magnitude(currentToNeighbour);
             float rij = neighbour.getRadius() + currentActor->getRadius();
@@ -45,7 +45,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
             float g = dij > rij ? 0 : rij - dij;
             float deltavtij = dotProduct((neighbour.getVelocity() - currentActor->getVelocity()), tij);
 
-            peopleForces += (Ai * sycl::exp((rij - dij) / Bi) + K1 * g) * nij + (K2 * g * deltavtij * tij);
+            peopleForces += (PEOPLEAi * sycl::exp((rij - dij) / Bi) + K1 * g) * nij + (K2 * g * deltavtij * tij);
         }
     }
 
@@ -60,7 +60,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
         vecType niw = dAndn.second;
         vecType tiw = getTangentialVector(niw);
 
-        wallForces += (Ai * sycl::exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
+        wallForces += (WALLAi * sycl::exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
     }
 
     vecType forceSum = personalImpulse + peopleForces + wallForces;

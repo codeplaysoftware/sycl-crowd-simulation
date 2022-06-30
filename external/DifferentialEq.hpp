@@ -11,7 +11,8 @@
 #include "Heatmap.hpp"
 #include "Path.hpp"
 
-constexpr float Ai = 200;
+constexpr float PEOPLEAi = 500;
+constexpr float WALLAi = 1500;
 constexpr float Bi = 0.08;
 constexpr float K1 = 125000;
 constexpr float K2 = 240000;

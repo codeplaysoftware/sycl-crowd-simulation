@@ -1,0 +1,82 @@
+{
+    "config": {
+        "width": 9,
+        "height": 9,
+        "scale": 100,
+        "delay": 0
+    },
+    "room": {
+        "walls": [
+            [
+                0,
+                0,
+                9,
+                0
+            ]
+        ]
+    },
+    "paths": [
+        {
+            "id": 0,
+            "checkpoints": [
+                [
+                    8.5,
+                    4.5
+                ]
+            ]
+        },
+        {
+            "id": 1,
+            "checkpoints": [
+                [
+                    0.5,
+                    4.5
+                ]
+            ]
+        }
+    ],
+    "actors": [
+        {
+            "pos": [
+                0.5,
+                4.5
+            ],
+            "velocity": [
+                0.01,
+                0.01
+            ],
+            "desiredSpeed": 0.6,
+            "pathId": 0,
+            "mass": 50,
+            "radius": 0.05,
+            "atDestination": false,
+            "color": [
+                255,
+                0,
+                0
+            ],
+            "heatmapEnabled": false
+        },
+        {
+            "pos": [
+                8.5,
+                4.5
+            ],
+            "velocity": [
+                0.01,
+                0.01
+            ],
+            "desiredSpeed": 0.6,
+            "pathId": 1,
+            "mass": 50,
+            "radius": 0.05,
+            "atDestination": false,
+            "color": [
+                0,
+                255,
+                0
+            ],
+            "heatmapEnabled": false
+        }
+    ]
+}

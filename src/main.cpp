@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <chrono>
+#include <ctime>
 #include <random>
 #include <numeric>
 #include <memory>
@@ -13,11 +14,14 @@
 #include "VectorMaths.hpp"
 #include "ParseInputFile.hpp"
 #include "Path.hpp"
+#include "RandomNumber.hpp"
 
 int WIDTH; // metres
 int HEIGHT; // metres
 int SCALE;
 int DELAY;
+
+uint SEED;
 
 void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, Room &room, std::vector<Path> &paths, int argc, char **argv) {
     // Read from input file path JSON
@@ -25,6 +29,8 @@ void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, R
         std::string inputPath = argv[1];
         parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE, DELAY);
     }
+
+    SEED = uint(time(0));
     
     // Initialise SDL
     SDL_Init(SDL_INIT_VIDEO);
@@ -45,11 +51,7 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
     }
 }
 
-void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room, std::vector<Path> paths) {
-    for (auto &a : actors) {
-        a.refreshVariation();
-    }
-
+void update(sycl::queue &myQueue, std::vector<Actor> &actors, Room room, std::vector<Path> paths) {
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
     auto walls = room.getWalls();
@@ -74,17 +76,31 @@ void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room, std::vec
     }).wait();
 }
 
-void updateBBox(sycl::queue myQueue, std::vector<Actor> &actors) {
+void updateVariations(sycl::queue &myQueue, std::vector<Actor> &actors) {
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
-    auto widthBuf = sycl::buffer<int>(&WIDTH, 1);
-    auto heightBuf = sycl::buffer<int>(&HEIGHT, 1);
+    auto seedBuf = sycl::buffer<uint>(&SEED, 1);
 
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-        auto widthAcc = widthBuf.get_access<sycl::access::mode::read>(cgh);
-        auto heightAcc = heightBuf.get_access<sycl::access::mode::read>(cgh);
+        auto seedAcc = seedBuf.get_access<sycl::access::mode::read_write>(cgh);
+
+        cgh.parallel_for(sycl::range<1>{actorAcc.size()}, [=](sycl::item<1> item) {
+            seedAcc[0] = randXorShift(seedAcc[0]);
+            float rand = float(seedAcc[0]) * (1.0f / 4294967296.0f);
+            seedAcc[0] = randXorShift(seedAcc[0]);
+            float rand2 = float(seedAcc[0]) * (1.0f / 4294967296.0f);
+            actorAcc[item.get_id()].setVariation({rand, rand2});
+        });
+    });
+}
+
+void updateBBox(sycl::queue &myQueue, std::vector<Actor> &actors) {
+    auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
+
+    myQueue.submit([&](sycl::handler& cgh) {
+        auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
             Actor* currentActor = &actorAcc[index];
@@ -161,15 +177,21 @@ int main(int argc, char *argv[]) {
             auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
             executionTimes.push_back(duration.count());
             draw(render, actors, room);
+            updateBBoxCounter--;
         }
         else {
             delayCounter++;
-            updateBBoxCounter--;
         }
     }
 
+    // For VTune
+    // for (int x = 0; x < 500; x++) {
+    //     updateBBox(myQueue, actors);
+    //     update(myQueue, actors, room, paths);
+    // }
+
     executionTimes.erase(executionTimes.begin());
-    auto count = static_cast<float>(executionTimes.size());
+    float count = static_cast<float>(executionTimes.size());
     float mean = std::accumulate(executionTimes.begin(), executionTimes.end(), 0.0) / count;
     std::cout << mean << std::endl;
 
