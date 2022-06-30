@@ -170,7 +170,7 @@ def main(argv):
 
             actorList = []
             for i in range(0, 120):
-                for j in range(0, 40):
+                for j in range(0, 85):
                     actorList.append({
                         "pos": [4 + (i * 0.2), 1 + (j * 0.2)],
                         "velocity": [0.01, 0.01],

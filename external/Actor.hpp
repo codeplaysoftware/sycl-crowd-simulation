@@ -49,7 +49,6 @@ public:
     SYCL_EXTERNAL void setBBox(std::array<int, 2> newBBox);
 
     SYCL_EXTERNAL void checkAtDestination(vecType destination, int pathSize);
-    void refreshVariation();
 };
 
 #endif

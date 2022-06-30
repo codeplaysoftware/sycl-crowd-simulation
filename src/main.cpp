@@ -176,6 +176,7 @@ int main(int argc, char *argv[]) {
             auto end = std::chrono::high_resolution_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
             executionTimes.push_back(duration.count());
+            std::cout << "fps: " << (1000.0f / duration.count()) << std::endl;
             draw(render, actors, room);
             updateBBoxCounter--;
         }

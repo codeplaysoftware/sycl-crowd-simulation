@@ -100,10 +100,3 @@ SYCL_EXTERNAL void Actor::checkAtDestination(vecType destination, int pathSize) 
             }
         }
 }
-
-void Actor::refreshVariation() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::normal_distribution<float> distr{0.0f, 2.0f};
-    this->setVariation({distr(gen), distr(gen)});
-}
