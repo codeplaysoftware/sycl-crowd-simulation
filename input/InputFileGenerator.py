@@ -159,20 +159,19 @@ def main(argv):
             tightCorner["paths"] = [{"id": 0, "checkpoints": [[7, 15]]}]
             tightCorner["actors"] = actorList
             
-            with open("tightCorner,json", "w") as out:
+            with open("tightCorner.json", "w") as out:
                 json.dump(tightCorner, out, ensure_ascii=False, indent=4)
             
             print("Finished Generating ../input/tightCorner.json")
         
         elif config == "laneFiltering":
             laneFiltering = {}
-            laneFiltering["config"] = {"width": 11, "height": 9, "scale": 100, "delay": 0}
+            laneFiltering["config"] = {"width": 12, "height": 9, "scale": 100, "delay": 0}
 
             laneFiltering["room"] = {"walls":  [
-                [0.5, 0.5, 10.5, 0.5],
-                [10.5, 0.5, 10.5, 4.3],
-                [10.5, 4.7, 10.5, 8.5],
-                [10.5, 8.5, 0.5, 8.5],
+                [0.5, 0.5, 11.5, 0.5],
+                [11.5, 0.5, 11.5, 8.5],
+                [11.5, 8.5, 0.5, 8.5],
                 [0.5, 8.5, 0.5, 0.5],
 
                 [8.5, 0.5, 8.5, 3],
@@ -209,7 +208,7 @@ def main(argv):
                         "heatmapEnabled": True
                     })
             
-            laneFiltering["paths"] = [{"id": 0, "checkpoints": [[10.5, 4.5], [15, 4.5]]}]
+            laneFiltering["paths"] = [{"id": 0, "checkpoints": [[10.5, 4.5]]}]
             laneFiltering["actors"] = actorList
 
             with open("laneFiltering.json", "w") as out:
