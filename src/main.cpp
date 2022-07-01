@@ -191,10 +191,15 @@ int main(int argc, char *argv[]) {
     }
 
     // // For VTune
+    // int updateBBoxCounterr = 0;
     // for (int x = 0; x < 500; x++) {
-    //     updateBBox(myQueue, actors);
+    //     if (updateBBoxCounterr <= 0) {
+    //         updateBBox(myQueue, actors);
+    //         updateBBoxCounterr = 20;
+    //     }
     //     updateVariations(myQueue, actors);
     //     update(myQueue, actors, room, paths);
+    //     updateBBoxCounterr--;
     // }
 
     executionTimes.erase(executionTimes.begin());

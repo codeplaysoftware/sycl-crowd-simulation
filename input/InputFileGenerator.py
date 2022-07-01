@@ -52,9 +52,13 @@ def main(argv):
             for o in range (0, len(offsets)):
                 for i in range(0, 5):
                     for j in range(0, 5):
+                        point = [offsets[len(offsets) - o - 1][0] + (i * 0.5), offsets[len(offsets) - o - 1][1] + (j * 0.5)]
                         pathList.append({
                             "id": idCounter,
-                            "checkpoints": [[offsets[len(offsets) - o - 1][0] + (i * 0.5), offsets[len(offsets) - o - 1][1] + (j * 0.5)]]
+                            "checkpoints": [[[point[0] - 0.01, point[1] - 0.01], 
+                                             [point[0] + 0.01, point[1] - 0.01],
+                                             [point[0] + 0.01, point[1] + 0.01], 
+                                             [point[0] - 0.01, point[1] + 0.01]]]
                         })
                         actorList.append({
                             "pos": [offsets[o][0] + (i * 0.5), offsets[o][1] + (j * 0.5)],
@@ -68,6 +72,7 @@ def main(argv):
                             "heatmapEnabled": False
                         })
                         idCounter += 1
+
             fourSquare["actors"] = actorList
             fourSquare["paths"] = pathList
             
@@ -116,8 +121,15 @@ def main(argv):
                         "color": [0, 255, 0],
                         "heatmapEnabled": False
                     })
-            twoExitsTwoGroups["paths"] = [{"id": 0, "checkpoints": [[0.5, 4.0], [-10, 4.0]]},
-                                     {"id": 1, "checkpoints": [[8.5, 6.2], [20, 6.2]]}]
+
+            twoExitsTwoGroups["paths"] = [{"id": 0, "checkpoints": [
+                [[0.3, 3.8], [0.7, 3.8], [0.7, 4.2], [0.3, 4.2]],
+                [[-11, 3.5], [-10, 3.5], [-10, 4.5], [-11, 4.5]]
+            ]},
+                                          {"id": 1, "checkpoints": [
+                [[8.3, 6], [8.7, 6], [8.7, 6.4], [8.3, 6.4]],
+                [[20, 5.7], [21, 5.7], [21, 6.7], [20, 6.7]]
+            ]}]
             twoExitsTwoGroups["actors"] = actorList
 
             with open("twoExitsTwoGroups.json", "w") as out:
@@ -156,7 +168,9 @@ def main(argv):
                         "heatmapEnabled": True
                     })
 
-            tightCorner["paths"] = [{"id": 0, "checkpoints": [[7, 15]]}]
+            tightCorner["paths"] = [{"id": 0, "checkpoints": [
+                [[6.8, 14.8], [7.2, 14.8], [7.2, 15.2], [6.8, 15.2]]
+            ]}]
             tightCorner["actors"] = actorList
             
             with open("tightCorner.json", "w") as out:
@@ -166,12 +180,12 @@ def main(argv):
         
         elif config == "laneFiltering":
             laneFiltering = {}
-            laneFiltering["config"] = {"width": 12, "height": 9, "scale": 100, "delay": 0}
+            laneFiltering["config"] = {"width": 14, "height": 9, "scale": 100, "delay": 0}
 
             laneFiltering["room"] = {"walls":  [
-                [0.5, 0.5, 11.5, 0.5],
-                [11.5, 0.5, 11.5, 8.5],
-                [11.5, 8.5, 0.5, 8.5],
+                [0.5, 0.5, 13.5, 0.5],
+                [13.5, 0.5, 13.5, 8.5],
+                [13.5, 8.5, 0.5, 8.5],
                 [0.5, 8.5, 0.5, 0.5],
 
                 [8.5, 0.5, 8.5, 3],
@@ -207,8 +221,11 @@ def main(argv):
                         "color": [255, 0, 0],
                         "heatmapEnabled": True
                     })
-            
-            laneFiltering["paths"] = [{"id": 0, "checkpoints": [[10.5, 4.5]]}]
+
+            laneFiltering["paths"] = [{"id": 0, "checkpoints": [
+                [[8.5, 3], [8.7, 3], [8.7, 6], [8.5, 6]],
+                [[12.3, 4.3], [12.7, 4.3], [12.7, 4.7], [12.3, 4.7]]
+            ]}]
             laneFiltering["actors"] = actorList
 
             with open("laneFiltering.json", "w") as out:
@@ -242,11 +259,10 @@ def main(argv):
                         "color": [255, 0, 0],
                         "heatmapEnabled": True
                     })
-            evacuateRoom["paths"] = [{"id": 0, 
-                                           "checkpoints": [
-                                            [[8.3, 3.9], [8.7, 3.9], [8.7, 4.3], [8.3, 4.3]], 
-                                            [[15, 3.5], [16, 3.5], [16, 4.5], [15, 4.5]]
-                                           ]}]
+            evacuateRoom["paths"] = [{"id": 0, "checkpoints": [
+                [[8.3, 3.9], [8.7, 3.9], [8.7, 4.3], [8.3, 4.3]], 
+                [[15, 3.5], [16, 3.5], [16, 4.5], [15, 4.5]]
+            ]}]
             evacuateRoom["actors"] = actorList
 
             with open("evacuateRoom.json", "w") as out:
@@ -280,11 +296,10 @@ def main(argv):
                         "color": [255, 0, 0],
                         "heatmapEnabled": True
                     })
-            evacuateRoomLarge["paths"] = [{"id": 0, 
-                                           "checkpoints": [
-                                            [[0.3, 9.3], [0.7, 9.3], [0.7, 9.7], [0.3, 9.7]], 
-                                            [[-11, 9], [-10, 9], [-10, 10], [-11, 10]]
-                                           ]}]
+            evacuateRoomLarge["paths"] = [{"id": 0, "checkpoints": [
+                [[0.3, 9.3], [0.7, 9.3], [0.7, 9.7], [0.3, 9.7]], 
+                [[-11, 9], [-10, 9], [-10, 10], [-11, 10]]
+            ]}]
             evacuateRoomLarge["actors"] = actorList
 
             with open("evacuateRoomLarge.json", "w") as out:

@@ -17,7 +17,7 @@
 
   "actors": [
     {
-      "pos": [1, 1.5],
+      "pos": [7, 1.5],
       "velocity": [0.0123, 0.0567],
       "desiredSpeed": 0.6,
       "pathId": 0,
@@ -28,7 +28,7 @@
       "heatmapEnabled": true
     },
     {
-      "pos": [8, 4.5],
+      "pos": [7, 4.5],
       "velocity": [0.0789, 0.0444],
       "desiredSpeed": 0.6,
       "pathId": 1,

@@ -23,8 +23,6 @@ SYCL_EXTERNAL float distance(vecType a, vecType b);
 
 SYCL_EXTERNAL vecType normalize(vecType inp);
 
-SYCL_EXTERNAL vecType getDestination(vecType pos, std::array<vecType, 4> region);
-
 SYCL_EXTERNAL std::pair<float, vecType> getDistanceAndNiw(vecType point, std::array<vecType, 2> wall);
 
 SYCL_EXTERNAL vecType getTangentialVector(vecType normal);

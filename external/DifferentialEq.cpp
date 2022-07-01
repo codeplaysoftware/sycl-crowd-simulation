@@ -10,9 +10,20 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     float v0i = currentActor->getDesiredSpeed();
     std::array<vecType, 4> destination = paths[currentActor->getPathId()].getCheckpoints()[currentActor->getDestinationIndex()];
     
-    vecType e0i = getDestination(currentActor->getPos(), destination);
+    std::pair<float, vecType> minRegionDistance;
+    for (int x = 0; x < 4; x++) {
+        int endIndex = x == 3 ? 0 : x + 1;
+        auto dniw = getDistanceAndNiw(currentActor->getPos(), 
+                                      {destination[x], destination[endIndex]});
+        if (dniw.first < minRegionDistance.first || minRegionDistance.first == 0) {
+            minRegionDistance = dniw;
+        }
+    }
+    minRegionDistance.second = normalize(minRegionDistance.second);
+    vecType e0i = {-minRegionDistance.second[0], -minRegionDistance.second[1]};
+
     
-    //vecType e0i = normalize(getDirectionVector(currentActor->getPos(), destination));
+    //vecType e0i = getDestination(currentActor->getPos(), destination);
     vecType vi = currentActor->getVelocity();
 
     vecType personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
@@ -60,7 +71,7 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
         std::pair<float, vecType> dAndn = getDistanceAndNiw(pos, currentWall);
         float diw = dAndn.first;
         float g = diw > ri ? 0 : ri - diw;
-        vecType niw = dAndn.second;
+        vecType niw = normalize(dAndn.second);
         vecType tiw = getTangentialVector(niw);
 
         wallForces += (WALLAi * sycl::exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
