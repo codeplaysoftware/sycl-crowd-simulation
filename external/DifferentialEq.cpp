@@ -8,8 +8,11 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     // Calculate personal impulse
     float mi = currentActor->getMass();
     float v0i = currentActor->getDesiredSpeed();
-    vecType destination = paths[currentActor->getPathId()].getCheckpoints()[currentActor->getDestinationIndex()];
-    vecType e0i = normalize(getDirectionVector(currentActor->getPos(), destination));
+    std::array<vecType, 4> destination = paths[currentActor->getPathId()].getCheckpoints()[currentActor->getDestinationIndex()];
+    
+    vecType e0i = getDestination(currentActor->getPos(), destination);
+    
+    //vecType e0i = normalize(getDirectionVector(currentActor->getPos(), destination));
     vecType vi = currentActor->getVelocity();
 
     vecType personalImpulse = mi * (((v0i * e0i) - vi) / Ti);

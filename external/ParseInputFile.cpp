@@ -77,9 +77,14 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors, Room &room
     for (auto& p : jsonPaths) {
         int id = p["id"].GetInt();
         auto jsonCheckpoints = p["checkpoints"].GetArray();
-        std::array<vecType, PATHALLOCATIONSIZE> checkpoints;
+        std::array<std::array<vecType, 4>, PATHALLOCATIONSIZE> checkpoints;
         for (int i = 0; i < jsonCheckpoints.Size(); i++) {
-            checkpoints[i] = vecType({jsonCheckpoints[i][0].GetFloat(), jsonCheckpoints[i][1].GetFloat()});
+            //checkpoints[i] = vecType({jsonCheckpoints[i][0].GetFloat(), jsonCheckpoints[i][1].GetFloat()});
+            std::array<vecType, 4> region;
+            for (int j = 0; j < 4; j++) {
+                region[j] = vecType({jsonCheckpoints[i][j][0].GetFloat(), jsonCheckpoints[i][j][1].GetFloat()});
+            }
+            checkpoints[i] = region;
         }
         int pathSize = jsonCheckpoints.Size();
         paths.push_back(Path(id, checkpoints, pathSize));

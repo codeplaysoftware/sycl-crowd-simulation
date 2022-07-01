@@ -242,7 +242,11 @@ def main(argv):
                         "color": [255, 0, 0],
                         "heatmapEnabled": True
                     })
-            evacuateRoom["paths"] = [{"id": 0, "checkpoints": [[8.5, 4.1], [15, 4.1]]}]
+            evacuateRoom["paths"] = [{"id": 0, 
+                                           "checkpoints": [
+                                            [[8.3, 3.9], [8.7, 3.9], [8.7, 4.3], [8.3, 4.3]], 
+                                            [[15, 3.5], [16, 3.5], [16, 4.5], [15, 4.5]]
+                                           ]}]
             evacuateRoom["actors"] = actorList
 
             with open("evacuateRoom.json", "w") as out:
@@ -276,7 +280,11 @@ def main(argv):
                         "color": [255, 0, 0],
                         "heatmapEnabled": True
                     })
-            evacuateRoomLarge["paths"] = [{"id": 0, "checkpoints": [[0.5, 9.5], [-10, 9.5]]}]
+            evacuateRoomLarge["paths"] = [{"id": 0, 
+                                           "checkpoints": [
+                                            [[0.3, 9.3], [0.7, 9.3], [0.7, 9.7], [0.3, 9.7]], 
+                                            [[-11, 9], [-10, 9], [-10, 10], [-11, 10]]
+                                           ]}]
             evacuateRoomLarge["actors"] = actorList
 
             with open("evacuateRoomLarge.json", "w") as out:

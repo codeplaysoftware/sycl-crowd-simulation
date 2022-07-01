@@ -48,7 +48,7 @@ public:
     SYCL_EXTERNAL void setColor(std::array<int, 3> newColor);
     SYCL_EXTERNAL void setBBox(std::array<int, 2> newBBox);
 
-    SYCL_EXTERNAL void checkAtDestination(vecType destination, int pathSize);
+    SYCL_EXTERNAL void checkAtDestination(std::array<vecType, 4> destination, int pathSize);
 };
 
 #endif
