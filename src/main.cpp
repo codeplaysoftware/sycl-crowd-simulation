@@ -16,15 +16,14 @@
 #include "Room.hpp"
 #include "VectorMaths.hpp"
 
-int WIDTH;  // metres
-int HEIGHT; // metres
-int SCALE;
-int DELAY;
-
 uint RNGSEED;
 
-void init(SDL_Window *&win, SDL_Renderer *&render, std::vector<Actor> &actors,
-          Room &room, std::vector<Path> &paths, int argc, char **argv) {
+void init(int &SCALE, int &DELAY, SDL_Window *&win, SDL_Renderer *&render,
+          std::vector<Actor> &actors, Room &room, std::vector<Path> &paths,
+          int argc, char **argv) {
+    int WIDTH;
+    int HEIGHT;
+
     // Read from input file path JSON
     if (argc > 1) {
         std::string inputPath = argv[1];
@@ -130,7 +129,8 @@ void updateBBox(sycl::queue &myQueue, std::vector<Actor> &actors) {
         .wait();
 }
 
-void draw(SDL_Renderer *&render, std::vector<Actor> actors, Room room) {
+void draw(int SCALE, SDL_Renderer *&render, std::vector<Actor> actors,
+          Room room) {
     SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
     SDL_RenderClear(render);
 
@@ -160,6 +160,11 @@ void close(SDL_Window *win, SDL_Renderer *render) {
 }
 
 int main(int argc, char *argv[]) {
+    int WIDTH;  // metres
+    int HEIGHT; // metres
+    int SCALE;
+    int DELAY;
+
     SDL_Window *win;
     SDL_Renderer *render;
 
@@ -169,9 +174,9 @@ int main(int argc, char *argv[]) {
 
     sycl::queue myQueue{sycl::gpu_selector()};
 
-    init(win, render, actors, room, paths, argc, argv);
+    init(SCALE, DELAY, win, render, actors, room, paths, argc, argv);
 
-    draw(render, actors, room);
+    draw(SCALE, render, actors, room);
 
     int delayCounter = 0;
     int updateBBoxCounter = 0;
@@ -204,9 +209,10 @@ int main(int argc, char *argv[]) {
                 std::chrono::duration_cast<std::chrono::milliseconds>(end -
                                                                       start);
             executionTimes.push_back(duration.count());
-            // std::cout << "fps: " << (1000.0f / duration.count()) << std::endl;
+            // std::cout << "fps: " << (1000.0f / duration.count()) <<
+            // std::endl;
 
-            draw(render, actors, room);
+            draw(SCALE, render, actors, room);
             updateBBoxCounter--;
         } else {
             delayCounter++;
