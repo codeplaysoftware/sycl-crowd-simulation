@@ -8,7 +8,8 @@ SYCL_EXTERNAL vecType velFromSpeedAndDir(float speed, vecType direction) {
     return direction * (speed * inverseMagnitude(direction));
 }
 
-SYCL_EXTERNAL vecType velToPoint(float speed, vecType pos, vecType destination) {
+SYCL_EXTERNAL vecType velToPoint(float speed, vecType pos,
+                                 vecType destination) {
     return velFromSpeedAndDir(speed, getDirectionVector(pos, destination));
 }
 
@@ -32,7 +33,8 @@ SYCL_EXTERNAL vecType normalize(vecType inp) {
     return inp * inverseMagnitude(inp);
 }
 
-SYCL_EXTERNAL std::pair<float, vecType> getDistanceAndNiw(vecType point, std::array<vecType, 2> wall) {
+SYCL_EXTERNAL std::pair<float, vecType>
+getDistanceAndNiw(vecType point, std::array<vecType, 2> wall) {
     vecType AB = getDirectionVector(wall[0], wall[1]);
     vecType BP = getDirectionVector(wall[1], point);
     vecType AP = getDirectionVector(wall[0], point);
@@ -42,19 +44,17 @@ SYCL_EXTERNAL std::pair<float, vecType> getDistanceAndNiw(vecType point, std::ar
 
     if (ABdotBP >= 0) {
         return {distance(point, wall[1]), BP};
-    }
-    else if (ABdotAP < 0) {
+    } else if (ABdotAP < 0) {
         return {distance(point, wall[0]), AP};
-    }
-    else {
-        // float lSquared = pow(magnitude(AB), 2);
+    } else {
         float lSquared = dotProduct(AB, AB);
         if (lSquared == 0.0) {
             return {0, {0, 0}};
-        } 
-        float t = sycl::max(0.0f, sycl::min(1.0f, dotProduct(AP, AB) / lSquared));
+        }
+        float t =
+            sycl::max(0.0f, sycl::min(1.0f, dotProduct(AP, AB) / lSquared));
         auto projection = t * AB;
-        
+
         return {distance(AP, projection), AP - projection};
     }
 }

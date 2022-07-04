@@ -7,15 +7,23 @@ SYCL_EXTERNAL std::array<float, 3> HSVtoRGB(float h, float s, float v) {
     float m = v - c;
 
     std::array<float, 3> rgb = {};
-    
-    if (0 <= scaledH && scaledH < 1) { rgb[0] = c; rgb[1] = x; rgb[2] = 0; }
-    else if (1 <= scaledH && scaledH < 2) { rgb[0] = x; rgb[1] = c; rgb[2] = 0; }
-    else if (2 <= scaledH && scaledH < 3) { rgb[0] = 0; rgb[1] = c; rgb[2] = x; }
-    else if (3 <= scaledH && scaledH < 4) { rgb[0] = 0; rgb[1] = x; rgb[2] = c; }
-    else if (4 <= scaledH && scaledH < 5) { rgb[0] = x; rgb[1] = 0; rgb[2] = c; }
-    else if (5 <= scaledH && scaledH < 6) { rgb[0] = c; rgb[1] = 0; rgb[2] = x; }
-    else { rgb[0] = 0; rgb[1] = 0; rgb[2] = 0; }
-    
+
+    if (0 <= scaledH && scaledH < 1) {
+        rgb = {c, x, 0};
+    } else if (1 <= scaledH && scaledH < 2) {
+        rgb = {x, c, 0};
+    } else if (2 <= scaledH && scaledH < 3) {
+        rgb = {0, c, x};
+    } else if (3 <= scaledH && scaledH < 4) {
+        rgb = {0, x, c};
+    } else if (4 <= scaledH && scaledH < 5) {
+        rgb = {x, 0, c};
+    } else if (5 <= scaledH && scaledH < 6) {
+        rgb = {c, 0, x};
+    } else {
+        rgb = {0, 0, 0};
+    }
+
     return rgb;
 }
 

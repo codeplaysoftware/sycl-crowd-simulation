@@ -1,33 +1,38 @@
 #include "DifferentialEq.hpp"
 
-SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::accessor<Path, 1, sycl::access::mode::read> paths, sycl::stream out) {
-    Actor* currentActor = &actors[currentIndex];
+SYCL_EXTERNAL void differentialEq(
+    int currentIndex,
+    sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors,
+    sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls,
+    sycl::accessor<Path, 1, sycl::access::mode::read> paths, sycl::stream out) {
+    Actor *currentActor = &actors[currentIndex];
 
     vecType pos = currentActor->getPos();
 
     // Calculate personal impulse
     float mi = currentActor->getMass();
     float v0i = currentActor->getDesiredSpeed();
-    std::array<vecType, 4> destination = paths[currentActor->getPathId()].getCheckpoints()[currentActor->getDestinationIndex()];
-    
+    std::array<vecType, 4> destination =
+        paths[currentActor->getPathId()]
+            .getCheckpoints()[currentActor->getDestinationIndex()];
+
     std::pair<float, vecType> minRegionDistance;
     for (int x = 0; x < 4; x++) {
         int endIndex = x == 3 ? 0 : x + 1;
-        auto dniw = getDistanceAndNiw(currentActor->getPos(), 
+        auto dniw = getDistanceAndNiw(currentActor->getPos(),
                                       {destination[x], destination[endIndex]});
-        if (dniw.first < minRegionDistance.first || minRegionDistance.first == 0) {
+        if (dniw.first < minRegionDistance.first ||
+            minRegionDistance.first == 0) {
             minRegionDistance = dniw;
         }
     }
     minRegionDistance.second = normalize(minRegionDistance.second);
     vecType e0i = {-minRegionDistance.second[0], -minRegionDistance.second[1]};
 
-    
-    //vecType e0i = getDestination(currentActor->getPos(), destination);
     vecType vi = currentActor->getVelocity();
 
     vecType personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
-    
+
     std::array<int, 2> currentBBox = currentActor->getBBox();
     std::array<std::array<int, 2>, 9> neighbourBoxes = {{
         {currentBBox},
@@ -45,11 +50,14 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     vecType peopleForces = {0, 0};
     for (int x = 0; x < actors.size(); x++) {
         Actor neighbour = actors[x];
-        
-        bool bBoxFlag = std::any_of(neighbourBoxes.begin(), neighbourBoxes.end(), [neighbour](std::array<int, 2> i){
-            return i[0] == neighbour.getBBox()[0] && i[1] == neighbour.getBBox()[1];
-        });
-        
+
+        bool bBoxFlag =
+            std::any_of(neighbourBoxes.begin(), neighbourBoxes.end(),
+                        [neighbour](std::array<int, 2> i) {
+                            return i[0] == neighbour.getBBox()[0] &&
+                                   i[1] == neighbour.getBBox()[1];
+                        });
+
         if (currentIndex != x && !neighbour.getAtDestination() && bBoxFlag) {
             vecType currentToNeighbour = pos - neighbour.getPos();
             float dij = magnitude(currentToNeighbour);
@@ -57,9 +65,12 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
             vecType nij = (currentToNeighbour) / dij;
             vecType tij = getTangentialVector(nij);
             float g = dij > rij ? 0 : rij - dij;
-            float deltavtij = dotProduct((neighbour.getVelocity() - currentActor->getVelocity()), tij);
+            float deltavtij = dotProduct(
+                (neighbour.getVelocity() - currentActor->getVelocity()), tij);
 
-            peopleForces += (PEOPLEAi * sycl::exp((rij - dij) / Bi) + K1 * g) * nij + (K2 * g * deltavtij * tij);
+            peopleForces +=
+                (PEOPLEAi * sycl::exp((rij - dij) / Bi) + K1 * g) * nij +
+                (K2 * g * deltavtij * tij);
         }
     }
 
@@ -74,7 +85,8 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
         vecType niw = normalize(dAndn.second);
         vecType tiw = getTangentialVector(niw);
 
-        wallForces += (WALLAi * sycl::exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
+        wallForces += (WALLAi * sycl::exp((ri - diw) / Bi) + K1 * g) * niw -
+                      (K2 * g * dotProduct(vi, tiw) * tiw);
     }
 
     vecType forceSum = personalImpulse + peopleForces + wallForces;
@@ -85,19 +97,23 @@ SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, syc
     // Color actor according to heatmap
     if (currentActor->getHeatmapEnabled()) {
         auto colorVal = sycl::fabs((forceSum[0] + forceSum[1]) / 700.0f);
-        if (colorVal > 1) { colorVal = 1.0f; }
+        if (colorVal > 1) {
+            colorVal = 1.0f;
+        }
         auto color = findColor(colorVal);
         currentActor->setColor({int(color[0]), int(color[1]), int(color[2])});
     }
 
-    // out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1] << ")    " << z << sycl::endl;
-    // out << "Wall Forces: (" << wallForces[0] << ", " << wallForces[1] << ")    " << z << sycl::endl;
-    // out << "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ")    " << z << sycl::endl;
-    // out << "-----------------------" << sycl::endl;
+    // out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1]
+    // << ")    " << z << sycl::endl; out << "Wall Forces: (" << wallForces[0]
+    // << ", " << wallForces[1] << ")    " << z << sycl::endl; out <<
+    // "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ") "
+    // << z << sycl::endl; out << "-----------------------" << sycl::endl;
 
     vecType acceleration = forceSum / mi;
     currentActor->setVelocity(vi + acceleration * TIMESTEP);
     currentActor->setPos(pos + currentActor->getVelocity() * TIMESTEP);
 
-    currentActor->checkAtDestination(destination, paths[currentActor->getPathId()].getPathSize());
+    currentActor->checkAtDestination(
+        destination, paths[currentActor->getPathId()].getPathSize());
 }

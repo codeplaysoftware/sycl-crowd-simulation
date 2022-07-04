@@ -1,16 +1,16 @@
 #ifndef Actor_hpp
 #define Actor_hpp
 
-#include <iostream>
-#include <array>
-#include <random>
-#include <vector>
-#include <sycl/sycl.hpp>
-#include "VectorMaths.hpp"
 #include "Path.hpp"
+#include "VectorMaths.hpp"
+#include <array>
+#include <iostream>
+#include <random>
+#include <sycl/sycl.hpp>
+#include <vector>
 
 class Actor {
-private:
+  private:
     vecType pos;
     vecType velocity;
     float desiredSpeed;
@@ -24,9 +24,11 @@ private:
     bool heatmapEnabled;
     std::array<int, 2> bBox;
 
-public:
-    Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, int pPathId, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor, bool pHeatmapEnabled);
-    
+  public:
+    Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, int pPathId,
+          float pMass, float pRadius, bool pAtDestination,
+          std::array<int, 3> pColor, bool pHeatmapEnabled);
+
     SYCL_EXTERNAL vecType getPos() const;
     SYCL_EXTERNAL vecType getVelocity() const;
     SYCL_EXTERNAL float getDesiredSpeed() const;
@@ -48,7 +50,8 @@ public:
     SYCL_EXTERNAL void setColor(std::array<int, 3> newColor);
     SYCL_EXTERNAL void setBBox(std::array<int, 2> newBBox);
 
-    SYCL_EXTERNAL void checkAtDestination(std::array<vecType, 4> destination, int pathSize);
+    SYCL_EXTERNAL void checkAtDestination(std::array<vecType, 4> destination,
+                                          int pathSize);
 };
 
 #endif
