@@ -210,8 +210,8 @@ def main(argv):
             ]
             tightCorner["actors"] = actorList
 
-        elif config == "laneFiltering":
-            laneFiltering = {}
+        elif config[0] == "laneFiltering":
+            laneFiltering = config[1]
             laneFiltering["config"] = {
                 "width": 14,
                 "height": 9,
@@ -295,7 +295,7 @@ def main(argv):
                             "desiredSpeed": 1.0,
                             "pathId": 0,
                             "mass": 50,
-                            "radius": 0.05,
+                            "radius": random.uniform(0.04, 0.06),
                             "atDestination": False,
                             "color": [255, 0, 0],
                             "heatmapEnabled": True,
