@@ -16,6 +16,7 @@ SYCL_EXTERNAL void differentialEq(
         paths[currentActor->getPathId()]
             .getCheckpoints()[currentActor->getDestinationIndex()];
 
+    // Find direction vector to nearest point in destination region
     std::pair<float, vecType> minRegionDistance;
     for (int x = 0; x < 4; x++) {
         int endIndex = x == 3 ? 0 : x + 1;
@@ -33,6 +34,7 @@ SYCL_EXTERNAL void differentialEq(
 
     vecType personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
 
+    // Collect neighbouring bounding boxes
     std::array<int, 2> currentBBox = currentActor->getBBox();
     std::array<std::array<int, 2>, 9> neighbourBoxes = {{
         {currentBBox},
@@ -46,7 +48,7 @@ SYCL_EXTERNAL void differentialEq(
         {currentBBox[0] + 1, currentBBox[1] + 1},
     }};
 
-    // Calculate forces applied by neighbouring actors
+    // Calculate forces applied by neighbouring actors (in valid bounding boxes)
     vecType peopleForces = {0, 0};
     for (int x = 0; x < actors.size(); x++) {
         Actor neighbour = actors[x];
@@ -96,19 +98,16 @@ SYCL_EXTERNAL void differentialEq(
 
     // Color actor according to heatmap
     if (currentActor->getHeatmapEnabled()) {
-        auto colorVal = sycl::fabs((forceSum[0] + forceSum[1]) / 700.0f);
+        // theoreticalMax was decided based on observed max forces for a set of configurations
+        // It may need to be altered based on the max forces of your config to create a satisfying heatmap
+        float theoreticalMax = 700.0f;
+        auto colorVal = sycl::fabs((forceSum[0] + forceSum[1]) / theoreticalMax);
         if (colorVal > 1) {
             colorVal = 1.0f;
         }
         auto color = findColor(colorVal);
         currentActor->setColor({int(color[0]), int(color[1]), int(color[2])});
     }
-
-    // out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1]
-    // << ")    " << z << sycl::endl; out << "Wall Forces: (" << wallForces[0]
-    // << ", " << wallForces[1] << ")    " << z << sycl::endl; out <<
-    // "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ") "
-    // << z << sycl::endl; out << "-----------------------" << sycl::endl;
 
     vecType acceleration = forceSum / mi;
     currentActor->setVelocity(vi + acceleration * TIMESTEP);

@@ -6,6 +6,9 @@
 #include <iostream>
 #include <sycl/sycl.hpp>
 
+// Constant denoting the size of the array used to store paths
+// SYCL kernels can't use dynamic vectors, so paths are stored in
+// a fixed-size array, so the path size can't exceed this constant
 const int PATHALLOCATIONSIZE = 10;
 
 class Path {

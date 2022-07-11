@@ -28,6 +28,7 @@ SYCL_EXTERNAL std::array<float, 3> HSVtoRGB(float h, float s, float v) {
 }
 
 SYCL_EXTERNAL std::array<float, 3> findColor(float val) {
+    // Map force to hsv color
     float h = (1.0f - val) * 120.0f;
     return HSVtoRGB(h, 100, 50);
 }

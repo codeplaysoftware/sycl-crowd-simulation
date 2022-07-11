@@ -66,6 +66,7 @@ SYCL_EXTERNAL void Actor::setBBox(std::array<int, 2> newBBox) {
 
 SYCL_EXTERNAL void Actor::checkAtDestination(std::array<vecType, 4> destination,
                                              int pathSize) {
+    // Destinations are defined as rectangular regions
     if (pos[0] >= destination[0][0] && pos[0] <= destination[2][0] &&
         pos[1] >= destination[0][1] && pos[1] <= destination[2][1]) {
         if (destinationIndex >= PATHALLOCATIONSIZE - 1 ||
