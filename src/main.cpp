@@ -30,7 +30,7 @@ void init(int &SCALE, int &DELAY, SDL_Window *&win, SDL_Renderer *&render,
         parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE,
                        DELAY);
     }
-
+    
     RNGSEED = uint(time(0));
 
     // Initialise SDL
@@ -254,7 +254,7 @@ int main(int argc, char *argv[]) {
     float mean =
         std::accumulate(executionTimes.begin(), executionTimes.end(), 0.0) /
         count;
-    std::cout << mean << std::endl;
+    std::cout << "Mean execution time: " << mean << std::endl;
 
     close(win, render);
     return 0;

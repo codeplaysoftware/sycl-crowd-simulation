@@ -7,6 +7,7 @@ import sys
 # - twoExitsTwoGroups
 # - tightCorner
 # - laneFiltering
+# - corridorWidening
 # - evacuateRoom
 # - evacuateRoomLarge
 
@@ -17,6 +18,7 @@ def main(argv):
             ["twoExitsTwoGroups", {}],
             ["tightCorner", {}],
             ["laneFiltering", {}],
+            ["corridorWidening", {}],
             ["evacuateRoom", {}],
             ["evacuateRoomLarge", {}],
         ]
@@ -273,6 +275,51 @@ def main(argv):
                 }
             ]
             laneFiltering["actors"] = actorList
+        
+        elif config[0] == "corridorWidening":
+            corridorWidening = config[1]
+            corridorWidening["config"] = {"width": 12, "height": 9, "scale": 100, "delay": 0}
+
+            corridorWidening["room"] = {
+                "walls": [
+                    [-10, 6, -10, 3],
+                    [-10, 3, 4, 3],
+                    [4, 3, 6, 0.1],
+                    [6, 0.1, 8, 3],
+                    [8, 3, 12, 3],
+                    [-10, 6, 4, 6],
+                    [4, 6, 6, 8.9],
+                    [6, 8.9, 8, 6],
+                    [8, 6, 12, 6]
+                ]
+            }
+
+            actorList = []
+            for i in range(0, 39):
+                for j in range(0, 12):
+                    actorList.append(
+                        {
+                            "pos": [-9.8 + (i * 0.25), 3.1 + (j * 0.25)],
+                            "velocity": [0, 0],
+                            "desiredSpeed": 3.0,
+                            "pathId": 0,
+                            "mass": 50,
+                            "radius": 0.1,
+                            "atDestination": False,
+                            "color": [255, 0, 0],
+                            "heatmapEnabled": True,
+                        }
+                    )
+            
+            corridorWidening["paths"] = [
+                {
+                    "id": 0,
+                    "checkpoints": [
+                        [[20, 3], [22, 3], [22, 6], [20, 6]]
+                    ],
+                }
+            ]
+            corridorWidening["actors"] = actorList
 
         elif config[0] == "evacuateRoom":
             evacuateRoom = config[1]
