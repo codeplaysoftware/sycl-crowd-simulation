@@ -31,6 +31,7 @@ void init(int &SCALE, int &DELAY, SDL_Window *&win, SDL_Renderer *&render,
                        DELAY);
     }
     
+    // Seed RNG with current time in seconds
     RNGSEED = uint(time(0));
 
     // Initialise SDL
@@ -106,6 +107,7 @@ void updateVariations(sycl::queue &myQueue, std::vector<Actor> &actors) {
             cgh.parallel_for(
                 sycl::range<1>{actorAcc.size()}, [=](sycl::item<1> item) {
                     seedAcc[0] = randXorShift(seedAcc[0]);
+                    // Previous RNG output is used as next seed
                     float randX = float(seedAcc[0]) * (1.0f / 4294967296.0f);
                     seedAcc[0] = randXorShift(seedAcc[0]);
                     float randY = float(seedAcc[0]) * (1.0f / 4294967296.0f);
@@ -185,9 +187,9 @@ int main(int argc, char *argv[]) {
     std::vector<Path> paths;
 
     auto asyncHandler = [&](sycl::exception_list exceptionList) {
-      for (auto& e : exceptionList) {
-        std::rethrow_exception(e);
-      }
+        for (auto& e : exceptionList) {
+            std::rethrow_exception(e);
+        }
     };
 
     sycl::queue myQueue{sycl::gpu_selector(), asyncHandler};
@@ -199,6 +201,7 @@ int main(int argc, char *argv[]) {
     int delayCounter = 0;
     int updateBBoxCounter = 0;
     bool isQuit = false;
+    bool isPause = false;
     SDL_Event event;
 
     std::vector<int> executionTimes;
@@ -208,32 +211,37 @@ int main(int argc, char *argv[]) {
             if (event.type == SDL_QUIT) {
                 isQuit = true;
             }
+            else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
+                isPause = !isPause;
+            }
         }
 
-        if (delayCounter >= DELAY) {
-            delayCounter = 0;
-            auto start = std::chrono::high_resolution_clock::now();
+        if (!isPause) {
+            if (delayCounter >= DELAY) {
+                delayCounter = 0;
+                auto start = std::chrono::high_resolution_clock::now();
 
-            if (updateBBoxCounter <= 0) {
-                updateBBox(myQueue, actors);
-                updateBBoxCounter = 20;
+                if (updateBBoxCounter <= 0) {
+                    updateBBox(myQueue, actors);
+                    updateBBoxCounter = 20;
+                }
+
+                updateVariations(myQueue, actors);
+                update(myQueue, actors, room, paths);
+
+                auto end = std::chrono::high_resolution_clock::now();
+                auto duration =
+                    std::chrono::duration_cast<std::chrono::milliseconds>(end -
+                                                                        start);
+                executionTimes.push_back(duration.count());
+                // std::cout << "fps: " << (1000.0f / duration.count()) <<
+                // std::endl;
+
+                draw(SCALE, render, actors, room);
+                updateBBoxCounter--;
+            } else {
+                delayCounter++;
             }
-
-            updateVariations(myQueue, actors);
-            update(myQueue, actors, room, paths);
-
-            auto end = std::chrono::high_resolution_clock::now();
-            auto duration =
-                std::chrono::duration_cast<std::chrono::milliseconds>(end -
-                                                                      start);
-            executionTimes.push_back(duration.count());
-            // std::cout << "fps: " << (1000.0f / duration.count()) <<
-            // std::endl;
-
-            draw(SCALE, render, actors, room);
-            updateBBoxCounter--;
-        } else {
-            delayCounter++;
         }
     }
 

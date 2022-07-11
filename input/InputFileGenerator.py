@@ -1,7 +1,3 @@
-import json
-import random
-import sys
-
 # Available configurations:
 # - fourSquare
 # - twoExitsTwoGroups
@@ -10,6 +6,12 @@ import sys
 # - corridorWidening
 # - evacuateRoom
 # - evacuateRoomLarge
+
+# Running script without args will generate all input configurations
+
+import json
+import random
+import sys
 
 def main(argv):
     if len(argv) == 0:
@@ -328,8 +330,8 @@ def main(argv):
             evacuateRoom["room"] = {
                 "walls": [
                     [0.5, 0.5, 8.5, 0.5],
-                    [8.5, 0.5, 8.5, 3.8],
-                    [8.5, 4.2, 8.5, 8.5],
+                    [8.5, 0.5, 8.5, 4.3],
+                    [8.5, 4.7, 8.5, 8.5],
                     [8.5, 8.5, 0.5, 8.5],
                     [0.5, 8.5, 0.5, 0.5],
                 ]
@@ -355,7 +357,7 @@ def main(argv):
                 {
                     "id": 0,
                     "checkpoints": [
-                        [[8.3, 3.9], [8.7, 3.9], [8.7, 4.3], [8.3, 4.3]],
+                        [[8.3, 4.3], [8.7, 4.3], [8.7, 4.7], [8.3, 4.7]],
                         [[15, 3.5], [16, 3.5], [16, 4.5], [15, 4.5]],
                     ],
                 }
