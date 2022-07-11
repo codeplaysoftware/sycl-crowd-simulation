@@ -57,76 +57,88 @@ void drawCircle(SDL_Renderer *&render, SDL_Point center, int radius,
 
 void update(sycl::queue &myQueue, std::vector<Actor> &actors, Room room,
             std::vector<Path> paths) {
-    auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
+    try {
+        auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
-    auto walls = room.getWalls();
-    auto wallsBuf =
-        sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
+        auto walls = room.getWalls();
+        auto wallsBuf =
+            sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
 
-    auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
+        auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
 
-    myQueue
-        .submit([&](sycl::handler &cgh) {
-            auto actorAcc =
-                actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+        myQueue
+            .submit([&](sycl::handler &cgh) {
+                auto actorAcc =
+                    actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-            auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
+                auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
 
-            auto pathsAcc = pathsBuf.get_access<sycl::access::mode::read>(cgh);
+                auto pathsAcc = pathsBuf.get_access<sycl::access::mode::read>(cgh);
 
-            auto out = sycl::stream{1024, 768, cgh};
+                auto out = sycl::stream{1024, 768, cgh};
 
-            cgh.parallel_for(sycl::range<1>{actors.size()},
-                             [=](sycl::id<1> index) {
-                                 if (!actorAcc[index].getAtDestination()) {
-                                     differentialEq(index, actorAcc, wallsAcc,
-                                                    pathsAcc, out);
-                                 }
-                             });
-        })
-        .wait();
+                cgh.parallel_for(sycl::range<1>{actors.size()},
+                                [=](sycl::id<1> index) {
+                                    if (!actorAcc[index].getAtDestination()) {
+                                        differentialEq(index, actorAcc, wallsAcc,
+                                                        pathsAcc, out);
+                                    }
+                                });
+            })
+            .wait_and_throw();
+    } catch (const sycl::exception& e) {
+        std::cout << "SYCL exception caught:\n" << e.what() << "\n[update]";
+    }
 }
 
 void updateVariations(sycl::queue &myQueue, std::vector<Actor> &actors) {
-    auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
+    try {
+        auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
-    auto seedBuf = sycl::buffer<uint>(&RNGSEED, 1);
+        auto seedBuf = sycl::buffer<uint>(&RNGSEED, 1);
 
-    myQueue.submit([&](sycl::handler &cgh) {
-        auto actorAcc =
-            actorBuf.get_access<sycl::access::mode::read_write>(cgh);
-
-        auto seedAcc = seedBuf.get_access<sycl::access::mode::read_write>(cgh);
-
-        cgh.parallel_for(
-            sycl::range<1>{actorAcc.size()}, [=](sycl::item<1> item) {
-                seedAcc[0] = randXorShift(seedAcc[0]);
-                float randX = float(seedAcc[0]) * (1.0f / 4294967296.0f);
-                seedAcc[0] = randXorShift(seedAcc[0]);
-                float randY = float(seedAcc[0]) * (1.0f / 4294967296.0f);
-                actorAcc[item.get_id()].setVariation({randX, randY});
-            });
-    });
-}
-
-void updateBBox(sycl::queue &myQueue, std::vector<Actor> &actors) {
-    auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
-
-    myQueue
-        .submit([&](sycl::handler &cgh) {
+        myQueue.submit([&](sycl::handler &cgh) {
             auto actorAcc =
                 actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-            cgh.parallel_for(sycl::range<1>{actors.size()},
-                             [=](sycl::id<1> index) {
-                                 Actor *currentActor = &actorAcc[index];
-                                 vecType pos = currentActor->getPos();
-                                 int row = sycl::floor(pos[0]);
-                                 int col = sycl::floor(pos[1]);
-                                 currentActor->setBBox({row, col});
-                             });
-        })
-        .wait();
+            auto seedAcc = seedBuf.get_access<sycl::access::mode::read_write>(cgh);
+
+            cgh.parallel_for(
+                sycl::range<1>{actorAcc.size()}, [=](sycl::item<1> item) {
+                    seedAcc[0] = randXorShift(seedAcc[0]);
+                    float randX = float(seedAcc[0]) * (1.0f / 4294967296.0f);
+                    seedAcc[0] = randXorShift(seedAcc[0]);
+                    float randY = float(seedAcc[0]) * (1.0f / 4294967296.0f);
+                    actorAcc[item.get_id()].setVariation({randX, randY});
+                });
+        }).wait_and_throw();
+    } catch (const sycl::exception& e) {
+        std::cout << "SYCL exception caught:\n" << e.what() << "\n[updateVariations]";
+    }
+}
+
+void updateBBox(sycl::queue &myQueue, std::vector<Actor> &actors) {
+    try {
+        auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
+
+        myQueue
+            .submit([&](sycl::handler &cgh) {
+                auto actorAcc =
+                    actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+
+                cgh.parallel_for(sycl::range<1>{actors.size()},
+                                [=](sycl::id<1> index) {
+                                    Actor *currentActor = &actorAcc[index];
+                                    vecType pos = currentActor->getPos();
+                                    int row = sycl::floor(pos[0]);
+                                    int col = sycl::floor(pos[1]);
+                                    currentActor->setBBox({row, col});
+                                });
+            })
+            .wait_and_throw();
+    } catch (const sycl::exception& e) {
+        std::cout << "SYCL exception caught:\n" << e.what() << "\n[updateBBox]";
+    }
 }
 
 void draw(int SCALE, SDL_Renderer *&render, std::vector<Actor> actors,
@@ -172,7 +184,13 @@ int main(int argc, char *argv[]) {
     Room room = Room({});
     std::vector<Path> paths;
 
-    sycl::queue myQueue{sycl::gpu_selector()};
+    auto asyncHandler = [&](sycl::exception_list exceptionList) {
+      for (auto& e : exceptionList) {
+        std::rethrow_exception(e);
+      }
+    };
+
+    sycl::queue myQueue{sycl::gpu_selector(), asyncHandler};
 
     init(SCALE, DELAY, win, render, actors, room, paths, argc, argv);
 
