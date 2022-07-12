@@ -98,10 +98,12 @@ SYCL_EXTERNAL void differentialEq(
 
     // Color actor according to heatmap
     if (currentActor->getHeatmapEnabled()) {
-        // theoreticalMax was decided based on observed max forces for a set of configurations
-        // It may need to be altered based on the max forces of your config to create a satisfying heatmap
+        // theoreticalMax was decided based on observed max forces for a set of
+        // configurations It may need to be altered based on the max forces of
+        // your config to create a satisfying heatmap
         float theoreticalMax = 700.0f;
-        auto colorVal = sycl::fabs((forceSum[0] + forceSum[1]) / theoreticalMax);
+        auto colorVal =
+            sycl::fabs((forceSum[0] + forceSum[1]) / theoreticalMax);
         if (colorVal > 1) {
             colorVal = 1.0f;
         }

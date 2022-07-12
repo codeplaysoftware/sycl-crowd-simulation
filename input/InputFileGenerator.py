@@ -13,6 +13,7 @@ import json
 import random
 import sys
 
+
 def main(argv):
     if len(argv) == 0:
         toGenerate = [
@@ -183,7 +184,7 @@ def main(argv):
                     [7.5, 6, 7.5, 9],
                     [6, 0, 6, 5.5],
                     [6, 5.5, 8, 5.5],
-                    [8, 5.5, 8, 9]
+                    [8, 5.5, 8, 9],
                 ]
             }
 
@@ -210,7 +211,7 @@ def main(argv):
                     "checkpoints": [
                         [[5.5, 5.5], [6, 5.5], [6, 6], [5.5, 6]],
                         [[7.5, 5.5], [8, 5.5], [8, 6], [7.5, 6]],
-                        [[7.5, 14.8], [8, 14.8], [8, 15.2], [7.5, 15.2]]
+                        [[7.5, 14.8], [8, 14.8], [8, 15.2], [7.5, 15.2]],
                     ],
                 }
             ]
@@ -231,11 +232,9 @@ def main(argv):
                     [15.5, 0.5, 15.5, 8.5],
                     [15.5, 8.5, 0.5, 8.5],
                     [0.5, 8.5, 0.5, 0.5],
-
                     [8.5, 0.5, 8.5, 3],
                     [8.5, 3, 8.7, 3],
                     [8.7, 3, 8.7, 0.5],
-
                     [8.5, 3.3, 8.7, 3.3],
                     [8.5, 3.6, 8.7, 3.6],
                     [8.5, 3.9, 8.7, 3.9],
@@ -245,7 +244,6 @@ def main(argv):
                     [8.5, 5.1, 8.7, 5.1],
                     [8.5, 5.4, 8.7, 5.4],
                     [8.5, 5.7, 8.7, 5.7],
-
                     [8.5, 6, 8.7, 6],
                     [8.5, 6, 8.5, 8.5],
                     [8.7, 6, 8.7, 8.5],
@@ -279,10 +277,15 @@ def main(argv):
                 }
             ]
             laneFiltering["actors"] = actorList
-        
+
         elif config[0] == "corridorWidening":
             corridorWidening = config[1]
-            corridorWidening["config"] = {"width": 12, "height": 9, "scale": 100, "delay": 0}
+            corridorWidening["config"] = {
+                "width": 12,
+                "height": 9,
+                "scale": 100,
+                "delay": 0,
+            }
 
             corridorWidening["room"] = {
                 "walls": [
@@ -294,7 +297,7 @@ def main(argv):
                     [-10, 6, 4, 6],
                     [4, 6, 6, 8.9],
                     [6, 8.9, 8, 6],
-                    [8, 6, 12, 6]
+                    [8, 6, 12, 6],
                 ]
             }
 
@@ -314,13 +317,11 @@ def main(argv):
                             "heatmapEnabled": True,
                         }
                     )
-            
+
             corridorWidening["paths"] = [
                 {
                     "id": 0,
-                    "checkpoints": [
-                        [[20, 3], [22, 3], [22, 6], [20, 6]]
-                    ],
+                    "checkpoints": [[[20, 3], [22, 3], [22, 6], [20, 6]]],
                 }
             ]
             corridorWidening["actors"] = actorList

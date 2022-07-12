@@ -30,7 +30,7 @@ void init(int &SCALE, int &DELAY, SDL_Window *&win, SDL_Renderer *&render,
         parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE,
                        DELAY);
     }
-    
+
     // Seed RNG with current time in seconds
     RNGSEED = uint(time(0));
 
@@ -72,22 +72,24 @@ void update(sycl::queue &myQueue, std::vector<Actor> &actors, Room room,
                 auto actorAcc =
                     actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-                auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
+                auto wallsAcc =
+                    wallsBuf.get_access<sycl::access::mode::read>(cgh);
 
-                auto pathsAcc = pathsBuf.get_access<sycl::access::mode::read>(cgh);
+                auto pathsAcc =
+                    pathsBuf.get_access<sycl::access::mode::read>(cgh);
 
                 auto out = sycl::stream{1024, 768, cgh};
 
-                cgh.parallel_for(sycl::range<1>{actors.size()},
-                                [=](sycl::id<1> index) {
-                                    if (!actorAcc[index].getAtDestination()) {
-                                        differentialEq(index, actorAcc, wallsAcc,
-                                                        pathsAcc, out);
-                                    }
-                                });
+                cgh.parallel_for(
+                    sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
+                        if (!actorAcc[index].getAtDestination()) {
+                            differentialEq(index, actorAcc, wallsAcc, pathsAcc,
+                                           out);
+                        }
+                    });
             })
             .wait_and_throw();
-    } catch (const sycl::exception& e) {
+    } catch (const sycl::exception &e) {
         std::cout << "SYCL exception caught:\n" << e.what() << "\n[update]";
     }
 }
@@ -98,24 +100,30 @@ void updateVariations(sycl::queue &myQueue, std::vector<Actor> &actors) {
 
         auto seedBuf = sycl::buffer<uint>(&RNGSEED, 1);
 
-        myQueue.submit([&](sycl::handler &cgh) {
-            auto actorAcc =
-                actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+        myQueue
+            .submit([&](sycl::handler &cgh) {
+                auto actorAcc =
+                    actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-            auto seedAcc = seedBuf.get_access<sycl::access::mode::read_write>(cgh);
+                auto seedAcc =
+                    seedBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-            cgh.parallel_for(
-                sycl::range<1>{actorAcc.size()}, [=](sycl::item<1> item) {
-                    seedAcc[0] = randXorShift(seedAcc[0]);
-                    // Previous RNG output is used as next seed
-                    float randX = float(seedAcc[0]) * (1.0f / 4294967296.0f);
-                    seedAcc[0] = randXorShift(seedAcc[0]);
-                    float randY = float(seedAcc[0]) * (1.0f / 4294967296.0f);
-                    actorAcc[item.get_id()].setVariation({randX, randY});
-                });
-        }).wait_and_throw();
-    } catch (const sycl::exception& e) {
-        std::cout << "SYCL exception caught:\n" << e.what() << "\n[updateVariations]";
+                cgh.parallel_for(
+                    sycl::range<1>{actorAcc.size()}, [=](sycl::item<1> item) {
+                        seedAcc[0] = randXorShift(seedAcc[0]);
+                        // Previous RNG output is used as next seed
+                        float randX =
+                            float(seedAcc[0]) * (1.0f / 4294967296.0f);
+                        seedAcc[0] = randXorShift(seedAcc[0]);
+                        float randY =
+                            float(seedAcc[0]) * (1.0f / 4294967296.0f);
+                        actorAcc[item.get_id()].setVariation({randX, randY});
+                    });
+            })
+            .wait_and_throw();
+    } catch (const sycl::exception &e) {
+        std::cout << "SYCL exception caught:\n"
+                  << e.what() << "\n[updateVariations]";
     }
 }
 
@@ -129,16 +137,16 @@ void updateBBox(sycl::queue &myQueue, std::vector<Actor> &actors) {
                     actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
                 cgh.parallel_for(sycl::range<1>{actors.size()},
-                                [=](sycl::id<1> index) {
-                                    Actor *currentActor = &actorAcc[index];
-                                    vecType pos = currentActor->getPos();
-                                    int row = sycl::floor(pos[0]);
-                                    int col = sycl::floor(pos[1]);
-                                    currentActor->setBBox({row, col});
-                                });
+                                 [=](sycl::id<1> index) {
+                                     Actor *currentActor = &actorAcc[index];
+                                     vecType pos = currentActor->getPos();
+                                     int row = sycl::floor(pos[0]);
+                                     int col = sycl::floor(pos[1]);
+                                     currentActor->setBBox({row, col});
+                                 });
             })
             .wait_and_throw();
-    } catch (const sycl::exception& e) {
+    } catch (const sycl::exception &e) {
         std::cout << "SYCL exception caught:\n" << e.what() << "\n[updateBBox]";
     }
 }
@@ -187,7 +195,7 @@ int main(int argc, char *argv[]) {
     std::vector<Path> paths;
 
     auto asyncHandler = [&](sycl::exception_list exceptionList) {
-        for (auto& e : exceptionList) {
+        for (auto &e : exceptionList) {
             std::rethrow_exception(e);
         }
     };
@@ -210,8 +218,8 @@ int main(int argc, char *argv[]) {
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 isQuit = true;
-            }
-            else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
+            } else if (event.type == SDL_KEYDOWN &&
+                       event.key.keysym.sym == SDLK_SPACE) {
                 isPause = !isPause;
             }
         }
@@ -231,8 +239,8 @@ int main(int argc, char *argv[]) {
 
                 auto end = std::chrono::high_resolution_clock::now();
                 auto duration =
-                    std::chrono::duration_cast<std::chrono::milliseconds>(end -
-                                                                        start);
+                    std::chrono::duration_cast<std::chrono::milliseconds>(
+                        end - start);
                 executionTimes.push_back(duration.count());
                 // std::cout << "fps: " << (1000.0f / duration.count()) <<
                 // std::endl;
