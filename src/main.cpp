@@ -25,10 +25,16 @@ void init(int &SCALE, int &DELAY, SDL_Window *&win, SDL_Renderer *&render,
     int HEIGHT;
 
     // Read from input file path JSON
-    if (argc > 1) {
+    if (argc == 2) {
         std::string inputPath = argv[1];
         parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE,
                        DELAY);
+    }
+    else if (argc < 2) {
+        throw std::invalid_argument("Input configuration file must be supplied");
+    }
+    else {
+        throw std::invalid_argument("Too many inputs were supplied");
     }
 
     // Seed RNG with current time in seconds
