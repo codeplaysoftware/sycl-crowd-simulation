@@ -56,17 +56,9 @@ void drawCircle(SDL_Renderer *&render, SDL_Point center, int radius,
     }
 }
 
-void update(sycl::queue &myQueue, std::vector<Actor> &actors, Room room,
-            std::vector<Path> paths) {
+void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf, sycl::buffer<std::array<vecType, 2>> &wallsBuf,
+            sycl::buffer<Path> &pathsBuf) {
     try {
-        auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
-
-        auto walls = room.getWalls();
-        auto wallsBuf =
-            sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
-
-        auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
-
         myQueue
             .submit([&](sycl::handler &cgh) {
                 auto actorAcc =
@@ -81,7 +73,7 @@ void update(sycl::queue &myQueue, std::vector<Actor> &actors, Room room,
                 auto out = sycl::stream{1024, 768, cgh};
 
                 cgh.parallel_for(
-                    sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
+                    sycl::range<1>{actorAcc.size()}, [=](sycl::id<1> index) {
                         if (!actorAcc[index].getAtDestination()) {
                             differentialEq(index, actorAcc, wallsAcc, pathsAcc,
                                            out);
@@ -94,10 +86,8 @@ void update(sycl::queue &myQueue, std::vector<Actor> &actors, Room room,
     }
 }
 
-void updateVariations(sycl::queue &myQueue, std::vector<Actor> &actors) {
+void updateVariations(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
     try {
-        auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
-
         auto seedBuf = sycl::buffer<uint>(&RNGSEED, 1);
 
         myQueue
@@ -127,16 +117,14 @@ void updateVariations(sycl::queue &myQueue, std::vector<Actor> &actors) {
     }
 }
 
-void updateBBox(sycl::queue &myQueue, std::vector<Actor> &actors) {
+void updateBBox(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
     try {
-        auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
-
         myQueue
             .submit([&](sycl::handler &cgh) {
                 auto actorAcc =
                     actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-                cgh.parallel_for(sycl::range<1>{actors.size()},
+                cgh.parallel_for(sycl::range<1>{actorAcc.size()},
                                  [=](sycl::id<1> index) {
                                      Actor *currentActor = &actorAcc[index];
                                      vecType pos = currentActor->getPos();
@@ -151,12 +139,13 @@ void updateBBox(sycl::queue &myQueue, std::vector<Actor> &actors) {
     }
 }
 
-void draw(int SCALE, SDL_Renderer *&render, std::vector<Actor> actors,
+void draw(int SCALE, SDL_Renderer *&render, sycl::host_accessor<Actor, 1, sycl::access::mode::read> actors,
           Room room) {
     SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
     SDL_RenderClear(render);
 
-    for (Actor actor : actors) {
+    for (int i = 0; i < actors.size(); i++) {
+        auto actor = actors[i];
         SDL_Point pos = {int(actor.getPos()[0] * SCALE),
                          int(actor.getPos()[1] * SCALE)};
         SDL_Color actorColor = {Uint8(actor.getColor()[0]),
@@ -204,7 +193,11 @@ int main(int argc, char *argv[]) {
 
     init(SCALE, DELAY, win, render, actors, room, paths, argc, argv);
 
-    draw(SCALE, render, actors, room);
+    // Buffer creation
+    auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
+    auto walls = room.getWalls();
+    auto wallsBuf = sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
+    auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
 
     int delayCounter = 0;
     int updateBBoxCounter = 0;
@@ -230,12 +223,12 @@ int main(int argc, char *argv[]) {
                 auto start = std::chrono::high_resolution_clock::now();
 
                 if (updateBBoxCounter <= 0) {
-                    updateBBox(myQueue, actors);
+                    updateBBox(myQueue, actorBuf);
                     updateBBoxCounter = 20;
                 }
 
-                updateVariations(myQueue, actors);
-                update(myQueue, actors, room, paths);
+                updateVariations(myQueue, actorBuf);
+                update(myQueue, actorBuf, wallsBuf, pathsBuf);
 
                 auto end = std::chrono::high_resolution_clock::now();
                 auto duration =
@@ -245,7 +238,9 @@ int main(int argc, char *argv[]) {
                 // std::cout << "fps: " << (1000.0f / duration.count()) <<
                 // std::endl;
 
-                draw(SCALE, render, actors, room);
+                sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(actorBuf);
+
+                draw(SCALE, render, actorHostAcc, room);
                 updateBBoxCounter--;
             } else {
                 delayCounter++;
@@ -253,15 +248,16 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // // For VTune
+    // // For Profiling
     // int updateBBoxCounterr = 0;
     // for (int x = 0; x < 500; x++) {
     //     if (updateBBoxCounterr <= 0) {
-    //         updateBBox(myQueue, actors);
+    //         updateBBox(myQueue, actorBuf);
     //         updateBBoxCounterr = 20;
     //     }
-    //     updateVariations(myQueue, actors);
-    //     update(myQueue, actors, room, paths);
+    //     updateVariations(myQueue, actorBuf);
+    //     update(myQueue, actorBuf, wallsBuf, pathsBuf);
+    //     sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(actorBuf);
     //     updateBBoxCounterr--;
     // }
 

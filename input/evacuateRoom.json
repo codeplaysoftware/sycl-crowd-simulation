@@ -95,7 +95,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05556073106446068,
+            "radius": 0.04697498552200507,
             "atDestination": false,
             "color": [
                 255,
@@ -116,7 +116,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049866483567581374,
+            "radius": 0.052714089345798756,
             "atDestination": false,
             "color": [
                 255,
@@ -137,7 +137,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0548330699506238,
+            "radius": 0.04881659702137822,
             "atDestination": false,
             "color": [
                 255,
@@ -158,7 +158,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046419916655904545,
+            "radius": 0.04090682625308885,
             "atDestination": false,
             "color": [
                 255,
@@ -179,7 +179,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048289601160455733,
+            "radius": 0.051144718107151904,
             "atDestination": false,
             "color": [
                 255,
@@ -200,7 +200,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04308049715363017,
+            "radius": 0.04994731896460944,
             "atDestination": false,
             "color": [
                 255,
@@ -221,7 +221,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04847352221098209,
+            "radius": 0.04289018307290501,
             "atDestination": false,
             "color": [
                 255,
@@ -242,7 +242,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043958858133607184,
+            "radius": 0.042209350173668385,
             "atDestination": false,
             "color": [
                 255,
@@ -263,7 +263,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04231901299695507,
+            "radius": 0.05685660340921909,
             "atDestination": false,
             "color": [
                 255,
@@ -284,7 +284,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0504100851858047,
+            "radius": 0.051857588181065756,
             "atDestination": false,
             "color": [
                 255,
@@ -305,7 +305,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04527154182491565,
+            "radius": 0.04945920625158781,
             "atDestination": false,
             "color": [
                 255,
@@ -326,7 +326,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04066322318262032,
+            "radius": 0.055646374573300725,
             "atDestination": false,
             "color": [
                 255,
@@ -347,7 +347,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04775129736448405,
+            "radius": 0.04403318843661248,
             "atDestination": false,
             "color": [
                 255,
@@ -368,7 +368,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05650446356022362,
+            "radius": 0.044846642413617986,
             "atDestination": false,
             "color": [
                 255,
@@ -389,7 +389,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054776835346233343,
+            "radius": 0.059427369489057504,
             "atDestination": false,
             "color": [
                 255,
@@ -410,7 +410,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05455742862799311,
+            "radius": 0.05860289425967046,
             "atDestination": false,
             "color": [
                 255,
@@ -431,7 +431,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05456888524428123,
+            "radius": 0.043239867682849716,
             "atDestination": false,
             "color": [
                 255,
@@ -452,7 +452,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04094138091376793,
+            "radius": 0.05029663375701866,
             "atDestination": false,
             "color": [
                 255,
@@ -473,7 +473,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04941837118304313,
+            "radius": 0.059836290940607786,
             "atDestination": false,
             "color": [
                 255,
@@ -494,7 +494,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04102067590752652,
+            "radius": 0.04657549395351032,
             "atDestination": false,
             "color": [
                 255,
@@ -515,7 +515,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04198230645468186,
+            "radius": 0.045640626746710836,
             "atDestination": false,
             "color": [
                 255,
@@ -536,7 +536,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05495424670123064,
+            "radius": 0.051061021296073136,
             "atDestination": false,
             "color": [
                 255,
@@ -557,7 +557,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0588141899944459,
+            "radius": 0.04445956579708346,
             "atDestination": false,
             "color": [
                 255,
@@ -578,7 +578,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048897280164821116,
+            "radius": 0.04878037074356166,
             "atDestination": false,
             "color": [
                 255,
@@ -599,7 +599,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.056638969163326974,
+            "radius": 0.05423079923773484,
             "atDestination": false,
             "color": [
                 255,
@@ -620,7 +620,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05025805620720197,
+            "radius": 0.0467073967524726,
             "atDestination": false,
             "color": [
                 255,
@@ -641,7 +641,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05132706413710604,
+            "radius": 0.04476895865438346,
             "atDestination": false,
             "color": [
                 255,
@@ -662,7 +662,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.042075484244869954,
+            "radius": 0.05372422449032467,
             "atDestination": false,
             "color": [
                 255,
@@ -683,7 +683,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044731156929253765,
+            "radius": 0.04785520184058301,
             "atDestination": false,
             "color": [
                 255,
@@ -704,7 +704,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.041869005013956156,
+            "radius": 0.04160812723374204,
             "atDestination": false,
             "color": [
                 255,
@@ -725,7 +725,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04029745953260227,
+            "radius": 0.050209234046530694,
             "atDestination": false,
             "color": [
                 255,
@@ -746,7 +746,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059036352776964125,
+            "radius": 0.04741841754218698,
             "atDestination": false,
             "color": [
                 255,
@@ -767,7 +767,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04881138233483971,
+            "radius": 0.04233552877171856,
             "atDestination": false,
             "color": [
                 255,
@@ -788,7 +788,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05774105752677977,
+            "radius": 0.04434746748355549,
             "atDestination": false,
             "color": [
                 255,
@@ -809,7 +809,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059156443745734935,
+            "radius": 0.042615090356450634,
             "atDestination": false,
             "color": [
                 255,
@@ -830,7 +830,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05883988646581062,
+            "radius": 0.04194662466654226,
             "atDestination": false,
             "color": [
                 255,
@@ -851,7 +851,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04423949651892667,
+            "radius": 0.054759702630038355,
             "atDestination": false,
             "color": [
                 255,
@@ -872,7 +872,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050011965160492215,
+            "radius": 0.04259543546747577,
             "atDestination": false,
             "color": [
                 255,
@@ -893,7 +893,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.056798368422000256,
+            "radius": 0.05537470445841455,
             "atDestination": false,
             "color": [
                 255,
@@ -914,7 +914,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04469701414510488,
+            "radius": 0.04173738442431067,
             "atDestination": false,
             "color": [
                 255,
@@ -935,7 +935,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05465148624526165,
+            "radius": 0.05565877681661448,
             "atDestination": false,
             "color": [
                 255,
@@ -956,7 +956,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04320471895987517,
+            "radius": 0.04383014805167573,
             "atDestination": false,
             "color": [
                 255,
@@ -977,7 +977,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051507021752584745,
+            "radius": 0.05786992033465259,
             "atDestination": false,
             "color": [
                 255,
@@ -998,7 +998,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04864875378725132,
+            "radius": 0.0513161725017008,
             "atDestination": false,
             "color": [
                 255,
@@ -1019,7 +1019,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05738082273900577,
+            "radius": 0.049279986329508176,
             "atDestination": false,
             "color": [
                 255,
@@ -1040,7 +1040,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054719347047107916,
+            "radius": 0.056640135433264835,
             "atDestination": false,
             "color": [
                 255,
@@ -1061,7 +1061,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0531350396215765,
+            "radius": 0.05187605323964903,
             "atDestination": false,
             "color": [
                 255,
@@ -1082,7 +1082,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05605099788267005,
+            "radius": 0.05888673925528737,
             "atDestination": false,
             "color": [
                 255,
@@ -1103,7 +1103,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04623263400250321,
+            "radius": 0.057196642907003145,
             "atDestination": false,
             "color": [
                 255,
@@ -1124,7 +1124,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05488397623959854,
+            "radius": 0.04992260170543151,
             "atDestination": false,
             "color": [
                 255,
@@ -1145,7 +1145,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052536664450398673,
+            "radius": 0.04356432078240805,
             "atDestination": false,
             "color": [
                 255,
@@ -1166,7 +1166,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.056187471377526554,
+            "radius": 0.05524468018060737,
             "atDestination": false,
             "color": [
                 255,
@@ -1187,7 +1187,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047444181425771816,
+            "radius": 0.05234288211636355,
             "atDestination": false,
             "color": [
                 255,
@@ -1208,7 +1208,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04359213119125693,
+            "radius": 0.05839771414758495,
             "atDestination": false,
             "color": [
                 255,
@@ -1229,7 +1229,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054633031894154555,
+            "radius": 0.058228973878785326,
             "atDestination": false,
             "color": [
                 255,
@@ -1250,7 +1250,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0466212491518625,
+            "radius": 0.049507899462086655,
             "atDestination": false,
             "color": [
                 255,
@@ -1271,7 +1271,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045910759620134495,
+            "radius": 0.05377209261759065,
             "atDestination": false,
             "color": [
                 255,
@@ -1292,7 +1292,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0452881836462773,
+            "radius": 0.05575942145679949,
             "atDestination": false,
             "color": [
                 255,
@@ -1313,7 +1313,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04066726770349742,
+            "radius": 0.05408187732642718,
             "atDestination": false,
             "color": [
                 255,
@@ -1334,7 +1334,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04401478596203811,
+            "radius": 0.04451202696722177,
             "atDestination": false,
             "color": [
                 255,
@@ -1355,7 +1355,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05036711450767291,
+            "radius": 0.059598962374422415,
             "atDestination": false,
             "color": [
                 255,
@@ -1376,7 +1376,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044583413742790845,
+            "radius": 0.052541890493646874,
             "atDestination": false,
             "color": [
                 255,
@@ -1397,7 +1397,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05313756504015348,
+            "radius": 0.0438597085509794,
             "atDestination": false,
             "color": [
                 255,
@@ -1418,7 +1418,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05596785510507668,
+            "radius": 0.056653455317141325,
             "atDestination": false,
             "color": [
                 255,
@@ -1439,7 +1439,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059341248450409695,
+            "radius": 0.04430089465322443,
             "atDestination": false,
             "color": [
                 255,
@@ -1460,7 +1460,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04414125362873551,
+            "radius": 0.0593750013717126,
             "atDestination": false,
             "color": [
                 255,
@@ -1481,7 +1481,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05606304458860166,
+            "radius": 0.040548702210356086,
             "atDestination": false,
             "color": [
                 255,
@@ -1502,7 +1502,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04142115762493414,
+            "radius": 0.04023396237074167,
             "atDestination": false,
             "color": [
                 255,
@@ -1523,7 +1523,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045588330493463176,
+            "radius": 0.05449574422493799,
             "atDestination": false,
             "color": [
                 255,
@@ -1544,7 +1544,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04413588828202019,
+            "radius": 0.05221837929927727,
             "atDestination": false,
             "color": [
                 255,
@@ -1565,7 +1565,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04732215427636783,
+            "radius": 0.05269557932697668,
             "atDestination": false,
             "color": [
                 255,
@@ -1586,7 +1586,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05470158585862811,
+            "radius": 0.04847699712813798,
             "atDestination": false,
             "color": [
                 255,
@@ -1607,7 +1607,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054227151036850704,
+            "radius": 0.05459524584197256,
             "atDestination": false,
             "color": [
                 255,
@@ -1628,7 +1628,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04639182919868567,
+            "radius": 0.05080238656883688,
             "atDestination": false,
             "color": [
                 255,
@@ -1649,7 +1649,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04716824268159692,
+            "radius": 0.048995033198065044,
             "atDestination": false,
             "color": [
                 255,
@@ -1670,7 +1670,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04038401971122401,
+            "radius": 0.0436501433536242,
             "atDestination": false,
             "color": [
                 255,
@@ -1691,7 +1691,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04079832466396368,
+            "radius": 0.04550401239231558,
             "atDestination": false,
             "color": [
                 255,
@@ -1712,7 +1712,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05689631079394112,
+            "radius": 0.04544420785851244,
             "atDestination": false,
             "color": [
                 255,
@@ -1733,7 +1733,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051765624838462795,
+            "radius": 0.04198012442787573,
             "atDestination": false,
             "color": [
                 255,
@@ -1754,7 +1754,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04784005019469511,
+            "radius": 0.056894579176193005,
             "atDestination": false,
             "color": [
                 255,
@@ -1775,7 +1775,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05877853408234547,
+            "radius": 0.04490862064420574,
             "atDestination": false,
             "color": [
                 255,
@@ -1796,7 +1796,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05992148467062532,
+            "radius": 0.05316620925959621,
             "atDestination": false,
             "color": [
                 255,
@@ -1817,7 +1817,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05214521126765857,
+            "radius": 0.04477202090274195,
             "atDestination": false,
             "color": [
                 255,
@@ -1838,7 +1838,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047661750194946374,
+            "radius": 0.05171430864609437,
             "atDestination": false,
             "color": [
                 255,
@@ -1859,7 +1859,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04104833727050329,
+            "radius": 0.042251780070362926,
             "atDestination": false,
             "color": [
                 255,
@@ -1880,7 +1880,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05572234513125575,
+            "radius": 0.04981291692786707,
             "atDestination": false,
             "color": [
                 255,
@@ -1901,7 +1901,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.058347482092799115,
+            "radius": 0.05582331071516969,
             "atDestination": false,
             "color": [
                 255,
@@ -1922,7 +1922,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057508635238071586,
+            "radius": 0.04779509019461003,
             "atDestination": false,
             "color": [
                 255,
@@ -1943,7 +1943,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05509398380868754,
+            "radius": 0.04674505703501447,
             "atDestination": false,
             "color": [
                 255,
@@ -1964,7 +1964,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0534172794858377,
+            "radius": 0.042756715893571606,
             "atDestination": false,
             "color": [
                 255,
@@ -1985,7 +1985,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05398714103489999,
+            "radius": 0.043660330430039064,
             "atDestination": false,
             "color": [
                 255,
@@ -2006,7 +2006,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04699807617422144,
+            "radius": 0.04975906972838174,
             "atDestination": false,
             "color": [
                 255,
@@ -2027,7 +2027,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05240275832603251,
+            "radius": 0.057507751111278,
             "atDestination": false,
             "color": [
                 255,
@@ -2048,7 +2048,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04598196992475735,
+            "radius": 0.0585119396798246,
             "atDestination": false,
             "color": [
                 255,
@@ -2069,7 +2069,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04206666896935717,
+            "radius": 0.04888120502320508,
             "atDestination": false,
             "color": [
                 255,
@@ -2090,7 +2090,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04987605436405901,
+            "radius": 0.058340366309445335,
             "atDestination": false,
             "color": [
                 255,
@@ -2111,7 +2111,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04373944262816531,
+            "radius": 0.05264940519350097,
             "atDestination": false,
             "color": [
                 255,
@@ -2132,7 +2132,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05035541243595529,
+            "radius": 0.0501815942925523,
             "atDestination": false,
             "color": [
                 255,
@@ -2153,7 +2153,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047384287507627576,
+            "radius": 0.04090393949067013,
             "atDestination": false,
             "color": [
                 255,
@@ -2174,7 +2174,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045722044797353825,
+            "radius": 0.05514256255285648,
             "atDestination": false,
             "color": [
                 255,
@@ -2195,7 +2195,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05753983252482486,
+            "radius": 0.050990490954654015,
             "atDestination": false,
             "color": [
                 255,
@@ -2216,7 +2216,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04974575062659101,
+            "radius": 0.043867994350681054,
             "atDestination": false,
             "color": [
                 255,
@@ -2237,7 +2237,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05866469306335964,
+            "radius": 0.043552217597188934,
             "atDestination": false,
             "color": [
                 255,
@@ -2258,7 +2258,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0581092649714358,
+            "radius": 0.047285686788181625,
             "atDestination": false,
             "color": [
                 255,
@@ -2279,7 +2279,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046064818933871265,
+            "radius": 0.05742946554214997,
             "atDestination": false,
             "color": [
                 255,
@@ -2300,7 +2300,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.058055219974786076,
+            "radius": 0.0411187284662396,
             "atDestination": false,
             "color": [
                 255,
@@ -2321,7 +2321,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043326802023395304,
+            "radius": 0.04418640554538505,
             "atDestination": false,
             "color": [
                 255,
@@ -2342,7 +2342,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04405036526756584,
+            "radius": 0.04678798151993369,
             "atDestination": false,
             "color": [
                 255,
@@ -2363,7 +2363,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04933145052184737,
+            "radius": 0.04248910170687209,
             "atDestination": false,
             "color": [
                 255,
@@ -2384,7 +2384,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048439571698348734,
+            "radius": 0.049050194920259624,
             "atDestination": false,
             "color": [
                 255,
@@ -2405,7 +2405,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043897139013372846,
+            "radius": 0.04233686105731152,
             "atDestination": false,
             "color": [
                 255,
@@ -2426,7 +2426,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04550372298803704,
+            "radius": 0.057527867453010174,
             "atDestination": false,
             "color": [
                 255,
@@ -2447,7 +2447,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04994585950033911,
+            "radius": 0.056590574223551286,
             "atDestination": false,
             "color": [
                 255,
@@ -2468,7 +2468,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04883505729964048,
+            "radius": 0.045052827459950415,
             "atDestination": false,
             "color": [
                 255,
@@ -2489,7 +2489,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.041438024747384186,
+            "radius": 0.048659709350015845,
             "atDestination": false,
             "color": [
                 255,
@@ -2510,7 +2510,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047568667239256096,
+            "radius": 0.04830491042543096,
             "atDestination": false,
             "color": [
                 255,
@@ -2531,7 +2531,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0503490472334485,
+            "radius": 0.04498047571018361,
             "atDestination": false,
             "color": [
                 255,
@@ -2552,7 +2552,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0471319965960826,
+            "radius": 0.05392160904636519,
             "atDestination": false,
             "color": [
                 255,
@@ -2573,7 +2573,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04820336722392854,
+            "radius": 0.04318376530714458,
             "atDestination": false,
             "color": [
                 255,
@@ -2594,7 +2594,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05762502017015429,
+            "radius": 0.05255226145139539,
             "atDestination": false,
             "color": [
                 255,
@@ -2615,7 +2615,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04183008119497971,
+            "radius": 0.04905923446753472,
             "atDestination": false,
             "color": [
                 255,
@@ -2636,7 +2636,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05056905639425654,
+            "radius": 0.04296267224481004,
             "atDestination": false,
             "color": [
                 255,
@@ -2657,7 +2657,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05857693501851781,
+            "radius": 0.04350647235845733,
             "atDestination": false,
             "color": [
                 255,
@@ -2678,7 +2678,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043728487669683576,
+            "radius": 0.04088381235010939,
             "atDestination": false,
             "color": [
                 255,
@@ -2699,7 +2699,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051527083432879484,
+            "radius": 0.04915015994598309,
             "atDestination": false,
             "color": [
                 255,
@@ -2720,7 +2720,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04456614728213784,
+            "radius": 0.05630401278732164,
             "atDestination": false,
             "color": [
                 255,
@@ -2741,7 +2741,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048836780570715166,
+            "radius": 0.05619578259901574,
             "atDestination": false,
             "color": [
                 255,
@@ -2762,7 +2762,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049493724323953874,
+            "radius": 0.058249270460947244,
             "atDestination": false,
             "color": [
                 255,
@@ -2783,7 +2783,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05019254391258508,
+            "radius": 0.05252504649694838,
             "atDestination": false,
             "color": [
                 255,
@@ -2804,7 +2804,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053084710524683706,
+            "radius": 0.04855140537094908,
             "atDestination": false,
             "color": [
                 255,
@@ -2825,7 +2825,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.041499909651136244,
+            "radius": 0.04188506513740704,
             "atDestination": false,
             "color": [
                 255,
@@ -2846,7 +2846,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04240817478323659,
+            "radius": 0.047822018118958455,
             "atDestination": false,
             "color": [
                 255,
@@ -2867,7 +2867,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051680498940274155,
+            "radius": 0.05570957156798749,
             "atDestination": false,
             "color": [
                 255,
@@ -2888,7 +2888,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05747429577261707,
+            "radius": 0.041840578211614264,
             "atDestination": false,
             "color": [
                 255,
@@ -2909,7 +2909,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05887208944638808,
+            "radius": 0.055818622331439235,
             "atDestination": false,
             "color": [
                 255,
@@ -2930,7 +2930,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04377251442231186,
+            "radius": 0.05788546186802267,
             "atDestination": false,
             "color": [
                 255,
@@ -2951,7 +2951,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.040568194839217094,
+            "radius": 0.04655865649916843,
             "atDestination": false,
             "color": [
                 255,
@@ -2972,7 +2972,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05524802082763389,
+            "radius": 0.043437928625894046,
             "atDestination": false,
             "color": [
                 255,
@@ -2993,7 +2993,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04574681491165351,
+            "radius": 0.05241625288400974,
             "atDestination": false,
             "color": [
                 255,
@@ -3014,7 +3014,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.055550742760896575,
+            "radius": 0.05980091187607681,
             "atDestination": false,
             "color": [
                 255,
@@ -3035,7 +3035,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04201243304828937,
+            "radius": 0.04056891199131854,
             "atDestination": false,
             "color": [
                 255,
@@ -3056,7 +3056,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04006510632851892,
+            "radius": 0.04512059983587077,
             "atDestination": false,
             "color": [
                 255,
@@ -3077,7 +3077,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045435753437038526,
+            "radius": 0.04146782194809402,
             "atDestination": false,
             "color": [
                 255,
@@ -3098,7 +3098,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04845668540616213,
+            "radius": 0.04542343011639441,
             "atDestination": false,
             "color": [
                 255,
@@ -3119,7 +3119,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04255843581533658,
+            "radius": 0.04229169218182244,
             "atDestination": false,
             "color": [
                 255,
@@ -3140,7 +3140,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04445968255717053,
+            "radius": 0.057390570854207304,
             "atDestination": false,
             "color": [
                 255,
@@ -3161,7 +3161,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.040213081491476815,
+            "radius": 0.05070436911573653,
             "atDestination": false,
             "color": [
                 255,
@@ -3182,7 +3182,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05629049124171803,
+            "radius": 0.04514267732914934,
             "atDestination": false,
             "color": [
                 255,
@@ -3203,7 +3203,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059641884569451915,
+            "radius": 0.05026504417760841,
             "atDestination": false,
             "color": [
                 255,
@@ -3224,7 +3224,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05232338479356656,
+            "radius": 0.05159888852004395,
             "atDestination": false,
             "color": [
                 255,
@@ -3245,7 +3245,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04984287157997844,
+            "radius": 0.04226307805967656,
             "atDestination": false,
             "color": [
                 255,
@@ -3266,7 +3266,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05274294982099081,
+            "radius": 0.04698920275772694,
             "atDestination": false,
             "color": [
                 255,
@@ -3287,7 +3287,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0425525490036961,
+            "radius": 0.055095907358911324,
             "atDestination": false,
             "color": [
                 255,
@@ -3308,7 +3308,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053751876157143996,
+            "radius": 0.045125933177652684,
             "atDestination": false,
             "color": [
                 255,
@@ -3329,7 +3329,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05029989589521077,
+            "radius": 0.05833504404451772,
             "atDestination": false,
             "color": [
                 255,
@@ -3350,7 +3350,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05406810691653417,
+            "radius": 0.041897538911835217,
             "atDestination": false,
             "color": [
                 255,
@@ -3371,7 +3371,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044373187175803436,
+            "radius": 0.057002789725232456,
             "atDestination": false,
             "color": [
                 255,
@@ -3392,7 +3392,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05884007799497705,
+            "radius": 0.05384737187665369,
             "atDestination": false,
             "color": [
                 255,
@@ -3413,7 +3413,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0572896998150606,
+            "radius": 0.04138781902686582,
             "atDestination": false,
             "color": [
                 255,
@@ -3434,7 +3434,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04732251652044917,
+            "radius": 0.04499084511743273,
             "atDestination": false,
             "color": [
                 255,
@@ -3455,7 +3455,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05068958621956207,
+            "radius": 0.0584735204972028,
             "atDestination": false,
             "color": [
                 255,
@@ -3476,7 +3476,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05780130571261022,
+            "radius": 0.043369906412233816,
             "atDestination": false,
             "color": [
                 255,
@@ -3497,7 +3497,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0579830432783252,
+            "radius": 0.05767451834029283,
             "atDestination": false,
             "color": [
                 255,
@@ -3518,7 +3518,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04999241101937653,
+            "radius": 0.05028565557252744,
             "atDestination": false,
             "color": [
                 255,
@@ -3539,7 +3539,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051968242313110896,
+            "radius": 0.04484664865058625,
             "atDestination": false,
             "color": [
                 255,
@@ -3560,7 +3560,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04807278058562422,
+            "radius": 0.041530076353516805,
             "atDestination": false,
             "color": [
                 255,
@@ -3581,7 +3581,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05108554599211768,
+            "radius": 0.04660322397550377,
             "atDestination": false,
             "color": [
                 255,
@@ -3602,7 +3602,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04251027585415307,
+            "radius": 0.04852932355712895,
             "atDestination": false,
             "color": [
                 255,
@@ -3623,7 +3623,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05819788592990517,
+            "radius": 0.05085578379500698,
             "atDestination": false,
             "color": [
                 255,
@@ -3644,7 +3644,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05892437312999413,
+            "radius": 0.04585181886333013,
             "atDestination": false,
             "color": [
                 255,
@@ -3665,7 +3665,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05285989988275405,
+            "radius": 0.05360422986242266,
             "atDestination": false,
             "color": [
                 255,
@@ -3686,7 +3686,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05351976940243295,
+            "radius": 0.05366694938279268,
             "atDestination": false,
             "color": [
                 255,
@@ -3707,7 +3707,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05763362566898089,
+            "radius": 0.04078246177449266,
             "atDestination": false,
             "color": [
                 255,
@@ -3728,7 +3728,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043952133966355694,
+            "radius": 0.042280885275127474,
             "atDestination": false,
             "color": [
                 255,
@@ -3749,7 +3749,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04307480048400653,
+            "radius": 0.051533698285484125,
             "atDestination": false,
             "color": [
                 255,
@@ -3770,7 +3770,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05645349057458811,
+            "radius": 0.05859035850884499,
             "atDestination": false,
             "color": [
                 255,
@@ -3791,7 +3791,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05092841681468812,
+            "radius": 0.058733631908219494,
             "atDestination": false,
             "color": [
                 255,
@@ -3812,7 +3812,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04522203085840933,
+            "radius": 0.058972261680373145,
             "atDestination": false,
             "color": [
                 255,
@@ -3833,7 +3833,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04890840982568729,
+            "radius": 0.04184990910212025,
             "atDestination": false,
             "color": [
                 255,
@@ -3854,7 +3854,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0557861175716733,
+            "radius": 0.05275646707005406,
             "atDestination": false,
             "color": [
                 255,
@@ -3875,7 +3875,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05323330842039704,
+            "radius": 0.05177693283181952,
             "atDestination": false,
             "color": [
                 255,
@@ -3896,7 +3896,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.041569394781810626,
+            "radius": 0.04631026687819105,
             "atDestination": false,
             "color": [
                 255,
@@ -3917,7 +3917,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052426271031296656,
+            "radius": 0.05960791255990652,
             "atDestination": false,
             "color": [
                 255,
@@ -3938,7 +3938,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050896823805808324,
+            "radius": 0.0482394462727757,
             "atDestination": false,
             "color": [
                 255,
@@ -3959,7 +3959,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049597483684254255,
+            "radius": 0.05947483520397652,
             "atDestination": false,
             "color": [
                 255,
@@ -3980,7 +3980,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05963172995229853,
+            "radius": 0.0478017136938754,
             "atDestination": false,
             "color": [
                 255,
@@ -4001,7 +4001,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047740203524210746,
+            "radius": 0.05087036627428752,
             "atDestination": false,
             "color": [
                 255,
@@ -4022,7 +4022,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044561006187693784,
+            "radius": 0.046576835132221356,
             "atDestination": false,
             "color": [
                 255,
@@ -4043,7 +4043,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05354182345773538,
+            "radius": 0.04143439461991996,
             "atDestination": false,
             "color": [
                 255,
@@ -4064,7 +4064,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04887281297641915,
+            "radius": 0.04450333793949597,
             "atDestination": false,
             "color": [
                 255,
@@ -4085,7 +4085,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05659606857491318,
+            "radius": 0.043192193940212224,
             "atDestination": false,
             "color": [
                 255,
@@ -4106,7 +4106,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04868126605707415,
+            "radius": 0.04990561942190862,
             "atDestination": false,
             "color": [
                 255,
@@ -4127,7 +4127,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.042970108809744924,
+            "radius": 0.04483452286127846,
             "atDestination": false,
             "color": [
                 255,
@@ -4148,7 +4148,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05544449560088349,
+            "radius": 0.04912626877521871,
             "atDestination": false,
             "color": [
                 255,
@@ -4169,7 +4169,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05348660681940573,
+            "radius": 0.05061519706655196,
             "atDestination": false,
             "color": [
                 255,
@@ -4190,7 +4190,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05650208686777669,
+            "radius": 0.047869154223625164,
             "atDestination": false,
             "color": [
                 255,
@@ -4211,7 +4211,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.040012210884211225,
+            "radius": 0.057562686184997505,
             "atDestination": false,
             "color": [
                 255,
@@ -4232,7 +4232,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04003965443231567,
+            "radius": 0.05254278853603664,
             "atDestination": false,
             "color": [
                 255,
@@ -4253,7 +4253,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05667729946484576,
+            "radius": 0.05688825997400206,
             "atDestination": false,
             "color": [
                 255,
@@ -4274,7 +4274,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044902277959696105,
+            "radius": 0.04220479520115128,
             "atDestination": false,
             "color": [
                 255,
@@ -4295,7 +4295,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05126075552571473,
+            "radius": 0.04110615862449908,
             "atDestination": false,
             "color": [
                 255,
@@ -4316,7 +4316,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04160888898442917,
+            "radius": 0.048825398438756,
             "atDestination": false,
             "color": [
                 255,
@@ -4337,7 +4337,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.058423782823343054,
+            "radius": 0.04155658212310452,
             "atDestination": false,
             "color": [
                 255,
@@ -4358,7 +4358,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05514335334393719,
+            "radius": 0.053714982308360894,
             "atDestination": false,
             "color": [
                 255,
@@ -4379,7 +4379,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04201014127014166,
+            "radius": 0.04231855274499078,
             "atDestination": false,
             "color": [
                 255,
@@ -4400,7 +4400,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049685907635689856,
+            "radius": 0.05053775226620759,
             "atDestination": false,
             "color": [
                 255,
@@ -4421,7 +4421,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05041539602389972,
+            "radius": 0.05720278028298226,
             "atDestination": false,
             "color": [
                 255,
@@ -4442,7 +4442,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04409517711867605,
+            "radius": 0.051134852168262565,
             "atDestination": false,
             "color": [
                 255,
@@ -4463,7 +4463,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057170376161232966,
+            "radius": 0.058186829107860855,
             "atDestination": false,
             "color": [
                 255,
@@ -4484,7 +4484,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05998730386328027,
+            "radius": 0.04012137098867842,
             "atDestination": false,
             "color": [
                 255,
@@ -4505,7 +4505,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04346192485981359,
+            "radius": 0.056443560842307,
             "atDestination": false,
             "color": [
                 255,
@@ -4526,7 +4526,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05371663673464988,
+            "radius": 0.05692177392816921,
             "atDestination": false,
             "color": [
                 255,
@@ -4547,7 +4547,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04935376721971389,
+            "radius": 0.049136331202797104,
             "atDestination": false,
             "color": [
                 255,
@@ -4568,7 +4568,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044620016173207114,
+            "radius": 0.041852331520980404,
             "atDestination": false,
             "color": [
                 255,
@@ -4589,7 +4589,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04721169355977973,
+            "radius": 0.056698041046929645,
             "atDestination": false,
             "color": [
                 255,
@@ -4610,7 +4610,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047406681039765294,
+            "radius": 0.05870897879188215,
             "atDestination": false,
             "color": [
                 255,
@@ -4631,7 +4631,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04671375664309233,
+            "radius": 0.05388114294651859,
             "atDestination": false,
             "color": [
                 255,
@@ -4652,7 +4652,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05904942179563018,
+            "radius": 0.04562743626006586,
             "atDestination": false,
             "color": [
                 255,
@@ -4673,7 +4673,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.055196657740412464,
+            "radius": 0.04221353835536659,
             "atDestination": false,
             "color": [
                 255,
@@ -4694,7 +4694,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05792709759695849,
+            "radius": 0.05282732100712891,
             "atDestination": false,
             "color": [
                 255,
@@ -4715,7 +4715,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04527907615933636,
+            "radius": 0.04011952837521323,
             "atDestination": false,
             "color": [
                 255,
@@ -4736,7 +4736,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0514549914718325,
+            "radius": 0.04315434647264467,
             "atDestination": false,
             "color": [
                 255,
@@ -4757,7 +4757,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04710678885519731,
+            "radius": 0.057880452382186795,
             "atDestination": false,
             "color": [
                 255,
@@ -4778,7 +4778,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.055064184703235375,
+            "radius": 0.059639705394469555,
             "atDestination": false,
             "color": [
                 255,
@@ -4799,7 +4799,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04032763745829561,
+            "radius": 0.056973440373474724,
             "atDestination": false,
             "color": [
                 255,
@@ -4820,7 +4820,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04130701763835317,
+            "radius": 0.040430719712843295,
             "atDestination": false,
             "color": [
                 255,
@@ -4841,7 +4841,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05036034746894529,
+            "radius": 0.049813385544043735,
             "atDestination": false,
             "color": [
                 255,
@@ -4862,7 +4862,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04815836971513716,
+            "radius": 0.04668450317589306,
             "atDestination": false,
             "color": [
                 255,
@@ -4883,7 +4883,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04164613279735472,
+            "radius": 0.055355184939416525,
             "atDestination": false,
             "color": [
                 255,
@@ -4904,7 +4904,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05049089805611617,
+            "radius": 0.04379007135131175,
             "atDestination": false,
             "color": [
                 255,
@@ -4925,7 +4925,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05950522664842206,
+            "radius": 0.055526803711102565,
             "atDestination": false,
             "color": [
                 255,
@@ -4946,7 +4946,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05148525360714261,
+            "radius": 0.04860188439526862,
             "atDestination": false,
             "color": [
                 255,
@@ -4967,7 +4967,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047061357345620725,
+            "radius": 0.05752800950655584,
             "atDestination": false,
             "color": [
                 255,
@@ -4988,7 +4988,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04068912980412302,
+            "radius": 0.05718263477695015,
             "atDestination": false,
             "color": [
                 255,
@@ -5009,7 +5009,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05371731124477141,
+            "radius": 0.05815628728519294,
             "atDestination": false,
             "color": [
                 255,
@@ -5030,7 +5030,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0440249054401621,
+            "radius": 0.054520938915601794,
             "atDestination": false,
             "color": [
                 255,
@@ -5051,7 +5051,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04981426718759234,
+            "radius": 0.05056958000572452,
             "atDestination": false,
             "color": [
                 255,
@@ -5072,7 +5072,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05423501556761527,
+            "radius": 0.056643812954379744,
             "atDestination": false,
             "color": [
                 255,
@@ -5093,7 +5093,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04813559847922722,
+            "radius": 0.05673190959893808,
             "atDestination": false,
             "color": [
                 255,
@@ -5114,7 +5114,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04392624458544796,
+            "radius": 0.04857415793208997,
             "atDestination": false,
             "color": [
                 255,
@@ -5135,7 +5135,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.042172757593580204,
+            "radius": 0.05608402443670957,
             "atDestination": false,
             "color": [
                 255,
@@ -5156,7 +5156,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04101507217052343,
+            "radius": 0.0589848606142926,
             "atDestination": false,
             "color": [
                 255,
@@ -5177,7 +5177,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051708351902233024,
+            "radius": 0.04970818501321948,
             "atDestination": false,
             "color": [
                 255,
@@ -5198,7 +5198,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05925577130269652,
+            "radius": 0.05135796811897579,
             "atDestination": false,
             "color": [
                 255,
@@ -5219,7 +5219,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044779308374004005,
+            "radius": 0.045470492033275196,
             "atDestination": false,
             "color": [
                 255,
@@ -5240,7 +5240,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05853131891382779,
+            "radius": 0.04321509890340548,
             "atDestination": false,
             "color": [
                 255,
@@ -5261,7 +5261,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05230224150963775,
+            "radius": 0.04578739842294933,
             "atDestination": false,
             "color": [
                 255,
@@ -5282,7 +5282,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05001130686260258,
+            "radius": 0.04265882133687312,
             "atDestination": false,
             "color": [
                 255,
@@ -5303,7 +5303,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046388631281519696,
+            "radius": 0.04341531999508533,
             "atDestination": false,
             "color": [
                 255,
@@ -5324,7 +5324,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04842122233108038,
+            "radius": 0.0476982275353845,
             "atDestination": false,
             "color": [
                 255,
@@ -5345,7 +5345,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05751279765122138,
+            "radius": 0.04776039373482473,
             "atDestination": false,
             "color": [
                 255,
@@ -5366,7 +5366,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05937243507824794,
+            "radius": 0.05430794873468493,
             "atDestination": false,
             "color": [
                 255,
@@ -5387,7 +5387,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.055954744181811136,
+            "radius": 0.04017407299881097,
             "atDestination": false,
             "color": [
                 255,
@@ -5408,7 +5408,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05634020395453822,
+            "radius": 0.059551689222077236,
             "atDestination": false,
             "color": [
                 255,
@@ -5429,7 +5429,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046596788683304025,
+            "radius": 0.04052892306630083,
             "atDestination": false,
             "color": [
                 255,
@@ -5450,7 +5450,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053818356374938994,
+            "radius": 0.04914481932577318,
             "atDestination": false,
             "color": [
                 255,
@@ -5471,7 +5471,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047972886496783336,
+            "radius": 0.05321093327120502,
             "atDestination": false,
             "color": [
                 255,
@@ -5492,7 +5492,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04210372577399601,
+            "radius": 0.05736404302623054,
             "atDestination": false,
             "color": [
                 255,
@@ -5513,7 +5513,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04129349527371812,
+            "radius": 0.05443005071107096,
             "atDestination": false,
             "color": [
                 255,
@@ -5534,7 +5534,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054503889410433895,
+            "radius": 0.05975913586537183,
             "atDestination": false,
             "color": [
                 255,
@@ -5555,7 +5555,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04122937030629247,
+            "radius": 0.051041973608833134,
             "atDestination": false,
             "color": [
                 255,
@@ -5576,7 +5576,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05831160880203502,
+            "radius": 0.04605544987762578,
             "atDestination": false,
             "color": [
                 255,
@@ -5597,7 +5597,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05397008620881295,
+            "radius": 0.05870095867053926,
             "atDestination": false,
             "color": [
                 255,
@@ -5618,7 +5618,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04007002535644338,
+            "radius": 0.058445528642247016,
             "atDestination": false,
             "color": [
                 255,
@@ -5639,7 +5639,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048191617600451986,
+            "radius": 0.05210812144363741,
             "atDestination": false,
             "color": [
                 255,
@@ -5660,7 +5660,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.056299000965685964,
+            "radius": 0.054618451716715415,
             "atDestination": false,
             "color": [
                 255,
@@ -5681,7 +5681,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0425182358283008,
+            "radius": 0.04199402146180308,
             "atDestination": false,
             "color": [
                 255,
@@ -5702,7 +5702,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047790292866534335,
+            "radius": 0.04005135473744875,
             "atDestination": false,
             "color": [
                 255,
@@ -5723,7 +5723,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.042279087964013105,
+            "radius": 0.04854914819766229,
             "atDestination": false,
             "color": [
                 255,
@@ -5744,7 +5744,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044325324859638325,
+            "radius": 0.056198615243683844,
             "atDestination": false,
             "color": [
                 255,
@@ -5765,7 +5765,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04712634129964318,
+            "radius": 0.05785948409443917,
             "atDestination": false,
             "color": [
                 255,
@@ -5786,7 +5786,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044908782938945145,
+            "radius": 0.045060771687350946,
             "atDestination": false,
             "color": [
                 255,
@@ -5807,7 +5807,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05697252692286557,
+            "radius": 0.04367219534994577,
             "atDestination": false,
             "color": [
                 255,
@@ -5828,7 +5828,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.055025259894753126,
+            "radius": 0.05131978250575994,
             "atDestination": false,
             "color": [
                 255,
@@ -5849,7 +5849,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05306743170270958,
+            "radius": 0.052286847387543404,
             "atDestination": false,
             "color": [
                 255,
@@ -5870,7 +5870,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059941654965905214,
+            "radius": 0.04133819569416841,
             "atDestination": false,
             "color": [
                 255,
@@ -5891,7 +5891,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05877459485325509,
+            "radius": 0.04023180857769365,
             "atDestination": false,
             "color": [
                 255,
@@ -5912,7 +5912,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04139192136262467,
+            "radius": 0.05346221238671061,
             "atDestination": false,
             "color": [
                 255,
@@ -5933,7 +5933,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04790602688408849,
+            "radius": 0.049771431723071705,
             "atDestination": false,
             "color": [
                 255,
@@ -5954,7 +5954,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04546520539731579,
+            "radius": 0.052652056395306596,
             "atDestination": false,
             "color": [
                 255,
@@ -5975,7 +5975,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051852672928291516,
+            "radius": 0.041417142532270204,
             "atDestination": false,
             "color": [
                 255,
@@ -5996,7 +5996,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04816839554322518,
+            "radius": 0.04028664956548573,
             "atDestination": false,
             "color": [
                 255,
@@ -6017,7 +6017,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0485705518761505,
+            "radius": 0.05700846563833987,
             "atDestination": false,
             "color": [
                 255,
@@ -6038,7 +6038,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04072308518644039,
+            "radius": 0.05030348970590946,
             "atDestination": false,
             "color": [
                 255,
@@ -6059,7 +6059,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04231044603647472,
+            "radius": 0.04685711200244988,
             "atDestination": false,
             "color": [
                 255,
@@ -6080,7 +6080,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054085129590122835,
+            "radius": 0.05018531295212589,
             "atDestination": false,
             "color": [
                 255,
@@ -6101,7 +6101,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050224512199263424,
+            "radius": 0.047021352535185315,
             "atDestination": false,
             "color": [
                 255,
@@ -6122,7 +6122,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05285050464191034,
+            "radius": 0.05560413567647089,
             "atDestination": false,
             "color": [
                 255,
@@ -6143,7 +6143,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04770755353302172,
+            "radius": 0.048499197723916775,
             "atDestination": false,
             "color": [
                 255,
@@ -6164,7 +6164,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05181039283247568,
+            "radius": 0.05601148199661249,
             "atDestination": false,
             "color": [
                 255,
@@ -6185,7 +6185,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04449836917429553,
+            "radius": 0.05880374060469924,
             "atDestination": false,
             "color": [
                 255,
@@ -6206,7 +6206,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057306159063882214,
+            "radius": 0.050745927555310655,
             "atDestination": false,
             "color": [
                 255,
@@ -6227,7 +6227,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05966779057215732,
+            "radius": 0.0428548624847921,
             "atDestination": false,
             "color": [
                 255,
@@ -6248,7 +6248,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04860541890017236,
+            "radius": 0.05222316285698501,
             "atDestination": false,
             "color": [
                 255,
@@ -6269,7 +6269,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04165987131062041,
+            "radius": 0.05708364927478278,
             "atDestination": false,
             "color": [
                 255,
@@ -6290,7 +6290,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04702459845055424,
+            "radius": 0.04922271261405199,
             "atDestination": false,
             "color": [
                 255,
@@ -6311,7 +6311,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057240129494861805,
+            "radius": 0.04548111180556178,
             "atDestination": false,
             "color": [
                 255,
@@ -6332,7 +6332,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050693648434215866,
+            "radius": 0.05468577999990812,
             "atDestination": false,
             "color": [
                 255,
@@ -6353,7 +6353,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04331714129516213,
+            "radius": 0.05455338298133415,
             "atDestination": false,
             "color": [
                 255,
@@ -6374,7 +6374,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05093792802317982,
+            "radius": 0.043584831287280995,
             "atDestination": false,
             "color": [
                 255,
@@ -6395,7 +6395,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04530719535985195,
+            "radius": 0.05226685619564333,
             "atDestination": false,
             "color": [
                 255,
@@ -6416,7 +6416,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05732791947164077,
+            "radius": 0.04746842655909606,
             "atDestination": false,
             "color": [
                 255,
@@ -6437,7 +6437,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.041705880910842145,
+            "radius": 0.04486465617637658,
             "atDestination": false,
             "color": [
                 255,
@@ -6458,7 +6458,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05158653326882158,
+            "radius": 0.05140303295394488,
             "atDestination": false,
             "color": [
                 255,
@@ -6479,7 +6479,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052279137618667086,
+            "radius": 0.04797959174813583,
             "atDestination": false,
             "color": [
                 255,
@@ -6500,7 +6500,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053395739701000026,
+            "radius": 0.05062753097457517,
             "atDestination": false,
             "color": [
                 255,
@@ -6521,7 +6521,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0405488473027835,
+            "radius": 0.04378294986955249,
             "atDestination": false,
             "color": [
                 255,
@@ -6542,7 +6542,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04935844953946054,
+            "radius": 0.04343169824241263,
             "atDestination": false,
             "color": [
                 255,
@@ -6563,7 +6563,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05574325122291868,
+            "radius": 0.04872269689439371,
             "atDestination": false,
             "color": [
                 255,
@@ -6584,7 +6584,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05158859833913216,
+            "radius": 0.04092368720995709,
             "atDestination": false,
             "color": [
                 255,
@@ -6605,7 +6605,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05309702485932207,
+            "radius": 0.041258992486000894,
             "atDestination": false,
             "color": [
                 255,
@@ -6626,7 +6626,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04725134052997504,
+            "radius": 0.04070857340794234,
             "atDestination": false,
             "color": [
                 255,
@@ -6647,7 +6647,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05122680503379011,
+            "radius": 0.05373627503224948,
             "atDestination": false,
             "color": [
                 255,
@@ -6668,7 +6668,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05063512290341096,
+            "radius": 0.05380626318624521,
             "atDestination": false,
             "color": [
                 255,
@@ -6689,7 +6689,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047106021315593265,
+            "radius": 0.05045046186945354,
             "atDestination": false,
             "color": [
                 255,
@@ -6710,7 +6710,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048412091737773666,
+            "radius": 0.04876219276869759,
             "atDestination": false,
             "color": [
                 255,
@@ -6731,7 +6731,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0536801299451867,
+            "radius": 0.05746228096289277,
             "atDestination": false,
             "color": [
                 255,
@@ -6752,7 +6752,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.056189251517633335,
+            "radius": 0.04588283636616143,
             "atDestination": false,
             "color": [
                 255,
@@ -6773,7 +6773,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05523995925346802,
+            "radius": 0.04536084500385147,
             "atDestination": false,
             "color": [
                 255,
@@ -6794,7 +6794,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04584148532068299,
+            "radius": 0.042200339714111225,
             "atDestination": false,
             "color": [
                 255,
@@ -6815,7 +6815,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0437870720453991,
+            "radius": 0.05601539932511716,
             "atDestination": false,
             "color": [
                 255,
@@ -6836,7 +6836,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05596092624256996,
+            "radius": 0.0418509642503269,
             "atDestination": false,
             "color": [
                 255,
@@ -6857,7 +6857,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05217144323196336,
+            "radius": 0.05487827620782271,
             "atDestination": false,
             "color": [
                 255,
@@ -6878,7 +6878,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05402667706120872,
+            "radius": 0.05129870239258696,
             "atDestination": false,
             "color": [
                 255,
@@ -6899,7 +6899,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04642457680477026,
+            "radius": 0.04707471096984978,
             "atDestination": false,
             "color": [
                 255,
@@ -6920,7 +6920,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04674364101195113,
+            "radius": 0.05436139454215707,
             "atDestination": false,
             "color": [
                 255,
@@ -6941,7 +6941,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04190916739290529,
+            "radius": 0.0464827797351455,
             "atDestination": false,
             "color": [
                 255,
@@ -6962,7 +6962,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0403849473682428,
+            "radius": 0.059938817885098764,
             "atDestination": false,
             "color": [
                 255,
@@ -6983,7 +6983,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054891733904251776,
+            "radius": 0.05200932814137252,
             "atDestination": false,
             "color": [
                 255,
@@ -7004,7 +7004,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05763184120888975,
+            "radius": 0.05812333171737187,
             "atDestination": false,
             "color": [
                 255,
@@ -7025,7 +7025,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05025917638147247,
+            "radius": 0.05572778195491063,
             "atDestination": false,
             "color": [
                 255,
@@ -7046,7 +7046,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05543509825467695,
+            "radius": 0.04491685947617234,
             "atDestination": false,
             "color": [
                 255,
@@ -7067,7 +7067,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05320615681829775,
+            "radius": 0.053851652960174225,
             "atDestination": false,
             "color": [
                 255,
@@ -7088,7 +7088,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05631334051397388,
+            "radius": 0.04616929779972438,
             "atDestination": false,
             "color": [
                 255,
@@ -7109,7 +7109,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04673416506905281,
+            "radius": 0.05007141450614916,
             "atDestination": false,
             "color": [
                 255,
@@ -7130,7 +7130,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04316856938345219,
+            "radius": 0.04066246618667681,
             "atDestination": false,
             "color": [
                 255,
@@ -7151,7 +7151,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.042539773267025925,
+            "radius": 0.05915397752526251,
             "atDestination": false,
             "color": [
                 255,
@@ -7172,7 +7172,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.042458733478833666,
+            "radius": 0.0445410000122401,
             "atDestination": false,
             "color": [
                 255,
@@ -7193,7 +7193,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053572863356636594,
+            "radius": 0.04512945795298854,
             "atDestination": false,
             "color": [
                 255,
@@ -7214,7 +7214,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04685614648934275,
+            "radius": 0.05296061823786685,
             "atDestination": false,
             "color": [
                 255,
@@ -7235,7 +7235,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04511544346555708,
+            "radius": 0.04241281817012674,
             "atDestination": false,
             "color": [
                 255,
@@ -7256,7 +7256,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04256620581328446,
+            "radius": 0.059368591623219995,
             "atDestination": false,
             "color": [
                 255,
@@ -7277,7 +7277,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04697020601437219,
+            "radius": 0.053634083496795534,
             "atDestination": false,
             "color": [
                 255,
@@ -7298,7 +7298,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04306072924463194,
+            "radius": 0.0469438257453445,
             "atDestination": false,
             "color": [
                 255,
@@ -7319,7 +7319,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05756063295899503,
+            "radius": 0.05678016559736537,
             "atDestination": false,
             "color": [
                 255,
@@ -7340,7 +7340,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05969182504151773,
+            "radius": 0.05359906207961022,
             "atDestination": false,
             "color": [
                 255,
@@ -7361,7 +7361,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05130218115237455,
+            "radius": 0.059186972367581844,
             "atDestination": false,
             "color": [
                 255,
@@ -7382,7 +7382,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0468384653859264,
+            "radius": 0.04860375297071233,
             "atDestination": false,
             "color": [
                 255,
@@ -7403,7 +7403,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05894753615130147,
+            "radius": 0.047950873964384445,
             "atDestination": false,
             "color": [
                 255,
@@ -7424,7 +7424,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05488960450537954,
+            "radius": 0.04879266702854669,
             "atDestination": false,
             "color": [
                 255,
@@ -7445,7 +7445,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05390919526775198,
+            "radius": 0.05661135727309506,
             "atDestination": false,
             "color": [
                 255,
@@ -7466,7 +7466,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05309690312525856,
+            "radius": 0.048916714920047434,
             "atDestination": false,
             "color": [
                 255,
@@ -7487,7 +7487,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05556755595128923,
+            "radius": 0.04558110042433611,
             "atDestination": false,
             "color": [
                 255,
@@ -7508,7 +7508,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053475850254087326,
+            "radius": 0.04079454402252185,
             "atDestination": false,
             "color": [
                 255,
@@ -7529,7 +7529,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050599732051149926,
+            "radius": 0.04138736810603756,
             "atDestination": false,
             "color": [
                 255,
@@ -7550,7 +7550,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054546037438383425,
+            "radius": 0.050720673119867346,
             "atDestination": false,
             "color": [
                 255,
@@ -7571,7 +7571,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0499919926580612,
+            "radius": 0.052244529270464586,
             "atDestination": false,
             "color": [
                 255,
@@ -7592,7 +7592,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05304372377619334,
+            "radius": 0.04173413520108326,
             "atDestination": false,
             "color": [
                 255,
@@ -7613,7 +7613,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04270464327526319,
+            "radius": 0.04883183808547649,
             "atDestination": false,
             "color": [
                 255,
@@ -7634,7 +7634,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05119332501343298,
+            "radius": 0.057221476711277086,
             "atDestination": false,
             "color": [
                 255,
@@ -7655,7 +7655,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04223220153822593,
+            "radius": 0.05535454648577017,
             "atDestination": false,
             "color": [
                 255,
@@ -7676,7 +7676,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05071707161271603,
+            "radius": 0.0478557742072096,
             "atDestination": false,
             "color": [
                 255,
@@ -7697,7 +7697,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05647408759230518,
+            "radius": 0.04232769864301987,
             "atDestination": false,
             "color": [
                 255,
@@ -7718,7 +7718,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0581399938675793,
+            "radius": 0.056707798924381186,
             "atDestination": false,
             "color": [
                 255,
@@ -7739,7 +7739,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05063218792427666,
+            "radius": 0.057141495261223356,
             "atDestination": false,
             "color": [
                 255,
@@ -7760,7 +7760,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059244477198654874,
+            "radius": 0.05538151285092818,
             "atDestination": false,
             "color": [
                 255,
@@ -7781,7 +7781,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04405583851125519,
+            "radius": 0.05100048450171544,
             "atDestination": false,
             "color": [
                 255,
@@ -7802,7 +7802,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05500431077117267,
+            "radius": 0.04667461547264336,
             "atDestination": false,
             "color": [
                 255,
@@ -7823,7 +7823,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050225606617940864,
+            "radius": 0.057984064458129314,
             "atDestination": false,
             "color": [
                 255,
@@ -7844,7 +7844,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048198751218904254,
+            "radius": 0.05362954890425646,
             "atDestination": false,
             "color": [
                 255,
@@ -7865,7 +7865,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045293334560250156,
+            "radius": 0.05691606554335108,
             "atDestination": false,
             "color": [
                 255,
@@ -7886,7 +7886,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05827814696677749,
+            "radius": 0.05007584221357751,
             "atDestination": false,
             "color": [
                 255,
@@ -7907,7 +7907,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051587889727029206,
+            "radius": 0.04442345388432806,
             "atDestination": false,
             "color": [
                 255,
@@ -7928,7 +7928,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04329917742544744,
+            "radius": 0.052333319311375706,
             "atDestination": false,
             "color": [
                 255,
@@ -7949,7 +7949,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.056584291286833316,
+            "radius": 0.04306607606262313,
             "atDestination": false,
             "color": [
                 255,
@@ -7970,7 +7970,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05452158145489526,
+            "radius": 0.04329443149085126,
             "atDestination": false,
             "color": [
                 255,
@@ -7991,7 +7991,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04130970431238043,
+            "radius": 0.05943211555803589,
             "atDestination": false,
             "color": [
                 255,
@@ -8012,7 +8012,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04507882628648159,
+            "radius": 0.04838102119222261,
             "atDestination": false,
             "color": [
                 255,
@@ -8033,7 +8033,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049664007081852604,
+            "radius": 0.05275259249777172,
             "atDestination": false,
             "color": [
                 255,
@@ -8054,7 +8054,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05317483198023206,
+            "radius": 0.04503510124856041,
             "atDestination": false,
             "color": [
                 255,
@@ -8075,7 +8075,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.055628085654681414,
+            "radius": 0.045984672408874314,
             "atDestination": false,
             "color": [
                 255,
@@ -8096,7 +8096,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04588055894763552,
+            "radius": 0.04662713740549851,
             "atDestination": false,
             "color": [
                 255,
@@ -8117,7 +8117,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04477371466144008,
+            "radius": 0.05091443690160675,
             "atDestination": false,
             "color": [
                 255,
@@ -8138,7 +8138,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05559998328400913,
+            "radius": 0.04293220236394862,
             "atDestination": false,
             "color": [
                 255,
@@ -8159,7 +8159,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048480987496870076,
+            "radius": 0.05486172412284923,
             "atDestination": false,
             "color": [
                 255,
@@ -8180,7 +8180,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05512930544107189,
+            "radius": 0.04432451005612106,
             "atDestination": false,
             "color": [
                 255,
@@ -8201,7 +8201,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045168674181745146,
+            "radius": 0.05095424501554949,
             "atDestination": false,
             "color": [
                 255,
@@ -8222,7 +8222,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04342136796593179,
+            "radius": 0.05761105337820265,
             "atDestination": false,
             "color": [
                 255,
@@ -8243,7 +8243,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0427237483077028,
+            "radius": 0.049448606302162884,
             "atDestination": false,
             "color": [
                 255,
@@ -8264,7 +8264,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04276623150990274,
+            "radius": 0.04252226977488909,
             "atDestination": false,
             "color": [
                 255,
@@ -8285,7 +8285,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04547276408952362,
+            "radius": 0.04121163749281542,
             "atDestination": false,
             "color": [
                 255,
@@ -8306,7 +8306,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050312331395813585,
+            "radius": 0.04504609721450672,
             "atDestination": false,
             "color": [
                 255,
@@ -8327,7 +8327,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04600946386256121,
+            "radius": 0.04453091776019846,
             "atDestination": false,
             "color": [
                 255,
@@ -8348,7 +8348,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049226285561364665,
+            "radius": 0.056977894502087956,
             "atDestination": false,
             "color": [
                 255,
@@ -8369,7 +8369,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054147164515655724,
+            "radius": 0.04869216666721621,
             "atDestination": false,
             "color": [
                 255,
@@ -8390,7 +8390,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04250368561731319,
+            "radius": 0.04875055444596593,
             "atDestination": false,
             "color": [
                 255,
@@ -8411,7 +8411,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050005883412656535,
+            "radius": 0.04903956321956407,
             "atDestination": false,
             "color": [
                 255,
@@ -8432,7 +8432,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04489530765782816,
+            "radius": 0.04776191392774745,
             "atDestination": false,
             "color": [
                 255,
@@ -8453,7 +8453,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052033440231019724,
+            "radius": 0.044247502846999874,
             "atDestination": false,
             "color": [
                 255,
@@ -8474,7 +8474,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04189091054139251,
+            "radius": 0.04484771086261519,
             "atDestination": false,
             "color": [
                 255,
@@ -8495,7 +8495,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049118855012218625,
+            "radius": 0.051464918710034946,
             "atDestination": false,
             "color": [
                 255,
@@ -8516,7 +8516,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0496783924663456,
+            "radius": 0.0490204946864059,
             "atDestination": false,
             "color": [
                 255,
@@ -8537,7 +8537,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04097094407509816,
+            "radius": 0.04217904193395075,
             "atDestination": false,
             "color": [
                 255,
@@ -8558,7 +8558,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04312690597500746,
+            "radius": 0.059151132280349725,
             "atDestination": false,
             "color": [
                 255,
@@ -8579,7 +8579,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04201623758793563,
+            "radius": 0.04118694002782654,
             "atDestination": false,
             "color": [
                 255,
@@ -8600,7 +8600,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05756791349663702,
+            "radius": 0.04718298842492055,
             "atDestination": false,
             "color": [
                 255,
@@ -8621,7 +8621,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04515867784516455,
+            "radius": 0.04116772359111969,
             "atDestination": false,
             "color": [
                 255,
@@ -8642,7 +8642,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04705186932711604,
+            "radius": 0.0453258458683318,
             "atDestination": false,
             "color": [
                 255,
@@ -8663,7 +8663,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04837058861141319,
+            "radius": 0.05656519434561796,
             "atDestination": false,
             "color": [
                 255,
@@ -8684,7 +8684,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04458726350101235,
+            "radius": 0.04451867141516004,
             "atDestination": false,
             "color": [
                 255,
@@ -8705,7 +8705,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054572213685513724,
+            "radius": 0.04291339721488174,
             "atDestination": false,
             "color": [
                 255,
@@ -8726,7 +8726,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04286020464184418,
+            "radius": 0.05435498015561767,
             "atDestination": false,
             "color": [
                 255,
@@ -8747,7 +8747,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0568474632077926,
+            "radius": 0.04817081094847314,
             "atDestination": false,
             "color": [
                 255,
@@ -8768,7 +8768,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04431682181977394,
+            "radius": 0.04209695012358081,
             "atDestination": false,
             "color": [
                 255,
@@ -8789,7 +8789,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05214987099530939,
+            "radius": 0.04083073558044968,
             "atDestination": false,
             "color": [
                 255,
@@ -8810,7 +8810,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04974270188085067,
+            "radius": 0.05424158832175919,
             "atDestination": false,
             "color": [
                 255,
@@ -8831,7 +8831,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04792051288458633,
+            "radius": 0.0448384181720223,
             "atDestination": false,
             "color": [
                 255,
@@ -8852,7 +8852,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046022509937689145,
+            "radius": 0.044604673773759415,
             "atDestination": false,
             "color": [
                 255,
@@ -8873,7 +8873,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04583358803647795,
+            "radius": 0.054411826970765166,
             "atDestination": false,
             "color": [
                 255,
@@ -8894,7 +8894,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0450042196714286,
+            "radius": 0.04896290078458808,
             "atDestination": false,
             "color": [
                 255,
@@ -8915,7 +8915,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045065066710857755,
+            "radius": 0.04094114244986876,
             "atDestination": false,
             "color": [
                 255,
@@ -8936,7 +8936,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04605668092102825,
+            "radius": 0.05850854983425696,
             "atDestination": false,
             "color": [
                 255,
@@ -8957,7 +8957,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050592379902327504,
+            "radius": 0.05086896496419312,
             "atDestination": false,
             "color": [
                 255,
@@ -8978,7 +8978,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045316030274625954,
+            "radius": 0.04322219862384384,
             "atDestination": false,
             "color": [
                 255,
@@ -8999,7 +8999,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047801582034254,
+            "radius": 0.040568168805747415,
             "atDestination": false,
             "color": [
                 255,
@@ -9020,7 +9020,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052319873730179586,
+            "radius": 0.055581361335326346,
             "atDestination": false,
             "color": [
                 255,
@@ -9041,7 +9041,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053738152667700954,
+            "radius": 0.05849732055893767,
             "atDestination": false,
             "color": [
                 255,
@@ -9062,7 +9062,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05729871477197475,
+            "radius": 0.049362508959689515,
             "atDestination": false,
             "color": [
                 255,
@@ -9083,7 +9083,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049785429717872795,
+            "radius": 0.04757095979926132,
             "atDestination": false,
             "color": [
                 255,
@@ -9104,7 +9104,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04167498355769122,
+            "radius": 0.047527532783389,
             "atDestination": false,
             "color": [
                 255,
@@ -9125,7 +9125,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04197393516177778,
+            "radius": 0.04995755117783886,
             "atDestination": false,
             "color": [
                 255,
@@ -9146,7 +9146,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05337884982870952,
+            "radius": 0.05734713234699982,
             "atDestination": false,
             "color": [
                 255,
@@ -9167,7 +9167,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05669717058517771,
+            "radius": 0.0497431739454399,
             "atDestination": false,
             "color": [
                 255,
@@ -9188,7 +9188,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054727170098944,
+            "radius": 0.057196313243041697,
             "atDestination": false,
             "color": [
                 255,
@@ -9209,7 +9209,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05970463936757513,
+            "radius": 0.04520148015538408,
             "atDestination": false,
             "color": [
                 255,
@@ -9230,7 +9230,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05416456708151496,
+            "radius": 0.04288425875127606,
             "atDestination": false,
             "color": [
                 255,
@@ -9251,7 +9251,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0464947210962351,
+            "radius": 0.05145665478464598,
             "atDestination": false,
             "color": [
                 255,
@@ -9272,7 +9272,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04108217282730723,
+            "radius": 0.043272504945374046,
             "atDestination": false,
             "color": [
                 255,
@@ -9293,7 +9293,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04334562338443151,
+            "radius": 0.051105427554527044,
             "atDestination": false,
             "color": [
                 255,
@@ -9314,7 +9314,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043425157595411296,
+            "radius": 0.05227460459584292,
             "atDestination": false,
             "color": [
                 255,
@@ -9335,7 +9335,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04275761246328737,
+            "radius": 0.05622384911067381,
             "atDestination": false,
             "color": [
                 255,
@@ -9356,7 +9356,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04120411588292626,
+            "radius": 0.05557934521378945,
             "atDestination": false,
             "color": [
                 255,
@@ -9377,7 +9377,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043395476993873056,
+            "radius": 0.05134273883693054,
             "atDestination": false,
             "color": [
                 255,
@@ -9398,7 +9398,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04261304631015813,
+            "radius": 0.04110385631655872,
             "atDestination": false,
             "color": [
                 255,
@@ -9419,7 +9419,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05938978001839035,
+            "radius": 0.05621082549604656,
             "atDestination": false,
             "color": [
                 255,
@@ -9440,7 +9440,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05101854017780401,
+            "radius": 0.05024040631622217,
             "atDestination": false,
             "color": [
                 255,
@@ -9461,7 +9461,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04858754888021291,
+            "radius": 0.051125980744335255,
             "atDestination": false,
             "color": [
                 255,
@@ -9482,7 +9482,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0434607579779074,
+            "radius": 0.0539430591075897,
             "atDestination": false,
             "color": [
                 255,
@@ -9503,7 +9503,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045483204320463724,
+            "radius": 0.056720926026676624,
             "atDestination": false,
             "color": [
                 255,
@@ -9524,7 +9524,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05777351125709987,
+            "radius": 0.05700072870920603,
             "atDestination": false,
             "color": [
                 255,
@@ -9545,7 +9545,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05836899978373774,
+            "radius": 0.04223365703782599,
             "atDestination": false,
             "color": [
                 255,
@@ -9566,7 +9566,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052019060545929294,
+            "radius": 0.046871383249879224,
             "atDestination": false,
             "color": [
                 255,
@@ -9587,7 +9587,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05202142506001304,
+            "radius": 0.05183489051457172,
             "atDestination": false,
             "color": [
                 255,
@@ -9608,7 +9608,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04128000514977455,
+            "radius": 0.04614094934849251,
             "atDestination": false,
             "color": [
                 255,
@@ -9629,7 +9629,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0540214052569779,
+            "radius": 0.05323421782400566,
             "atDestination": false,
             "color": [
                 255,
@@ -9650,7 +9650,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052306380329448586,
+            "radius": 0.05029595118967761,
             "atDestination": false,
             "color": [
                 255,
@@ -9671,7 +9671,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04858157493934424,
+            "radius": 0.05951675220001919,
             "atDestination": false,
             "color": [
                 255,
@@ -9692,7 +9692,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054602849552625246,
+            "radius": 0.04333161251321312,
             "atDestination": false,
             "color": [
                 255,
@@ -9713,7 +9713,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.040131506471436124,
+            "radius": 0.045158295876759534,
             "atDestination": false,
             "color": [
                 255,
@@ -9734,7 +9734,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04119414002450148,
+            "radius": 0.053356623842452135,
             "atDestination": false,
             "color": [
                 255,
@@ -9755,7 +9755,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04154885037063555,
+            "radius": 0.05612012360983522,
             "atDestination": false,
             "color": [
                 255,
@@ -9776,7 +9776,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04153684527809844,
+            "radius": 0.054692343323874106,
             "atDestination": false,
             "color": [
                 255,
@@ -9797,7 +9797,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04759878637310715,
+            "radius": 0.05450056701344025,
             "atDestination": false,
             "color": [
                 255,
@@ -9818,7 +9818,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04011935595222454,
+            "radius": 0.04477307345471943,
             "atDestination": false,
             "color": [
                 255,
@@ -9839,7 +9839,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05816324963806771,
+            "radius": 0.04857961801569926,
             "atDestination": false,
             "color": [
                 255,
@@ -9860,7 +9860,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.042805880654681355,
+            "radius": 0.05924991988251192,
             "atDestination": false,
             "color": [
                 255,
@@ -9881,7 +9881,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04726814919977065,
+            "radius": 0.043312477599941133,
             "atDestination": false,
             "color": [
                 255,
@@ -9902,7 +9902,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0472387692890633,
+            "radius": 0.05901585367365725,
             "atDestination": false,
             "color": [
                 255,
@@ -9923,7 +9923,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047078693387175324,
+            "radius": 0.0499663347407197,
             "atDestination": false,
             "color": [
                 255,
@@ -9944,7 +9944,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05886552852849419,
+            "radius": 0.04602750307782767,
             "atDestination": false,
             "color": [
                 255,
@@ -9965,7 +9965,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05135203875594669,
+            "radius": 0.04547480250427052,
             "atDestination": false,
             "color": [
                 255,
@@ -9986,7 +9986,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05068037244399062,
+            "radius": 0.04179833926517307,
             "atDestination": false,
             "color": [
                 255,
@@ -10007,7 +10007,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05784762239052853,
+            "radius": 0.05609535807417196,
             "atDestination": false,
             "color": [
                 255,
@@ -10028,7 +10028,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04254261471332777,
+            "radius": 0.042443111138806874,
             "atDestination": false,
             "color": [
                 255,
@@ -10049,7 +10049,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051025656028421046,
+            "radius": 0.04261249506637697,
             "atDestination": false,
             "color": [
                 255,
@@ -10070,7 +10070,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043501087471782246,
+            "radius": 0.04791062461131984,
             "atDestination": false,
             "color": [
                 255,
@@ -10091,7 +10091,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04068435722001677,
+            "radius": 0.0406865438749325,
             "atDestination": false,
             "color": [
                 255,
@@ -10112,7 +10112,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05707416232894052,
+            "radius": 0.050394426435726024,
             "atDestination": false,
             "color": [
                 255,
@@ -10133,7 +10133,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04259973625429109,
+            "radius": 0.04211158884752515,
             "atDestination": false,
             "color": [
                 255,
@@ -10154,7 +10154,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05803233501961771,
+            "radius": 0.04832675354168016,
             "atDestination": false,
             "color": [
                 255,
@@ -10175,7 +10175,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05116560963685125,
+            "radius": 0.059775150766790006,
             "atDestination": false,
             "color": [
                 255,
@@ -10196,7 +10196,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05142239509995113,
+            "radius": 0.04975138161509653,
             "atDestination": false,
             "color": [
                 255,
@@ -10217,7 +10217,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050368317545296346,
+            "radius": 0.04094794370687813,
             "atDestination": false,
             "color": [
                 255,
@@ -10238,7 +10238,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05291816893084705,
+            "radius": 0.04922987900668564,
             "atDestination": false,
             "color": [
                 255,
@@ -10259,7 +10259,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05957232687842458,
+            "radius": 0.04834575634486454,
             "atDestination": false,
             "color": [
                 255,
@@ -10280,7 +10280,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.041699899790035404,
+            "radius": 0.053258556135737045,
             "atDestination": false,
             "color": [
                 255,
@@ -10301,7 +10301,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05680627555061155,
+            "radius": 0.04624750120746677,
             "atDestination": false,
             "color": [
                 255,
@@ -10322,7 +10322,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052265820568333565,
+            "radius": 0.055331297411582644,
             "atDestination": false,
             "color": [
                 255,
@@ -10343,7 +10343,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04123314045437955,
+            "radius": 0.0509518955867789,
             "atDestination": false,
             "color": [
                 255,
@@ -10364,7 +10364,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05237227838301023,
+            "radius": 0.052405436136708346,
             "atDestination": false,
             "color": [
                 255,
@@ -10385,7 +10385,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04491170469271093,
+            "radius": 0.05589135030681491,
             "atDestination": false,
             "color": [
                 255,
@@ -10406,7 +10406,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0594923215835685,
+            "radius": 0.05279743294386414,
             "atDestination": false,
             "color": [
                 255,
@@ -10427,7 +10427,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05278586190100458,
+            "radius": 0.041101763685949505,
             "atDestination": false,
             "color": [
                 255,
@@ -10448,7 +10448,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04762990267893671,
+            "radius": 0.04603527369706109,
             "atDestination": false,
             "color": [
                 255,
@@ -10469,7 +10469,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05196880631972861,
+            "radius": 0.04608764909913941,
             "atDestination": false,
             "color": [
                 255,
@@ -10490,7 +10490,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05145487329217949,
+            "radius": 0.054591463458053456,
             "atDestination": false,
             "color": [
                 255,
@@ -10511,7 +10511,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05338592972391949,
+            "radius": 0.05091776849049625,
             "atDestination": false,
             "color": [
                 255,
@@ -10532,7 +10532,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051940872769861375,
+            "radius": 0.04576970367547114,
             "atDestination": false,
             "color": [
                 255,
@@ -10553,7 +10553,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051241069762391185,
+            "radius": 0.05452850308671922,
             "atDestination": false,
             "color": [
                 255,
@@ -10574,7 +10574,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05575264393151657,
+            "radius": 0.05985304808240781,
             "atDestination": false,
             "color": [
                 255,
@@ -10595,7 +10595,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05715461900441143,
+            "radius": 0.04684932976754228,
             "atDestination": false,
             "color": [
                 255,
@@ -10616,7 +10616,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04985861085024963,
+            "radius": 0.056404058000078215,
             "atDestination": false,
             "color": [
                 255,
@@ -10637,7 +10637,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.042464016373578294,
+            "radius": 0.040734067405190526,
             "atDestination": false,
             "color": [
                 255,
@@ -10658,7 +10658,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05905580695355611,
+            "radius": 0.058920959117766125,
             "atDestination": false,
             "color": [
                 255,
@@ -10679,7 +10679,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052457355710744176,
+            "radius": 0.05121787034674241,
             "atDestination": false,
             "color": [
                 255,
@@ -10700,7 +10700,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057770951452215044,
+            "radius": 0.04067634883060131,
             "atDestination": false,
             "color": [
                 255,
@@ -10721,7 +10721,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05573911435327046,
+            "radius": 0.05109545951472917,
             "atDestination": false,
             "color": [
                 255,
@@ -10742,7 +10742,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046968262543841996,
+            "radius": 0.057538637033165155,
             "atDestination": false,
             "color": [
                 255,
@@ -10763,7 +10763,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04457938299722197,
+            "radius": 0.04742997492472448,
             "atDestination": false,
             "color": [
                 255,
@@ -10784,7 +10784,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05202485657649681,
+            "radius": 0.05178990526066396,
             "atDestination": false,
             "color": [
                 255,
@@ -10805,7 +10805,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05040598632420887,
+            "radius": 0.0402748201877603,
             "atDestination": false,
             "color": [
                 255,
@@ -10826,7 +10826,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0545819274519581,
+            "radius": 0.040129497711953566,
             "atDestination": false,
             "color": [
                 255,
@@ -10847,7 +10847,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05992975521125074,
+            "radius": 0.05438548835932941,
             "atDestination": false,
             "color": [
                 255,
@@ -10868,7 +10868,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05780834851752753,
+            "radius": 0.042708118315549395,
             "atDestination": false,
             "color": [
                 255,
@@ -10889,7 +10889,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05319833486693498,
+            "radius": 0.0568669172539924,
             "atDestination": false,
             "color": [
                 255,
@@ -10910,7 +10910,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05013205633158104,
+            "radius": 0.04353314481864323,
             "atDestination": false,
             "color": [
                 255,
@@ -10931,7 +10931,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04877547316920592,
+            "radius": 0.052867867900635,
             "atDestination": false,
             "color": [
                 255,
@@ -10952,7 +10952,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04085217118854476,
+            "radius": 0.05800572543821492,
             "atDestination": false,
             "color": [
                 255,
@@ -10973,7 +10973,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057778600897320335,
+            "radius": 0.04988735412222,
             "atDestination": false,
             "color": [
                 255,
@@ -10994,7 +10994,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05918118773474507,
+            "radius": 0.05636815329586395,
             "atDestination": false,
             "color": [
                 255,
@@ -11015,7 +11015,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05514744409591328,
+            "radius": 0.0567968523229046,
             "atDestination": false,
             "color": [
                 255,
@@ -11036,7 +11036,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05965949921642674,
+            "radius": 0.05598220295502388,
             "atDestination": false,
             "color": [
                 255,
@@ -11057,7 +11057,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05371295872148372,
+            "radius": 0.05844621882927274,
             "atDestination": false,
             "color": [
                 255,
@@ -11078,7 +11078,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044063427890394614,
+            "radius": 0.052768727684349925,
             "atDestination": false,
             "color": [
                 255,
@@ -11099,7 +11099,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04531411294306023,
+            "radius": 0.057206143138892454,
             "atDestination": false,
             "color": [
                 255,
@@ -11120,7 +11120,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05661687522837214,
+            "radius": 0.051211743158086104,
             "atDestination": false,
             "color": [
                 255,
@@ -11141,7 +11141,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05365301106115622,
+            "radius": 0.053930266660776924,
             "atDestination": false,
             "color": [
                 255,
@@ -11162,7 +11162,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04404614786182558,
+            "radius": 0.05936876469086393,
             "atDestination": false,
             "color": [
                 255,
@@ -11183,7 +11183,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05859090437645084,
+            "radius": 0.0464359340101,
             "atDestination": false,
             "color": [
                 255,
@@ -11204,7 +11204,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.040359144923454236,
+            "radius": 0.04134157646007166,
             "atDestination": false,
             "color": [
                 255,
@@ -11225,7 +11225,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057944207287535826,
+            "radius": 0.055806970349928306,
             "atDestination": false,
             "color": [
                 255,
@@ -11246,7 +11246,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.042458402093490305,
+            "radius": 0.05769288967750753,
             "atDestination": false,
             "color": [
                 255,
@@ -11267,7 +11267,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04329173632797734,
+            "radius": 0.054296827905022854,
             "atDestination": false,
             "color": [
                 255,
@@ -11288,7 +11288,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04539936862788379,
+            "radius": 0.04661717849097661,
             "atDestination": false,
             "color": [
                 255,
@@ -11309,7 +11309,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05996764248098856,
+            "radius": 0.054226122561525814,
             "atDestination": false,
             "color": [
                 255,
@@ -11330,7 +11330,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04093845291295029,
+            "radius": 0.05469256668754653,
             "atDestination": false,
             "color": [
                 255,
@@ -11351,7 +11351,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05529372667996467,
+            "radius": 0.05385606723273258,
             "atDestination": false,
             "color": [
                 255,
@@ -11372,7 +11372,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04034051767663287,
+            "radius": 0.056951124798768266,
             "atDestination": false,
             "color": [
                 255,
@@ -11393,7 +11393,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052396956649112425,
+            "radius": 0.057270605847816014,
             "atDestination": false,
             "color": [
                 255,
@@ -11414,7 +11414,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04676661580511259,
+            "radius": 0.04524932364427404,
             "atDestination": false,
             "color": [
                 255,
@@ -11435,7 +11435,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052555370246897756,
+            "radius": 0.05233739520832981,
             "atDestination": false,
             "color": [
                 255,
@@ -11456,7 +11456,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05665298827486484,
+            "radius": 0.05897528310476226,
             "atDestination": false,
             "color": [
                 255,
@@ -11477,7 +11477,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04784810653896951,
+            "radius": 0.055823447686506406,
             "atDestination": false,
             "color": [
                 255,
@@ -11498,7 +11498,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.041132987922773916,
+            "radius": 0.053748463353549554,
             "atDestination": false,
             "color": [
                 255,
@@ -11519,7 +11519,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05299930814152595,
+            "radius": 0.05835036643983332,
             "atDestination": false,
             "color": [
                 255,
@@ -11540,7 +11540,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059677758287910956,
+            "radius": 0.05438789176247932,
             "atDestination": false,
             "color": [
                 255,
@@ -11561,7 +11561,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.056375060902862144,
+            "radius": 0.05693887432366366,
             "atDestination": false,
             "color": [
                 255,
@@ -11582,7 +11582,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04658256874185815,
+            "radius": 0.05424826196663274,
             "atDestination": false,
             "color": [
                 255,
@@ -11603,7 +11603,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049384600844792514,
+            "radius": 0.05648550462689307,
             "atDestination": false,
             "color": [
                 255,
@@ -11624,7 +11624,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04020730115836727,
+            "radius": 0.055975984721745614,
             "atDestination": false,
             "color": [
                 255,
@@ -11645,7 +11645,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05004290383575816,
+            "radius": 0.04178343735659649,
             "atDestination": false,
             "color": [
                 255,
@@ -11666,7 +11666,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057468733565705046,
+            "radius": 0.05053648723560038,
             "atDestination": false,
             "color": [
                 255,
@@ -11687,7 +11687,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057917155753368255,
+            "radius": 0.04919212622134816,
             "atDestination": false,
             "color": [
                 255,
@@ -11708,7 +11708,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05543609029430818,
+            "radius": 0.05307436479800514,
             "atDestination": false,
             "color": [
                 255,
@@ -11729,7 +11729,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04076315854085539,
+            "radius": 0.05476336016750668,
             "atDestination": false,
             "color": [
                 255,
@@ -11750,7 +11750,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0492239446971832,
+            "radius": 0.04914199291112078,
             "atDestination": false,
             "color": [
                 255,
@@ -11771,7 +11771,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05959757625357288,
+            "radius": 0.04555521371640781,
             "atDestination": false,
             "color": [
                 255,
@@ -11792,7 +11792,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054539515316275294,
+            "radius": 0.050047685314046006,
             "atDestination": false,
             "color": [
                 255,
@@ -11813,7 +11813,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05278225755050035,
+            "radius": 0.04901563718901576,
             "atDestination": false,
             "color": [
                 255,
@@ -11834,7 +11834,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059996716569006917,
+            "radius": 0.05830265651213935,
             "atDestination": false,
             "color": [
                 255,
@@ -11855,7 +11855,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05059257511615196,
+            "radius": 0.053468009420320775,
             "atDestination": false,
             "color": [
                 255,
@@ -11876,7 +11876,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.056840788490080896,
+            "radius": 0.048683871630531395,
             "atDestination": false,
             "color": [
                 255,
@@ -11897,7 +11897,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05167256600553552,
+            "radius": 0.04369847974913246,
             "atDestination": false,
             "color": [
                 255,
@@ -11918,7 +11918,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04781890512162805,
+            "radius": 0.04462366055199345,
             "atDestination": false,
             "color": [
                 255,
@@ -11939,7 +11939,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048107983862589146,
+            "radius": 0.05499941553219259,
             "atDestination": false,
             "color": [
                 255,
@@ -11960,7 +11960,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05685353014645265,
+            "radius": 0.05674090889973453,
             "atDestination": false,
             "color": [
                 255,
@@ -11981,7 +11981,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05102116664649238,
+            "radius": 0.056441221772959155,
             "atDestination": false,
             "color": [
                 255,
@@ -12002,7 +12002,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.052082404241734215,
+            "radius": 0.057226287650466834,
             "atDestination": false,
             "color": [
                 255,
@@ -12023,7 +12023,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04621821658047266,
+            "radius": 0.05978182993878378,
             "atDestination": false,
             "color": [
                 255,
@@ -12044,7 +12044,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04456148033376096,
+            "radius": 0.05536420789367444,
             "atDestination": false,
             "color": [
                 255,
@@ -12065,7 +12065,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0595293931249163,
+            "radius": 0.057486773439904534,
             "atDestination": false,
             "color": [
                 255,
@@ -12086,7 +12086,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05278863408409812,
+            "radius": 0.04332983102693614,
             "atDestination": false,
             "color": [
                 255,
@@ -12107,7 +12107,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.051844993042141796,
+            "radius": 0.05363675947730148,
             "atDestination": false,
             "color": [
                 255,
@@ -12128,7 +12128,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05073166281242341,
+            "radius": 0.04971870179248286,
             "atDestination": false,
             "color": [
                 255,
@@ -12149,7 +12149,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043885231679123844,
+            "radius": 0.05057274731440792,
             "atDestination": false,
             "color": [
                 255,
@@ -12170,7 +12170,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05445821684523824,
+            "radius": 0.059238389905739305,
             "atDestination": false,
             "color": [
                 255,
@@ -12191,7 +12191,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04857226468743091,
+            "radius": 0.056512401808619384,
             "atDestination": false,
             "color": [
                 255,
@@ -12212,7 +12212,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.054567635129815405,
+            "radius": 0.04269343586353978,
             "atDestination": false,
             "color": [
                 255,
@@ -12233,7 +12233,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05075662969368893,
+            "radius": 0.05018656335110904,
             "atDestination": false,
             "color": [
                 255,
@@ -12254,7 +12254,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04017136491160847,
+            "radius": 0.053522346300568,
             "atDestination": false,
             "color": [
                 255,
@@ -12275,7 +12275,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04385636934034775,
+            "radius": 0.04800495275838312,
             "atDestination": false,
             "color": [
                 255,
@@ -12296,7 +12296,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04498756175573675,
+            "radius": 0.04839340710764045,
             "atDestination": false,
             "color": [
                 255,
@@ -12317,7 +12317,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04475930221642296,
+            "radius": 0.05018253731482301,
             "atDestination": false,
             "color": [
                 255,
@@ -12338,7 +12338,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046754804671567826,
+            "radius": 0.04546528369486149,
             "atDestination": false,
             "color": [
                 255,
@@ -12359,7 +12359,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05657618495380961,
+            "radius": 0.048535701402137865,
             "atDestination": false,
             "color": [
                 255,
@@ -12380,7 +12380,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05145205985827453,
+            "radius": 0.049810196400026555,
             "atDestination": false,
             "color": [
                 255,
@@ -12401,7 +12401,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05872536178348283,
+            "radius": 0.056152406784880086,
             "atDestination": false,
             "color": [
                 255,
@@ -12422,7 +12422,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04195862134527477,
+            "radius": 0.04688818097396102,
             "atDestination": false,
             "color": [
                 255,
@@ -12443,7 +12443,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050222874498137476,
+            "radius": 0.049419919572272736,
             "atDestination": false,
             "color": [
                 255,
@@ -12464,7 +12464,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0562595338058758,
+            "radius": 0.04282887287441728,
             "atDestination": false,
             "color": [
                 255,
@@ -12485,7 +12485,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04320391836800144,
+            "radius": 0.04945242660813518,
             "atDestination": false,
             "color": [
                 255,
@@ -12506,7 +12506,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0489887859843585,
+            "radius": 0.053518289529641105,
             "atDestination": false,
             "color": [
                 255,
@@ -12527,7 +12527,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05426919955899705,
+            "radius": 0.05115078207506468,
             "atDestination": false,
             "color": [
                 255,
@@ -12548,7 +12548,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059995233854452226,
+            "radius": 0.05506039542617859,
             "atDestination": false,
             "color": [
                 255,
@@ -12569,7 +12569,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048378843949724755,
+            "radius": 0.042339504896078996,
             "atDestination": false,
             "color": [
                 255,
@@ -12590,7 +12590,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05580036451818885,
+            "radius": 0.053868491143152314,
             "atDestination": false,
             "color": [
                 255,
@@ -12611,7 +12611,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05496833479947201,
+            "radius": 0.05536202377888769,
             "atDestination": false,
             "color": [
                 255,
@@ -12632,7 +12632,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04860389188727257,
+            "radius": 0.055364739143146505,
             "atDestination": false,
             "color": [
                 255,
@@ -12653,7 +12653,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046216076213975,
+            "radius": 0.04649905920060821,
             "atDestination": false,
             "color": [
                 255,
@@ -12674,7 +12674,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05208983293110562,
+            "radius": 0.05798281211123128,
             "atDestination": false,
             "color": [
                 255,
@@ -12695,7 +12695,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04820761457542517,
+            "radius": 0.054718343863614974,
             "atDestination": false,
             "color": [
                 255,
@@ -12716,7 +12716,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.057052495178169585,
+            "radius": 0.05083204703279532,
             "atDestination": false,
             "color": [
                 255,
@@ -12737,7 +12737,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053300084627634095,
+            "radius": 0.04934244481648124,
             "atDestination": false,
             "color": [
                 255,
@@ -12758,7 +12758,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.058321245329898574,
+            "radius": 0.04812220850087255,
             "atDestination": false,
             "color": [
                 255,
@@ -12779,7 +12779,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04223984216971526,
+            "radius": 0.040956510565757526,
             "atDestination": false,
             "color": [
                 255,
@@ -12800,7 +12800,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04925413606389933,
+            "radius": 0.05825069580266887,
             "atDestination": false,
             "color": [
                 255,
@@ -12821,7 +12821,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05408803084079561,
+            "radius": 0.05880586517864332,
             "atDestination": false,
             "color": [
                 255,
@@ -12842,7 +12842,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0574854925073147,
+            "radius": 0.05868541886976273,
             "atDestination": false,
             "color": [
                 255,
@@ -12863,7 +12863,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05647063324520318,
+            "radius": 0.04019550288682456,
             "atDestination": false,
             "color": [
                 255,
@@ -12884,7 +12884,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04766960486340023,
+            "radius": 0.046879888389575734,
             "atDestination": false,
             "color": [
                 255,
@@ -12905,7 +12905,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.044996105735507046,
+            "radius": 0.05205010459123496,
             "atDestination": false,
             "color": [
                 255,
@@ -12926,7 +12926,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05593631321831452,
+            "radius": 0.04930886875069855,
             "atDestination": false,
             "color": [
                 255,
@@ -12947,7 +12947,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049232334000770955,
+            "radius": 0.05764294347231376,
             "atDestination": false,
             "color": [
                 255,
@@ -12968,7 +12968,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05053359807509223,
+            "radius": 0.05134628902845289,
             "atDestination": false,
             "color": [
                 255,
@@ -12989,7 +12989,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05389362987644411,
+            "radius": 0.04394728604982849,
             "atDestination": false,
             "color": [
                 255,
@@ -13010,7 +13010,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04235420253419996,
+            "radius": 0.053883312886619246,
             "atDestination": false,
             "color": [
                 255,
@@ -13031,7 +13031,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04535223278363572,
+            "radius": 0.044385009436340786,
             "atDestination": false,
             "color": [
                 255,
@@ -13052,7 +13052,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04293260683119559,
+            "radius": 0.0445589874548331,
             "atDestination": false,
             "color": [
                 255,
@@ -13073,7 +13073,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05320942593172403,
+            "radius": 0.05559986411481863,
             "atDestination": false,
             "color": [
                 255,
@@ -13094,7 +13094,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04023950949032594,
+            "radius": 0.042968491198155975,
             "atDestination": false,
             "color": [
                 255,
@@ -13115,7 +13115,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05637333271079326,
+            "radius": 0.045312361198998945,
             "atDestination": false,
             "color": [
                 255,
@@ -13136,7 +13136,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04359642288447286,
+            "radius": 0.05245137395310521,
             "atDestination": false,
             "color": [
                 255,
@@ -13157,7 +13157,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048075345284488036,
+            "radius": 0.04405880529610579,
             "atDestination": false,
             "color": [
                 255,
@@ -13178,7 +13178,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.041976066042145155,
+            "radius": 0.04789921721497727,
             "atDestination": false,
             "color": [
                 255,
@@ -13199,7 +13199,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.049163354886727725,
+            "radius": 0.05080616286448861,
             "atDestination": false,
             "color": [
                 255,
@@ -13220,7 +13220,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04345248851747038,
+            "radius": 0.04818890622785129,
             "atDestination": false,
             "color": [
                 255,
@@ -13241,7 +13241,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05330977142170258,
+            "radius": 0.051352645981305754,
             "atDestination": false,
             "color": [
                 255,
@@ -13262,7 +13262,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0559257824568849,
+            "radius": 0.04152771460865813,
             "atDestination": false,
             "color": [
                 255,
@@ -13283,7 +13283,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04450093108911076,
+            "radius": 0.049440419559525155,
             "atDestination": false,
             "color": [
                 255,
@@ -13304,7 +13304,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.043403881993553134,
+            "radius": 0.050254164399866595,
             "atDestination": false,
             "color": [
                 255,
@@ -13325,7 +13325,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04340359931268639,
+            "radius": 0.04870084433191237,
             "atDestination": false,
             "color": [
                 255,
@@ -13346,7 +13346,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05535866968416383,
+            "radius": 0.05094248009983199,
             "atDestination": false,
             "color": [
                 255,
@@ -13367,7 +13367,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04471147628021664,
+            "radius": 0.05071003042359859,
             "atDestination": false,
             "color": [
                 255,
@@ -13388,7 +13388,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05438338909751701,
+            "radius": 0.0535585761101058,
             "atDestination": false,
             "color": [
                 255,
@@ -13409,7 +13409,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053714029301372326,
+            "radius": 0.047128887898908636,
             "atDestination": false,
             "color": [
                 255,
@@ -13430,7 +13430,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04281720788918427,
+            "radius": 0.04590890664961776,
             "atDestination": false,
             "color": [
                 255,
@@ -13451,7 +13451,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0421942022806517,
+            "radius": 0.050880350633727825,
             "atDestination": false,
             "color": [
                 255,
@@ -13472,7 +13472,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04355297438026316,
+            "radius": 0.043954908012182985,
             "atDestination": false,
             "color": [
                 255,
@@ -13493,7 +13493,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04524769733546982,
+            "radius": 0.05115023860221985,
             "atDestination": false,
             "color": [
                 255,
@@ -13514,7 +13514,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0468051091910473,
+            "radius": 0.05414945053032323,
             "atDestination": false,
             "color": [
                 255,
@@ -13535,7 +13535,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05935717459232934,
+            "radius": 0.059135493256434454,
             "atDestination": false,
             "color": [
                 255,
@@ -13556,7 +13556,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.045796529819097036,
+            "radius": 0.04290179350286577,
             "atDestination": false,
             "color": [
                 255,
@@ -13577,7 +13577,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05404518048207516,
+            "radius": 0.048119357861866066,
             "atDestination": false,
             "color": [
                 255,
@@ -13598,7 +13598,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05575893837642512,
+            "radius": 0.0428994869922642,
             "atDestination": false,
             "color": [
                 255,
@@ -13619,7 +13619,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0430542291065605,
+            "radius": 0.057913439739075465,
             "atDestination": false,
             "color": [
                 255,
@@ -13640,7 +13640,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05674122897251248,
+            "radius": 0.05060071089127868,
             "atDestination": false,
             "color": [
                 255,
@@ -13661,7 +13661,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04434538957987741,
+            "radius": 0.04488008487374053,
             "atDestination": false,
             "color": [
                 255,
@@ -13682,7 +13682,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050253510658139385,
+            "radius": 0.057598602193475915,
             "atDestination": false,
             "color": [
                 255,
@@ -13703,7 +13703,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.041415071285122396,
+            "radius": 0.042724322010878134,
             "atDestination": false,
             "color": [
                 255,
@@ -13724,7 +13724,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05352828896398118,
+            "radius": 0.045096937273795205,
             "atDestination": false,
             "color": [
                 255,
@@ -13745,7 +13745,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053997276931157585,
+            "radius": 0.05769465837723232,
             "atDestination": false,
             "color": [
                 255,
@@ -13766,7 +13766,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05641906759639202,
+            "radius": 0.05019221615578971,
             "atDestination": false,
             "color": [
                 255,
@@ -13787,7 +13787,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059025450220512796,
+            "radius": 0.05697453190990509,
             "atDestination": false,
             "color": [
                 255,
@@ -13808,7 +13808,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04713653254346238,
+            "radius": 0.04453309450168775,
             "atDestination": false,
             "color": [
                 255,
@@ -13829,7 +13829,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0419605327602471,
+            "radius": 0.0558703088150206,
             "atDestination": false,
             "color": [
                 255,
@@ -13850,7 +13850,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05396616906948071,
+            "radius": 0.04603427087833116,
             "atDestination": false,
             "color": [
                 255,
@@ -13871,7 +13871,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05636790970953605,
+            "radius": 0.04861102784054741,
             "atDestination": false,
             "color": [
                 255,
@@ -13892,7 +13892,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05763747484550936,
+            "radius": 0.05118564218296115,
             "atDestination": false,
             "color": [
                 255,
@@ -13913,7 +13913,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05030019735095633,
+            "radius": 0.04959114588083984,
             "atDestination": false,
             "color": [
                 255,
@@ -13934,7 +13934,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05577840056804044,
+            "radius": 0.05392247415785571,
             "atDestination": false,
             "color": [
                 255,
@@ -13955,7 +13955,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05106832441919547,
+            "radius": 0.05424699545981586,
             "atDestination": false,
             "color": [
                 255,
@@ -13976,7 +13976,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0493387358455962,
+            "radius": 0.0494452148107047,
             "atDestination": false,
             "color": [
                 255,
@@ -13997,7 +13997,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.059729221153863254,
+            "radius": 0.05473207531727491,
             "atDestination": false,
             "color": [
                 255,
@@ -14018,7 +14018,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05758674586199726,
+            "radius": 0.047725646325904404,
             "atDestination": false,
             "color": [
                 255,
@@ -14039,7 +14039,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04647332354390336,
+            "radius": 0.054589719947222,
             "atDestination": false,
             "color": [
                 255,
@@ -14060,7 +14060,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0454631718713962,
+            "radius": 0.05674011733746334,
             "atDestination": false,
             "color": [
                 255,
@@ -14081,7 +14081,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.056026822932041684,
+            "radius": 0.05886981810204543,
             "atDestination": false,
             "color": [
                 255,
@@ -14102,7 +14102,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04115829094185715,
+            "radius": 0.059074316920544115,
             "atDestination": false,
             "color": [
                 255,
@@ -14123,7 +14123,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05068308862848718,
+            "radius": 0.05896939513561619,
             "atDestination": false,
             "color": [
                 255,
@@ -14144,7 +14144,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05098771607345348,
+            "radius": 0.043772450032109965,
             "atDestination": false,
             "color": [
                 255,
@@ -14165,7 +14165,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046214158497255554,
+            "radius": 0.045316860221971074,
             "atDestination": false,
             "color": [
                 255,
@@ -14186,7 +14186,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0408254457095254,
+            "radius": 0.045518541515833524,
             "atDestination": false,
             "color": [
                 255,
@@ -14207,7 +14207,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.050362592581249546,
+            "radius": 0.04730459392550297,
             "atDestination": false,
             "color": [
                 255,
@@ -14228,7 +14228,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048367066939258456,
+            "radius": 0.04043153317559844,
             "atDestination": false,
             "color": [
                 255,
@@ -14249,7 +14249,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05111399891111167,
+            "radius": 0.04654068361742367,
             "atDestination": false,
             "color": [
                 255,
@@ -14270,7 +14270,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04518755258263529,
+            "radius": 0.054509036823884506,
             "atDestination": false,
             "color": [
                 255,
@@ -14291,7 +14291,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05097697737552383,
+            "radius": 0.04967228876996989,
             "atDestination": false,
             "color": [
                 255,
@@ -14312,7 +14312,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046986254227455754,
+            "radius": 0.052878240123734335,
             "atDestination": false,
             "color": [
                 255,
@@ -14333,7 +14333,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04918291364794747,
+            "radius": 0.05259142686538515,
             "atDestination": false,
             "color": [
                 255,
@@ -14354,7 +14354,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05537377767550131,
+            "radius": 0.04217680968498551,
             "atDestination": false,
             "color": [
                 255,
@@ -14375,7 +14375,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04200762546410466,
+            "radius": 0.05301788452977435,
             "atDestination": false,
             "color": [
                 255,
@@ -14396,7 +14396,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.047295863547566167,
+            "radius": 0.04453797732820815,
             "atDestination": false,
             "color": [
                 255,
@@ -14417,7 +14417,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05346639777477589,
+            "radius": 0.049425320329863964,
             "atDestination": false,
             "color": [
                 255,
@@ -14438,7 +14438,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0480292377914952,
+            "radius": 0.041695465494089555,
             "atDestination": false,
             "color": [
                 255,
@@ -14459,7 +14459,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0552474116518002,
+            "radius": 0.059317609854689805,
             "atDestination": false,
             "color": [
                 255,
@@ -14480,7 +14480,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0508308637327466,
+            "radius": 0.04304288938644349,
             "atDestination": false,
             "color": [
                 255,
@@ -14501,7 +14501,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05731600266385639,
+            "radius": 0.057768089083281626,
             "atDestination": false,
             "color": [
                 255,
@@ -14522,7 +14522,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04634219183151196,
+            "radius": 0.05952315807140929,
             "atDestination": false,
             "color": [
                 255,
@@ -14543,7 +14543,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0578679732890243,
+            "radius": 0.044261449996343044,
             "atDestination": false,
             "color": [
                 255,
@@ -14564,7 +14564,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05164482893186282,
+            "radius": 0.05269839504483248,
             "atDestination": false,
             "color": [
                 255,
@@ -14585,7 +14585,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05841402993492092,
+            "radius": 0.059810759022991176,
             "atDestination": false,
             "color": [
                 255,
@@ -14606,7 +14606,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.053900434886157325,
+            "radius": 0.04513619905558272,
             "atDestination": false,
             "color": [
                 255,
@@ -14627,7 +14627,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04180276997584744,
+            "radius": 0.05810033066205979,
             "atDestination": false,
             "color": [
                 255,
@@ -14648,7 +14648,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.048467793277178345,
+            "radius": 0.05644014515013586,
             "atDestination": false,
             "color": [
                 255,
@@ -14669,7 +14669,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05769861647476031,
+            "radius": 0.05217855365424931,
             "atDestination": false,
             "color": [
                 255,
@@ -14690,7 +14690,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.046411306231815025,
+            "radius": 0.056296822463142826,
             "atDestination": false,
             "color": [
                 255,
@@ -14711,7 +14711,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.0580833132458939,
+            "radius": 0.04201529178034236,
             "atDestination": false,
             "color": [
                 255,
@@ -14732,7 +14732,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04212748875198341,
+            "radius": 0.05870997629657308,
             "atDestination": false,
             "color": [
                 255,
@@ -14753,7 +14753,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.04120035639765993,
+            "radius": 0.0455353265943136,
             "atDestination": false,
             "color": [
                 255,
@@ -14774,7 +14774,7 @@
             "desiredSpeed": 1.0,
             "pathId": 0,
             "mass": 50,
-            "radius": 0.05396184381423548,
+            "radius": 0.04028153013174488,
             "atDestination": false,
             "color": [
                 255,
