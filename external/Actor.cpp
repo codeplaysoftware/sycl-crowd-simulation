@@ -38,6 +38,8 @@ SYCL_EXTERNAL bool Actor::getHeatmapEnabled() const { return heatmapEnabled; }
 
 SYCL_EXTERNAL std::array<int, 2> Actor::getBBox() const { return bBox; }
 
+SYCL_EXTERNAL uint Actor::getSeed() const { return seed; }
+
 SYCL_EXTERNAL void Actor::setPos(vecType newPos) { pos = newPos; }
 
 SYCL_EXTERNAL void Actor::setVelocity(vecType newVelocity) {
@@ -62,6 +64,19 @@ SYCL_EXTERNAL void Actor::setColor(std::array<int, 3> newColor) {
 
 SYCL_EXTERNAL void Actor::setBBox(std::array<int, 2> newBBox) {
     bBox = newBBox;
+}
+
+SYCL_EXTERNAL void Actor::setSeed(uint newSeed) {
+    seed = newSeed;
+}
+
+SYCL_EXTERNAL void Actor::refreshVariations() {
+    // Previous RNG output is used as next seed
+    seed = randXorShift(seed);
+    float randX = float(seed) * (1.0f / 4294967296.0f);
+    seed = randXorShift(seed);
+    float randY = float(seed) * (1.0f / 4294967296.0f);
+    this->setVariation({randX, randY});
 }
 
 SYCL_EXTERNAL void Actor::checkAtDestination(std::array<vecType, 4> destination,

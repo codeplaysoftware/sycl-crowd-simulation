@@ -16,7 +16,7 @@
 #include "Room.hpp"
 #include "VectorMaths.hpp"
 
-uint RNGSEED;
+uint GLOBALSEED;
 
 void init(int &SCALE, int &DELAY, SDL_Window *&win, SDL_Renderer *&render,
           std::vector<Actor> &actors, Room &room, std::vector<Path> &paths,
@@ -32,7 +32,11 @@ void init(int &SCALE, int &DELAY, SDL_Window *&win, SDL_Renderer *&render,
     }
 
     // Seed RNG with current time in seconds
-    RNGSEED = uint(time(0));
+    GLOBALSEED = uint(time(0));
+    for (auto actor : actors) {
+        GLOBALSEED = randXorShift(GLOBALSEED);
+        actor.setSeed(GLOBALSEED);
+    }
 
     // Initialise SDL
     SDL_Init(SDL_INIT_VIDEO);
@@ -88,26 +92,14 @@ void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf, sycl::buffer<st
 
 void updateVariations(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
     try {
-        auto seedBuf = sycl::buffer<uint>(&RNGSEED, 1);
-
         myQueue
             .submit([&](sycl::handler &cgh) {
                 auto actorAcc =
                     actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-                auto seedAcc =
-                    seedBuf.get_access<sycl::access::mode::read_write>(cgh);
-
                 cgh.parallel_for(
                     sycl::range<1>{actorAcc.size()}, [=](sycl::item<1> item) {
-                        seedAcc[0] = randXorShift(seedAcc[0]);
-                        // Previous RNG output is used as next seed
-                        float randX =
-                            float(seedAcc[0]) * (1.0f / 4294967296.0f);
-                        seedAcc[0] = randXorShift(seedAcc[0]);
-                        float randY =
-                            float(seedAcc[0]) * (1.0f / 4294967296.0f);
-                        actorAcc[item.get_id()].setVariation({randX, randY});
+                        actorAcc[item.get_id()].refreshVariations();
                     });
             })
             .wait_and_throw();

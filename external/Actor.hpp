@@ -3,6 +3,7 @@
 
 #include "Path.hpp"
 #include "VectorMaths.hpp"
+#include "RandomNumber.hpp"
 #include <array>
 #include <iostream>
 #include <random>
@@ -23,6 +24,7 @@ class Actor {
     std::array<int, 3> color;
     bool heatmapEnabled;
     std::array<int, 2> bBox;
+    uint seed;
 
   public:
     Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, int pPathId,
@@ -41,6 +43,7 @@ class Actor {
     SYCL_EXTERNAL std::array<int, 3> getColor() const;
     SYCL_EXTERNAL bool getHeatmapEnabled() const;
     SYCL_EXTERNAL std::array<int, 2> getBBox() const;
+    SYCL_EXTERNAL uint getSeed() const;
 
     SYCL_EXTERNAL void setPos(vecType newPos);
     SYCL_EXTERNAL void setVelocity(vecType newVelocity);
@@ -49,6 +52,9 @@ class Actor {
     SYCL_EXTERNAL void setAtDestination(bool param);
     SYCL_EXTERNAL void setColor(std::array<int, 3> newColor);
     SYCL_EXTERNAL void setBBox(std::array<int, 2> newBBox);
+    SYCL_EXTERNAL void setSeed(uint newSeed);
+
+    SYCL_EXTERNAL void refreshVariations();
 
     SYCL_EXTERNAL void checkAtDestination(std::array<vecType, 4> destination,
                                           int pathSize);
