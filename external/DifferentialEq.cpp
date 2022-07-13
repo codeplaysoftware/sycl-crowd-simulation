@@ -1,11 +1,11 @@
 #include "DifferentialEq.hpp"
 
 SYCL_EXTERNAL void differentialEq(
-    int currentIndex,
+    int actorIndex,
     sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors,
     sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls,
     sycl::accessor<Path, 1, sycl::access::mode::read> paths, sycl::stream out) {
-    Actor *currentActor = &actors[currentIndex];
+    Actor *currentActor = &actors[actorIndex];
 
     vecType pos = currentActor->getPos();
 
@@ -60,7 +60,7 @@ SYCL_EXTERNAL void differentialEq(
                                    i[1] == neighbour.getBBox()[1];
                         });
 
-        if (currentIndex != x && !neighbour.getAtDestination() && bBoxFlag) {
+        if (actorIndex != x && !neighbour.getAtDestination() && bBoxFlag) {
             vecType currentToNeighbour = pos - neighbour.getPos();
             float dij = magnitude(currentToNeighbour);
             float rij = neighbour.getRadius() + currentActor->getRadius();
