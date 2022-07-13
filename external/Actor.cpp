@@ -6,11 +6,8 @@ Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, int pPathId,
     : pos(pPos), velocity(pVelocity), desiredSpeed(pDesiredSpeed),
       pathId(pPathId), mass(pMass), radius(pRadius),
       atDestination(pAtDestination), color(pColor),
-      heatmapEnabled(pHeatmapEnabled) {
-    variation = {0, 0};
-    destinationIndex = 0;
-    bBox = {0, 0};
-}
+      heatmapEnabled(pHeatmapEnabled), variation({0, 0}), destinationIndex(0),
+      bBox({0, 0}) {}
 
 SYCL_EXTERNAL vecType Actor::getPos() const { return pos; }
 
@@ -66,9 +63,7 @@ SYCL_EXTERNAL void Actor::setBBox(std::array<int, 2> newBBox) {
     bBox = newBBox;
 }
 
-SYCL_EXTERNAL void Actor::setSeed(uint newSeed) {
-    seed = newSeed;
-}
+SYCL_EXTERNAL void Actor::setSeed(uint newSeed) { seed = newSeed; }
 
 SYCL_EXTERNAL void Actor::refreshVariations() {
     // Previous RNG output is used as next seed
