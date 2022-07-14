@@ -87,6 +87,11 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
         int id = p["id"].GetInt();
         auto jsonCheckpoints = p["checkpoints"].GetArray();
         std::array<std::array<vecType, 4>, PATHALLOCATIONSIZE> checkpoints;
+        if (jsonCheckpoints.Size() > PATHALLOCATIONSIZE) {
+            throw JSONException(
+                "Path Size exceeds amount allocated in memory\nEither reduce "
+                "path size or increase PATHALLOCATIONSIZE in 'Path.hpp'");
+        }
         for (int i = 0; i < jsonCheckpoints.Size(); i++) {
             std::array<vecType, 4> region;
             for (int j = 0; j < 4; j++) {
