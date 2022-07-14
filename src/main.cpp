@@ -2,64 +2,33 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <chrono>
+#include <random>
+#include <memory>
 
 #include "Actor.hpp"
 #include "Room.hpp"
 #include "MathHelper.hpp"
 #include "DifferentialEq.hpp"
 #include "VectorMaths.hpp"
+#include "ParseInputFile.hpp"
+#include "Path.hpp"
 
-constexpr int WIDTH = 9; // metres
-constexpr int HEIGHT = 9; // metres
-constexpr int SCALE = 100;
-constexpr int DELAY = 0;
+int WIDTH; // metres
+int HEIGHT; // metres
+int SCALE;
+int DELAY;
 
-using vecType = std::array<float, 2>;
-
-void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors) {
+void init(SDL_Window* &win, SDL_Renderer* &render, std::vector<Actor> &actors, Room &room, std::vector<Path> &paths, int argc, char **argv) {
+    // Read from input file path JSON
+    if (argc > 1) {
+        std::string inputPath = argv[1];
+        parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE, DELAY);
+    }
+    
+    // Initialise SDL
     SDL_Init(SDL_INIT_VIDEO);
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE, HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
-
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
-            actors.push_back(Actor{{0.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
-                    {0.01, 0.01}, 
-                    {0.02, 0.02},
-                    {6.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
-                    50, 0.05, false, {255, 0, 0}});
-        }
-    }
-
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
-            actors.push_back(Actor{{6.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
-                    {0.01, 0.01}, 
-                    {0.02, 0.02},
-                    {0.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
-                    50, 0.05, false, {0, 255, 0}});
-        }
-    }
-
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
-            actors.push_back(Actor{{6.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
-                    {0.01, 0.01}, 
-                    {0.02, 0.02},
-                    {0.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
-                    50, 0.05, false, {0, 0, 255}});
-        }
-    }
-
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 5; j++) {
-            actors.push_back(Actor{{0.5f + (i * 0.5f), 6.5f + (j * 0.5f)},
-                    {0.01, 0.01}, 
-                    {0.02, 0.02},
-                    {6.5f + (i * 0.5f), 0.5f + (j * 0.5f)},
-                    50, 0.05, false, {150, 150, 150}});
-        }
-    }
 }
 
 void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color color) {
@@ -75,22 +44,30 @@ void drawCircle(SDL_Renderer* &render, SDL_Point center, int radius, SDL_Color c
     }
 }
 
-void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room) {
+void update(sycl::queue myQueue, std::vector<Actor> &actors, Room room, std::vector<Path> paths) {
+    for (auto &a : actors) {
+        a.refreshVariation();
+    }
+
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
 
     auto walls = room.getWalls();
     auto wallsBuf = sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
+
+    auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
 
     myQueue.submit([&](sycl::handler& cgh) {
         auto actorAcc = actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
         auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
 
+        auto pathsAcc = pathsBuf.get_access<sycl::access::mode::read>(cgh);
+
         auto out = sycl::stream{1024, 768, cgh};
 
         cgh.parallel_for(sycl::range<1>{actors.size()}, [=](sycl::id<1> index) {
             if (!actorAcc[index].getAtDestination()) {
-                differentialEq(index, actorAcc, wallsAcc, out);
+                differentialEq(index, actorAcc, wallsAcc, pathsAcc, out);
             }
         });
     }).wait();
@@ -121,37 +98,17 @@ void close(SDL_Window* win, SDL_Renderer* render) {
     SDL_Quit();
 }
 
-int main() {
-    SDL_Window* win = NULL;
-    SDL_Renderer* render = NULL;
+int main(int argc, char *argv[]) {
+    SDL_Window* win;
+    SDL_Renderer* render;
 
     std::vector<Actor> actors;
-    Room room = Room({{vecType{3.15, 3.15}, vecType{4.25, 3.15}}, 
-                      {vecType{4.25, 3.15}, vecType{4.25, 4.25}}, 
-                      {vecType{4.25, 4.25}, vecType{3.15, 4.25}},
-                      {vecType{3.15, 4.25}, vecType{3.15, 3.15}}, 
-
-                      {vecType{4.75, 3.15}, vecType{5.85, 3.15}},
-                      {vecType{5.85, 3.15}, vecType{5.85, 4.25}},
-                      {vecType{5.85, 4.25}, vecType{4.75, 4.25}},
-                      {vecType{4.75, 4.25}, vecType{4.75, 3.15}},
-
-                      {vecType{3.15, 4.75}, vecType{4.25, 4.75}},
-                      {vecType{4.25, 4.75}, vecType{4.25, 5.85}},
-                      {vecType{4.25, 5.85}, vecType{3.15, 5.85}},
-                      {vecType{3.15, 5.85}, vecType{3.15, 4.75}},
-
-                      {vecType{4.75, 4.75}, vecType{5.85, 4.75}},
-                      {vecType{5.85, 4.75}, vecType{5.85, 5.85}},
-                      {vecType{5.85, 5.85}, vecType{4.75, 5.85}},
-                      {vecType{4.75, 5.85}, vecType{4.75, 4.75}},
-    });
-    // Room room = Room({{vecType{2, 3.5}, vecType{6, 3.5}}});
-    // Room room = Room({{vecType{3.5, 0.5}, vecType{4.5, 5.5}}});
+    Room room = Room({});
+    std::vector<Path> paths;
 
     sycl::queue myQueue{sycl::gpu_selector()};
 
-    init(win, render, actors);
+    init(win, render, actors, room, paths, argc, argv);
 
     draw(render, actors, room);
 
@@ -165,9 +122,10 @@ int main() {
                 isQuit = true;
             }
         }
+
         if (delayCounter >= DELAY) {
             delayCounter = 0;
-            update(myQueue, actors, room);
+            update(myQueue, actors, room, paths);
             draw(render, actors, room);
         }
         else {

@@ -13,17 +13,11 @@ SYCL_EXTERNAL vecType velToPoint(float speed, vecType pos, vecType destination) 
 }
 
 SYCL_EXTERNAL float magnitude(vecType inp) {
-    return std::sqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
+    return sycl::sqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
 }
 
 SYCL_EXTERNAL float inverseMagnitude(vecType inp) {
-    float x = (inp[0] * inp[0]) + (inp[1] * inp[1]);
-    float y = x;
-    uint32_t *i = reinterpret_cast<uint32_t *>(&y);
-    const uint32_t expMask = 0x7F800000;
-    const uint32_t magicNumber = 0x5F000000;
-    *i = magicNumber - ((*i >> 1) & expMask);
-    return (x * y * y + 1) / (2 * x * y);
+    return sycl::rsqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
 }
 
 SYCL_EXTERNAL float dotProduct(vecType a, vecType b) {
@@ -57,10 +51,14 @@ SYCL_EXTERNAL std::pair<float, vecType> getDistanceAndNiw(vecType point, std::ar
         float lSquared = dotProduct(AB, AB);
         if (lSquared == 0.0) {
             return {0, {0, 0}};
-        }
-        float t = std::max(0.0f, std::min(1.0f, dotProduct(AP, AB) / lSquared));
+        } 
+        float t = sycl::max(0.0f, sycl::min(1.0f, dotProduct(AP, AB) / lSquared));
         auto projection = t * AB;
         
         return {distance(AP, projection), normalize(AP - projection)};
     }
+}
+
+SYCL_EXTERNAL vecType getTangentialVector(vecType normal) {
+    return {-normal[1], normal[0]};
 }

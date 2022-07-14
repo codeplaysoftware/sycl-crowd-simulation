@@ -1,62 +1,71 @@
 #include "DifferentialEq.hpp"
 
-SYCL_EXTERNAL void differentialEq(int z, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::stream out) {
-    Actor* i = &actors[z];
+SYCL_EXTERNAL void differentialEq(int currentIndex, sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors, sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls, sycl::accessor<Path, 1, sycl::access::mode::read> paths, sycl::stream out) {
+    Actor* currentActor = &actors[currentIndex];
 
-    vecType pos = i->getPos();
+    vecType pos = currentActor->getPos();
 
-    float mi = i->getMass();
-    float v0i = 2.0f;
-    vecType e0i = normalize(getDirectionVector(i->getPos(), i->getDestination()));
-    vecType vi = i->getVelocity();
+    // Calculate personal impulse
+    float mi = currentActor->getMass();
+    float v0i = currentActor->getDesiredSpeed();
+    vecType destination = paths[currentActor->getPathId()].getCheckpoints()[currentActor->getDestinationIndex()];
+    vecType e0i = normalize(getDirectionVector(currentActor->getPos(), destination));
+    vecType vi = currentActor->getVelocity();
 
     vecType personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
-
+    
+    // Calculate forces applied by neighbouring actors
     vecType peopleForces = {0, 0};
     for (int x = 0; x < actors.size(); x++) {
-        Actor j = actors[x];
-        if (z != x && !j.getAtDestination()) {
-            float rij = j.getRadius() + i->getRadius();
-            float dij = magnitude(pos - j.getPos());
-            vecType nij = (pos - j.getPos()) / dij;
-            vecType tij = {-nij[1], nij[0]};
+        Actor neighbour = actors[x];
+        if (currentIndex != x && !neighbour.getAtDestination()) {
+            float rij = neighbour.getRadius() + currentActor->getRadius();
+            vecType currentToNeighbour = pos - neighbour.getPos();
+            float dij = magnitude(currentToNeighbour);
+            vecType nij = (currentToNeighbour) / dij;
+            vecType tij = getTangentialVector(nij);
             float g = dij > rij ? 0 : rij - dij;
-            float deltavtij = dotProduct((j.getVelocity() - i->getVelocity()), tij);
+            float deltavtij = dotProduct((neighbour.getVelocity() - currentActor->getVelocity()), tij);
 
-            peopleForces += (Ai * exp((rij - dij) / Bi) + K1 * g) * nij + (K2 * g * deltavtij * tij);
+            peopleForces += (Ai * sycl::exp((rij - dij) / Bi) + K1 * g) * nij + (K2 * g * deltavtij * tij);
         }
     }
 
+    // Calculate forces applied by walls
     vecType wallForces = {0, 0};
     for (int x = 0; x < walls.size(); x++) {
-        std::array<vecType, 2> w = walls[x];
-        float ri = i->getRadius();
-        std::pair<float, vecType> dAndn = getDistanceAndNiw(pos, w);
+        std::array<vecType, 2> currentWall = walls[x];
+        float ri = currentActor->getRadius();
+        std::pair<float, vecType> dAndn = getDistanceAndNiw(pos, currentWall);
         float diw = dAndn.first;
         float g = diw > ri ? 0 : ri - diw;
         vecType niw = dAndn.second;
-        vecType tiw = {-niw[1], niw[0]};
+        vecType tiw = getTangentialVector(niw);
 
-        wallForces += (Ai * exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
+        wallForces += (Ai * sycl::exp((ri - diw) / Bi) + K1 * g) * niw - (K2 * g * dotProduct(vi, tiw) * tiw);
     }
 
     vecType forceSum = personalImpulse + peopleForces + wallForces;
+
+    // Apply random force variations
+    forceSum += currentActor->getVariation();
+
+    // Color actor according to heatmap
+    if (currentActor->getHeatmapEnabled()) {
+        auto colorVal = sycl::fabs((forceSum[0] + forceSum[1]) / 700.0f);
+        if (colorVal > 1) { colorVal = 1.0f; }
+        auto color = findColor(colorVal);
+        currentActor->setColor({int(color[0]), int(color[1]), int(color[2])});
+    }
+
+    // out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1] << ")    " << z << sycl::endl;
+    // out << "Wall Forces: (" << wallForces[0] << ", " << wallForces[1] << ")    " << z << sycl::endl;
+    // out << "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ")    " << z << sycl::endl;
+    // out << "-----------------------" << sycl::endl;
+
     vecType acceleration = forceSum / mi;
+    currentActor->setVelocity(vi + acceleration * TIMESTEP);
+    currentActor->setPos(pos + currentActor->getVelocity() * TIMESTEP);
 
-    //out << "People Forces: (" << peopleForces[0] << ", " << peopleForces[1] << ")    " << z << sycl::endl;
-    //out << "Wall Forces: (" << wallForces[0] << ", " << wallForces[1] << ")    " << z << sycl::endl;
-    //out << "Acceleration: (" << acceleration[0] << ", " << acceleration[1] << ")    " << z << sycl::endl;
-    //out << "-----------------------" << sycl::endl;
-
-    i->setVelocity(vi + forceSum * 0.001);
-    i->setPos(pos + i->getVelocity() * 0.001);
-
-    vecType newPos = i->getPos();
-    vecType destination = i->getDestination();
-
-    std::array<float, 4> destinationBoundingBox = {destination[0] + 0.01f, destination[0] - 0.01f, destination[1] + 0.01f, destination[1] - 0.01f};
-    if (newPos[0] <= destinationBoundingBox[0] && newPos[0] >= destinationBoundingBox[1]
-        && pos[1] <= destinationBoundingBox[2] && pos[1] >= destinationBoundingBox[3]) {
-            i->setAtDestination(true);
-        }
+    currentActor->checkAtDestination(destination, paths[currentActor->getPathId()].getPathSize());
 }
