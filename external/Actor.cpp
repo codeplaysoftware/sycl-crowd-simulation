@@ -68,14 +68,9 @@ SYCL_EXTERNAL void Actor::setSeed(uint newSeed) { seed = newSeed; }
 SYCL_EXTERNAL void Actor::refreshVariations() {
     // Previous RNG output is used as next seed
     seed = randXorShift(seed);
-    float xDirection = float(seed) > 2151000064 ? -1.0f : 1.0f;
+    float randX = (float(seed) * (2.0f / 4294967296.0f)) - 1.0f;
     seed = randXorShift(seed);
-    float yDirection = float(seed) > 2151000064 ? -1.0f : 1.0f;
-
-    seed = randXorShift(seed);
-    float randX = float(seed) * (1.0f / 4294967296.0f) * xDirection;
-    seed = randXorShift(seed);
-    float randY = float(seed) * (1.0f / 4294967296.0f) * yDirection;
+    float randY = (float(seed) * (2.0f / 4294967296.0f)) - 1.0f;
     this->setVariation({randX, randY});
 }
 
