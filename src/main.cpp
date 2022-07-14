@@ -195,7 +195,9 @@ int main(int argc, char *argv[]) {
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
     auto walls = room.getWalls();
     auto wallsBuf = sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
+    wallsBuf.set_final_data(nullptr);
     auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
+    pathsBuf.set_final_data(nullptr);
 
     int delayCounter = 0;
     int updateBBoxCounter = 0;
