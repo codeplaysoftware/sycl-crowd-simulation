@@ -1,6 +1,8 @@
 # Available configurations:
 # - fourSquare
-# - twoExitsTwoGroups
+# - fourCorridor
+# - twoGroups
+# - twoGroupsLarge
 # - tightCorner
 # - laneFiltering
 # - corridorWidening
@@ -18,7 +20,9 @@ def main(argv):
     if len(argv) == 0:
         toGenerate = [
             ["fourSquare", {}],
-            ["twoExitsTwoGroups", {}],
+            ["fourCorridor", {}],
+            ["twoGroups", {}],
+            ["twoGroupsLarge", {}],
             ["tightCorner", {}],
             ["laneFiltering", {}],
             ["corridorWidening", {}],
@@ -99,17 +103,135 @@ def main(argv):
 
             fourSquare["actors"] = actorList
             fourSquare["paths"] = pathList
-
-        elif config[0] == "twoExitsTwoGroups":
-            twoExitsTwoGroups = config[1]
-            twoExitsTwoGroups["config"] = {
+        
+        elif config[0] == "fourCorridor":
+            fourCorridor = config[1]
+            fourCorridor["config"] = {
                 "width": 9,
                 "height": 9,
                 "scale": 100,
                 "delay": 0,
             }
 
-            twoExitsTwoGroups["room"] = {
+            fourCorridor["room"] = {
+                "walls": [
+                    [-10, 3.5, 3.5, 3.5],
+                    [3.5, 3.5, 3.5, -10],
+                    [3.5, -10, 5.5, -10],
+                    [5.5, -10, 5.5, 3.5],
+                    [5.5, 3.5, 19, 3.5],
+                    [19, 3.5, 19, 5.5],
+                    [19, 5.5, 5.5, 5.5],
+                    [5.5, 5.5, 5.5, 19],
+                    [5.5, 19, 3.5, 19],
+                    [3.5, 19, 3.5, 5.5],
+                    [3.5, 5.5, -10, 5.5],
+                    [-10, 5.5, -10, 3.5]
+                ]
+            }
+
+            actorList = []
+            for i in range(0, 9):
+                for j in range(0, 50):
+                    actorList.append(
+                        {
+                            "pos": [3.7 + (i * 0.2), -9.9 + (j * 0.2)],
+                            "velocity": [0, 0],
+                            "desiredSpeed": 1.7,
+                            "pathId": 0,
+                            "mass": 50,
+                            "radius": 0.05,
+                            "atDestination": False,
+                            "color": [255, 0, 0],
+                            "heatmapEnabled": False,
+                        }
+                    )
+            for i in range(0, 9):
+                for j in range(0, 50):
+                    actorList.append(
+                        {
+                            "pos": [3.7 + (i * 0.2), 18.9 - (j * 0.2)],
+                            "velocity": [0, 0],
+                            "desiredSpeed": 1.6,
+                            "pathId": 1,
+                            "mass": 50,
+                            "radius": 0.05,
+                            "atDestination": False,
+                            "color": [0, 255, 0],
+                            "heatmapEnabled": False,
+                        }
+                    )
+            for i in range(0, 50):
+                for j in range(0, 9):
+                    actorList.append(
+                        {
+                            "pos": [-9.9 + (i * 0.2), 3.7 + (j * 0.2)],
+                            "velocity": [0, 0],
+                            "desiredSpeed": 1.5,
+                            "pathId": 2,
+                            "mass": 50,
+                            "radius": 0.05,
+                            "atDestination": False,
+                            "color": [0, 0, 255],
+                            "heatmapEnabled": False,
+                        }
+                    )
+            for i in range(0, 50):
+                for j in range(0, 9):
+                    actorList.append(
+                        {
+                            "pos": [18.9 - (i * 0.2), 3.7 + (j * 0.2)],
+                            "velocity": [0, 0],
+                            "desiredSpeed": 1.8,
+                            "pathId": 3,
+                            "mass": 50,
+                            "radius": 0.05,
+                            "atDestination": False,
+                            "color": [150, 150, 150],
+                            "heatmapEnabled": False,
+                        }
+                    )
+            
+            fourCorridor["paths"] = [
+                {
+                    "id": 0,
+                    "checkpoints": [
+                        [[3.5, 18], [5.5, 18], [5.5, 19], [3.5, 19]]
+                    ],
+                },
+                {
+                    "id": 1,
+                    "checkpoints": [
+                        [[3.5, -9], [5.5, -9], [5.5, -10], [3.5, -10]]
+                    ],
+                },
+                {
+                    "id": 2,
+                    "checkpoints": [
+                        [[18, 3.5], [19, 3.5], [19, 5.5], [18, 5.5]]
+                    ],
+                },
+                {
+                    "id": 3,
+                    "checkpoints": [
+                        [[-10, 3.5], [-9, 3.5], [-9, 5.5], [-10, 19]]
+                    ],
+                }
+            ]
+
+            fourCorridor["actors"] = actorList
+        
+
+        elif config[0] == "twoGroups":
+            twoGroups = config[1]
+            twoGroups["config"] = {
+                "width": 9,
+                "height": 9,
+                "scale": 100,
+                "delay": 0,
+            }
+
+            twoGroups["room"] = {
                 "walls": [
                     [0.5, 0.5, 8.5, 0.5],
                     [8.5, 0.5, 8.5, 6],
@@ -152,7 +274,7 @@ def main(argv):
                         }
                     )
 
-            twoExitsTwoGroups["paths"] = [
+            twoGroups["paths"] = [
                 {
                     "id": 0,
                     "checkpoints": [
@@ -168,11 +290,82 @@ def main(argv):
                     ],
                 },
             ]
-            twoExitsTwoGroups["actors"] = actorList
+            twoGroups["actors"] = actorList
+        
+        elif config[0] == "twoGroupsLarge":
+            twoGroupsLarge = config[1]
+            twoGroupsLarge["config"] = {
+                "width": 30,
+                "height": 20,
+                "scale": 50,
+                "delay": 0,
+            }
+
+            twoGroupsLarge["room"] = {
+                "walls": [
+                    [-10, 0, 40, 0],
+                    [40, 0, 40, 20],
+                    [40, 20, -10, 20],
+                    [-10, 20, -10, 0]
+                ]
+            }
+
+            actorList = []
+            for i in range(0, 50):
+                for j in range(0, 98):
+                    actorList.append(
+                        {
+                            "pos": [29.8 - (i * 0.2), 0.2 + (j * 0.2)],
+                            "velocity": [0, 0],
+                            "desiredSpeed": 2,
+                            "pathId": 0,
+                            "mass": 50,
+                            "radius": 0.05,
+                            "atDestination": False,
+                            "color": [255, 0, 0],
+                            "heatmapEnabled": False,
+                        }
+                    )
+            for i in range(0, 50):
+                for j in range(0, 98):
+                    actorList.append(
+                        {
+                            "pos": [0.2 + (i * 0.2), 0.2 + (j * 0.2)],
+                            "velocity": [0, 0],
+                            "desiredSpeed": 2,
+                            "pathId": 1,
+                            "mass": 50,
+                            "radius": 0.05,
+                            "atDestination": False,
+                            "color": [0, 255, 0],
+                            "heatmapEnabled": False,
+                        }
+                    )
+            
+            twoGroupsLarge["paths"] = [
+                {
+                    "id": 0,
+                    "checkpoints": [
+                        [[-10, 5], [-9, 5], [-9, 15], [-10, 15]],
+                    ],
+                },
+                {
+                    "id": 1,
+                    "checkpoints": [
+                        [[39, 5], [40, 5], [40, 15], [39, 15]],
+                    ],
+                },
+            ]
+            twoGroupsLarge["actors"] = actorList
 
         elif config[0] == "tightCorner":
             tightCorner = config[1]
-            tightCorner["config"] = {"width": 9, "height": 9, "scale": 100, "delay": 0}
+            tightCorner["config"] = {
+                "width": 9, 
+                "height": 9, 
+                "scale": 100, 
+                "delay": 0
+            }
 
             tightCorner["room"] = {
                 "walls": [
