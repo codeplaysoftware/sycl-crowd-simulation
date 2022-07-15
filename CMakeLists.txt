@@ -13,12 +13,12 @@ include_directories(${SDL2_INCLUDE_DIRS})
 
 add_executable(crowdsim src/main.cpp)
 
-set(Backend "Backend" CACHE STRING "Backend chosen by the user at CMake configure time")
-set_property(CACHE Backend PROPERTY STRINGS spir cuda hip)
+set(SYCL_BACKEND "SYCL_BACKEND" CACHE STRING "Backend chosen by the user at CMake configure time")
+set_property(CACHE SYCL_BACKEND PROPERTY STRINGS spir cuda hip)
 
-if(Backend STREQUAL hip)
+if(SYCL_BACKEND STREQUAL hip)
     SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -fsycl -fsycl-targets=amdgcn-amd-amdhsa")
-elseif(Backend STREQUAL cuda)
+elseif(SYCL_BACKEND STREQUAL cuda)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsycl -fsycl-targets=nvptx64-nvidia-cuda")
 else()
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsycl -fsycl-targets=spir64")
