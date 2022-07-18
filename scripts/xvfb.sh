@@ -7,7 +7,7 @@ rm /var/tmp/Xvfb_screen0
 Xvfb :99 -screen 0 1920x1080x16 -fbdir /var/tmp &
 
 # Run crowd simulation, using script argument as input file config
-DISPLAY=:99.0 ../build/crowdsim ../input/$1 &
+DISPLAY=:99.0 ../build/crowdsim $1 &
 
 # Use the x11grab device to write to video file
 ffmpeg -video_size 1920x1080 -framerate 25 -f x11grab -i :99.0+0,0 output.mp4

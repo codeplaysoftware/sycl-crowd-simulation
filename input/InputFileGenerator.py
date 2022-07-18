@@ -2,12 +2,13 @@
 # - fourSquare
 # - fourCorridor
 # - twoGroups
-# - twoGroupsLarge
+# - twoGroups10000
 # - tightCorner
 # - laneFiltering
 # - corridorWidening
 # - evacuateRoom
-# - evacuateRoomLarge
+# - evacuateRoom10000
+# - evacuateRoom50000
 
 # Running script without args will generate all input configurations
 
@@ -22,12 +23,13 @@ def main(argv):
             ["fourSquare", {}],
             ["fourCorridor", {}],
             ["twoGroups", {}],
-            ["twoGroupsLarge", {}],
+            ["twoGroups10000", {}],
             ["tightCorner", {}],
             ["laneFiltering", {}],
             ["corridorWidening", {}],
             ["evacuateRoom", {}],
-            ["evacuateRoomLarge", {}],
+            ["evacuateRoom10000", {}],
+            ["evacuateRoom50000", {}]
         ]
     else:
         toGenerate = argv
@@ -292,16 +294,16 @@ def main(argv):
             ]
             twoGroups["actors"] = actorList
         
-        elif config[0] == "twoGroupsLarge":
-            twoGroupsLarge = config[1]
-            twoGroupsLarge["config"] = {
+        elif config[0] == "twoGroups10000":
+            twoGroups10000 = config[1]
+            twoGroups10000["config"] = {
                 "width": 30,
                 "height": 20,
                 "scale": 50,
                 "delay": 0,
             }
 
-            twoGroupsLarge["room"] = {
+            twoGroups10000["room"] = {
                 "walls": [
                     [-10, 0, 40, 0],
                     [40, 0, 40, 20],
@@ -342,7 +344,7 @@ def main(argv):
                         }
                     )
             
-            twoGroupsLarge["paths"] = [
+            twoGroups10000["paths"] = [
                 {
                     "id": 0,
                     "checkpoints": [
@@ -356,7 +358,7 @@ def main(argv):
                     ],
                 },
             ]
-            twoGroupsLarge["actors"] = actorList
+            twoGroups10000["actors"] = actorList
 
         elif config[0] == "tightCorner":
             tightCorner = config[1]
@@ -560,16 +562,16 @@ def main(argv):
             ]
             evacuateRoom["actors"] = actorList
 
-        elif config[0] == "evacuateRoomLarge":
-            evacuateRoomLarge = config[1]
-            evacuateRoomLarge["config"] = {
+        elif config[0] == "evacuateRoom10000":
+            evacuateRoom10000 = config[1]
+            evacuateRoom10000["config"] = {
                 "width": 30,
                 "height": 19,
                 "scale": 50,
                 "delay": 0,
             }
 
-            evacuateRoomLarge["room"] = {
+            evacuateRoom10000["room"] = {
                 "walls": [
                     [0.5, 0.5, 29.5, 0.5],
                     [29.5, 0.5, 29.5, 18.5],
@@ -595,7 +597,7 @@ def main(argv):
                             "heatmapEnabled": True,
                         }
                     )
-            evacuateRoomLarge["paths"] = [
+            evacuateRoom10000["paths"] = [
                 {
                     "id": 0,
                     "checkpoints": [
@@ -604,7 +606,53 @@ def main(argv):
                     ],
                 }
             ]
-            evacuateRoomLarge["actors"] = actorList
+            evacuateRoom10000["actors"] = actorList
+
+        elif config[0] == "evacuateRoom50000":
+            evacuateRoom50000 = config[1]
+            evacuateRoom50000["config"] = {
+                "width": 210,
+                "height": 110,
+                "scale": 10,
+                "delay": 0,
+            }
+
+            evacuateRoom50000["room"] = {
+                "walls": [
+                    [0.5, 0.5, 209.5, 0.5],
+                    [209.5, 0.5, 209.5, 109.5],
+                    [209.5, 109.5, 0.5, 109.5],
+                    [0.5, 109.5, 0.5, 47.5],
+                    [0.5, 46.5, 0.5, 0.5],
+                ]
+            }
+
+            actorList = []
+            for i in range(0, 1000):
+                for j in range(0, 500):
+                    actorList.append(
+                        {
+                            "pos": [4 + (i * 0.2), 1 + (j * 0.2)],
+                            "velocity": [0, 0],
+                            "desiredSpeed": 2.0,
+                            "pathId": 0,
+                            "mass": 50,
+                            "radius": 0.05,
+                            "atDestination": False,
+                            "color": [255, 0, 0],
+                            "heatmapEnabled": True,
+                        }
+                    )
+            evacuateRoom50000["paths"] = [
+                {
+                    "id": 0,
+                    "checkpoints": [
+                        [[0.3, 46.5], [0.7, 46.5], [0.7, 47.5], [0.3, 47.5]],
+                        [[-11, 46.5], [-10, 46.5], [-10, 47.5], [-11, 47.5]],
+                    ],
+                }
+            ]
+            evacuateRoom50000["actors"] = actorList
 
     # Write configurations to JSON files
     for config in toGenerate:
