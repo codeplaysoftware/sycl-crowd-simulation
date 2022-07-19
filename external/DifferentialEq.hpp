@@ -31,6 +31,6 @@ SYCL_EXTERNAL void differentialEq(
     int actorIndex,
     sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors,
     sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls,
-    sycl::accessor<Path, 1, sycl::access::mode::read> paths, sycl::stream out);
+    sycl::accessor<Path, 1, sycl::access::mode::read> paths);
 
 #endif

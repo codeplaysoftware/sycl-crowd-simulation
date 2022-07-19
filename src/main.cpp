@@ -80,13 +80,10 @@ void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf, sycl::buffer<st
                 auto pathsAcc =
                     pathsBuf.get_access<sycl::access::mode::read>(cgh);
 
-                auto out = sycl::stream{1024, 768, cgh};
-
                 cgh.parallel_for(
                     sycl::range<1>{actorAcc.size()}, [=](sycl::id<1> index) {
                         if (!actorAcc[index].getAtDestination()) {
-                            differentialEq(index, actorAcc, wallsAcc, pathsAcc,
-                                           out);
+                            differentialEq(index, actorAcc, wallsAcc, pathsAcc);
                         }
                     });
             })
