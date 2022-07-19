@@ -656,7 +656,7 @@ def main(argv):
 
     # Write configurations to JSON files
     for config in toGenerate:
-        with open(config[0] + ".json", "w") as out:
+        with open("../input/" + config[0] + ".json", "w") as out:
             json.dump(config[1], out, ensure_ascii=False, indent=4)
         print("Finished Generating ../input/" + config[0] + ".json")
 

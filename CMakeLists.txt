@@ -24,6 +24,13 @@ else()
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsycl -fsycl-targets=spir64")
 endif()
 
+find_package(Python QUIET)
+if(Python_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/input/InputFileGenerator.py")
+    execute_process(COMMAND ${Python_EXECUTABLE} ../input/InputFileGenerator.py)
+else()
+    message(WARNING "Unable to generate input configuration files")
+endif()
+
 add_subdirectory(external)
 
 target_link_libraries(crowdsim PUBLIC ${SDL2_LIBRARIES} external) 
