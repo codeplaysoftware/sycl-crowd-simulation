@@ -18,7 +18,7 @@
 
 uint GLOBALSEED;
 
-void init(int &SCALE, int &DELAY, 
+void init(int &SCALE, int &DELAY, SDL_Window*& win, SDL_Renderer*& render,
           std::vector<Actor> &actors, Room &room, std::vector<Path> &paths,
           int argc, char **argv) {
     int WIDTH;
@@ -168,8 +168,8 @@ int main(int argc, char *argv[]) {
     int SCALE;
     int DELAY;
 
-    // SDL_Window *win;
-    // SDL_Renderer *render;
+    SDL_Window *win;
+    SDL_Renderer *render;
 
     std::vector<Actor> actors;
     Room room = Room({});
@@ -183,7 +183,7 @@ int main(int argc, char *argv[]) {
 
     sycl::queue myQueue{sycl::gpu_selector(), asyncHandler};
 
-    init(SCALE, DELAY, actors, room, paths, argc, argv);
+    init(SCALE, DELAY, win, render, actors, room, paths, argc, argv);
 
     // Buffer creation
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
@@ -193,76 +193,76 @@ int main(int argc, char *argv[]) {
     auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
     pathsBuf.set_final_data(nullptr);
 
-    // int delayCounter = 0;
-    // int updateBBoxCounter = 0;
-    // bool isQuit = false;
-    // bool isPause = false;
-    // SDL_Event event;
+    int delayCounter = 0;
+    int updateBBoxCounter = 0;
+    bool isQuit = false;
+    bool isPause = false;
+    SDL_Event event;
 
-    // std::vector<int> executionTimes;
+    std::vector<int> executionTimes;
 
-    // while (!isQuit) {
-    //     if (SDL_PollEvent(&event)) {
-    //         if (event.type == SDL_QUIT) {
-    //             isQuit = true;
-    //         } else if (event.type == SDL_KEYDOWN &&
-    //                    event.key.keysym.sym == SDLK_SPACE) {
-    //             isPause = !isPause;
-    //         }
-    //     }
-
-    //     if (!isPause) {
-    //         if (delayCounter >= DELAY) {
-    //             delayCounter = 0;
-    //             auto start = std::chrono::high_resolution_clock::now();
-
-    //             if (updateBBoxCounter <= 0) {
-    //                 updateBBox(myQueue, actorBuf);
-    //                 updateBBoxCounter = 20;
-    //             }
-
-    //             updateVariations(myQueue, actorBuf);
-    //             update(myQueue, actorBuf, wallsBuf, pathsBuf);
-
-    //             auto end = std::chrono::high_resolution_clock::now();
-    //             auto duration =
-    //                 std::chrono::duration_cast<std::chrono::milliseconds>(
-    //                     end - start);
-    //             executionTimes.push_back(duration.count());
-    //             // std::cout << "fps: " << (1000.0f / duration.count()) <<
-    //             // std::endl;
-
-    //             sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(actorBuf);
-
-    //             draw(SCALE, render, actorHostAcc, room);
-    //             updateBBoxCounter--;
-    //         } else {
-    //             delayCounter++;
-    //         }
-    //     }
-    // }
-
-    // executionTimes.erase(executionTimes.begin());
-    // float count = static_cast<float>(executionTimes.size());
-    // float mean =
-    //     std::accumulate(executionTimes.begin(), executionTimes.end(), 0.0) /
-    //     count;
-    // std::cout << "Mean execution time: " << mean << std::endl;
-
-    // close(win, render);
-
-    // For Profiling
-    int updateBBoxCounterr = 0;
-    for (int x = 0; x < 500; x++) {
-        if (updateBBoxCounterr <= 0) {
-            updateBBox(myQueue, actorBuf);
-            updateBBoxCounterr = 20;
+    while (!isQuit) {
+        if (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                isQuit = true;
+            } else if (event.type == SDL_KEYDOWN &&
+                       event.key.keysym.sym == SDLK_SPACE) {
+                isPause = !isPause;
+            }
         }
-        updateVariations(myQueue, actorBuf);
-        update(myQueue, actorBuf, wallsBuf, pathsBuf);
-        sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(actorBuf);
-        updateBBoxCounterr--;
+
+        if (!isPause) {
+            if (delayCounter >= DELAY) {
+                delayCounter = 0;
+                auto start = std::chrono::high_resolution_clock::now();
+
+                if (updateBBoxCounter <= 0) {
+                    updateBBox(myQueue, actorBuf);
+                    updateBBoxCounter = 20;
+                }
+
+                updateVariations(myQueue, actorBuf);
+                update(myQueue, actorBuf, wallsBuf, pathsBuf);
+
+                auto end = std::chrono::high_resolution_clock::now();
+                auto duration =
+                    std::chrono::duration_cast<std::chrono::milliseconds>(
+                        end - start);
+                executionTimes.push_back(duration.count());
+                // std::cout << "fps: " << (1000.0f / duration.count()) <<
+                // std::endl;
+
+                sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(actorBuf);
+
+                draw(SCALE, render, actorHostAcc, room);
+                updateBBoxCounter--;
+            } else {
+                delayCounter++;
+            }
+        }
     }
+
+    executionTimes.erase(executionTimes.begin());
+    float count = static_cast<float>(executionTimes.size());
+    float mean =
+        std::accumulate(executionTimes.begin(), executionTimes.end(), 0.0) /
+        count;
+    std::cout << "Mean execution time: " << mean << std::endl;
+
+    close(win, render);
+
+    // // For Profiling
+    // int updateBBoxCounterr = 0;
+    // for (int x = 0; x < 500; x++) {
+    //     if (updateBBoxCounterr <= 0) {
+    //         updateBBox(myQueue, actorBuf);
+    //         updateBBoxCounterr = 20;
+    //     }
+    //     updateVariations(myQueue, actorBuf);
+    //     update(myQueue, actorBuf, wallsBuf, pathsBuf);
+    //     sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(actorBuf);
+    //     updateBBoxCounterr--;
+    // }
 
     return 0;
 }
