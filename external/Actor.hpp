@@ -51,7 +51,7 @@ class Actor {
     SYCL_EXTERNAL void setBBox(std::array<int, 2> newBBox);
     SYCL_EXTERNAL void setSeed(uint newSeed);
 
-    SYCL_EXTERNAL void checkAtDestination(std::array<vecType, 4> destination,
+    SYCL_EXTERNAL void checkAtDestination(std::array<vecType, 2> destination,
                                           int pathSize);
 };
 

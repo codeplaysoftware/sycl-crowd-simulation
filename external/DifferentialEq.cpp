@@ -12,16 +12,22 @@ SYCL_EXTERNAL void differentialEq(
     // Calculate personal impulse
     float mi = currentActor->getMass();
     float v0i = currentActor->getDesiredSpeed();
-    std::array<vecType, 4> destination =
+    std::array<vecType, 2> destination =
         paths[currentActor->getPathId()]
             .getCheckpoints()[currentActor->getDestinationIndex()];
 
     // Find direction vector to nearest point in destination region
     std::pair<float, vecType> minRegionDistance;
+    std::array<vecType, 4> destinationRect = {
+        destination[0],
+        {destination[1][0], destination[0][1]},
+        destination[1],
+        {destination[0][0], destination[1][1]}
+    };
     for (int x = 0; x < 4; x++) {
         int endIndex = x == 3 ? 0 : x + 1;
         auto dniw = getDistanceAndNiw(currentActor->getPos(),
-                                      {destination[x], destination[endIndex]});
+                                      {destinationRect[x], destinationRect[endIndex]});
         if (dniw.first < minRegionDistance.first ||
             minRegionDistance.first == 0) {
             minRegionDistance = dniw;

@@ -59,11 +59,11 @@ SYCL_EXTERNAL void Actor::setBBox(std::array<int, 2> newBBox) {
 
 SYCL_EXTERNAL void Actor::setSeed(uint newSeed) { seed = newSeed; }
 
-SYCL_EXTERNAL void Actor::checkAtDestination(std::array<vecType, 4> destination,
+SYCL_EXTERNAL void Actor::checkAtDestination(std::array<vecType, 2> destination,
                                              int pathSize) {
     // Destinations are defined as rectangular regions
-    if (pos[0] >= destination[0][0] && pos[0] <= destination[2][0] &&
-        pos[1] >= destination[0][1] && pos[1] <= destination[2][1]) {
+    if (pos[0] >= destination[0][0] && pos[0] <= destination[1][0] &&
+        pos[1] >= destination[0][1] && pos[1] <= destination[1][1]) {
         if (destinationIndex >= PATHALLOCATIONSIZE - 1 ||
             destinationIndex >= pathSize - 1) {
             this->setAtDestination(true);
