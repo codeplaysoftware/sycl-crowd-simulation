@@ -96,25 +96,6 @@ void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf, sycl::buffer<st
     }
 }
 
-void updateVariations(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
-    try {
-        myQueue
-            .submit([&](sycl::handler &cgh) {
-                auto actorAcc =
-                    actorBuf.get_access<sycl::access::mode::read_write>(cgh);
-
-                cgh.parallel_for(
-                    sycl::range<1>{actorAcc.size()}, [=](sycl::item<1> item) {
-                        actorAcc[item.get_id()].refreshVariations();
-                    });
-            })
-            .wait_and_throw();
-    } catch (const sycl::exception &e) {
-        std::cout << "SYCL exception caught:\n"
-                  << e.what() << "\n[updateVariations]";
-    }
-}
-
 void updateBBox(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
     try {
         myQueue
@@ -226,8 +207,7 @@ int main(int argc, char *argv[]) {
                     updateBBox(myQueue, actorBuf);
                     updateBBoxCounter = 20;
                 }
-
-                updateVariations(myQueue, actorBuf);
+                
                 update(myQueue, actorBuf, wallsBuf, pathsBuf);
 
                 auto end = std::chrono::high_resolution_clock::now();
@@ -264,7 +244,6 @@ int main(int argc, char *argv[]) {
     //         updateBBox(myQueue, actorBuf);
     //         updateBBoxCounterr = 20;
     //     }
-    //     updateVariations(myQueue, actorBuf);
     //     update(myQueue, actorBuf, wallsBuf, pathsBuf);
     //     sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(actorBuf);
     //     updateBBoxCounterr--;

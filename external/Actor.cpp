@@ -6,7 +6,7 @@ Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, int pPathId,
     : pos(pPos), velocity(pVelocity), desiredSpeed(pDesiredSpeed),
       pathId(pPathId), mass(pMass), radius(pRadius),
       atDestination(pAtDestination), color(pColor),
-      heatmapEnabled(pHeatmapEnabled), variation({0, 0}), destinationIndex(0),
+      heatmapEnabled(pHeatmapEnabled), destinationIndex(0),
       bBox({0, 0}) {}
 
 SYCL_EXTERNAL vecType Actor::getPos() const { return pos; }
@@ -20,8 +20,6 @@ SYCL_EXTERNAL int Actor::getPathId() const { return pathId; }
 SYCL_EXTERNAL int Actor::getDestinationIndex() const {
     return destinationIndex;
 }
-
-SYCL_EXTERNAL vecType Actor::getVariation() const { return variation; }
 
 SYCL_EXTERNAL float Actor::getMass() const { return mass; }
 
@@ -47,10 +45,6 @@ SYCL_EXTERNAL void Actor::setDesiredSpeed(float newDesiredSpeed) {
     desiredSpeed = newDesiredSpeed;
 }
 
-SYCL_EXTERNAL void Actor::setVariation(vecType newVariation) {
-    variation = newVariation;
-}
-
 SYCL_EXTERNAL void Actor::setAtDestination(bool param) {
     atDestination = param;
 }
@@ -64,15 +58,6 @@ SYCL_EXTERNAL void Actor::setBBox(std::array<int, 2> newBBox) {
 }
 
 SYCL_EXTERNAL void Actor::setSeed(uint newSeed) { seed = newSeed; }
-
-SYCL_EXTERNAL void Actor::refreshVariations() {
-    // Previous RNG output is used as next seed
-    seed = randXorShift(seed);
-    float randX = (float(seed) * (2.0f / 4294967296.0f)) - 1.0f;
-    seed = randXorShift(seed);
-    float randY = (float(seed) * (2.0f / 4294967296.0f)) - 1.0f;
-    this->setVariation({randX, randY});
-}
 
 SYCL_EXTERNAL void Actor::checkAtDestination(std::array<vecType, 4> destination,
                                              int pathSize) {

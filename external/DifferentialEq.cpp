@@ -94,7 +94,11 @@ SYCL_EXTERNAL void differentialEq(
     vecType forceSum = personalImpulse + peopleForces + wallForces;
 
     // Apply random force variations
-    forceSum += currentActor->getVariation();
+    currentActor->setSeed(randXorShift(currentActor->getSeed()));
+    float randX = (float(currentActor->getSeed()) * (2.0f / 4294967296.0f)) - 1.0f;
+    currentActor->setSeed(randXorShift(currentActor->getSeed()));
+    float randY = (float(currentActor->getSeed()) * (2.0f / 4294967296.0f)) - 1.0f;
+    forceSum += {randX, randY};
 
     // Color actor according to heatmap
     if (currentActor->getHeatmapEnabled()) {
