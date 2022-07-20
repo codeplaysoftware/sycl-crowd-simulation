@@ -1,16 +1,17 @@
 #ifndef Actor_hpp
 #define Actor_hpp
 
-#include <iostream>
-#include <array>
-#include <random>
-#include <vector>
-#include <sycl/sycl.hpp>
-#include "VectorMaths.hpp"
 #include "Path.hpp"
+#include "VectorMaths.hpp"
+#include "RandomNumber.hpp"
+#include <array>
+#include <iostream>
+#include <random>
+#include <sycl/sycl.hpp>
+#include <vector>
 
 class Actor {
-private:
+  private:
     vecType pos;
     vecType velocity;
     float desiredSpeed;
@@ -22,10 +23,14 @@ private:
     bool atDestination;
     std::array<int, 3> color;
     bool heatmapEnabled;
+    std::array<int, 2> bBox;
+    uint seed;
 
-public:
-    Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, int pPathId, float pMass, float pRadius, bool pAtDestination, std::array<int, 3> pColor, bool pHeatmapEnabled);
-    
+  public:
+    Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, int pPathId,
+          float pMass, float pRadius, bool pAtDestination,
+          std::array<int, 3> pColor, bool pHeatmapEnabled);
+
     SYCL_EXTERNAL vecType getPos() const;
     SYCL_EXTERNAL vecType getVelocity() const;
     SYCL_EXTERNAL float getDesiredSpeed() const;
@@ -37,6 +42,8 @@ public:
     SYCL_EXTERNAL bool getAtDestination() const;
     SYCL_EXTERNAL std::array<int, 3> getColor() const;
     SYCL_EXTERNAL bool getHeatmapEnabled() const;
+    SYCL_EXTERNAL std::array<int, 2> getBBox() const;
+    SYCL_EXTERNAL uint getSeed() const;
 
     SYCL_EXTERNAL void setPos(vecType newPos);
     SYCL_EXTERNAL void setVelocity(vecType newVelocity);
@@ -44,9 +51,13 @@ public:
     SYCL_EXTERNAL void setVariation(vecType newVariation);
     SYCL_EXTERNAL void setAtDestination(bool param);
     SYCL_EXTERNAL void setColor(std::array<int, 3> newColor);
+    SYCL_EXTERNAL void setBBox(std::array<int, 2> newBBox);
+    SYCL_EXTERNAL void setSeed(uint newSeed);
 
-    SYCL_EXTERNAL void checkAtDestination(vecType destination, int pathSize);
-    void refreshVariation();
+    SYCL_EXTERNAL void refreshVariations();
+
+    SYCL_EXTERNAL void checkAtDestination(std::array<vecType, 4> destination,
+                                          int pathSize);
 };
 
 #endif
