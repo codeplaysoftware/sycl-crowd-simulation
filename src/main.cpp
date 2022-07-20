@@ -20,7 +20,8 @@
 
 uint GLOBALSEED;
 
-void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY, std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR,
+void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY,
+          std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR,
           std::vector<Actor> &actors, Room &room, std::vector<Path> &paths,
           int argc, char **argv) {
     // Read from input file path JSON
@@ -71,7 +72,8 @@ void drawCircle(SDL_Renderer *&render, SDL_Point center, int radius,
 #endif
 
 #ifndef PROFILING_MODE
-void draw(int SCALE, std::array<int, 3> BGCOLOR, std::array<int, 3> WALLCOLOR, SDL_Renderer *&render,
+void draw(int SCALE, std::array<int, 3> BGCOLOR, std::array<int, 3> WALLCOLOR,
+          SDL_Renderer *&render,
           sycl::host_accessor<Actor, 1, sycl::access::mode::read> actors,
           Room room) {
     SDL_SetRenderDrawColor(render, BGCOLOR[0], BGCOLOR[1], BGCOLOR[2], 255);
@@ -87,7 +89,8 @@ void draw(int SCALE, std::array<int, 3> BGCOLOR, std::array<int, 3> WALLCOLOR, S
         drawCircle(render, pos, actor.getRadius() * SCALE, actorColor);
     }
 
-    SDL_SetRenderDrawColor(render, WALLCOLOR[0], WALLCOLOR[1], WALLCOLOR[2], 255);
+    SDL_SetRenderDrawColor(render, WALLCOLOR[0], WALLCOLOR[1], WALLCOLOR[2],
+                           255);
     auto walls = room.getWalls();
     for (auto wall : walls) {
         SDL_RenderDrawLine(render, wall[0][0] * SCALE, wall[0][1] * SCALE,
@@ -110,24 +113,21 @@ void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf,
             sycl::buffer<std::array<vecType, 2>> &wallsBuf,
             sycl::buffer<Path> &pathsBuf) {
     try {
-        myQueue
-            .submit([&](sycl::handler &cgh) {
-                auto actorAcc =
-                    actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+        myQueue.submit([&](sycl::handler &cgh) {
+            auto actorAcc =
+                actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-                auto wallsAcc =
-                    wallsBuf.get_access<sycl::access::mode::read>(cgh);
+            auto wallsAcc = wallsBuf.get_access<sycl::access::mode::read>(cgh);
 
-                auto pathsAcc =
-                    pathsBuf.get_access<sycl::access::mode::read>(cgh);
+            auto pathsAcc = pathsBuf.get_access<sycl::access::mode::read>(cgh);
 
-                cgh.parallel_for(
-                    sycl::range<1>{actorAcc.size()}, [=](sycl::id<1> index) {
-                        if (!actorAcc[index].getAtDestination()) {
-                            differentialEq(index, actorAcc, wallsAcc, pathsAcc);
-                        }
-                    });
-            });
+            cgh.parallel_for(
+                sycl::range<1>{actorAcc.size()}, [=](sycl::id<1> index) {
+                    if (!actorAcc[index].getAtDestination()) {
+                        differentialEq(index, actorAcc, wallsAcc, pathsAcc);
+                    }
+                });
+        });
         myQueue.throw_asynchronous();
     } catch (const sycl::exception &e) {
         std::cout << "SYCL exception caught:\n" << e.what() << "\n[update]";
@@ -136,20 +136,19 @@ void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf,
 
 void updateBBox(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
     try {
-        myQueue
-            .submit([&](sycl::handler &cgh) {
-                auto actorAcc =
-                    actorBuf.get_access<sycl::access::mode::read_write>(cgh);
+        myQueue.submit([&](sycl::handler &cgh) {
+            auto actorAcc =
+                actorBuf.get_access<sycl::access::mode::read_write>(cgh);
 
-                cgh.parallel_for(sycl::range<1>{actorAcc.size()},
-                                 [=](sycl::id<1> index) {
-                                     Actor *currentActor = &actorAcc[index];
-                                     vecType pos = currentActor->getPos();
-                                     int row = sycl::floor(pos[0]);
-                                     int col = sycl::floor(pos[1]);
-                                     currentActor->setBBox({row, col});
-                                 });
-            });
+            cgh.parallel_for(sycl::range<1>{actorAcc.size()},
+                             [=](sycl::id<1> index) {
+                                 Actor *currentActor = &actorAcc[index];
+                                 vecType pos = currentActor->getPos();
+                                 int row = sycl::floor(pos[0]);
+                                 int col = sycl::floor(pos[1]);
+                                 currentActor->setBBox({row, col});
+                             });
+        });
         myQueue.throw_asynchronous();
     } catch (const sycl::exception &e) {
         std::cout << "SYCL exception caught:\n" << e.what() << "\n[updateBBox]";
@@ -183,7 +182,8 @@ int main(int argc, char *argv[]) {
     sycl::queue myQueue{sycl::gpu_selector(), asyncHandler};
 
 #ifndef PROFILING_MODE
-    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, actors, room, paths, argc, argv);
+    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, actors, room, paths,
+         argc, argv);
     initSDL(WIDTH, HEIGHT, SCALE, win, render);
 #else
     init(WIDTH, HEIGHT, SCALE, DELAY, actors, room, paths, argc, argv);
@@ -232,7 +232,7 @@ int main(int argc, char *argv[]) {
                 sycl::host_accessor<Actor, 1, sycl::access::mode::read>
                     actorHostAcc(actorBuf);
                 draw(SCALE, BGCOLOR, WALLCOLOR, render, actorHostAcc, room);
-                
+
                 updateBBoxCounter--;
             } else {
                 delayCounter++;

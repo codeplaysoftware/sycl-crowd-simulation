@@ -1,5 +1,6 @@
 #include "ParseInputFile.hpp"
 
+// Checks that input json file contains required members
 void validateParameters(rapidjson::Document &jsonDoc) {
     std::string missingParameters = "";
 
@@ -16,7 +17,8 @@ void validateParameters(rapidjson::Document &jsonDoc) {
         throw JSONException("Missing these parameters: " + missingParameters);
     } else {
         auto &config = jsonDoc["config"];
-        auto configParams = {"width", "height", "scale", "delay", "wallColor", "bgColor"};
+        auto configParams = {"width", "height",    "scale",
+                             "delay", "wallColor", "bgColor"};
         for (auto p : configParams) {
             if (!config.HasMember(p))
                 missingParameters += std::string(p) + " ";
@@ -51,7 +53,9 @@ void validateParameters(rapidjson::Document &jsonDoc) {
 
 void parseInputFile(std::string filename, std::vector<Actor> &actors,
                     Room &room, std::vector<Path> &paths, int &WIDTH,
-                    int &HEIGHT, int &SCALE, int &DELAY, std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR) {
+                    int &HEIGHT, int &SCALE, int &DELAY,
+                    std::array<int, 3> &BGCOLOR,
+                    std::array<int, 3> &WALLCOLOR) {
     std::ifstream jsonFile(filename);
     if (!jsonFile.is_open()) {
         throw JSONException("Error opening file " + filename);

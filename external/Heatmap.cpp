@@ -1,5 +1,6 @@
 #include "Heatmap.hpp"
 
+// Required because SDL only takes RGB colors
 SYCL_EXTERNAL std::array<float, 3> HSVtoRGB(float h, float s, float v) {
     float c = v * s;
     double scaledH = sycl::fmod(h / 60.0, 6.0);

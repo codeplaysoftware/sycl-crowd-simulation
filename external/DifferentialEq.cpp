@@ -124,6 +124,7 @@ SYCL_EXTERNAL void differentialEq(
         currentActor->setColor({int(color[0]), int(color[1]), int(color[2])});
     }
 
+    // Perform integration
     vecType acceleration = forceSum / mi;
     currentActor->setVelocity(vi + acceleration * TIMESTEP);
     currentActor->setPos(pos + currentActor->getVelocity() * TIMESTEP);

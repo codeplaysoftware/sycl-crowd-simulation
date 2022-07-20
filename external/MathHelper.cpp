@@ -17,6 +17,8 @@ SYCL_EXTERNAL float magnitude(vecType inp) {
     return sycl::sqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
 }
 
+// Fast inverse square root optimisation
+// https://en.wikipedia.org/wiki/Fast_inverse_square_root
 SYCL_EXTERNAL float inverseMagnitude(vecType inp) {
     return sycl::rsqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
 }
@@ -33,6 +35,7 @@ SYCL_EXTERNAL vecType normalize(vecType inp) {
     return inp * inverseMagnitude(inp);
 }
 
+// Returns pair of distance to line and normalised direction from wall to point
 SYCL_EXTERNAL std::pair<float, vecType>
 getDistanceAndNiw(vecType point, std::array<vecType, 2> wall) {
     vecType AB = getDirectionVector(wall[0], wall[1]);

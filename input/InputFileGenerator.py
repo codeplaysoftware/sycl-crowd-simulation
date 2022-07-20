@@ -42,10 +42,10 @@ def main(argv):
             fourSquare["config"] = {
                 "width": 9,
                 "height": 9,
-                "scale": 100, 
+                "scale": 100,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             fourSquare["room"] = {
@@ -121,7 +121,7 @@ def main(argv):
                 "scale": 100,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             fourCorridor["room"] = {
@@ -232,7 +232,7 @@ def main(argv):
                 "scale": 100,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             twoGroups["room"] = {
@@ -304,7 +304,7 @@ def main(argv):
                 "scale": 50,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             twoGroups10000["room"] = {
@@ -367,12 +367,12 @@ def main(argv):
         elif config[0] == "tightCorner":
             tightCorner = config[1]
             tightCorner["config"] = {
-                "width": 9, 
-                "height": 9, 
-                "scale": 100, 
+                "width": 9,
+                "height": 9,
+                "scale": 100,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             tightCorner["room"] = {
@@ -426,7 +426,7 @@ def main(argv):
                 "scale": 100,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             laneFiltering["room"] = {
@@ -489,7 +489,7 @@ def main(argv):
                 "scale": 100,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             corridorWidening["room"] = {
@@ -534,12 +534,12 @@ def main(argv):
         elif config[0] == "evacuateRoom":
             evacuateRoom = config[1]
             evacuateRoom["config"] = {
-                "width": 9, 
-                "height": 9, 
-                "scale": 100, 
+                "width": 9,
+                "height": 9,
+                "scale": 100,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             evacuateRoom["room"] = {
@@ -587,7 +587,7 @@ def main(argv):
                 "scale": 50,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             evacuateRoom10000["room"] = {
@@ -635,7 +635,7 @@ def main(argv):
                 "scale": 10,
                 "delay": 0,
                 "bgColor": [0, 0, 0],
-                "wallColor": [255, 255, 255]
+                "wallColor": [255, 255, 255],
             }
 
             evacuateRoom50000["room"] = {
