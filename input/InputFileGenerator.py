@@ -32,7 +32,9 @@ def main(argv):
             ["evacuateRoom50000", {}],
         ]
     else:
-        toGenerate = argv
+        toGenerate = []
+        for target in argv:
+            toGenerate.append([target, {}])
 
     for config in toGenerate:
         if config[0] == "fourSquare":
