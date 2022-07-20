@@ -127,8 +127,8 @@ void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf,
                             differentialEq(index, actorAcc, wallsAcc, pathsAcc);
                         }
                     });
-            })
-            .wait_and_throw();
+            });
+        myQueue.throw_asynchronous();
     } catch (const sycl::exception &e) {
         std::cout << "SYCL exception caught:\n" << e.what() << "\n[update]";
     }
@@ -149,8 +149,8 @@ void updateBBox(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
                                      int col = sycl::floor(pos[1]);
                                      currentActor->setBBox({row, col});
                                  });
-            })
-            .wait_and_throw();
+            });
+        myQueue.throw_asynchronous();
     } catch (const sycl::exception &e) {
         std::cout << "SYCL exception caught:\n" << e.what() << "\n[updateBBox]";
     }
