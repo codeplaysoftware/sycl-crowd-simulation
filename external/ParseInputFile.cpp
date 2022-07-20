@@ -94,8 +94,10 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
         }
         for (int i = 0; i < jsonCheckpoints.Size(); i++) {
             std::array<vecType, 2> region;
-            region[0] = vecType({jsonCheckpoints[i][0][0].GetFloat(), jsonCheckpoints[i][0][1].GetFloat()});
-            region[1] = vecType({jsonCheckpoints[i][1][0].GetFloat(), jsonCheckpoints[i][1][1].GetFloat()});
+            region[0] = vecType({jsonCheckpoints[i][0][0].GetFloat(),
+                                 jsonCheckpoints[i][0][1].GetFloat()});
+            region[1] = vecType({jsonCheckpoints[i][1][0].GetFloat(),
+                                 jsonCheckpoints[i][1][1].GetFloat()});
             checkpoints[i] = region;
         }
         int pathSize = jsonCheckpoints.Size();

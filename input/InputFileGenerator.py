@@ -29,7 +29,7 @@ def main(argv):
             ["corridorWidening", {}],
             ["evacuateRoom", {}],
             ["evacuateRoom10000", {}],
-            ["evacuateRoom50000", {}]
+            ["evacuateRoom50000", {}],
         ]
     else:
         toGenerate = argv
@@ -78,7 +78,7 @@ def main(argv):
                                 "checkpoints": [
                                     [
                                         [point[0] - 0.01, point[1] - 0.01],
-                                        [point[0] + 0.01, point[1] + 0.01]
+                                        [point[0] + 0.01, point[1] + 0.01],
                                     ]
                                 ],
                             }
@@ -103,7 +103,7 @@ def main(argv):
 
             fourSquare["actors"] = actorList
             fourSquare["paths"] = pathList
-        
+
         elif config[0] == "fourCorridor":
             fourCorridor = config[1]
             fourCorridor["config"] = {
@@ -126,7 +126,7 @@ def main(argv):
                     [5.5, 19, 3.5, 19],
                     [3.5, 19, 3.5, 5.5],
                     [3.5, 5.5, -10, 5.5],
-                    [-10, 5.5, -10, 3.5]
+                    [-10, 5.5, -10, 3.5],
                 ]
             }
 
@@ -191,36 +191,27 @@ def main(argv):
                             "heatmapEnabled": False,
                         }
                     )
-            
+
             fourCorridor["paths"] = [
                 {
                     "id": 0,
-                    "checkpoints": [
-                        [[3.5, 18], [5.5, 19]]
-                    ],
+                    "checkpoints": [[[3.5, 18], [5.5, 19]]],
                 },
                 {
                     "id": 1,
-                    "checkpoints": [
-                        [[3.5, -9], [5.5, -10]]
-                    ],
+                    "checkpoints": [[[3.5, -9], [5.5, -10]]],
                 },
                 {
                     "id": 2,
-                    "checkpoints": [
-                        [[18, 3.5], [19, 5.5]]
-                    ],
+                    "checkpoints": [[[18, 3.5], [19, 5.5]]],
                 },
                 {
                     "id": 3,
-                    "checkpoints": [
-                        [[-10, 3.5], [-9, 5.5]]
-                    ],
-                }
+                    "checkpoints": [[[-10, 3.5], [-9, 5.5]]],
+                },
             ]
 
             fourCorridor["actors"] = actorList
-        
 
         elif config[0] == "twoGroups":
             twoGroups = config[1]
@@ -291,7 +282,7 @@ def main(argv):
                 },
             ]
             twoGroups["actors"] = actorList
-        
+
         elif config[0] == "twoGroups10000":
             twoGroups10000 = config[1]
             twoGroups10000["config"] = {
@@ -306,7 +297,7 @@ def main(argv):
                     [-10, 0, 40, 0],
                     [40, 0, 40, 20],
                     [40, 20, -10, 20],
-                    [-10, 20, -10, 0]
+                    [-10, 20, -10, 0],
                 ]
             }
 
@@ -341,7 +332,7 @@ def main(argv):
                             "heatmapEnabled": False,
                         }
                     )
-            
+
             twoGroups10000["paths"] = [
                 {
                     "id": 0,
@@ -360,12 +351,7 @@ def main(argv):
 
         elif config[0] == "tightCorner":
             tightCorner = config[1]
-            tightCorner["config"] = {
-                "width": 9, 
-                "height": 9, 
-                "scale": 100, 
-                "delay": 0
-            }
+            tightCorner["config"] = {"width": 9, "height": 9, "scale": 100, "delay": 0}
 
             tightCorner["room"] = {
                 "walls": [

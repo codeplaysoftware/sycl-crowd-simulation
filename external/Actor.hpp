@@ -2,8 +2,8 @@
 #define Actor_hpp
 
 #include "Path.hpp"
-#include "VectorMaths.hpp"
 #include "RandomNumber.hpp"
+#include "VectorMaths.hpp"
 #include <array>
 #include <iostream>
 #include <random>

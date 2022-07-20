@@ -6,8 +6,7 @@ Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, int pPathId,
     : pos(pPos), velocity(pVelocity), desiredSpeed(pDesiredSpeed),
       pathId(pPathId), mass(pMass), radius(pRadius),
       atDestination(pAtDestination), color(pColor),
-      heatmapEnabled(pHeatmapEnabled), destinationIndex(0),
-      bBox({0, 0}) {}
+      heatmapEnabled(pHeatmapEnabled), destinationIndex(0), bBox({0, 0}) {}
 
 SYCL_EXTERNAL vecType Actor::getPos() const { return pos; }
 

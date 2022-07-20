@@ -22,12 +22,12 @@ SYCL_EXTERNAL void differentialEq(
         destination[0],
         {destination[1][0], destination[0][1]},
         destination[1],
-        {destination[0][0], destination[1][1]}
-    };
+        {destination[0][0], destination[1][1]}};
     for (int x = 0; x < 4; x++) {
         int endIndex = x == 3 ? 0 : x + 1;
-        auto dniw = getDistanceAndNiw(currentActor->getPos(),
-                                      {destinationRect[x], destinationRect[endIndex]});
+        auto dniw =
+            getDistanceAndNiw(currentActor->getPos(),
+                              {destinationRect[x], destinationRect[endIndex]});
         if (dniw.first < minRegionDistance.first ||
             minRegionDistance.first == 0) {
             minRegionDistance = dniw;
@@ -101,9 +101,12 @@ SYCL_EXTERNAL void differentialEq(
 
     // Apply random force variations
     currentActor->setSeed(randXorShift(currentActor->getSeed()));
-    float randX = (float(currentActor->getSeed()) * (2.0f / 4294967296.0f)) - 1.0f;
+    // Generate a random number in range -1 to 1
+    float randX =
+        (float(currentActor->getSeed()) * (2.0f / 4294967296.0f)) - 1.0f;
     currentActor->setSeed(randXorShift(currentActor->getSeed()));
-    float randY = (float(currentActor->getSeed()) * (2.0f / 4294967296.0f)) - 1.0f;
+    float randY =
+        (float(currentActor->getSeed()) * (2.0f / 4294967296.0f)) - 1.0f;
     forceSum += {randX, randY};
 
     // Color actor according to heatmap
