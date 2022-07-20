@@ -44,6 +44,12 @@ void init(int &SCALE, int &DELAY, SDL_Window*& win, SDL_Renderer*& render,
         actor.setSeed(GLOBALSEED);
     }
 
+    // Initialise SDL
+    SDL_Init(SDL_INIT_VIDEO);
+    win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED,
+                           SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE,
+                           HEIGHT * SCALE, SDL_WINDOW_SHOWN);
+    render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 }
 
 void drawCircle(SDL_Renderer *&render, SDL_Point center, int radius,
