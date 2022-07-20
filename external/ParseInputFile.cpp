@@ -16,7 +16,7 @@ void validateParameters(rapidjson::Document &jsonDoc) {
         throw JSONException("Missing these parameters: " + missingParameters);
     } else {
         auto &config = jsonDoc["config"];
-        auto configParams = {"width", "height", "scale", "delay"};
+        auto configParams = {"width", "height", "scale", "delay", "wallColor", "bgColor"};
         for (auto p : configParams) {
             if (!config.HasMember(p))
                 missingParameters += std::string(p) + " ";
@@ -51,7 +51,7 @@ void validateParameters(rapidjson::Document &jsonDoc) {
 
 void parseInputFile(std::string filename, std::vector<Actor> &actors,
                     Room &room, std::vector<Path> &paths, int &WIDTH,
-                    int &HEIGHT, int &SCALE, int &DELAY) {
+                    int &HEIGHT, int &SCALE, int &DELAY, std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR) {
     std::ifstream jsonFile(filename);
     if (!jsonFile.is_open()) {
         throw JSONException("Error opening file " + filename);
@@ -71,6 +71,10 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
     HEIGHT = config["height"].GetInt();
     SCALE = config["scale"].GetInt();
     DELAY = config["delay"].GetInt();
+    for (int x; x < 3; x++) {
+        BGCOLOR[x] = config["bgColor"][x].GetFloat();
+        WALLCOLOR[x] = config["wallColor"][x].GetFloat();
+    }
 
     // Room
     auto jsonWalls = jsonDoc["room"]["walls"].GetArray();

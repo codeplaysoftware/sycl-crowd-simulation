@@ -20,14 +20,14 @@
 
 uint GLOBALSEED;
 
-void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY,
+void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY, std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR,
           std::vector<Actor> &actors, Room &room, std::vector<Path> &paths,
           int argc, char **argv) {
     // Read from input file path JSON
     if (argc == 2) {
         std::string inputPath = argv[1];
         parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE,
-                       DELAY);
+                       DELAY, BGCOLOR, WALLCOLOR);
     } else if (argc < 2) {
         throw std::invalid_argument(
             "Input configuration file must be supplied");
@@ -71,10 +71,10 @@ void drawCircle(SDL_Renderer *&render, SDL_Point center, int radius,
 #endif
 
 #ifndef PROFILING_MODE
-void draw(int SCALE, SDL_Renderer *&render,
+void draw(int SCALE, std::array<int, 3> BGCOLOR, std::array<int, 3> WALLCOLOR, SDL_Renderer *&render,
           sycl::host_accessor<Actor, 1, sycl::access::mode::read> actors,
           Room room) {
-    SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(render, BGCOLOR[0], BGCOLOR[1], BGCOLOR[2], 255);
     SDL_RenderClear(render);
 
     for (int i = 0; i < actors.size(); i++) {
@@ -87,7 +87,7 @@ void draw(int SCALE, SDL_Renderer *&render,
         drawCircle(render, pos, actor.getRadius() * SCALE, actorColor);
     }
 
-    SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(render, WALLCOLOR[0], WALLCOLOR[1], WALLCOLOR[2], 255);
     auto walls = room.getWalls();
     for (auto wall : walls) {
         SDL_RenderDrawLine(render, wall[0][0] * SCALE, wall[0][1] * SCALE,
@@ -162,6 +162,9 @@ int main(int argc, char *argv[]) {
     int SCALE;
     int DELAY;
 
+    std::array<int, 3> BGCOLOR;
+    std::array<int, 3> WALLCOLOR;
+
 #ifndef PROFILING_MODE
     SDL_Window *win;
     SDL_Renderer *render;
@@ -180,7 +183,7 @@ int main(int argc, char *argv[]) {
     sycl::queue myQueue{sycl::gpu_selector(), asyncHandler};
 
 #ifndef PROFILING_MODE
-    init(WIDTH, HEIGHT, SCALE, DELAY, actors, room, paths, argc, argv);
+    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, actors, room, paths, argc, argv);
     initSDL(WIDTH, HEIGHT, SCALE, win, render);
 #else
     init(WIDTH, HEIGHT, SCALE, DELAY, actors, room, paths, argc, argv);
@@ -202,8 +205,6 @@ int main(int argc, char *argv[]) {
     bool isPause = false;
     SDL_Event event;
 
-    std::vector<int> executionTimes;
-
     while (!isQuit) {
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
@@ -217,7 +218,6 @@ int main(int argc, char *argv[]) {
         if (!isPause) {
             if (delayCounter >= DELAY) {
                 delayCounter = 0;
-                auto start = std::chrono::high_resolution_clock::now();
 
                 if (updateBBoxCounter <= 0) {
                     updateBBox(myQueue, actorBuf);
@@ -226,31 +226,19 @@ int main(int argc, char *argv[]) {
 
                 update(myQueue, actorBuf, wallsBuf, pathsBuf);
 
-                auto end = std::chrono::high_resolution_clock::now();
-                auto duration =
-                    std::chrono::duration_cast<std::chrono::milliseconds>(
-                        end - start);
-                executionTimes.push_back(duration.count());
                 // std::cout << "fps: " << (1000.0f / duration.count()) <<
                 // std::endl;
 
                 sycl::host_accessor<Actor, 1, sycl::access::mode::read>
                     actorHostAcc(actorBuf);
-
-                draw(SCALE, render, actorHostAcc, room);
+                draw(SCALE, BGCOLOR, WALLCOLOR, render, actorHostAcc, room);
+                
                 updateBBoxCounter--;
             } else {
                 delayCounter++;
             }
         }
     }
-
-    executionTimes.erase(executionTimes.begin());
-    float count = static_cast<float>(executionTimes.size());
-    float mean =
-        std::accumulate(executionTimes.begin(), executionTimes.end(), 0.0) /
-        count;
-    std::cout << "Mean execution time: " << mean << std::endl;
 
     close(win, render);
 #else

@@ -12,7 +12,7 @@
 #include <sycl/sycl.hpp>
 
 // Constant for scaling inter-actor repulsive force
-constexpr float PEOPLEAi = 500;
+constexpr float PEOPLEAi = 800;
 // Constant for scaling actor-wall repulsive force
 constexpr float WALLAi = 1300;
 // Reproduces distance kept at normal desired velocities
