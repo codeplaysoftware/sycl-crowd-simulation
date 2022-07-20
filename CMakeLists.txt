@@ -8,8 +8,13 @@ project(crowd-simulation)
 set(CMAKE_C_COMPILER /home/sami/sycl_workspace/llvm/build/bin/clang)
 set(CMAKE_CXX_COMPILER /home/sami/sycl_workspace/llvm/build/bin/clang++)
 
-find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
+OPTION(PROFILING_MODE "Enable Profiling" off)
+if(PROFILING_MODE)
+    add_definitions(-DPROFILING_MODE)
+else()
+    find_package(SDL2 REQUIRED)
+    include_directories(${SDL2_INCLUDE_DIRS})
+endif()
 
 add_executable(crowdsim src/main.cpp)
 
@@ -33,5 +38,9 @@ endif()
 
 add_subdirectory(external)
 
-target_link_libraries(crowdsim PUBLIC ${SDL2_LIBRARIES} external) 
+if (PROFILING_MODE)
+    target_link_libraries(crowdsim PUBLIC external) 
+else()
+    target_link_libraries(crowdsim PUBLIC ${SDL2_LIBRARIES} external)
+endif()
 target_include_directories(crowdsim PUBLIC "${PROJECT_BINARY_DIR}" "${PROJECT_SOURCE_DIR}/external")
