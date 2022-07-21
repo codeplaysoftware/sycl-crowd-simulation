@@ -202,6 +202,7 @@ int main(int argc, char *argv[]) {
     auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
     pathsBuf.set_final_data(nullptr);
 
+// Initialise stats variables if STATS flag is true
 #ifdef STATS
     std::vector<float> averageForces;
     int updateStatsCounter = 49;
@@ -289,8 +290,9 @@ int main(int argc, char *argv[]) {
 #endif
 
     close(win, render);
+
+// Profiling loop
 #else
-    // For Profiling
     int updateBBoxCounterr = 0;
 
 #ifdef STATS

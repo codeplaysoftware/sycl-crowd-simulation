@@ -9,6 +9,7 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
         float forceSum = 0;
         auto forceSumBuf = sycl::buffer<float>(&forceSum, 1);
 
+        // Calculate average force applied to actor this iteration
         myQueue
             .submit([&](sycl::handler &cgh) {
                 auto actorAcc =
@@ -28,6 +29,8 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
             forceSumBuf);
         averageForces.push_back(forceSumHostAcc[0] / actorBuf.size());
 
+        // Find actors which have reached their destination and record how long
+        // it took them
         auto destinationTimesBuf =
             sycl::buffer<int>(destinationTimes.data(), destinationTimes.size());
 
@@ -76,6 +79,7 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
         auto kernelDurationsBuf =
             sycl::buffer<int>(kernelDurations.data(), kernelDurations.size());
 
+        // Calculate average kernel duration
         myQueue
             .submit([&](sycl::handler &cgh) {
                 auto durationAcc =
@@ -98,6 +102,7 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
         float avgKernelDuration =
             float(durationSumHostAcc[0]) / float(kernelDurations.size());
 
+        // Write results to ../output/outputStats.txt
         std::ofstream outputFile;
         outputFile.open("../output/outputStats.txt", std::ios::out);
 
@@ -144,9 +149,8 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
 
         outputFile.close();
 
-        std::cout
-            << "Stats results have been written to ../output/outputStats.txt"
-            << std::endl;
+        std::cout << "Stats have been written to ../output/outputStats.txt"
+                  << std::endl;
     } catch (const sycl::exception &e) {
         std::cout << "SYCL exception caught:\n"
                   << e.what() << "\n[finalizeStats]";
