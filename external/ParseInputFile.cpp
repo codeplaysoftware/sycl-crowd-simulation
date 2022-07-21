@@ -75,10 +75,11 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
     HEIGHT = config["height"].GetInt();
     SCALE = config["scale"].GetInt();
     DELAY = config["delay"].GetInt();
-    for (int x; x < 3; x++) {
-        BGCOLOR[x] = config["bgColor"][x].GetFloat();
-        WALLCOLOR[x] = config["wallColor"][x].GetFloat();
-    }
+    WALLCOLOR = {config["wallColor"][0].GetInt(),
+                 config["wallColor"][1].GetInt(),
+                 config["wallColor"][2].GetInt()};
+    BGCOLOR = {config["bgColor"][0].GetInt(), config["bgColor"][1].GetInt(),
+               config["bgColor"][2].GetInt()};
 
     // Room
     auto jsonWalls = jsonDoc["room"]["walls"].GetArray();

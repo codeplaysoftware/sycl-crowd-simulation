@@ -24,6 +24,7 @@ class Actor {
     bool heatmapEnabled;
     std::array<int, 2> bBox;
     uint seed;
+    float prevForce;
 
   public:
     Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, int pPathId,
@@ -42,6 +43,7 @@ class Actor {
     SYCL_EXTERNAL bool getHeatmapEnabled() const;
     SYCL_EXTERNAL std::array<int, 2> getBBox() const;
     SYCL_EXTERNAL uint getSeed() const;
+    SYCL_EXTERNAL float getPrevForce() const;
 
     SYCL_EXTERNAL void setPos(vecType newPos);
     SYCL_EXTERNAL void setVelocity(vecType newVelocity);
@@ -50,6 +52,7 @@ class Actor {
     SYCL_EXTERNAL void setColor(std::array<int, 3> newColor);
     SYCL_EXTERNAL void setBBox(std::array<int, 2> newBBox);
     SYCL_EXTERNAL void setSeed(uint newSeed);
+    SYCL_EXTERNAL void setPrevForce(float newPrevForce);
 
     SYCL_EXTERNAL void checkAtDestination(std::array<vecType, 2> destination,
                                           int pathSize);

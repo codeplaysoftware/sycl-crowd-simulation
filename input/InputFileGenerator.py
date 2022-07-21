@@ -178,7 +178,7 @@ def main(argv):
                         {
                             "pos": [-9.9 + (i * 0.2), 3.7 + (j * 0.2)],
                             "velocity": [0, 0],
-                            "desiredSpeed": 1.5,
+                            "desiredSpeed": 1.8,
                             "pathId": 2,
                             "mass": 50,
                             "radius": 0.05,
@@ -193,7 +193,7 @@ def main(argv):
                         {
                             "pos": [18.9 - (i * 0.2), 3.7 + (j * 0.2)],
                             "velocity": [0, 0],
-                            "desiredSpeed": 1.8,
+                            "desiredSpeed": 1.5,
                             "pathId": 3,
                             "mass": 50,
                             "radius": 0.05,

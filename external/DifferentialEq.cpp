@@ -99,6 +99,10 @@ SYCL_EXTERNAL void differentialEq(
 
     vecType forceSum = personalImpulse + peopleForces + wallForces;
 
+#ifdef STATS
+    currentActor->setPrevForce(magnitude(forceSum));
+#endif
+
     // Apply random force variations
     currentActor->setSeed(randXorShift(currentActor->getSeed()));
     // Generate a random number in range -1 to 1

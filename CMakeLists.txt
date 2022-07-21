@@ -16,7 +16,10 @@ else()
     include_directories(${SDL2_INCLUDE_DIRS})
 endif()
 
-add_executable(crowdsim src/main.cpp)
+OPTION(STATS "Run in stats mode" off)
+if (STATS)
+    add_definitions(-DSTATS)
+endif()
 
 set(SYCL_BACKEND "SYCL_BACKEND" CACHE STRING "Backend chosen by the user at CMake configure time")
 set_property(CACHE SYCL_BACKEND PROPERTY STRINGS spir cuda hip)
@@ -35,6 +38,8 @@ if(Python_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/input/InputFileGenerator.py")
 else()
     message(WARNING "Unable to generate input configuration files")
 endif()
+
+add_executable(crowdsim src/main.cpp)
 
 add_subdirectory(external)
 

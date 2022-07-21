@@ -17,6 +17,9 @@
 #include "RandomNumber.hpp"
 #include "Room.hpp"
 #include "VectorMaths.hpp"
+#ifdef STATS
+#include "Stats.hpp"
+#endif
 
 uint GLOBALSEED;
 
@@ -186,7 +189,8 @@ int main(int argc, char *argv[]) {
          argc, argv);
     initSDL(WIDTH, HEIGHT, SCALE, win, render);
 #else
-    init(WIDTH, HEIGHT, SCALE, DELAY, actors, room, paths, argc, argv);
+    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, actors, room, paths,
+         argc, argv);
 #endif
 
     // Buffer creation
@@ -198,12 +202,27 @@ int main(int argc, char *argv[]) {
     auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
     pathsBuf.set_final_data(nullptr);
 
+#ifdef STATS
+    std::vector<float> averageForces;
+    int updateStatsCounter = 49;
+    auto startTime = std::chrono::high_resolution_clock::now();
+    std::vector<int> destinationTimes;
+    for (int x = 0; x < actors.size(); x++) {
+        destinationTimes.push_back(0);
+    }
+    std::vector<int> kernelDurations;
+#endif
+
 #ifndef PROFILING_MODE
     int delayCounter = 0;
     int updateBBoxCounter = 0;
     bool isQuit = false;
     bool isPause = false;
     SDL_Event event;
+
+#ifdef STATS
+    auto globalStart = std::chrono::high_resolution_clock::now();
+#endif
 
     while (!isQuit) {
         if (SDL_PollEvent(&event)) {
@@ -219,12 +238,32 @@ int main(int argc, char *argv[]) {
             if (delayCounter >= DELAY) {
                 delayCounter = 0;
 
+#ifdef STATS
+                auto kernelStart = std::chrono::high_resolution_clock::now();
+#endif
+
                 if (updateBBoxCounter <= 0) {
                     updateBBox(myQueue, actorBuf);
                     updateBBoxCounter = 20;
                 }
 
                 update(myQueue, actorBuf, wallsBuf, pathsBuf);
+
+#ifdef STATS
+                auto kernelEnd = std::chrono::high_resolution_clock::now();
+                auto kernelDuration =
+                    std::chrono::duration_cast<std::chrono::microseconds>(
+                        kernelEnd - kernelStart);
+                kernelDurations.push_back(kernelDuration.count());
+
+                if (updateStatsCounter >= 100) {
+                    updateStats(myQueue, actorBuf, averageForces,
+                                destinationTimes, startTime);
+                    updateStatsCounter = 0;
+                } else {
+                    updateStatsCounter++;
+                }
+#endif
 
                 // std::cout << "fps: " << (1000.0f / duration.count()) <<
                 // std::endl;
@@ -240,20 +279,64 @@ int main(int argc, char *argv[]) {
         }
     }
 
+#ifdef STATS
+    auto globalEnd = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+        globalEnd - globalStart);
+
+    finalizeStats(myQueue, averageForces, destinationTimes, kernelDurations,
+                  actors.size(), duration.count());
+#endif
+
     close(win, render);
 #else
     // For Profiling
     int updateBBoxCounterr = 0;
+
+#ifdef STATS
+    auto globalStart = std::chrono::high_resolution_clock::now();
+#endif
+
     for (int x = 0; x < 500; x++) {
+#ifdef STATS
+        auto kernelStart = std::chrono::high_resolution_clock::now();
+#endif
+
         if (updateBBoxCounterr <= 0) {
             updateBBox(myQueue, actorBuf);
             updateBBoxCounterr = 20;
         }
         update(myQueue, actorBuf, wallsBuf, pathsBuf);
+
+#ifdef STATS
+        auto kernelEnd = std::chrono::high_resolution_clock::now();
+        auto kernelDuration =
+            std::chrono::duration_cast<std::chrono::microseconds>(kernelEnd -
+                                                                  kernelStart);
+        kernelDurations.push_back(kernelDuration.count());
+
+        if (updateStatsCounter >= 100) {
+            updateStats(myQueue, actorBuf, averageForces, destinationTimes,
+                        startTime);
+            updateStatsCounter = 0;
+        } else {
+            updateStatsCounter++;
+        }
+#endif
+
         sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(
             actorBuf);
         updateBBoxCounterr--;
     }
+
+#ifdef STATS
+    auto globalEnd = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+        globalEnd - globalStart);
+
+    finalizeStats(myQueue, averageForces, destinationTimes, kernelDurations,
+                  actors.size(), duration.count());
+#endif
 #endif
 
     return 0;
