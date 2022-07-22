@@ -102,55 +102,89 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
         float avgKernelDuration =
             float(durationSumHostAcc[0]) / float(kernelDurations.size());
 
-        // Write results to ../output/outputStats.txt
-        std::ofstream outputFile;
-        outputFile.open("../output/outputStats.txt", std::ios::out);
+        // Write results in human-readable format
+        {
+            // Write results to ../output/outputStats.txt
+            std::ofstream outputFile;
+            outputFile.open("../output/outputStats.txt", std::ios::out);
 
-        outputFile << "No. of actors: " << numActors << std::endl;
-        outputFile << "Average kernel executation time: " << avgKernelDuration
-                   << "μs   NOTE: First kernel time has been disregarded"
-                   << std::endl;
-        outputFile << "Total execution time: " << totalExecutionTime << "μs"
-                   << std::endl;
-        outputFile << std::endl << std::endl;
+            outputFile << "No. of actors: " << numActors << std::endl;
+            outputFile << "Average kernel executation time: " << avgKernelDuration
+                    << "μs   NOTE: First kernel time has been disregarded"
+                    << std::endl;
+            outputFile << "Total execution time: " << totalExecutionTime << "μs"
+                    << std::endl;
+            outputFile << std::endl << std::endl;
 
-        outputFile << "Actor ID | Time to Reach Destination (ms)" << std::endl;
-        outputFile << "-----------------------------------------" << std::endl;
-        for (int x = 0; x < destinationTimes.size(); x++) {
-            outputFile << std::setprecision(2) << std::fixed;
-            outputFile << std::setw(8) << x << " |";
-            if (destinationTimes[x] == 0) {
-                outputFile << std::setw(30) << "NA";
-            } else {
-                outputFile << std::setw(30) << destinationTimes[x];
+            outputFile << "Actor ID | Time to Reach Destination (ms)" << std::endl;
+            outputFile << "-----------------------------------------" << std::endl;
+            for (int x = 0; x < destinationTimes.size(); x++) {
+                outputFile << std::setprecision(2) << std::fixed;
+                outputFile << std::setw(8) << x << " |";
+                if (destinationTimes[x] == 0) {
+                    outputFile << std::setw(30) << "NA";
+                } else {
+                    outputFile << std::setw(30) << destinationTimes[x];
+                }
+                outputFile << std::endl;
             }
-            outputFile << std::endl;
+            outputFile << std::endl << std::endl;
+
+            outputFile << "Timestep | Average Force (N)" << std::endl;
+            outputFile << "----------------------------" << std::endl;
+            for (int x = 0; x < averageForces.size(); x++) {
+                outputFile << std::setprecision(2) << std::fixed;
+                outputFile << std::setw(8) << x * 100 << " |";
+                outputFile << std::setw(17) << averageForces[x];
+                outputFile << std::endl;
+            }
+            outputFile << std::endl << std::endl;
+
+            outputFile << "Kernel no. | Kernel Execution Time (μs)" << std::endl;
+            outputFile << "---------------------------------------" << std::endl;
+            for (int x = 0; x < kernelDurationsForOutput.size(); x++) {
+                outputFile << std::setprecision(2) << std::fixed;
+                outputFile << std::setw(10) << x << " |";
+                outputFile << std::setw(26) << kernelDurationsForOutput[x];
+                outputFile << std::endl;
+            }
+
+            outputFile.close();
+
+            std::cout << "Stats have been written to ../output/outputStats.txt"
+                    << std::endl;
         }
-        outputFile << std::endl << std::endl;
 
-        outputFile << "Timestep | Average Force (N)" << std::endl;
-        outputFile << "----------------------------" << std::endl;
-        for (int x = 0; x < averageForces.size(); x++) {
-            outputFile << std::setprecision(2) << std::fixed;
-            outputFile << std::setw(8) << x * 100 << " |";
-            outputFile << std::setw(17) << averageForces[x];
-            outputFile << std::endl;
+        // Write results to csv for python script
+        {
+            std::ofstream outputDestinationTimesCSV;
+            outputDestinationTimesCSV.open("../output/destinationTimes.csv", std::ios::out);
+            for (int x = 0; x < destinationTimes.size(); x++) {
+                outputDestinationTimesCSV << x << ", ";
+                if (destinationTimes[x] == 0) {
+                    outputDestinationTimesCSV << "NA" << std::endl;
+                }
+                else {
+                    outputDestinationTimesCSV << destinationTimes[x] << std::endl;
+                }
+            }
+            outputDestinationTimesCSV.close();
+
+            std::ofstream outputAverageForcesCSV;
+            outputAverageForcesCSV.open("../output/averageForces.csv", std::ios::out);
+            for (int x = 0; x < averageForces.size(); x++) {
+                outputAverageForcesCSV << x * 100 << ", " << averageForces[x] << std::endl;
+            }
+            outputAverageForcesCSV.close();
+
+            std::ofstream outputKernelDurationsCSV;
+            outputKernelDurationsCSV.open("../output/kernelDurations.csv", std::ios::out);
+            for (int x = 0; x < kernelDurations.size(); x++) {
+                outputKernelDurationsCSV << x << ", " << kernelDurations[x] << std::endl;
+            }
+            outputKernelDurationsCSV.close();
         }
-        outputFile << std::endl << std::endl;
 
-        outputFile << "Kernel no. |     Execution Time (μs)" << std::endl;
-        outputFile << "------------------------------------" << std::endl;
-        for (int x = 0; x < kernelDurationsForOutput.size(); x++) {
-            outputFile << std::setprecision(2) << std::fixed;
-            outputFile << std::setw(10) << x << " |";
-            outputFile << std::setw(23) << kernelDurationsForOutput[x];
-            outputFile << std::endl;
-        }
-
-        outputFile.close();
-
-        std::cout << "Stats have been written to ../output/outputStats.txt"
-                  << std::endl;
     } catch (const sycl::exception &e) {
         std::cout << "SYCL exception caught:\n"
                   << e.what() << "\n[finalizeStats]";
