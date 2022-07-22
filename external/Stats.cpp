@@ -9,7 +9,7 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
         float forceSum = 0;
         auto forceSumBuf = sycl::buffer<float>(&forceSum, 1);
 
-        // Calculate average force applied to actor this iteration
+        // Calculate average force applied to actors this iteration
         myQueue
             .submit([&](sycl::handler &cgh) {
                 auto actorAcc =

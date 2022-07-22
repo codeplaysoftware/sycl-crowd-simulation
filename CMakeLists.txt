@@ -8,7 +8,7 @@ project(crowd-simulation)
 set(CMAKE_C_COMPILER /home/sami/sycl_workspace/llvm/build/bin/clang)
 set(CMAKE_CXX_COMPILER /home/sami/sycl_workspace/llvm/build/bin/clang++)
 
-OPTION(PROFILING_MODE "Enable Profiling" off)
+OPTION(PROFILING_MODE "Enable profiling" off)
 if(PROFILING_MODE)
     add_definitions(-DPROFILING_MODE)
 else()
