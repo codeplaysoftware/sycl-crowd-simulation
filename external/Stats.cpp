@@ -21,30 +21,38 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                 auto forceSumReduction =
                     sycl::reduction(forceSumBuf, cgh, sycl::plus<float>());
 
-                cgh.parallel_for(sycl::range<1>{actorAcc.size()}, forceSumReduction,
+                cgh.parallel_for(sycl::range<1>{actorAcc.size()},
+                                 forceSumReduction,
                                  [=](sycl::id<1> index, auto &sum) {
                                      if (!actorAcc[index].getAtDestination()) {
-                                        sum += actorAcc[index].getPrevForce();
+                                         sum += actorAcc[index].getPrevForce();
                                      }
                                  });
             })
             .wait_and_throw();
-        
-        myQueue.submit([&](sycl::handler &cgh) {
-            auto actorAcc = actorBuf.get_access<sycl::access::mode::read>(cgh);
 
-            auto activeActorsReduction = sycl::reduction(activeActorsBuf, cgh, sycl::plus<float>());
+        myQueue
+            .submit([&](sycl::handler &cgh) {
+                auto actorAcc =
+                    actorBuf.get_access<sycl::access::mode::read>(cgh);
 
-            cgh.parallel_for(sycl::range<1>{actorAcc.size()}, activeActorsReduction, [=](sycl::id<1> index, auto &sum) {
-                if (!actorAcc[index].getAtDestination()) {
-                    sum += 1.0f;
-                }
-            });
-        }).wait_and_throw();
+                auto activeActorsReduction =
+                    sycl::reduction(activeActorsBuf, cgh, sycl::plus<float>());
+
+                cgh.parallel_for(sycl::range<1>{actorAcc.size()},
+                                 activeActorsReduction,
+                                 [=](sycl::id<1> index, auto &sum) {
+                                     if (!actorAcc[index].getAtDestination()) {
+                                         sum += 1.0f;
+                                     }
+                                 });
+            })
+            .wait_and_throw();
 
         sycl::host_accessor<float, 1, sycl::access::mode::read> forceSumHostAcc(
             forceSumBuf);
-        sycl::host_accessor<float, 1, sycl::access::mode::read> activeActorsHostAcc(activeActorsBuf);
+        sycl::host_accessor<float, 1, sycl::access::mode::read>
+            activeActorsHostAcc(activeActorsBuf);
         averageForces.push_back(forceSumHostAcc[0] / activeActorsHostAcc[0]);
 
         // Find actors which have reached their destination and record how long
@@ -127,15 +135,20 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
             outputFile.open("../output/outputStats.txt", std::ios::out);
 
             outputFile << "No. of actors: " << numActors << std::endl;
-            outputFile << "Average kernel executation time: " << avgKernelDuration
-                    << "μs   NOTE: First kernel time has been disregarded"
-                    << std::endl;
-            outputFile << "Total execution time: " << totalExecutionTime << "μs   NOTE: Stat collation will add overhead and SDL rendering adds overhead"
-                    << std::endl;
+            outputFile << "Average kernel executation time: "
+                       << avgKernelDuration
+                       << "μs   NOTE: First kernel time has been disregarded"
+                       << std::endl;
+            outputFile
+                << "Total execution time: " << totalExecutionTime
+                << "μs   NOTE: Stat collation and SDL rendering adds overhead"
+                << std::endl;
             outputFile << std::endl << std::endl;
 
-            outputFile << "Actor ID | Time to Reach Destination (ms)" << std::endl;
-            outputFile << "-----------------------------------------" << std::endl;
+            outputFile << "Actor ID | Time to Reach Destination (ms)"
+                       << std::endl;
+            outputFile << "-----------------------------------------"
+                       << std::endl;
             for (int x = 0; x < destinationTimes.size(); x++) {
                 outputFile << std::setprecision(2) << std::fixed;
                 outputFile << std::setw(8) << x << " |";
@@ -158,8 +171,10 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
             }
             outputFile << std::endl << std::endl;
 
-            outputFile << "Kernel no. | Kernel Execution Time (μs)" << std::endl;
-            outputFile << "---------------------------------------" << std::endl;
+            outputFile << "Kernel no. | Kernel Execution Time (μs)"
+                       << std::endl;
+            outputFile << "---------------------------------------"
+                       << std::endl;
             for (int x = 0; x < kernelDurationsForOutput.size(); x++) {
                 outputFile << std::setprecision(2) << std::fixed;
                 outputFile << std::setw(10) << x << " |";
@@ -170,35 +185,40 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
             outputFile.close();
 
             std::cout << "Stats have been written to ../output/outputStats.txt"
-                    << std::endl;
+                      << std::endl;
         }
 
         // Write results to csv for python script
         {
             std::ofstream outputDestinationTimesCSV;
-            outputDestinationTimesCSV.open("../output/destinationTimes.csv", std::ios::out);
+            outputDestinationTimesCSV.open("../output/csv/destinationTimes.csv",
+                                           std::ios::out);
             for (int x = 0; x < destinationTimes.size(); x++) {
                 outputDestinationTimesCSV << x << ", ";
                 if (destinationTimes[x] == 0) {
                     outputDestinationTimesCSV << "-1" << std::endl;
-                }
-                else {
-                    outputDestinationTimesCSV << destinationTimes[x] << std::endl;
+                } else {
+                    outputDestinationTimesCSV << destinationTimes[x]
+                                              << std::endl;
                 }
             }
             outputDestinationTimesCSV.close();
 
             std::ofstream outputAverageForcesCSV;
-            outputAverageForcesCSV.open("../output/averageForces.csv", std::ios::out);
+            outputAverageForcesCSV.open("../output/csv/averageForces.csv",
+                                        std::ios::out);
             for (int x = 0; x < averageForces.size(); x++) {
-                outputAverageForcesCSV << x * 100 << ", " << averageForces[x] << std::endl;
+                outputAverageForcesCSV << x * 100 << ", " << averageForces[x]
+                                       << std::endl;
             }
             outputAverageForcesCSV.close();
 
             std::ofstream outputKernelDurationsCSV;
-            outputKernelDurationsCSV.open("../output/kernelDurations.csv", std::ios::out);
+            outputKernelDurationsCSV.open("../output/csv/kernelDurations.csv",
+                                          std::ios::out);
             for (int x = 0; x < kernelDurations.size(); x++) {
-                outputKernelDurationsCSV << x << ", " << kernelDurations[x] << std::endl;
+                outputKernelDurationsCSV << x << ", " << kernelDurations[x]
+                                         << std::endl;
             }
             outputKernelDurationsCSV.close();
         }
