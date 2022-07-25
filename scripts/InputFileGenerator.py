@@ -19,6 +19,8 @@ from threading import Thread
 import time
 
 complete = False
+
+
 def workingAnimation():
     index = 0
     keyframes = "|/-\\"
@@ -27,6 +29,7 @@ def workingAnimation():
         index += 1
         time.sleep(0.1)
     print("Input files have been writted to ../input")
+
 
 def main(argv):
     if len(argv) == 0:
@@ -396,7 +399,7 @@ def main(argv):
                     [6, 1.5, 9, 1.5],
                     [0, 3, 5.5, 3],
                     [5.5, 3, 5.5, 1],
-                    [5.5, 1, 9, 1]
+                    [5.5, 1, 9, 1],
                 ]
             }
 

@@ -5,6 +5,8 @@ from threading import Thread
 import time
 
 complete = False
+
+
 def workingAnimation():
     index = 0
     keyframes = "|/-\\"
@@ -13,6 +15,8 @@ def workingAnimation():
         index += 1
         time.sleep(0.1)
     print("Graphs have been writted to ../output/images")
+
+
 animationThread = Thread(target=workingAnimation)
 animationThread.start()
 
@@ -59,12 +63,15 @@ else:
         destinationTimes = []
         for entry in reader:
             if entry[1] != -1:
-                destinationTimes.append([int(entry[0]), int(entry[1])]) 
+                destinationTimes.append([int(entry[0]), int(entry[1])])
         destinationTimes = list(zip(*destinationTimes))
 
         operatingOn = sorted(destinationTimes[1])
 
-        alteredDestinationTimes = [[i for i in range(0, max(operatingOn))], [0 for i in range(0, max(operatingOn))]]
+        alteredDestinationTimes = [
+            [i for i in range(0, max(operatingOn))],
+            [0 for i in range(0, max(operatingOn))],
+        ]
         for timestamp in operatingOn:
             if timestamp != -1:
                 for x in range(timestamp, max(operatingOn)):
@@ -73,8 +80,8 @@ else:
     if len(destinationTimes) > 0:
         plt.plot(alteredDestinationTimes[0], alteredDestinationTimes[1])
         plt.xlabel("No. of Actors at Destination")
-        plt.ylabel("Timestep")
-        plt.title("Actor Arrival Times at Destina")
+        plt.ylabel("Time (ms)")
+        plt.title("Actor Arrival Times at Destination")
         plt.savefig("../output/images/destinationTimesGraph.png")
 
 complete = True

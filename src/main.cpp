@@ -41,6 +41,7 @@ void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY,
 
     // Seed RNG with current time in seconds
     GLOBALSEED = uint(time(0));
+    // Seed each actor's RNG using global seed
     for (auto actor : actors) {
         GLOBALSEED = randXorShift(GLOBALSEED);
         actor.setSeed(GLOBALSEED);
@@ -202,6 +203,13 @@ int main(int argc, char *argv[]) {
     auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
     pathsBuf.set_final_data(nullptr);
 
+#ifndef PROFILING_MODE
+    int delayCounter = 0;
+    int updateBBoxCounter = 0;
+    bool isQuit = false;
+    bool isPause = false;
+    SDL_Event event;
+
 // Initialise stats variables if STATS flag is true
 #ifdef STATS
     std::vector<float> averageForces;
@@ -212,16 +220,6 @@ int main(int argc, char *argv[]) {
         destinationTimes.push_back(0);
     }
     std::vector<int> kernelDurations;
-#endif
-
-#ifndef PROFILING_MODE
-    int delayCounter = 0;
-    int updateBBoxCounter = 0;
-    bool isQuit = false;
-    bool isPause = false;
-    SDL_Event event;
-
-#ifdef STATS
     auto globalStart = std::chrono::high_resolution_clock::now();
 #endif
 
