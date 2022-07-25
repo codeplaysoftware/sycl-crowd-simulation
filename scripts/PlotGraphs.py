@@ -66,16 +66,17 @@ else:
                 destinationTimes.append([int(entry[0]), int(entry[1])])
         destinationTimes = list(zip(*destinationTimes))
 
-        operatingOn = sorted(destinationTimes[1])
+        if len(destinationTimes) > 0:
+            operatingOn = sorted(destinationTimes[1])
 
-        alteredDestinationTimes = [
-            [i for i in range(0, max(operatingOn))],
-            [0 for i in range(0, max(operatingOn))],
-        ]
-        for timestamp in operatingOn:
-            if timestamp != -1:
-                for x in range(timestamp, max(operatingOn)):
-                    alteredDestinationTimes[1][x] += 1
+            alteredDestinationTimes = [
+                [i for i in range(0, max(operatingOn))],
+                [0 for i in range(0, max(operatingOn))],
+            ]
+            for timestamp in operatingOn:
+                if timestamp != -1:
+                    for x in range(timestamp, max(operatingOn)):
+                        alteredDestinationTimes[1][x] += 1
 
     if len(destinationTimes) > 0:
         plt.plot(alteredDestinationTimes[0], alteredDestinationTimes[1])

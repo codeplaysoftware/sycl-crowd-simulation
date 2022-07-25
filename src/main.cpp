@@ -294,6 +294,14 @@ int main(int argc, char *argv[]) {
     int updateBBoxCounterr = 0;
 
 #ifdef STATS
+    std::vector<float> averageForces;
+    int updateStatsCounter = 49;
+    auto startTime = std::chrono::high_resolution_clock::now();
+    std::vector<int> destinationTimes;
+    for (int x = 0; x < actors.size(); x++) {
+        destinationTimes.push_back(0);
+    }
+    std::vector<int> kernelDurations;
     auto globalStart = std::chrono::high_resolution_clock::now();
 #endif
 
