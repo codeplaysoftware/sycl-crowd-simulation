@@ -15,7 +15,18 @@
 import json
 import random
 import sys
+from threading import Thread
+import time
 
+complete = False
+def workingAnimation():
+    index = 0
+    keyframes = "|/-\\"
+    while not complete:
+        print("Generating input files " + keyframes[index % len(keyframes)], end="\r")
+        index += 1
+        time.sleep(0.1)
+    print("Input files have been writted to ../input")
 
 def main(argv):
     if len(argv) == 0:
@@ -683,4 +694,7 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    animationThread = Thread(target=workingAnimation)
+    animationThread.start()
     main(sys.argv[1:])
+    complete = True
