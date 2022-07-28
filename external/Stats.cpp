@@ -25,7 +25,7 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                                  forceSumReduction,
                                  [=](sycl::id<1> index, auto &sum) {
                                      if (!actorAcc[index].getAtDestination()) {
-                                         sum += actorAcc[index].getPrevForce();
+                                         sum += actorAcc[index].getForce();
                                      }
                                  });
             });

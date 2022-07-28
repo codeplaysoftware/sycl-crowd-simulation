@@ -101,7 +101,7 @@ SYCL_EXTERNAL void differentialEq(
 
 #ifdef STATS
     if (!currentActor->getAtDestination()) {
-        currentActor->setPrevForce(magnitude(forceSum));
+        currentActor->setForce(magnitude(forceSum));
     }
 #endif
 

@@ -34,7 +34,7 @@ SYCL_EXTERNAL std::array<int, 2> Actor::getBBox() const { return bBox; }
 
 SYCL_EXTERNAL uint Actor::getSeed() const { return seed; }
 
-SYCL_EXTERNAL float Actor::getPrevForce() const { return prevForce; }
+SYCL_EXTERNAL float Actor::getForce() const { return force; }
 
 SYCL_EXTERNAL void Actor::setPos(vecType newPos) { pos = newPos; }
 
@@ -60,8 +60,8 @@ SYCL_EXTERNAL void Actor::setBBox(std::array<int, 2> newBBox) {
 
 SYCL_EXTERNAL void Actor::setSeed(uint newSeed) { seed = newSeed; }
 
-SYCL_EXTERNAL void Actor::setPrevForce(float newPrevForce) {
-    prevForce = newPrevForce;
+SYCL_EXTERNAL void Actor::setForce(float newForce) {
+    force = newForce;
 }
 
 SYCL_EXTERNAL void Actor::checkAtDestination(std::array<vecType, 2> destination,
