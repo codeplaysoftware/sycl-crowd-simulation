@@ -83,9 +83,7 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                                  });
             });
         myQueue.throw_asynchronous();
-
-        sycl::host_accessor<int, 1, sycl::access::mode::read>
-            destinationTimesHostAcc(destinationTimesBuf);
+        
     } catch (const sycl::exception &e) {
         std::cout << "SYCL exception caught:\n"
                   << e.what() << "\n[updateStats]";
