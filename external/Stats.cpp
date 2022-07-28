@@ -28,8 +28,8 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                                          sum += actorAcc[index].getPrevForce();
                                      }
                                  });
-            })
-            .wait_and_throw();
+            });
+        myQueue.throw_asynchronous();
 
         myQueue
             .submit([&](sycl::handler &cgh) {
@@ -46,8 +46,8 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                                          sum += 1.0f;
                                      }
                                  });
-            })
-            .wait_and_throw();
+            });
+        myQueue.throw_asynchronous();
 
         sycl::host_accessor<float, 1, sycl::access::mode::read> forceSumHostAcc(
             forceSumBuf);
@@ -81,8 +81,8 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                                          destinationTimesAcc[index] = duration;
                                      }
                                  });
-            })
-            .wait_and_throw();
+            });
+        myQueue.throw_asynchronous();
 
         sycl::host_accessor<int, 1, sycl::access::mode::read>
             destinationTimesHostAcc(destinationTimesBuf);
@@ -120,8 +120,8 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
                                  [=](sycl::id<1> index, auto &sum) {
                                      sum += durationAcc[index];
                                  });
-            })
-            .wait_and_throw();
+            });
+        myQueue.throw_asynchronous();
 
         sycl::host_accessor<int, 1, sycl::access::mode::read>
             durationSumHostAcc(durationSumBuf);
