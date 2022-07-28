@@ -60,9 +60,7 @@ SYCL_EXTERNAL void Actor::setBBox(std::array<int, 2> newBBox) {
 
 SYCL_EXTERNAL void Actor::setSeed(uint newSeed) { seed = newSeed; }
 
-SYCL_EXTERNAL void Actor::setForce(float newForce) {
-    force = newForce;
-}
+SYCL_EXTERNAL void Actor::setForce(float newForce) { force = newForce; }
 
 SYCL_EXTERNAL void Actor::checkAtDestination(std::array<vecType, 2> destination,
                                              int pathSize) {

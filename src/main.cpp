@@ -197,9 +197,9 @@ int main(int argc, char *argv[]) {
     int profilingCounter = 0;
     int timestepCounter = 0;
     bool isPause = false;
-    #ifndef PROFILING_MODE
+#ifndef PROFILING_MODE
     SDL_Event event;
-    #endif
+#endif
 
 // Initialise stats variables if STATS flag is true
 #ifdef STATS
@@ -215,23 +215,24 @@ int main(int argc, char *argv[]) {
 #endif
 
     while (profilingCounter <= 500) {
-        #ifndef PROFILING_MODE
+#ifndef PROFILING_MODE
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 profilingCounter = 501;
-            } else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
+            } else if (event.type == SDL_KEYDOWN &&
+                       event.key.keysym.sym == SDLK_SPACE) {
                 isPause = !isPause;
             }
         }
-        #endif
+#endif
 
         if (!isPause) {
             if (delayCounter >= DELAY) {
                 delayCounter = 0;
 
-                #ifdef STATS
+#ifdef STATS
                 auto kernelStart = std::chrono::high_resolution_clock::now();
-                #endif
+#endif
 
                 if (updateBBoxCounter <= 0) {
                     updateBBox(myQueue, actorBuf);
@@ -240,47 +241,53 @@ int main(int argc, char *argv[]) {
 
                 update(myQueue, actorBuf, wallsBuf, pathsBuf);
 
-                #ifdef STATS
+#ifdef STATS
                 auto kernelEnd = std::chrono::high_resolution_clock::now();
-                auto kernelDuration = std::chrono::duration_cast<std::chrono::microseconds>(kernelEnd - kernelStart);
+                auto kernelDuration =
+                    std::chrono::duration_cast<std::chrono::microseconds>(
+                        kernelEnd - kernelStart);
                 kernelDurations.push_back(kernelDuration.count());
 
                 if (updateStatsCounter >= 100) {
-                    updateStats(myQueue, actorBuf, averageForces, destinationTimes, startTime, timestepCounter);
+                    updateStats(myQueue, actorBuf, averageForces,
+                                destinationTimes, startTime, timestepCounter);
                     updateStatsCounter = 0;
                 } else {
                     updateStatsCounter++;
                 }
-                #endif
+#endif
 
-                sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(actorBuf);
+                sycl::host_accessor<Actor, 1, sycl::access::mode::read>
+                    actorHostAcc(actorBuf);
 
-                #ifndef PROFILING_MODE
+#ifndef PROFILING_MODE
                 draw(SCALE, BGCOLOR, WALLCOLOR, render, actorHostAcc, room);
-                #endif
+#endif
 
                 updateBBoxCounter--;
 
                 timestepCounter++;
-                #ifdef PROFILING_MODE
+#ifdef PROFILING_MODE
                 profilingCounter++;
-                #endif
+#endif
             } else {
                 delayCounter++;
             }
         }
     }
 
-    #ifdef STATS
+#ifdef STATS
     auto globalEnd = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(globalEnd - globalStart);
-    
-    finalizeStats(myQueue, averageForces, destinationTimes, kernelDurations, actors.size(), duration.count());
-    #endif
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
+        globalEnd - globalStart);
 
-    #ifndef PROFILING_MODE
+    finalizeStats(myQueue, averageForces, destinationTimes, kernelDurations,
+                  actors.size(), duration.count());
+#endif
+
+#ifndef PROFILING_MODE
     close(win, render);
-    #endif
+#endif
 
     return 0;
 }
