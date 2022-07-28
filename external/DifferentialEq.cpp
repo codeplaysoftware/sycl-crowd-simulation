@@ -106,14 +106,11 @@ SYCL_EXTERNAL void differentialEq(
 #endif
 
     // Apply random force variations
-    currentActor->setSeed(randXorShift(currentActor->getSeed()));
-    // Generate a random number in range -1 to 1
-    float randX =
-        (float(currentActor->getSeed()) * (2.0f / 4294967296.0f)) - 1.0f;
-    currentActor->setSeed(randXorShift(currentActor->getSeed()));
-    float randY =
-        (float(currentActor->getSeed()) * (2.0f / 4294967296.0f)) - 1.0f;
+    float seed = currentActor->getSeed();
+    float randX = rngMinusOneToOne(seed);
+    float randY = rngMinusOneToOne(randXorShift(seed));
     forceSum += {randX, randY};
+    currentActor->setSeed(randXorShift(seed));
 
     // Color actor according to heatmap
     if (currentActor->getHeatmapEnabled()) {
