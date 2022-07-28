@@ -9,8 +9,8 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
         float forceSum = 0;
         auto forceSumBuf = sycl::buffer<float>(&forceSum, 1);
 
-        float activeActors = 0;
-        auto activeActorsBuf = sycl::buffer<float>(&activeActors, 1);
+        int activeActors = 0;
+        auto activeActorsBuf = sycl::buffer<int>(&activeActors, 1);
 
         // Calculate average force applied to actors this iteration
         myQueue
@@ -37,13 +37,13 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                     actorBuf.get_access<sycl::access::mode::read>(cgh);
 
                 auto activeActorsReduction =
-                    sycl::reduction(activeActorsBuf, cgh, sycl::plus<float>());
+                    sycl::reduction(activeActorsBuf, cgh, sycl::plus<int>());
 
                 cgh.parallel_for(sycl::range<1>{actorAcc.size()},
                                  activeActorsReduction,
                                  [=](sycl::id<1> index, auto &sum) {
                                      if (!actorAcc[index].getAtDestination()) {
-                                         sum += 1.0f;
+                                         sum += 1;
                                      }
                                  });
             });
@@ -51,9 +51,9 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
 
         sycl::host_accessor<float, 1, sycl::access::mode::read> forceSumHostAcc(
             forceSumBuf);
-        sycl::host_accessor<float, 1, sycl::access::mode::read>
+        sycl::host_accessor<int, 1, sycl::access::mode::read>
             activeActorsHostAcc(activeActorsBuf);
-        averageForces.push_back(forceSumHostAcc[0] / activeActorsHostAcc[0]);
+        averageForces.push_back(forceSumHostAcc[0] / float(activeActorsHostAcc[0]));
 
         // Find actors which have reached their destination and record how long
         // it took them
