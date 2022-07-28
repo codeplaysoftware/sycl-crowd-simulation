@@ -194,7 +194,8 @@ int main(int argc, char *argv[]) {
 
     int delayCounter = 0;
     int updateBBoxCounter = 0;
-    int iterationCounter = 0;
+    int profilingCounter = 0;
+    int timestepCounter = 0;
     bool isPause = false;
     #ifndef PROFILING_MODE
     SDL_Event event;
@@ -205,19 +206,19 @@ int main(int argc, char *argv[]) {
     std::vector<float> averageForces;
     int updateStatsCounter = 49;
     auto startTime = std::chrono::high_resolution_clock::now();
-    std::vector<int> destinationTimes;
+    std::vector<std::array<int, 2>> destinationTimes;
     for (int x = 0; x < actors.size(); x++) {
-        destinationTimes.push_back(0);
+        destinationTimes.push_back({0, 0});
     }
     std::vector<int> kernelDurations;
     auto globalStart = std::chrono::high_resolution_clock::now();
 #endif
 
-    while (iterationCounter <= 500) {
+    while (profilingCounter <= 500) {
         #ifndef PROFILING_MODE
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
-                iterationCounter = 501;
+                profilingCounter = 501;
             } else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
                 isPause = !isPause;
             }
@@ -245,7 +246,7 @@ int main(int argc, char *argv[]) {
                 kernelDurations.push_back(kernelDuration.count());
 
                 if (updateStatsCounter >= 100) {
-                    updateStats(myQueue, actorBuf, averageForces, destinationTimes, startTime);
+                    updateStats(myQueue, actorBuf, averageForces, destinationTimes, startTime, timestepCounter);
                     updateStatsCounter = 0;
                 } else {
                     updateStatsCounter++;
@@ -260,8 +261,9 @@ int main(int argc, char *argv[]) {
 
                 updateBBoxCounter--;
 
+                timestepCounter++;
                 #ifdef PROFILING_MODE
-                iterationCounter++;
+                profilingCounter++;
                 #endif
             } else {
                 delayCounter++;

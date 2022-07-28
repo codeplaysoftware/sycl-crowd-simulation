@@ -3,8 +3,8 @@
 
 void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                  std::vector<float> &averageForces,
-                 std::vector<int> &destinationTimes,
-                 std::chrono::high_resolution_clock::time_point startPoint) {
+                 std::vector<std::array<int, 2>> &destinationTimes,
+                 std::chrono::high_resolution_clock::time_point startPoint, int timestep) {
     try {
         float forceSum = 0;
         auto forceSumBuf = sycl::buffer<float>(&forceSum, 1);
@@ -58,7 +58,8 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
         // Find actors which have reached their destination and record how long
         // it took them
         auto destinationTimesBuf =
-            sycl::buffer<int>(destinationTimes.data(), destinationTimes.size());
+            sycl::buffer<std::array<int, 2>>(destinationTimes.data(), destinationTimes.size());
+        auto timestepBuf = sycl::buffer<int>(&timestep, 1);
 
         myQueue
             .submit([&](sycl::handler &cgh) {
@@ -67,6 +68,7 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                 auto destinationTimesAcc =
                     destinationTimesBuf
                         .get_access<sycl::access::mode::read_write>(cgh);
+                auto timestepAcc = timestepBuf.get_access<sycl::access::mode::read>(cgh);
 
                 auto end = std::chrono::high_resolution_clock::now();
                 auto duration =
@@ -77,8 +79,8 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
                 cgh.parallel_for(sycl::range<1>{destinationTimesAcc.size()},
                                  [=](sycl::id<1> index) {
                                      if (actorAcc[index].getAtDestination() &&
-                                         destinationTimesAcc[index] == 0) {
-                                         destinationTimesAcc[index] = duration;
+                                         destinationTimesAcc[index][0] == 0) {
+                                         destinationTimesAcc[index] = {int(duration), timestepAcc[0]};
                                      }
                                  });
             });
@@ -91,7 +93,7 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
 }
 
 void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
-                   std::vector<int> destinationTimes,
+                   std::vector<std::array<int,2>> destinationTimes,
                    std::vector<int> kernelDurations, int numActors,
                    int totalExecutionTime) {
     try {
@@ -143,17 +145,22 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
                 << std::endl;
             outputFile << std::endl << std::endl;
 
-            outputFile << "Actor ID | Time to Reach Destination (ms)"
+            outputFile << "Actor ID | Time to Reach Destination (ms) | Timestep"
                        << std::endl;
-            outputFile << "-----------------------------------------"
+            outputFile << "----------------------------------------------------"
                        << std::endl;
             for (int x = 0; x < destinationTimes.size(); x++) {
                 outputFile << std::setprecision(2) << std::fixed;
                 outputFile << std::setw(8) << x << " |";
-                if (destinationTimes[x] == 0) {
-                    outputFile << std::setw(30) << "NA";
+                if (destinationTimes[x][0] == 0) {
+                    outputFile << std::setw(31) << "NA" << " |";
                 } else {
-                    outputFile << std::setw(30) << destinationTimes[x];
+                    outputFile << std::setw(31) << destinationTimes[x][0] << " |";
+                }
+                if (destinationTimes[x][1]  == 0) {
+                    outputFile << std::setw(8) << "NA";
+                } else {
+                    outputFile << std::setw(8) << destinationTimes[x][1];
                 }
                 outputFile << std::endl;
             }
@@ -193,10 +200,10 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
                                            std::ios::out);
             for (int x = 0; x < destinationTimes.size(); x++) {
                 outputDestinationTimesCSV << x << ", ";
-                if (destinationTimes[x] == 0) {
+                if (destinationTimes[x][0] == 0) {
                     outputDestinationTimesCSV << "-1" << std::endl;
                 } else {
-                    outputDestinationTimesCSV << destinationTimes[x]
+                    outputDestinationTimesCSV << destinationTimes[x][0]
                                               << std::endl;
                 }
             }
