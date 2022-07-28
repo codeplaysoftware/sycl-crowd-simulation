@@ -57,9 +57,7 @@ void initSDL(int WIDTH, int HEIGHT, int SCALE, SDL_Window *&win,
                            HEIGHT * SCALE, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 }
-#endif
 
-#ifndef PROFILING_MODE
 void drawCircle(SDL_Renderer *&render, SDL_Point center, int radius,
                 SDL_Color color) {
     SDL_SetRenderDrawColor(render, color.r, color.g, color.b, color.a);
@@ -73,9 +71,7 @@ void drawCircle(SDL_Renderer *&render, SDL_Point center, int radius,
         }
     }
 }
-#endif
 
-#ifndef PROFILING_MODE
 void draw(int SCALE, std::array<int, 3> BGCOLOR, std::array<int, 3> WALLCOLOR,
           SDL_Renderer *&render,
           sycl::host_accessor<Actor, 1, sycl::access::mode::read> actors,
@@ -103,9 +99,7 @@ void draw(int SCALE, std::array<int, 3> BGCOLOR, std::array<int, 3> WALLCOLOR,
 
     SDL_RenderPresent(render);
 }
-#endif
 
-#ifndef PROFILING_MODE
 void close(SDL_Window *win, SDL_Renderer *render) {
     SDL_DestroyRenderer(render);
     SDL_DestroyWindow(win);
@@ -168,11 +162,6 @@ int main(int argc, char *argv[]) {
     std::array<int, 3> BGCOLOR;
     std::array<int, 3> WALLCOLOR;
 
-#ifndef PROFILING_MODE
-    SDL_Window *win;
-    SDL_Renderer *render;
-#endif
-
     std::vector<Actor> actors;
     Room room = Room({});
     std::vector<Path> paths;
@@ -185,13 +174,13 @@ int main(int argc, char *argv[]) {
 
     sycl::queue myQueue{sycl::gpu_selector(), asyncHandler};
 
+    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, actors, room, paths,
+         argc, argv);
+
 #ifndef PROFILING_MODE
-    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, actors, room, paths,
-         argc, argv);
+    SDL_Window *win;
+    SDL_Renderer *render;
     initSDL(WIDTH, HEIGHT, SCALE, win, render);
-#else
-    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, actors, room, paths,
-         argc, argv);
 #endif
 
     // Buffer creation
@@ -203,12 +192,13 @@ int main(int argc, char *argv[]) {
     auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
     pathsBuf.set_final_data(nullptr);
 
-#ifndef PROFILING_MODE
     int delayCounter = 0;
     int updateBBoxCounter = 0;
-    bool isQuit = false;
+    int iterationCounter = 0;
     bool isPause = false;
+    #ifndef PROFILING_MODE
     SDL_Event event;
+    #endif
 
 // Initialise stats variables if STATS flag is true
 #ifdef STATS
@@ -223,23 +213,24 @@ int main(int argc, char *argv[]) {
     auto globalStart = std::chrono::high_resolution_clock::now();
 #endif
 
-    while (!isQuit) {
+    while (iterationCounter <= 500) {
+        #ifndef PROFILING_MODE
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
-                isQuit = true;
-            } else if (event.type == SDL_KEYDOWN &&
-                       event.key.keysym.sym == SDLK_SPACE) {
+                iterationCounter = 501;
+            } else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
                 isPause = !isPause;
             }
         }
+        #endif
 
         if (!isPause) {
             if (delayCounter >= DELAY) {
                 delayCounter = 0;
 
-#ifdef STATS
+                #ifdef STATS
                 auto kernelStart = std::chrono::high_resolution_clock::now();
-#endif
+                #endif
 
                 if (updateBBoxCounter <= 0) {
                     updateBBox(myQueue, actorBuf);
@@ -248,104 +239,46 @@ int main(int argc, char *argv[]) {
 
                 update(myQueue, actorBuf, wallsBuf, pathsBuf);
 
-#ifdef STATS
+                #ifdef STATS
                 auto kernelEnd = std::chrono::high_resolution_clock::now();
-                auto kernelDuration =
-                    std::chrono::duration_cast<std::chrono::microseconds>(
-                        kernelEnd - kernelStart);
+                auto kernelDuration = std::chrono::duration_cast<std::chrono::microseconds>(kernelEnd - kernelStart);
                 kernelDurations.push_back(kernelDuration.count());
 
                 if (updateStatsCounter >= 100) {
-                    updateStats(myQueue, actorBuf, averageForces,
-                                destinationTimes, startTime);
+                    updateStats(myQueue, actorBuf, averageForces, destinationTimes, startTime);
                     updateStatsCounter = 0;
                 } else {
                     updateStatsCounter++;
                 }
-#endif
+                #endif
 
-                // std::cout << "fps: " << (1000.0f / duration.count()) <<
-                // std::endl;
+                sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(actorBuf);
 
-                sycl::host_accessor<Actor, 1, sycl::access::mode::read>
-                    actorHostAcc(actorBuf);
+                #ifndef PROFILING_MODE
                 draw(SCALE, BGCOLOR, WALLCOLOR, render, actorHostAcc, room);
+                #endif
 
                 updateBBoxCounter--;
+
+                #ifdef PROFILING_MODE
+                iterationCounter++;
+                #endif
             } else {
                 delayCounter++;
             }
         }
     }
 
-#ifdef STATS
+    #ifdef STATS
     auto globalEnd = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-        globalEnd - globalStart);
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(globalEnd - globalStart);
+    
+    finalizeStats(myQueue, averageForces, destinationTimes, kernelDurations, actors.size(), duration.count());
+    #endif
 
-    finalizeStats(myQueue, averageForces, destinationTimes, kernelDurations,
-                  actors.size(), duration.count());
-#endif
-
+    #ifndef PROFILING_MODE
     close(win, render);
-
-// Profiling loop
-#else
-    int updateBBoxCounterr = 0;
-
-#ifdef STATS
-    std::vector<float> averageForces;
-    int updateStatsCounter = 49;
-    auto startTime = std::chrono::high_resolution_clock::now();
-    std::vector<int> destinationTimes;
-    for (int x = 0; x < actors.size(); x++) {
-        destinationTimes.push_back(0);
-    }
-    std::vector<int> kernelDurations;
-    auto globalStart = std::chrono::high_resolution_clock::now();
-#endif
-
-    for (int x = 0; x < 500; x++) {
-#ifdef STATS
-        auto kernelStart = std::chrono::high_resolution_clock::now();
-#endif
-
-        if (updateBBoxCounterr <= 0) {
-            updateBBox(myQueue, actorBuf);
-            updateBBoxCounterr = 20;
-        }
-        update(myQueue, actorBuf, wallsBuf, pathsBuf);
-
-#ifdef STATS
-        auto kernelEnd = std::chrono::high_resolution_clock::now();
-        auto kernelDuration =
-            std::chrono::duration_cast<std::chrono::microseconds>(kernelEnd -
-                                                                  kernelStart);
-        kernelDurations.push_back(kernelDuration.count());
-
-        if (updateStatsCounter >= 100) {
-            updateStats(myQueue, actorBuf, averageForces, destinationTimes,
-                        startTime);
-            updateStatsCounter = 0;
-        } else {
-            updateStatsCounter++;
-        }
-#endif
-
-        sycl::host_accessor<Actor, 1, sycl::access::mode::read> actorHostAcc(
-            actorBuf);
-        updateBBoxCounterr--;
-    }
-
-#ifdef STATS
-    auto globalEnd = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(
-        globalEnd - globalStart);
-
-    finalizeStats(myQueue, averageForces, destinationTimes, kernelDurations,
-                  actors.size(), duration.count());
-#endif
-#endif
+    #endif
 
     return 0;
 }
