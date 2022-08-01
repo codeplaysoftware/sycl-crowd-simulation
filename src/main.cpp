@@ -194,11 +194,11 @@ int main(int argc, char *argv[]) {
 
     int delayCounter = 0;
     int updateBBoxCounter = 0;
-    int profilingCounter = 0;
     int timestepCounter = 0;
     bool isPause = false;
 #ifndef PROFILING_MODE
     SDL_Event event;
+    bool isQuit = false;
 #endif
 
 // Initialise stats variables if STATS flag is true
@@ -214,11 +214,13 @@ int main(int argc, char *argv[]) {
     auto globalStart = std::chrono::high_resolution_clock::now();
 #endif
 
-    while (profilingCounter <= 500) {
-#ifndef PROFILING_MODE
+#ifdef PROFILING_MODE
+    while (timestepCounter <= 500) {
+#else
+    while(!isQuit) {
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
-                profilingCounter = 501;
+                isQuit = true;
             } else if (event.type == SDL_KEYDOWN &&
                        event.key.keysym.sym == SDLK_SPACE) {
                 isPause = !isPause;
@@ -267,9 +269,6 @@ int main(int argc, char *argv[]) {
                 updateBBoxCounter--;
 
                 timestepCounter++;
-#ifdef PROFILING_MODE
-                profilingCounter++;
-#endif
             } else {
                 delayCounter++;
             }
