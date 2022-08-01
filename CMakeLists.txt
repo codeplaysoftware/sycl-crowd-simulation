@@ -1,12 +1,10 @@
+# Copyright (C) 2022 Codeplay Software Ltd.
 cmake_minimum_required (VERSION 3.21.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 project(crowd-simulation)
-
-set(CMAKE_C_COMPILER /home/sami/sycl_workspace/llvm/build/bin/clang)
-set(CMAKE_CXX_COMPILER /home/sami/sycl_workspace/llvm/build/bin/clang++)
 
 OPTION(PROFILING_MODE "Enable profiling" off)
 if(PROFILING_MODE)
