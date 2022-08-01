@@ -4,7 +4,7 @@ SYCL_EXTERNAL void differentialEq(
     int actorIndex,
     sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors,
     sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls,
-    sycl::accessor<Path, 1, sycl::access::mode::read> paths, sycl::stream out) {
+    sycl::accessor<Path, 1, sycl::access::mode::read> paths) {
     Actor *currentActor = &actors[actorIndex];
 
     vecType pos = currentActor->getPos();
@@ -12,16 +12,22 @@ SYCL_EXTERNAL void differentialEq(
     // Calculate personal impulse
     float mi = currentActor->getMass();
     float v0i = currentActor->getDesiredSpeed();
-    std::array<vecType, 4> destination =
+    std::array<vecType, 2> destination =
         paths[currentActor->getPathId()]
             .getCheckpoints()[currentActor->getDestinationIndex()];
 
     // Find direction vector to nearest point in destination region
     std::pair<float, vecType> minRegionDistance;
+    std::array<vecType, 4> destinationRect = {
+        destination[0],
+        {destination[1][0], destination[0][1]},
+        destination[1],
+        {destination[0][0], destination[1][1]}};
     for (int x = 0; x < 4; x++) {
         int endIndex = x == 3 ? 0 : x + 1;
-        auto dniw = getDistanceAndNiw(currentActor->getPos(),
-                                      {destination[x], destination[endIndex]});
+        auto dniw =
+            getDistanceAndNiw(currentActor->getPos(),
+                              {destinationRect[x], destinationRect[endIndex]});
         if (dniw.first < minRegionDistance.first ||
             minRegionDistance.first == 0) {
             minRegionDistance = dniw;
@@ -93,8 +99,18 @@ SYCL_EXTERNAL void differentialEq(
 
     vecType forceSum = personalImpulse + peopleForces + wallForces;
 
+#ifdef STATS
+    if (!currentActor->getAtDestination()) {
+        currentActor->setForce(magnitude(forceSum));
+    }
+#endif
+
     // Apply random force variations
-    forceSum += currentActor->getVariation();
+    float seed = currentActor->getSeed();
+    float randX = rngMinusOneToOne(seed);
+    float randY = rngMinusOneToOne(randXorShift(seed));
+    forceSum += {randX, randY};
+    currentActor->setSeed(randXorShift(seed));
 
     // Color actor according to heatmap
     if (currentActor->getHeatmapEnabled()) {
@@ -111,6 +127,7 @@ SYCL_EXTERNAL void differentialEq(
         currentActor->setColor({int(color[0]), int(color[1]), int(color[2])});
     }
 
+    // Perform integration
     vecType acceleration = forceSum / mi;
     currentActor->setVelocity(vi + acceleration * TIMESTEP);
     currentActor->setPos(pos + currentActor->getVelocity() * TIMESTEP);

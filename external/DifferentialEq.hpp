@@ -12,7 +12,7 @@
 #include <sycl/sycl.hpp>
 
 // Constant for scaling inter-actor repulsive force
-constexpr float PEOPLEAi = 500;
+constexpr float PEOPLEAi = 800;
 // Constant for scaling actor-wall repulsive force
 constexpr float WALLAi = 1300;
 // Reproduces distance kept at normal desired velocities
@@ -31,6 +31,6 @@ SYCL_EXTERNAL void differentialEq(
     int actorIndex,
     sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors,
     sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls,
-    sycl::accessor<Path, 1, sycl::access::mode::read> paths, sycl::stream out);
+    sycl::accessor<Path, 1, sycl::access::mode::read> paths);
 
 #endif

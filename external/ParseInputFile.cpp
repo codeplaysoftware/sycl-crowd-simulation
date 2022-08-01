@@ -1,5 +1,6 @@
 #include "ParseInputFile.hpp"
 
+// Checks that input json file contains required members
 void validateParameters(rapidjson::Document &jsonDoc) {
     std::string missingParameters = "";
 
@@ -16,7 +17,8 @@ void validateParameters(rapidjson::Document &jsonDoc) {
         throw JSONException("Missing these parameters: " + missingParameters);
     } else {
         auto &config = jsonDoc["config"];
-        auto configParams = {"width", "height", "scale", "delay"};
+        auto configParams = {"width", "height",    "scale",
+                             "delay", "wallColor", "bgColor"};
         for (auto p : configParams) {
             if (!config.HasMember(p))
                 missingParameters += std::string(p) + " ";
@@ -51,7 +53,9 @@ void validateParameters(rapidjson::Document &jsonDoc) {
 
 void parseInputFile(std::string filename, std::vector<Actor> &actors,
                     Room &room, std::vector<Path> &paths, int &WIDTH,
-                    int &HEIGHT, int &SCALE, int &DELAY) {
+                    int &HEIGHT, int &SCALE, int &DELAY,
+                    std::array<int, 3> &BGCOLOR,
+                    std::array<int, 3> &WALLCOLOR) {
     std::ifstream jsonFile(filename);
     if (!jsonFile.is_open()) {
         throw JSONException("Error opening file " + filename);
@@ -71,6 +75,11 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
     HEIGHT = config["height"].GetInt();
     SCALE = config["scale"].GetInt();
     DELAY = config["delay"].GetInt();
+    WALLCOLOR = {config["wallColor"][0].GetInt(),
+                 config["wallColor"][1].GetInt(),
+                 config["wallColor"][2].GetInt()};
+    BGCOLOR = {config["bgColor"][0].GetInt(), config["bgColor"][1].GetInt(),
+               config["bgColor"][2].GetInt()};
 
     // Room
     auto jsonWalls = jsonDoc["room"]["walls"].GetArray();
@@ -86,18 +95,18 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
     for (auto &p : jsonPaths) {
         int id = p["id"].GetInt();
         auto jsonCheckpoints = p["checkpoints"].GetArray();
-        std::array<std::array<vecType, 4>, PATHALLOCATIONSIZE> checkpoints;
+        std::array<std::array<vecType, 2>, PATHALLOCATIONSIZE> checkpoints;
         if (jsonCheckpoints.Size() > PATHALLOCATIONSIZE) {
             throw JSONException(
                 "Path Size exceeds amount allocated in memory\nEither reduce "
                 "path size or increase PATHALLOCATIONSIZE in 'Path.hpp'");
         }
         for (int i = 0; i < jsonCheckpoints.Size(); i++) {
-            std::array<vecType, 4> region;
-            for (int j = 0; j < 4; j++) {
-                region[j] = vecType({jsonCheckpoints[i][j][0].GetFloat(),
-                                     jsonCheckpoints[i][j][1].GetFloat()});
-            }
+            std::array<vecType, 2> region;
+            region[0] = vecType({jsonCheckpoints[i][0][0].GetFloat(),
+                                 jsonCheckpoints[i][0][1].GetFloat()});
+            region[1] = vecType({jsonCheckpoints[i][1][0].GetFloat(),
+                                 jsonCheckpoints[i][1][1].GetFloat()});
             checkpoints[i] = region;
         }
         int pathSize = jsonCheckpoints.Size();
