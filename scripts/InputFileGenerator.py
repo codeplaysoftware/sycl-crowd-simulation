@@ -55,7 +55,6 @@ def workingAnimation():
         time.sleep(0.1)
     print("Input files have been writted to ../input")
 
-
 def main(argv):
     if len(argv) == 0:
         toGenerate = [

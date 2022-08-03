@@ -96,7 +96,7 @@ SYCL_EXTERNAL void differentialEq(
             sycl::float2 currentToNeighbour = pos - neighbour.getPos();
             float dij = magnitude(currentToNeighbour);
             float rij = neighbour.getRadius() + currentActor->getRadius();
-            sycl::float2 nij = (currentToNeighbour) / dij;
+            sycl::float2 nij = currentToNeighbour / dij;
             sycl::float2 tij = getTangentialVector(nij);
             float g = dij > rij ? 0 : rij - dij;
             float deltavtij = dotProduct(

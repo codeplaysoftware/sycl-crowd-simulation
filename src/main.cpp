@@ -64,12 +64,12 @@ void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY,
         throw std::invalid_argument("Too many inputs were supplied");
     }
 
-    // Seed RNG with current time in seconds
-    GLOBALSEED = uint(time(0));
-    // Seed each actor's RNG using global seed
+    std::random_device rd;
+    // Seed each actor's RNG using std rng
     for (auto actor : actors) {
-        GLOBALSEED = randXorShift(GLOBALSEED);
-        actor.setSeed(GLOBALSEED);
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distr(-1000, 1000);
+        actor.setSeed(distr(gen));
     }
 }
 
