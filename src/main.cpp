@@ -41,7 +41,6 @@
 #include "Path.hpp"
 #include "RandomNumber.hpp"
 #include "Room.hpp"
-#include "VectorMaths.hpp"
 #ifdef STATS
 #include "Stats.hpp"
 #endif
@@ -134,7 +133,7 @@ void close(SDL_Window *win, SDL_Renderer *render) {
 #endif
 
 void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf,
-            sycl::buffer<std::array<vecType, 2>> &wallsBuf,
+            sycl::buffer<std::array<sycl::float2, 2>> &wallsBuf,
             sycl::buffer<Path> &pathsBuf, sycl::buffer<bool> &heatmapEnabledBuf) {
     try {
         myQueue.submit([&](sycl::handler &cgh) {
@@ -169,7 +168,7 @@ void updateBBox(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
             cgh.parallel_for(sycl::range<1>{actorAcc.size()},
                              [=](sycl::id<1> index) {
                                  Actor *currentActor = &actorAcc[index];
-                                 vecType pos = currentActor->getPos();
+                                 sycl::float2 pos = currentActor->getPos();
                                  int row = sycl::floor(pos[0]);
                                  int col = sycl::floor(pos[1]);
                                  currentActor->setBBox({row, col});
@@ -182,6 +181,8 @@ void updateBBox(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
 }
 
 int main(int argc, char *argv[]) {
+    //testsycl::float2();
+
     int WIDTH;  // metres
     int HEIGHT; // metres
     int SCALE;
@@ -216,7 +217,7 @@ int main(int argc, char *argv[]) {
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
     auto walls = room.getWalls();
     auto wallsBuf =
-        sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
+        sycl::buffer<std::array<sycl::float2, 2>>(walls.data(), walls.size());
     wallsBuf.set_final_data(nullptr);
     auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
     pathsBuf.set_final_data(nullptr);

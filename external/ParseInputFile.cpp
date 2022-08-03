@@ -109,10 +109,10 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
 
     // Room
     auto jsonWalls = jsonDoc["room"]["walls"].GetArray();
-    std::vector<std::array<vecType, 2>> walls;
+    std::vector<std::array<sycl::float2, 2>> walls;
     for (auto &w : jsonWalls) {
-        walls.push_back({vecType({w[0].GetFloat(), w[1].GetFloat()}),
-                         vecType({w[2].GetFloat(), w[3].GetFloat()})});
+        walls.push_back({sycl::float2({w[0].GetFloat(), w[1].GetFloat()}),
+                         sycl::float2({w[2].GetFloat(), w[3].GetFloat()})});
     }
     room.setWalls(walls);
 
@@ -121,17 +121,17 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
     for (auto &p : jsonPaths) {
         int id = p["id"].GetInt();
         auto jsonCheckpoints = p["checkpoints"].GetArray();
-        std::array<std::array<vecType, 2>, PATHALLOCATIONSIZE> checkpoints;
+        std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE> checkpoints;
         if (jsonCheckpoints.Size() > PATHALLOCATIONSIZE) {
             throw JSONException(
                 "Path Size exceeds amount allocated in memory\nEither reduce "
                 "path size or increase PATHALLOCATIONSIZE in 'Path.hpp'");
         }
         for (int i = 0; i < jsonCheckpoints.Size(); i++) {
-            std::array<vecType, 2> region;
-            region[0] = vecType({jsonCheckpoints[i][0][0].GetFloat(),
+            std::array<sycl::float2, 2> region;
+            region[0] = sycl::float2({jsonCheckpoints[i][0][0].GetFloat(),
                                  jsonCheckpoints[i][0][1].GetFloat()});
-            region[1] = vecType({jsonCheckpoints[i][1][0].GetFloat(),
+            region[1] = sycl::float2({jsonCheckpoints[i][1][0].GetFloat(),
                                  jsonCheckpoints[i][1][1].GetFloat()});
             checkpoints[i] = region;
         }
@@ -142,8 +142,8 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
     // Actor
     auto jsonActors = jsonDoc["actors"].GetArray();
     for (auto &a : jsonActors) {
-        vecType pos = {a["pos"][0].GetFloat(), a["pos"][1].GetFloat()};
-        vecType velocity = {a["velocity"][0].GetFloat(),
+        sycl::float2 pos = {a["pos"][0].GetFloat(), a["pos"][1].GetFloat()};
+        sycl::float2 velocity = {a["velocity"][0].GetFloat(),
                             a["velocity"][1].GetFloat()};
         float desiredSpeed = a["desiredSpeed"].GetFloat();
         int pathId = a["pathId"].GetInt();

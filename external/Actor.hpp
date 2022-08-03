@@ -28,7 +28,6 @@
 
 #include "Path.hpp"
 #include "RandomNumber.hpp"
-#include "VectorMaths.hpp"
 #include <array>
 #include <iostream>
 #include <random>
@@ -37,8 +36,8 @@
 
 class Actor {
   private:
-    vecType pos;
-    vecType velocity;
+    sycl::float2 pos;
+    sycl::float2 velocity;
     float desiredSpeed;
     int pathId;
     int destinationIndex;
@@ -51,12 +50,12 @@ class Actor {
     float force;
 
   public:
-    Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, int pPathId,
+    Actor(sycl::float2 pPos, sycl::float2 pVelocity, float pdesiredSpeed, int pPathId,
           float pMass, float pRadius, bool pAtDestination,
           std::array<int, 3> pColor);
 
-    SYCL_EXTERNAL vecType getPos() const;
-    SYCL_EXTERNAL vecType getVelocity() const;
+    SYCL_EXTERNAL sycl::float2 getPos() const;
+    SYCL_EXTERNAL sycl::float2 getVelocity() const;
     SYCL_EXTERNAL float getDesiredSpeed() const;
     SYCL_EXTERNAL int getPathId() const;
     SYCL_EXTERNAL int getDestinationIndex() const;
@@ -68,8 +67,8 @@ class Actor {
     SYCL_EXTERNAL uint getSeed() const;
     SYCL_EXTERNAL float getForce() const;
 
-    SYCL_EXTERNAL void setPos(vecType newPos);
-    SYCL_EXTERNAL void setVelocity(vecType newVelocity);
+    SYCL_EXTERNAL void setPos(sycl::float2 newPos);
+    SYCL_EXTERNAL void setVelocity(sycl::float2 newVelocity);
     SYCL_EXTERNAL void setDesiredSpeed(float newDesiredSpeed);
     SYCL_EXTERNAL void setAtDestination(bool param);
     SYCL_EXTERNAL void setColor(std::array<int, 3> newColor);
@@ -77,7 +76,7 @@ class Actor {
     SYCL_EXTERNAL void setSeed(uint newSeed);
     SYCL_EXTERNAL void setForce(float newForce);
 
-    SYCL_EXTERNAL void checkAtDestination(std::array<vecType, 2> destination,
+    SYCL_EXTERNAL void checkAtDestination(std::array<sycl::float2, 2> destination,
                                           int pathSize);
 };
 

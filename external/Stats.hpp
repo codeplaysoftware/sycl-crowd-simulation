@@ -25,7 +25,6 @@
 
 #ifdef STATS
 #include "Actor.hpp"
-#include "VectorMaths.hpp"
 #include <chrono>
 #include <iomanip>
 #include <iostream>

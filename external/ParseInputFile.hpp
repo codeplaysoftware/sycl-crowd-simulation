@@ -29,7 +29,6 @@
 #include "Actor.hpp"
 #include "Path.hpp"
 #include "Room.hpp"
-#include "VectorMaths.hpp"
 #include <array>
 #include <fstream>
 #include <iostream>

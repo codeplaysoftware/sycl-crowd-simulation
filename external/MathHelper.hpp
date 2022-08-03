@@ -27,30 +27,29 @@
 #ifndef MathHelper_hpp
 #define MathHelper_hpp
 
-#include "VectorMaths.hpp"
 #include <array>
 #include <iostream>
 #include <sycl/sycl.hpp>
 
-SYCL_EXTERNAL vecType getDirectionVector(vecType a, vecType b);
+SYCL_EXTERNAL sycl::float2 getDirectionVector(sycl::float2 a, sycl::float2 b);
 
-SYCL_EXTERNAL vecType velFromSpeedAndDir(float speed, vecType direction);
+SYCL_EXTERNAL sycl::float2 velFromSpeedAndDir(float speed, sycl::float2 direction);
 
-SYCL_EXTERNAL vecType velToPoint(float speed, vecType pos, vecType destination);
+SYCL_EXTERNAL sycl::float2 velToPoint(float speed, sycl::float2 pos, sycl::float2 destination);
 
-SYCL_EXTERNAL float magnitude(vecType inp);
+SYCL_EXTERNAL float magnitude(sycl::float2 inp);
 
-SYCL_EXTERNAL float inverseMagnitude(vecType inp);
+SYCL_EXTERNAL float inverseMagnitude(sycl::float2 inp);
 
-SYCL_EXTERNAL float dotProduct(vecType a, vecType b);
+SYCL_EXTERNAL float dotProduct(sycl::float2 a, sycl::float2 b);
 
-SYCL_EXTERNAL float distance(vecType a, vecType b);
+SYCL_EXTERNAL float distance(sycl::float2 a, sycl::float2 b);
 
-SYCL_EXTERNAL vecType normalize(vecType inp);
+SYCL_EXTERNAL sycl::float2 normalize(sycl::float2 inp);
 
-SYCL_EXTERNAL std::pair<float, vecType>
-getDistanceAndNiw(vecType point, std::array<vecType, 2> wall);
+SYCL_EXTERNAL std::pair<float, sycl::float2>
+getDistanceAndNiw(sycl::float2 point, std::array<sycl::float2, 2> wall);
 
-SYCL_EXTERNAL vecType getTangentialVector(vecType normal);
+SYCL_EXTERNAL sycl::float2 getTangentialVector(sycl::float2 normal);
 
 #endif

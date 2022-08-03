@@ -25,7 +25,7 @@
 
 #include "Actor.hpp"
 
-Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, int pPathId,
+Actor::Actor(sycl::float2 pPos, sycl::float2 pVelocity, float pDesiredSpeed, int pPathId,
              float pMass, float pRadius, bool pAtDestination,
              std::array<int, 3> pColor)
     : pos(pPos), velocity(pVelocity), desiredSpeed(pDesiredSpeed),
@@ -33,9 +33,9 @@ Actor::Actor(vecType pPos, vecType pVelocity, float pDesiredSpeed, int pPathId,
       atDestination(pAtDestination), color(pColor), 
       destinationIndex(0), bBox({0, 0}) {}
 
-SYCL_EXTERNAL vecType Actor::getPos() const { return pos; }
+SYCL_EXTERNAL sycl::float2 Actor::getPos() const { return pos; }
 
-SYCL_EXTERNAL vecType Actor::getVelocity() const { return velocity; }
+SYCL_EXTERNAL sycl::float2 Actor::getVelocity() const { return velocity; }
 
 SYCL_EXTERNAL float Actor::getDesiredSpeed() const { return desiredSpeed; }
 
@@ -59,9 +59,9 @@ SYCL_EXTERNAL uint Actor::getSeed() const { return seed; }
 
 SYCL_EXTERNAL float Actor::getForce() const { return force; }
 
-SYCL_EXTERNAL void Actor::setPos(vecType newPos) { pos = newPos; }
+SYCL_EXTERNAL void Actor::setPos(sycl::float2 newPos) { pos = newPos; }
 
-SYCL_EXTERNAL void Actor::setVelocity(vecType newVelocity) {
+SYCL_EXTERNAL void Actor::setVelocity(sycl::float2 newVelocity) {
     velocity = newVelocity;
 }
 
@@ -85,7 +85,7 @@ SYCL_EXTERNAL void Actor::setSeed(uint newSeed) { seed = newSeed; }
 
 SYCL_EXTERNAL void Actor::setForce(float newForce) { force = newForce; }
 
-SYCL_EXTERNAL void Actor::checkAtDestination(std::array<vecType, 2> destination,
+SYCL_EXTERNAL void Actor::checkAtDestination(std::array<sycl::float2, 2> destination,
                                              int pathSize) {
     // Destinations are defined as rectangular regions
     if (pos[0] >= destination[0][0] && pos[0] <= destination[1][0] &&
