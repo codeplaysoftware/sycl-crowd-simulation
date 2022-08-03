@@ -32,23 +32,6 @@
 #include <sycl/sycl.hpp>
 
 // Any file which includes VectorMaths.hpp will have this alias
-using vecType = std::array<float, 2>;
-
-SYCL_EXTERNAL vecType operator*=(vecType &a, vecType b);
-SYCL_EXTERNAL vecType operator*(vecType a, vecType b);
-
-SYCL_EXTERNAL vecType operator+=(vecType &a, vecType b);
-SYCL_EXTERNAL vecType operator+(vecType a, vecType b);
-
-SYCL_EXTERNAL vecType operator-=(vecType &a, vecType b);
-SYCL_EXTERNAL vecType operator-(vecType a, vecType b);
-
-SYCL_EXTERNAL vecType operator*=(vecType &a, float s);
-SYCL_EXTERNAL vecType operator*(vecType a, float s);
-SYCL_EXTERNAL vecType operator*=(float s, vecType &a);
-SYCL_EXTERNAL vecType operator*(float s, vecType a);
-
-SYCL_EXTERNAL vecType operator/=(vecType &a, float s);
-SYCL_EXTERNAL vecType operator/(vecType a, float s);
+using vecType = sycl::float2;
 
 #endif
