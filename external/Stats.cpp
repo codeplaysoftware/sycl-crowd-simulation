@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Process simulation statistics
- * 
+ *
  **************************************************************************/
 
 #ifdef STATS
@@ -45,28 +45,19 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
             auto forceSumReduction =
                 sycl::reduction(forceSumBuf, cgh, sycl::plus<float>());
 
-            cgh.parallel_for(sycl::range<1>{actorAcc.size()}, forceSumReduction,
-                             [=](sycl::id<1> index, auto &sum) {
-                                 if (!actorAcc[index].getAtDestination()) {
-                                     sum += actorAcc[index].getForce();
-                                 }
-                             });
-        });
-        myQueue.throw_asynchronous();
-
-        myQueue.submit([&](sycl::handler &cgh) {
-            auto actorAcc = actorBuf.get_access<sycl::access::mode::read>(cgh);
-
             auto activeActorsReduction =
                 sycl::reduction(activeActorsBuf, cgh, sycl::plus<int>());
 
-            cgh.parallel_for(sycl::range<1>{actorAcc.size()},
-                             activeActorsReduction,
-                             [=](sycl::id<1> index, auto &sum) {
-                                 if (!actorAcc[index].getAtDestination()) {
-                                     sum += 1;
-                                 }
-                             });
+            int globalSize = (std::floor(actorAcc.size() / 16) + 1) * 16;
+            cgh.parallel_for(
+                sycl::nd_range<1>{globalSize, 16}, forceSumReduction,
+                activeActorsReduction,
+                [=](sycl::nd_item<1> index, auto &forceSum, auto &actorSum) {
+                    if (!actorAcc[index.get_global_id()].getAtDestination()) {
+                        forceSum += actorAcc[index.get_global_id()].getForce();
+                        actorSum += 1;
+                    }
+                });
         });
         myQueue.throw_asynchronous();
 
@@ -124,9 +115,8 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
 
         auto kernelDurationsForOutput = kernelDurations;
         // Discard first kernel time to prevent skewed results
-        kernelDurations.erase(kernelDurations.begin());
-        auto kernelDurationsBuf =
-            sycl::buffer<int>(kernelDurations.data(), kernelDurations.size());
+        auto kernelDurationsBuf = sycl::buffer<int>(kernelDurations.data() + 1,
+                                                    kernelDurations.size());
 
         // Calculate average kernel duration
         myQueue.submit([&](sycl::handler &cgh) {
@@ -136,6 +126,7 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
             auto sumReduction =
                 sycl::reduction(durationSumBuf, cgh, sycl::plus<int>());
 
+            auto out = sycl::stream{64, 1028, cgh};
             cgh.parallel_for(sycl::range<1>{durationAcc.size()}, sumReduction,
                              [=](sycl::id<1> index, auto &sum) {
                                  sum += durationAcc[index];

@@ -19,54 +19,56 @@
  *  MathHelper.cpp
  *
  *  Description:
- *    Collection of helper functions performing common vector math 
+ *    Collection of helper functions performing common vector math
  *    operations
- * 
+ *
  **************************************************************************/
 
 #include "MathHelper.hpp"
 
-SYCL_EXTERNAL vecType getDirectionVector(vecType from, vecType to) {
+SYCL_EXTERNAL sycl::float2 getDirectionVector(sycl::float2 from,
+                                              sycl::float2 to) {
     return to - from;
 }
 
-SYCL_EXTERNAL vecType velFromSpeedAndDir(float speed, vecType direction) {
+SYCL_EXTERNAL sycl::float2 velFromSpeedAndDir(float speed,
+                                              sycl::float2 direction) {
     return direction * (speed * inverseMagnitude(direction));
 }
 
-SYCL_EXTERNAL vecType velToPoint(float speed, vecType pos,
-                                 vecType destination) {
+SYCL_EXTERNAL sycl::float2 velToPoint(float speed, sycl::float2 pos,
+                                      sycl::float2 destination) {
     return velFromSpeedAndDir(speed, getDirectionVector(pos, destination));
 }
 
-SYCL_EXTERNAL float magnitude(vecType inp) {
+SYCL_EXTERNAL float magnitude(sycl::float2 inp) {
     return sycl::sqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
 }
 
 // Fast inverse square root optimisation
 // https://en.wikipedia.org/wiki/Fast_inverse_square_root
-SYCL_EXTERNAL float inverseMagnitude(vecType inp) {
+SYCL_EXTERNAL float inverseMagnitude(sycl::float2 inp) {
     return sycl::rsqrt((inp[0] * inp[0]) + (inp[1] * inp[1]));
 }
 
-SYCL_EXTERNAL float dotProduct(vecType a, vecType b) {
+SYCL_EXTERNAL float dotProduct(sycl::float2 a, sycl::float2 b) {
     return (a[0] * b[0]) + (a[1] * b[1]);
 }
 
-SYCL_EXTERNAL float distance(vecType from, vecType to) {
+SYCL_EXTERNAL float distance(sycl::float2 from, sycl::float2 to) {
     return magnitude(from - to);
 }
 
-SYCL_EXTERNAL vecType normalize(vecType inp) {
+SYCL_EXTERNAL sycl::float2 normalize(sycl::float2 inp) {
     return inp * inverseMagnitude(inp);
 }
 
 // Returns pair of distance to line and normalised direction from wall to point
-SYCL_EXTERNAL std::pair<float, vecType>
-getDistanceAndNiw(vecType point, std::array<vecType, 2> wall) {
-    vecType AB = getDirectionVector(wall[0], wall[1]);
-    vecType BP = getDirectionVector(wall[1], point);
-    vecType AP = getDirectionVector(wall[0], point);
+SYCL_EXTERNAL std::pair<float, sycl::float2>
+getDistanceAndNiw(sycl::float2 point, std::array<sycl::float2, 2> wall) {
+    sycl::float2 AB = getDirectionVector(wall[0], wall[1]);
+    sycl::float2 BP = getDirectionVector(wall[1], point);
+    sycl::float2 AP = getDirectionVector(wall[0], point);
 
     float ABdotBP = dotProduct(AB, BP);
     float ABdotAP = dotProduct(AB, AP);
@@ -88,6 +90,6 @@ getDistanceAndNiw(vecType point, std::array<vecType, 2> wall) {
     }
 }
 
-SYCL_EXTERNAL vecType getTangentialVector(vecType normal) {
+SYCL_EXTERNAL sycl::float2 getTangentialVector(sycl::float2 normal) {
     return {-normal[1], normal[0]};
 }

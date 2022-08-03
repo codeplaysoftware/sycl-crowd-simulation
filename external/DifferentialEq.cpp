@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Kernel for calculating social forces
- * 
+ *
  **************************************************************************/
 
 #include "DifferentialEq.hpp"
@@ -28,22 +28,24 @@
 SYCL_EXTERNAL void differentialEq(
     int actorIndex,
     sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors,
-    sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls,
-    sycl::accessor<Path, 1, sycl::access::mode::read> paths) {
+    sycl::accessor<std::array<sycl::float2, 2>, 1, sycl::access::mode::read>
+        walls,
+    sycl::accessor<Path, 1, sycl::access::mode::read> paths,
+    sycl::accessor<bool, 1, sycl::access::mode::read> heatmapEnabled) {
     Actor *currentActor = &actors[actorIndex];
 
-    vecType pos = currentActor->getPos();
+    sycl::float2 pos = currentActor->getPos();
 
     // Calculate personal impulse
     float mi = currentActor->getMass();
     float v0i = currentActor->getDesiredSpeed();
-    std::array<vecType, 2> destination =
+    std::array<sycl::float2, 2> destination =
         paths[currentActor->getPathId()]
             .getCheckpoints()[currentActor->getDestinationIndex()];
 
     // Find direction vector to nearest point in destination region
-    std::pair<float, vecType> minRegionDistance;
-    std::array<vecType, 4> destinationRect = {
+    std::pair<float, sycl::float2> minRegionDistance;
+    std::array<sycl::float2, 4> destinationRect = {
         destination[0],
         {destination[1][0], destination[0][1]},
         destination[1],
@@ -59,11 +61,12 @@ SYCL_EXTERNAL void differentialEq(
         }
     }
     minRegionDistance.second = normalize(minRegionDistance.second);
-    vecType e0i = {-minRegionDistance.second[0], -minRegionDistance.second[1]};
+    sycl::float2 e0i = {-minRegionDistance.second[0],
+                        -minRegionDistance.second[1]};
 
-    vecType vi = currentActor->getVelocity();
+    sycl::float2 vi = currentActor->getVelocity();
 
-    vecType personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
+    sycl::float2 personalImpulse = mi * (((v0i * e0i) - vi) / Ti);
 
     // Collect neighbouring bounding boxes
     std::array<int, 2> currentBBox = currentActor->getBBox();
@@ -80,7 +83,7 @@ SYCL_EXTERNAL void differentialEq(
     }};
 
     // Calculate forces applied by neighbouring actors (in valid bounding boxes)
-    vecType peopleForces = {0, 0};
+    sycl::float2 peopleForces = {0, 0};
     for (int x = 0; x < actors.size(); x++) {
         Actor neighbour = actors[x];
 
@@ -92,11 +95,11 @@ SYCL_EXTERNAL void differentialEq(
                         });
 
         if (actorIndex != x && !neighbour.getAtDestination() && bBoxFlag) {
-            vecType currentToNeighbour = pos - neighbour.getPos();
+            sycl::float2 currentToNeighbour = pos - neighbour.getPos();
             float dij = magnitude(currentToNeighbour);
             float rij = neighbour.getRadius() + currentActor->getRadius();
-            vecType nij = (currentToNeighbour) / dij;
-            vecType tij = getTangentialVector(nij);
+            sycl::float2 nij = currentToNeighbour / dij;
+            sycl::float2 tij = getTangentialVector(nij);
             float g = dij > rij ? 0 : rij - dij;
             float deltavtij = dotProduct(
                 (neighbour.getVelocity() - currentActor->getVelocity()), tij);
@@ -108,21 +111,22 @@ SYCL_EXTERNAL void differentialEq(
     }
 
     // Calculate forces applied by walls
-    vecType wallForces = {0, 0};
+    sycl::float2 wallForces = {0, 0};
     for (int x = 0; x < walls.size(); x++) {
-        std::array<vecType, 2> currentWall = walls[x];
+        std::array<sycl::float2, 2> currentWall = walls[x];
         float ri = currentActor->getRadius();
-        std::pair<float, vecType> dAndn = getDistanceAndNiw(pos, currentWall);
+        std::pair<float, sycl::float2> dAndn =
+            getDistanceAndNiw(pos, currentWall);
         float diw = dAndn.first;
         float g = diw > ri ? 0 : ri - diw;
-        vecType niw = normalize(dAndn.second);
-        vecType tiw = getTangentialVector(niw);
+        sycl::float2 niw = normalize(dAndn.second);
+        sycl::float2 tiw = getTangentialVector(niw);
 
         wallForces += (WALLAi * sycl::exp((ri - diw) / Bi) + K1 * g) * niw -
                       (K2 * g * dotProduct(vi, tiw) * tiw);
     }
 
-    vecType forceSum = personalImpulse + peopleForces + wallForces;
+    sycl::float2 forceSum = personalImpulse + peopleForces + wallForces;
 
 #ifdef STATS
     if (!currentActor->getAtDestination()) {
@@ -138,7 +142,7 @@ SYCL_EXTERNAL void differentialEq(
     currentActor->setSeed(randXorShift(seed));
 
     // Color actor according to heatmap
-    if (currentActor->getHeatmapEnabled()) {
+    if (heatmapEnabled[0]) {
         // theoreticalMax was decided based on observed max forces for a set of
         // configurations It may need to be altered based on the max forces of
         // your config to create a satisfying heatmap
@@ -153,7 +157,7 @@ SYCL_EXTERNAL void differentialEq(
     }
 
     // Perform integration
-    vecType acceleration = forceSum / mi;
+    sycl::float2 acceleration = forceSum / mi;
     currentActor->setVelocity(vi + acceleration * TIMESTEP);
     currentActor->setPos(pos + currentActor->getVelocity() * TIMESTEP);
 

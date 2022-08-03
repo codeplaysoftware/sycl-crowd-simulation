@@ -20,7 +20,7 @@
  *
  *  Description:
  *    SYCL implementation of social force model for crowd simulation
- * 
+ *
  **************************************************************************/
 
 #ifndef PROFILING_MODE
@@ -41,7 +41,6 @@
 #include "Path.hpp"
 #include "RandomNumber.hpp"
 #include "Room.hpp"
-#include "VectorMaths.hpp"
 #ifdef STATS
 #include "Stats.hpp"
 #endif
@@ -50,13 +49,13 @@ uint GLOBALSEED;
 
 void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY,
           std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR,
-          std::vector<Actor> &actors, Room &room, std::vector<Path> &paths,
-          int argc, char **argv) {
+          bool &HEATMAPENABLED, std::vector<Actor> &actors, Room &room,
+          std::vector<Path> &paths, int argc, char **argv) {
     // Read from input file path JSON
     if (argc == 2) {
         std::string inputPath = argv[1];
         parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE,
-                       DELAY, BGCOLOR, WALLCOLOR);
+                       DELAY, BGCOLOR, WALLCOLOR, HEATMAPENABLED);
     } else if (argc < 2) {
         throw std::invalid_argument(
             "Input configuration file must be supplied");
@@ -64,12 +63,12 @@ void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY,
         throw std::invalid_argument("Too many inputs were supplied");
     }
 
-    // Seed RNG with current time in seconds
-    GLOBALSEED = uint(time(0));
-    // Seed each actor's RNG using global seed
+    std::random_device rd;
+    // Seed each actor's RNG using std rng
     for (auto actor : actors) {
-        GLOBALSEED = randXorShift(GLOBALSEED);
-        actor.setSeed(GLOBALSEED);
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> distr(-1000, 1000);
+        actor.setSeed(distr(gen));
     }
 }
 
@@ -133,8 +132,9 @@ void close(SDL_Window *win, SDL_Renderer *render) {
 #endif
 
 void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf,
-            sycl::buffer<std::array<vecType, 2>> &wallsBuf,
-            sycl::buffer<Path> &pathsBuf) {
+            sycl::buffer<std::array<sycl::float2, 2>> &wallsBuf,
+            sycl::buffer<Path> &pathsBuf,
+            sycl::buffer<bool> &heatmapEnabledBuf) {
     try {
         myQueue.submit([&](sycl::handler &cgh) {
             auto actorAcc =
@@ -144,10 +144,14 @@ void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf,
 
             auto pathsAcc = pathsBuf.get_access<sycl::access::mode::read>(cgh);
 
+            auto heatmapEnabledAcc =
+                heatmapEnabledBuf.get_access<sycl::access::mode::read>(cgh);
+
             cgh.parallel_for(
                 sycl::range<1>{actorAcc.size()}, [=](sycl::id<1> index) {
                     if (!actorAcc[index].getAtDestination()) {
-                        differentialEq(index, actorAcc, wallsAcc, pathsAcc);
+                        differentialEq(index, actorAcc, wallsAcc, pathsAcc,
+                                       heatmapEnabledAcc);
                     }
                 });
         });
@@ -166,7 +170,7 @@ void updateBBox(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
             cgh.parallel_for(sycl::range<1>{actorAcc.size()},
                              [=](sycl::id<1> index) {
                                  Actor *currentActor = &actorAcc[index];
-                                 vecType pos = currentActor->getPos();
+                                 sycl::float2 pos = currentActor->getPos();
                                  int row = sycl::floor(pos[0]);
                                  int col = sycl::floor(pos[1]);
                                  currentActor->setBBox({row, col});
@@ -183,6 +187,7 @@ int main(int argc, char *argv[]) {
     int HEIGHT; // metres
     int SCALE;
     int DELAY;
+    bool HEATMAPENABLED;
 
     std::array<int, 3> BGCOLOR;
     std::array<int, 3> WALLCOLOR;
@@ -199,8 +204,8 @@ int main(int argc, char *argv[]) {
 
     sycl::queue myQueue{sycl::gpu_selector(), asyncHandler};
 
-    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, actors, room, paths,
-         argc, argv);
+    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, HEATMAPENABLED,
+         actors, room, paths, argc, argv);
 
 #ifndef PROFILING_MODE
     SDL_Window *win;
@@ -212,10 +217,11 @@ int main(int argc, char *argv[]) {
     auto actorBuf = sycl::buffer<Actor>(actors.data(), actors.size());
     auto walls = room.getWalls();
     auto wallsBuf =
-        sycl::buffer<std::array<vecType, 2>>(walls.data(), walls.size());
+        sycl::buffer<std::array<sycl::float2, 2>>(walls.data(), walls.size());
     wallsBuf.set_final_data(nullptr);
     auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
     pathsBuf.set_final_data(nullptr);
+    auto heatmapEnableBuf = sycl::buffer<bool>(&HEATMAPENABLED, 1);
 
     int delayCounter = 0;
     int updateBBoxCounter = 0;
@@ -242,7 +248,7 @@ int main(int argc, char *argv[]) {
 #ifdef PROFILING_MODE
     while (timestepCounter <= 500) {
 #else
-    while(!isQuit) {
+    while (!isQuit) {
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 isQuit = true;
@@ -266,7 +272,7 @@ int main(int argc, char *argv[]) {
                     updateBBoxCounter = 20;
                 }
 
-                update(myQueue, actorBuf, wallsBuf, pathsBuf);
+                update(myQueue, actorBuf, wallsBuf, pathsBuf, heatmapEnableBuf);
 
 #ifdef STATS
                 auto kernelEnd = std::chrono::high_resolution_clock::now();

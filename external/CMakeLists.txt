@@ -5,7 +5,6 @@ add_library(external Actor.cpp
                      Path.cpp 
                      MathHelper.cpp 
                      DifferentialEq.cpp 
-                     VectorMaths.cpp 
                      Heatmap.cpp 
                      ParseInputFile.cpp 
                      RandomNumber.cpp 

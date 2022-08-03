@@ -20,27 +20,27 @@
  *
  *  Description:
  *    Class denoting the environment actors exist in
- * 
+ *
  **************************************************************************/
 
 #ifndef Room_hpp
 #define Room_hpp
 
-#include "VectorMaths.hpp"
 #include <array>
 #include <iostream>
 #include <sycl/sycl.hpp>
 
 class Room {
   private:
-    std::vector<std::array<vecType, 2>> walls;
+    // Each wall is defined as a line with a start and end point
+    std::vector<std::array<sycl::float2, 2>> walls;
 
   public:
-    Room(std::vector<std::array<vecType, 2>> pWalls);
+    Room(std::vector<std::array<sycl::float2, 2>> pWalls);
 
-    std::vector<std::array<vecType, 2>> getWalls() const;
+    std::vector<std::array<sycl::float2, 2>> getWalls() const;
 
-    void setWalls(std::vector<std::array<vecType, 2>> newWalls);
+    void setWalls(std::vector<std::array<sycl::float2, 2>> newWalls);
 };
 
 #endif

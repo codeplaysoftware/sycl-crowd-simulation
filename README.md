@@ -62,9 +62,10 @@ Below is an annotated example input file which creates a room containing two act
     "scale": 100,                                 
     "delay": 0,
     "bgColor": [0, 0, 0],                         
-    "wallColor": [255, 255, 255]
-  },                                              
-  
+    "wallColor": [255, 255, 255],
+    "heatmapEnabled": true                        <-- Flag denoting whether 
+  },                                                  the heatmap should be 
+                                                      applied to actors
   "room": {                                       
     "walls": [
       [0.5, 0.5, 8.5, 0.5],                       <-- Walls are defined via their
@@ -84,9 +85,9 @@ Below is an annotated example input file which creates a room containing two act
       "radius": 0.05,                             
       "atDestination": false,
       "color": [255, 0, 0],                       
-      "heatmapEnabled": true                      <-- Flag denoting whether the 
-    },                                                actor's colour should change
-    {                                                 with the heatmap
+      "heatmapEnabled": true 
+    },
+    {
       "pos": [0.7, 7.3],                          
       "velocity": [0.0789, 0.0444],
       "desiredSpeed": 0.6,                        

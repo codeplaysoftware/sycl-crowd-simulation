@@ -21,7 +21,7 @@
  *  Description:
  *    Applying heatmap across actors reflecting how much force they are
  *    experiencing
- * 
+ *
  **************************************************************************/
 
 #include "Heatmap.hpp"
