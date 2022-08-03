@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Kernel for calculating social forces
- * 
+ *
  **************************************************************************/
 
 #include "DifferentialEq.hpp"
@@ -28,8 +28,9 @@
 SYCL_EXTERNAL void differentialEq(
     int actorIndex,
     sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors,
-    sycl::accessor<std::array<sycl::float2, 2>, 1, sycl::access::mode::read> walls,
-    sycl::accessor<Path, 1, sycl::access::mode::read> paths, 
+    sycl::accessor<std::array<sycl::float2, 2>, 1, sycl::access::mode::read>
+        walls,
+    sycl::accessor<Path, 1, sycl::access::mode::read> paths,
     sycl::accessor<bool, 1, sycl::access::mode::read> heatmapEnabled) {
     Actor *currentActor = &actors[actorIndex];
 
@@ -60,7 +61,8 @@ SYCL_EXTERNAL void differentialEq(
         }
     }
     minRegionDistance.second = normalize(minRegionDistance.second);
-    sycl::float2 e0i = {-minRegionDistance.second[0], -minRegionDistance.second[1]};
+    sycl::float2 e0i = {-minRegionDistance.second[0],
+                        -minRegionDistance.second[1]};
 
     sycl::float2 vi = currentActor->getVelocity();
 
@@ -113,7 +115,8 @@ SYCL_EXTERNAL void differentialEq(
     for (int x = 0; x < walls.size(); x++) {
         std::array<sycl::float2, 2> currentWall = walls[x];
         float ri = currentActor->getRadius();
-        std::pair<float, sycl::float2> dAndn = getDistanceAndNiw(pos, currentWall);
+        std::pair<float, sycl::float2> dAndn =
+            getDistanceAndNiw(pos, currentWall);
         float diw = dAndn.first;
         float g = diw > ri ? 0 : ri - diw;
         sycl::float2 niw = normalize(dAndn.second);

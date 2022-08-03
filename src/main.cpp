@@ -20,7 +20,7 @@
  *
  *  Description:
  *    SYCL implementation of social force model for crowd simulation
- * 
+ *
  **************************************************************************/
 
 #ifndef PROFILING_MODE
@@ -49,9 +49,8 @@ uint GLOBALSEED;
 
 void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY,
           std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR,
-          bool &HEATMAPENABLED,
-          std::vector<Actor> &actors, Room &room, std::vector<Path> &paths,
-          int argc, char **argv) {
+          bool &HEATMAPENABLED, std::vector<Actor> &actors, Room &room,
+          std::vector<Path> &paths, int argc, char **argv) {
     // Read from input file path JSON
     if (argc == 2) {
         std::string inputPath = argv[1];
@@ -134,7 +133,8 @@ void close(SDL_Window *win, SDL_Renderer *render) {
 
 void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf,
             sycl::buffer<std::array<sycl::float2, 2>> &wallsBuf,
-            sycl::buffer<Path> &pathsBuf, sycl::buffer<bool> &heatmapEnabledBuf) {
+            sycl::buffer<Path> &pathsBuf,
+            sycl::buffer<bool> &heatmapEnabledBuf) {
     try {
         myQueue.submit([&](sycl::handler &cgh) {
             auto actorAcc =
@@ -144,12 +144,14 @@ void update(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf,
 
             auto pathsAcc = pathsBuf.get_access<sycl::access::mode::read>(cgh);
 
-            auto heatmapEnabledAcc = heatmapEnabledBuf.get_access<sycl::access::mode::read>(cgh);
+            auto heatmapEnabledAcc =
+                heatmapEnabledBuf.get_access<sycl::access::mode::read>(cgh);
 
             cgh.parallel_for(
                 sycl::range<1>{actorAcc.size()}, [=](sycl::id<1> index) {
                     if (!actorAcc[index].getAtDestination()) {
-                        differentialEq(index, actorAcc, wallsAcc, pathsAcc, heatmapEnabledAcc);
+                        differentialEq(index, actorAcc, wallsAcc, pathsAcc,
+                                       heatmapEnabledAcc);
                     }
                 });
         });
@@ -181,8 +183,6 @@ void updateBBox(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
 }
 
 int main(int argc, char *argv[]) {
-    //testsycl::float2();
-
     int WIDTH;  // metres
     int HEIGHT; // metres
     int SCALE;
@@ -204,8 +204,8 @@ int main(int argc, char *argv[]) {
 
     sycl::queue myQueue{sycl::gpu_selector(), asyncHandler};
 
-    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, HEATMAPENABLED, actors, room, paths,
-         argc, argv);
+    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, HEATMAPENABLED,
+         actors, room, paths, argc, argv);
 
 #ifndef PROFILING_MODE
     SDL_Window *win;
@@ -248,7 +248,7 @@ int main(int argc, char *argv[]) {
 #ifdef PROFILING_MODE
     while (timestepCounter <= 500) {
 #else
-    while(!isQuit) {
+    while (!isQuit) {
         if (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
                 isQuit = true;

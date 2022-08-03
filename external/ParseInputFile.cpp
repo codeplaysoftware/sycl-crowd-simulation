@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Parse input JSON file and load configuration into simulation
- * 
+ *
  **************************************************************************/
 
 #include "ParseInputFile.hpp"
@@ -42,8 +42,8 @@ void validateParameters(rapidjson::Document &jsonDoc) {
         throw JSONException("Missing these parameters: " + missingParameters);
     } else {
         auto &config = jsonDoc["config"];
-        auto configParams = {"width", "height",    "scale",
-                             "delay", "wallColor", "bgColor", "heatmapEnabled"};
+        auto configParams = {"width",     "height",  "scale",         "delay",
+                             "wallColor", "bgColor", "heatmapEnabled"};
         for (auto p : configParams) {
             if (!config.HasMember(p))
                 missingParameters += std::string(p) + " ";
@@ -52,9 +52,8 @@ void validateParameters(rapidjson::Document &jsonDoc) {
         if (!jsonDoc["room"].HasMember("walls"))
             missingParameters += "walls ";
 
-        auto actorParams = {"pos",           "velocity", "desiredSpeed",
-                            "pathId",        "mass",     "radius",
-                            "atDestination", "color"};
+        auto actorParams = {"pos",  "velocity", "desiredSpeed",  "pathId",
+                            "mass", "radius",   "atDestination", "color"};
         for (auto &a : jsonDoc["actors"].GetArray()) {
             for (auto p : actorParams) {
                 if (!a.HasMember(p))
@@ -79,8 +78,8 @@ void validateParameters(rapidjson::Document &jsonDoc) {
 void parseInputFile(std::string filename, std::vector<Actor> &actors,
                     Room &room, std::vector<Path> &paths, int &WIDTH,
                     int &HEIGHT, int &SCALE, int &DELAY,
-                    std::array<int, 3> &BGCOLOR,
-                    std::array<int, 3> &WALLCOLOR, bool &HEATMAPENABLED) {
+                    std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR,
+                    bool &HEATMAPENABLED) {
     std::ifstream jsonFile(filename);
     if (!jsonFile.is_open()) {
         throw JSONException("Error opening file " + filename);
@@ -130,9 +129,9 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
         for (int i = 0; i < jsonCheckpoints.Size(); i++) {
             std::array<sycl::float2, 2> region;
             region[0] = sycl::float2({jsonCheckpoints[i][0][0].GetFloat(),
-                                 jsonCheckpoints[i][0][1].GetFloat()});
+                                      jsonCheckpoints[i][0][1].GetFloat()});
             region[1] = sycl::float2({jsonCheckpoints[i][1][0].GetFloat(),
-                                 jsonCheckpoints[i][1][1].GetFloat()});
+                                      jsonCheckpoints[i][1][1].GetFloat()});
             checkpoints[i] = region;
         }
         int pathSize = jsonCheckpoints.Size();
@@ -144,7 +143,7 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
     for (auto &a : jsonActors) {
         sycl::float2 pos = {a["pos"][0].GetFloat(), a["pos"][1].GetFloat()};
         sycl::float2 velocity = {a["velocity"][0].GetFloat(),
-                            a["velocity"][1].GetFloat()};
+                                 a["velocity"][1].GetFloat()};
         float desiredSpeed = a["desiredSpeed"].GetFloat();
         int pathId = a["pathId"].GetInt();
         int pathSize = paths[pathId].getPathSize();

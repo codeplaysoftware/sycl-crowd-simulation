@@ -19,23 +19,25 @@
  *  MathHelper.cpp
  *
  *  Description:
- *    Collection of helper functions performing common vector math 
+ *    Collection of helper functions performing common vector math
  *    operations
- * 
+ *
  **************************************************************************/
 
 #include "MathHelper.hpp"
 
-SYCL_EXTERNAL sycl::float2 getDirectionVector(sycl::float2 from, sycl::float2 to) {
+SYCL_EXTERNAL sycl::float2 getDirectionVector(sycl::float2 from,
+                                              sycl::float2 to) {
     return to - from;
 }
 
-SYCL_EXTERNAL sycl::float2 velFromSpeedAndDir(float speed, sycl::float2 direction) {
+SYCL_EXTERNAL sycl::float2 velFromSpeedAndDir(float speed,
+                                              sycl::float2 direction) {
     return direction * (speed * inverseMagnitude(direction));
 }
 
 SYCL_EXTERNAL sycl::float2 velToPoint(float speed, sycl::float2 pos,
-                                 sycl::float2 destination) {
+                                      sycl::float2 destination) {
     return velFromSpeedAndDir(speed, getDirectionVector(pos, destination));
 }
 

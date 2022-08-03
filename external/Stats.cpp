@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Process simulation statistics
- * 
+ *
  **************************************************************************/
 
 #ifdef STATS
@@ -44,18 +44,20 @@ void updateStats(sycl::queue myQueue, sycl::buffer<Actor> actorBuf,
 
             auto forceSumReduction =
                 sycl::reduction(forceSumBuf, cgh, sycl::plus<float>());
-            
+
             auto activeActorsReduction =
                 sycl::reduction(activeActorsBuf, cgh, sycl::plus<int>());
 
-            int globalSize = (std::floor(actorAcc.size()/16) + 1) * 16;
-            cgh.parallel_for(sycl::nd_range<1>{globalSize, 16}, forceSumReduction, activeActorsReduction,
-                             [=](sycl::nd_item<1> index, auto &forceSum, auto& actorSum) {
-                                 if (!actorAcc[index.get_global_id()].getAtDestination()) {
-                                     forceSum += actorAcc[index.get_global_id()].getForce();
-                                     actorSum += 1;
-                                 }
-                             });
+            int globalSize = (std::floor(actorAcc.size() / 16) + 1) * 16;
+            cgh.parallel_for(
+                sycl::nd_range<1>{globalSize, 16}, forceSumReduction,
+                activeActorsReduction,
+                [=](sycl::nd_item<1> index, auto &forceSum, auto &actorSum) {
+                    if (!actorAcc[index.get_global_id()].getAtDestination()) {
+                        forceSum += actorAcc[index.get_global_id()].getForce();
+                        actorSum += 1;
+                    }
+                });
         });
         myQueue.throw_asynchronous();
 
@@ -113,8 +115,8 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
 
         auto kernelDurationsForOutput = kernelDurations;
         // Discard first kernel time to prevent skewed results
-        auto kernelDurationsBuf =
-            sycl::buffer<int>(kernelDurations.data() + 1, kernelDurations.size());
+        auto kernelDurationsBuf = sycl::buffer<int>(kernelDurations.data() + 1,
+                                                    kernelDurations.size());
 
         // Calculate average kernel duration
         myQueue.submit([&](sycl::handler &cgh) {

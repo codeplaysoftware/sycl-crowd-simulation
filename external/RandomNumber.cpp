@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Efficient random number generation on the GPU
- * 
+ *
  **************************************************************************/
 
 #include "RandomNumber.hpp"

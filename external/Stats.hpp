@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Process simulation statistics
- * 
+ *
  **************************************************************************/
 
 #ifdef STATS

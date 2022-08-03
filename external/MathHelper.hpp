@@ -19,9 +19,9 @@
  *  MathHelper.hpp
  *
  *  Description:
- *    Collection of helper functions performing common vector math 
+ *    Collection of helper functions performing common vector math
  *    operations
- * 
+ *
  **************************************************************************/
 
 #ifndef MathHelper_hpp
@@ -33,9 +33,11 @@
 
 SYCL_EXTERNAL sycl::float2 getDirectionVector(sycl::float2 a, sycl::float2 b);
 
-SYCL_EXTERNAL sycl::float2 velFromSpeedAndDir(float speed, sycl::float2 direction);
+SYCL_EXTERNAL sycl::float2 velFromSpeedAndDir(float speed,
+                                              sycl::float2 direction);
 
-SYCL_EXTERNAL sycl::float2 velToPoint(float speed, sycl::float2 pos, sycl::float2 destination);
+SYCL_EXTERNAL sycl::float2 velToPoint(float speed, sycl::float2 pos,
+                                      sycl::float2 destination);
 
 SYCL_EXTERNAL float magnitude(sycl::float2 inp);
 

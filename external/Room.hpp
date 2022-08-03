@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Class denoting the environment actors exist in
- * 
+ *
  **************************************************************************/
 
 #ifndef Room_hpp

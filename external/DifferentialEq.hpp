@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Kernel for calculating social forces
- * 
+ *
  **************************************************************************/
 
 #ifndef DifferentialEqu_hpp
@@ -54,7 +54,8 @@ constexpr float TIMESTEP = 0.001;
 SYCL_EXTERNAL void differentialEq(
     int actorIndex,
     sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors,
-    sycl::accessor<std::array<sycl::float2, 2>, 1, sycl::access::mode::read> walls,
+    sycl::accessor<std::array<sycl::float2, 2>, 1, sycl::access::mode::read>
+        walls,
     sycl::accessor<Path, 1, sycl::access::mode::read> paths,
     sycl::accessor<bool, 1, sycl::access::mode::read> heatmapEnabled);
 

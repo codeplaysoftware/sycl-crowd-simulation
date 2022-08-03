@@ -20,14 +20,15 @@
  *
  *  Description:
  *    Class denoting path an actor follows
- * 
+ *
  **************************************************************************/
 
 #include "Path.hpp"
 
-Path::Path(int pId,
-           std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE> pCheckpoints,
-           int pPathSize)
+Path::Path(
+    int pId,
+    std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE> pCheckpoints,
+    int pPathSize)
     : id(pId), checkpoints(pCheckpoints), pathSize(pPathSize) {}
 
 SYCL_EXTERNAL int Path::getId() const { return id; }
@@ -42,6 +43,7 @@ SYCL_EXTERNAL int Path::getPathSize() const { return pathSize; }
 void Path::setId(int newId) { id = newId; }
 
 void Path::setCheckpoints(
-    std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE> newCheckpoints) {
+    std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE>
+        newCheckpoints) {
     checkpoints = newCheckpoints;
 }

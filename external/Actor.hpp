@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Class denoting an actor in social force model
- * 
+ *
  **************************************************************************/
 
 #ifndef Actor_hpp
@@ -36,22 +36,22 @@
 
 class Actor {
   private:
-    std::array<int, 3> color; // 12 bytes
-    sycl::float2 pos; // 8 bytes
-    sycl::float2 velocity; // 8 bytes
-    std::array<int, 2> bBox; // 8 bytes
-    float desiredSpeed; // 4 bytes
-    int pathId; // 4 bytes
-    int destinationIndex; // 4 bytes
-    float mass; // 4 bytes
-    float radius; // 4 bytes
-    uint seed; // 4 bytes
-    float force; // 4 bytes
-    bool atDestination; // 1 byte
+    std::array<int, 3> color;
+    sycl::float2 pos;
+    sycl::float2 velocity;
+    std::array<int, 2> bBox;
+    float desiredSpeed;
+    int pathId;
+    int destinationIndex;
+    float mass;
+    float radius;
+    uint seed;
+    float force;
+    bool atDestination;
 
   public:
-    Actor(sycl::float2 pPos, sycl::float2 pVelocity, float pdesiredSpeed, int pPathId,
-          float pMass, float pRadius, bool pAtDestination,
+    Actor(sycl::float2 pPos, sycl::float2 pVelocity, float pdesiredSpeed,
+          int pPathId, float pMass, float pRadius, bool pAtDestination,
           std::array<int, 3> pColor);
 
     SYCL_EXTERNAL sycl::float2 getPos() const;
@@ -76,8 +76,8 @@ class Actor {
     SYCL_EXTERNAL void setSeed(uint newSeed);
     SYCL_EXTERNAL void setForce(float newForce);
 
-    SYCL_EXTERNAL void checkAtDestination(std::array<sycl::float2, 2> destination,
-                                          int pathSize);
+    SYCL_EXTERNAL void
+    checkAtDestination(std::array<sycl::float2, 2> destination, int pathSize);
 };
 
 #endif

@@ -55,6 +55,7 @@ def workingAnimation():
         time.sleep(0.1)
     print("Input files have been writted to ../input")
 
+
 def main(argv):
     if len(argv) == 0:
         toGenerate = [
@@ -84,7 +85,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": False
+                "heatmapEnabled": False,
             }
 
             fourSquare["room"] = {
@@ -143,7 +144,7 @@ def main(argv):
                                 "mass": 50,
                                 "radius": 0.05,
                                 "atDestination": False,
-                                "color": colors[o]
+                                "color": colors[o],
                             }
                         )
                         idCounter += 1
@@ -160,7 +161,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": False
+                "heatmapEnabled": False,
             }
 
             fourCorridor["room"] = {
@@ -268,7 +269,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": False
+                "heatmapEnabled": False,
             }
 
             twoGroups["room"] = {
@@ -339,7 +340,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": False
+                "heatmapEnabled": False,
             }
 
             twoGroups10000["room"] = {
@@ -363,7 +364,7 @@ def main(argv):
                             "mass": 50,
                             "radius": 0.05,
                             "atDestination": False,
-                            "color": [251, 255, 0]
+                            "color": [251, 255, 0],
                         }
                     )
             for i in range(0, 50):
@@ -406,7 +407,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": True
+                "heatmapEnabled": True,
             }
 
             tightCorner["room"] = {
@@ -435,7 +436,7 @@ def main(argv):
                             "mass": 50,
                             "radius": 0.05,
                             "atDestination": False,
-                            "color": [34, 174, 231]
+                            "color": [34, 174, 231],
                         }
                     )
 
@@ -460,7 +461,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": False
+                "heatmapEnabled": False,
             }
 
             laneFiltering["room"] = {
@@ -523,7 +524,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": True
+                "heatmapEnabled": True,
             }
 
             corridorWidening["room"] = {
@@ -573,7 +574,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": True
+                "heatmapEnabled": True,
             }
 
             evacuateRoom["room"] = {
@@ -621,7 +622,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": True
+                "heatmapEnabled": True,
             }
 
             evacuateRoom10000["room"] = {
@@ -639,7 +640,7 @@ def main(argv):
                 for j in range(0, 85):
                     actorList.append(
                         {
-                            "pos": [4 + (i * 0.2), 1 + (j * 0.2)],
+                            "pos": [5.2 + (i * 0.2), 1 + (j * 0.2)],
                             "velocity": [0, 0],
                             "desiredSpeed": 2.0,
                             "pathId": 0,
@@ -669,7 +670,7 @@ def main(argv):
                 "delay": 0,
                 "bgColor": [0, 0, 0],
                 "wallColor": [255, 255, 255],
-                "heatmapEnabled": True
+                "heatmapEnabled": True,
             }
 
             evacuateRoom50000["room"] = {
