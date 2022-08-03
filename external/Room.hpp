@@ -32,6 +32,7 @@
 
 class Room {
   private:
+    // Each wall is defined as a line with a start and end point
     std::vector<std::array<sycl::float2, 2>> walls;
 
   public:
