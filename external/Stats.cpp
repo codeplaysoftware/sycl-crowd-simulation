@@ -124,9 +124,8 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
 
         auto kernelDurationsForOutput = kernelDurations;
         // Discard first kernel time to prevent skewed results
-        kernelDurations.erase(kernelDurations.begin());
         auto kernelDurationsBuf =
-            sycl::buffer<int>(kernelDurations.data(), kernelDurations.size());
+            sycl::buffer<int>(kernelDurations.data() + 1, kernelDurations.size());
 
         // Calculate average kernel duration
         myQueue.submit([&](sycl::handler &cgh) {
@@ -136,6 +135,7 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
             auto sumReduction =
                 sycl::reduction(durationSumBuf, cgh, sycl::plus<int>());
 
+            auto out = sycl::stream{64, 1028, cgh};
             cgh.parallel_for(sycl::range<1>{durationAcc.size()}, sumReduction,
                              [=](sycl::id<1> index, auto &sum) {
                                  sum += durationAcc[index];
