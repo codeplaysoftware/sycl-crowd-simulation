@@ -29,7 +29,8 @@ SYCL_EXTERNAL void differentialEq(
     int actorIndex,
     sycl::accessor<Actor, 1, sycl::access::mode::read_write> actors,
     sycl::accessor<std::array<vecType, 2>, 1, sycl::access::mode::read> walls,
-    sycl::accessor<Path, 1, sycl::access::mode::read> paths) {
+    sycl::accessor<Path, 1, sycl::access::mode::read> paths, 
+    sycl::accessor<bool, 1, sycl::access::mode::read> heatmapEnabled) {
     Actor *currentActor = &actors[actorIndex];
 
     vecType pos = currentActor->getPos();
@@ -138,7 +139,7 @@ SYCL_EXTERNAL void differentialEq(
     currentActor->setSeed(randXorShift(seed));
 
     // Color actor according to heatmap
-    if (currentActor->getHeatmapEnabled()) {
+    if (heatmapEnabled[0]) {
         // theoreticalMax was decided based on observed max forces for a set of
         // configurations It may need to be altered based on the max forces of
         // your config to create a satisfying heatmap

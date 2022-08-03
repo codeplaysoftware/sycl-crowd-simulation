@@ -46,7 +46,6 @@ class Actor {
     float radius;
     bool atDestination;
     std::array<int, 3> color;
-    bool heatmapEnabled;
     std::array<int, 2> bBox;
     uint seed;
     float force;
@@ -54,7 +53,7 @@ class Actor {
   public:
     Actor(vecType pPos, vecType pVelocity, float pdesiredSpeed, int pPathId,
           float pMass, float pRadius, bool pAtDestination,
-          std::array<int, 3> pColor, bool pHeatmapEnabled);
+          std::array<int, 3> pColor);
 
     SYCL_EXTERNAL vecType getPos() const;
     SYCL_EXTERNAL vecType getVelocity() const;
@@ -65,7 +64,6 @@ class Actor {
     SYCL_EXTERNAL float getRadius() const;
     SYCL_EXTERNAL bool getAtDestination() const;
     SYCL_EXTERNAL std::array<int, 3> getColor() const;
-    SYCL_EXTERNAL bool getHeatmapEnabled() const;
     SYCL_EXTERNAL std::array<int, 2> getBBox() const;
     SYCL_EXTERNAL uint getSeed() const;
     SYCL_EXTERNAL float getForce() const;

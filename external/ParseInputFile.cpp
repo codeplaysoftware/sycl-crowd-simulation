@@ -43,7 +43,7 @@ void validateParameters(rapidjson::Document &jsonDoc) {
     } else {
         auto &config = jsonDoc["config"];
         auto configParams = {"width", "height",    "scale",
-                             "delay", "wallColor", "bgColor"};
+                             "delay", "wallColor", "bgColor", "heatmapEnabled"};
         for (auto p : configParams) {
             if (!config.HasMember(p))
                 missingParameters += std::string(p) + " ";
@@ -54,7 +54,7 @@ void validateParameters(rapidjson::Document &jsonDoc) {
 
         auto actorParams = {"pos",           "velocity", "desiredSpeed",
                             "pathId",        "mass",     "radius",
-                            "atDestination", "color",    "heatmapEnabled"};
+                            "atDestination", "color"};
         for (auto &a : jsonDoc["actors"].GetArray()) {
             for (auto p : actorParams) {
                 if (!a.HasMember(p))
@@ -80,7 +80,7 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
                     Room &room, std::vector<Path> &paths, int &WIDTH,
                     int &HEIGHT, int &SCALE, int &DELAY,
                     std::array<int, 3> &BGCOLOR,
-                    std::array<int, 3> &WALLCOLOR) {
+                    std::array<int, 3> &WALLCOLOR, bool &HEATMAPENABLED) {
     std::ifstream jsonFile(filename);
     if (!jsonFile.is_open()) {
         throw JSONException("Error opening file " + filename);
@@ -105,6 +105,7 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
                  config["wallColor"][2].GetInt()};
     BGCOLOR = {config["bgColor"][0].GetInt(), config["bgColor"][1].GetInt(),
                config["bgColor"][2].GetInt()};
+    HEATMAPENABLED = config["heatmapEnabled"].GetBool();
 
     // Room
     auto jsonWalls = jsonDoc["room"]["walls"].GetArray();
@@ -156,9 +157,7 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
                                     jsonColor[1].GetInt(),
                                     jsonColor[2].GetInt()};
 
-        bool heatmapEnabled = a["heatmapEnabled"].GetBool();
-
         actors.push_back(Actor(pos, velocity, desiredSpeed, pathId, mass,
-                               radius, atDestination, color, heatmapEnabled));
+                               radius, atDestination, color));
     }
 }
