@@ -36,18 +36,18 @@
 
 class Actor {
   private:
-    sycl::float2 pos;
-    sycl::float2 velocity;
-    float desiredSpeed;
-    int pathId;
-    int destinationIndex;
-    float mass;
-    float radius;
-    bool atDestination;
-    std::array<int, 3> color;
-    std::array<int, 2> bBox;
-    uint seed;
-    float force;
+    std::array<int, 3> color; // 12 bytes
+    sycl::float2 pos; // 8 bytes
+    sycl::float2 velocity; // 8 bytes
+    std::array<int, 2> bBox; // 8 bytes
+    float desiredSpeed; // 4 bytes
+    int pathId; // 4 bytes
+    int destinationIndex; // 4 bytes
+    float mass; // 4 bytes
+    float radius; // 4 bytes
+    uint seed; // 4 bytes
+    float force; // 4 bytes
+    bool atDestination; // 1 byte
 
   public:
     Actor(sycl::float2 pPos, sycl::float2 pVelocity, float pdesiredSpeed, int pPathId,

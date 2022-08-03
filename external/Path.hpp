@@ -37,8 +37,8 @@ const int PATHALLOCATIONSIZE = 10;
 
 class Path {
   private:
-    int id;
     std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE> checkpoints;
+    int id;
     int pathSize;
 
   public:
