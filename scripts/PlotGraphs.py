@@ -45,6 +45,20 @@ def workingAnimation():
 animationThread = Thread(target=workingAnimation)
 animationThread.start()
 
+fig = plt.figure()
+fig.set_facecolor("black")
+ax = plt.axes()
+ax.set_facecolor("black")
+ax.spines["bottom"].set_color("white")
+ax.spines["top"].set_color("white")
+ax.spines["left"].set_color("white")
+ax.spines["right"].set_color("white")
+ax.tick_params(axis="x", colors="white")
+ax.tick_params(axis="y", colors="white")
+ax.xaxis.label.set_color("white")
+ax.yaxis.label.set_color("white")
+ax.title.set_color("white")
+
 # Plot average forces
 if not os.path.exists("../output/csv/averageForces.csv"):
     print("Error: couldn't find averageForces.csv")
@@ -54,13 +68,27 @@ else:
         averageForces = list(reader)
         averageForces = list(zip(*averageForces))
 
-    plt.plot(averageForces[0], averageForces[1])
+    plt.plot(averageForces[0], averageForces[1], color="#A90092")
     plt.xlabel("Timestep")
     plt.ylabel("Average Force (N)")
     plt.title("Average Force Applied to Actor")
     plt.savefig("../output/images/averageForcesGraph.png")
 
     plt.clf()
+
+fig = plt.figure()
+fig.set_facecolor("black")
+ax = plt.axes()
+ax.set_facecolor("black")
+ax.spines["bottom"].set_color("white")
+ax.spines["top"].set_color("white")
+ax.spines["left"].set_color("white")
+ax.spines["right"].set_color("white")
+ax.tick_params(axis="x", colors="white")
+ax.tick_params(axis="y", colors="white")
+ax.xaxis.label.set_color("white")
+ax.yaxis.label.set_color("white")
+ax.title.set_color("white")
 
 # Plot kernel execution times
 if not os.path.exists("../output/csv/kernelDurations.csv"):
@@ -71,13 +99,27 @@ else:
         kernelDurations = list(reader)
         kernelDurations = list(zip(*kernelDurations))
 
-    plt.plot(kernelDurations[0], kernelDurations[1], linewidth=0.5)
+    plt.plot(kernelDurations[0], kernelDurations[1], linewidth=0.5, color="#FBFF00")
     plt.xlabel("Kernel Number")
     plt.ylabel("Execution Time (μs)")
     plt.title("Kernel Execution Times")
     plt.savefig("../output/images/kernelDurationsGraph.png")
 
     plt.clf()
+
+fig = plt.figure()
+fig.set_facecolor("black")
+ax = plt.axes()
+ax.set_facecolor("black")
+ax.spines["bottom"].set_color("white")
+ax.spines["top"].set_color("white")
+ax.spines["left"].set_color("white")
+ax.spines["right"].set_color("white")
+ax.tick_params(axis="x", colors="white")
+ax.tick_params(axis="y", colors="white")
+ax.xaxis.label.set_color("white")
+ax.yaxis.label.set_color("white")
+ax.title.set_color("white")
 
 # Plot actor arrival times
 if not os.path.exists("../output/csv/destinationTimes.csv"):
@@ -104,7 +146,9 @@ else:
                         alteredDestinationTimes[1][x] += 1
 
     if len(destinationTimes) > 0:
-        plt.plot(alteredDestinationTimes[0], alteredDestinationTimes[1])
+        plt.plot(
+            alteredDestinationTimes[0], alteredDestinationTimes[1], color="#22AEE7"
+        )
         plt.xlabel("No. of Actors at Destination")
         plt.ylabel("Time (ms)")
         plt.title("Actor Arrival Times at Destination")

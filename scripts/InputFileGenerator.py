@@ -354,7 +354,7 @@ def main(argv):
 
             actorList = []
             for i in range(0, 50):
-                for j in range(0, 98):
+                for j in range(0, 99):
                     actorList.append(
                         {
                             "pos": [29.8 - (i * 0.2), 0.2 + (j * 0.2)],
@@ -368,7 +368,7 @@ def main(argv):
                         }
                     )
             for i in range(0, 50):
-                for j in range(0, 98):
+                for j in range(0, 99):
                     actorList.append(
                         {
                             "pos": [0.2 + (i * 0.2), 0.2 + (j * 0.2)],
