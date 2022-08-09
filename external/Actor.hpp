@@ -76,8 +76,8 @@ class Actor {
     SYCL_EXTERNAL void setSeed(uint newSeed);
     SYCL_EXTERNAL void setForce(float newForce);
 
-    SYCL_EXTERNAL void
-    checkAtDestination(sycl::float4 destination, int pathSize);
+    SYCL_EXTERNAL void checkAtDestination(sycl::float4 destination,
+                                          int pathSize);
 };
 
 #endif

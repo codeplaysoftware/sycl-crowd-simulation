@@ -116,7 +116,7 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
         auto kernelDurationsForOutput = kernelDurations;
         // Discard first kernel time to prevent skewed results
         auto kernelDurationsBuf = sycl::buffer<int>(kernelDurations.data() + 1,
-                                                    kernelDurations.size());
+                                                    kernelDurations.size() - 1);
 
         // Calculate average kernel duration
         myQueue.submit([&](sycl::handler &cgh) {

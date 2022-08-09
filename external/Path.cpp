@@ -25,10 +25,8 @@
 
 #include "Path.hpp"
 
-Path::Path(
-    int pId,
-    std::array<sycl::float4, PATH_ALLOCATION_SIZE> pCheckpoints,
-    int pPathSize)
+Path::Path(int pId, std::array<sycl::float4, PATH_ALLOCATION_SIZE> pCheckpoints,
+           int pPathSize)
     : id(pId), checkpoints(pCheckpoints), pathSize(pPathSize) {}
 
 SYCL_EXTERNAL int Path::getId() const { return id; }
@@ -43,7 +41,6 @@ SYCL_EXTERNAL int Path::getPathSize() const { return pathSize; }
 void Path::setId(int newId) { id = newId; }
 
 void Path::setCheckpoints(
-    std::array<sycl::float4, PATH_ALLOCATION_SIZE>
-        newCheckpoints) {
+    std::array<sycl::float4, PATH_ALLOCATION_SIZE> newCheckpoints) {
     checkpoints = newCheckpoints;
 }

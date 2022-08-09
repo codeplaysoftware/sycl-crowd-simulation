@@ -20,7 +20,7 @@
  *
  *  Description:
  *    Operator overloading for common operators on vectors
- * 
+ *
  **************************************************************************/
 
 #ifndef VectorMaths_hpp

@@ -42,9 +42,7 @@ class Path {
     int pathSize;
 
   public:
-    Path(int pId,
-         std::array<sycl::float4, PATH_ALLOCATION_SIZE>
-             pCheckpoints,
+    Path(int pId, std::array<sycl::float4, PATH_ALLOCATION_SIZE> pCheckpoints,
          int pPathSize);
 
     SYCL_EXTERNAL int getId() const;
@@ -53,9 +51,8 @@ class Path {
     SYCL_EXTERNAL int getPathSize() const;
 
     void setId(int newId);
-    void
-    setCheckpoints(std::array<sycl::float4, PATH_ALLOCATION_SIZE>
-                       newCheckpoints);
+    void setCheckpoints(
+        std::array<sycl::float4, PATH_ALLOCATION_SIZE> newCheckpoints);
 };
 
 #endif
