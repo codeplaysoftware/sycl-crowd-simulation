@@ -37,24 +37,24 @@ const int PATHALLOCATIONSIZE = 10;
 
 class Path {
   private:
-    std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE> checkpoints;
+    std::array<sycl::float4, PATHALLOCATIONSIZE> checkpoints;
     int id;
     int pathSize;
 
   public:
     Path(int pId,
-         std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE>
+         std::array<sycl::float4, PATHALLOCATIONSIZE>
              pCheckpoints,
          int pPathSize);
 
     SYCL_EXTERNAL int getId() const;
-    SYCL_EXTERNAL std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE>
+    SYCL_EXTERNAL std::array<sycl::float4, PATHALLOCATIONSIZE>
     getCheckpoints() const;
     SYCL_EXTERNAL int getPathSize() const;
 
     void setId(int newId);
     void
-    setCheckpoints(std::array<std::array<sycl::float2, 2>, PATHALLOCATIONSIZE>
+    setCheckpoints(std::array<sycl::float4, PATHALLOCATIONSIZE>
                        newCheckpoints);
 };
 

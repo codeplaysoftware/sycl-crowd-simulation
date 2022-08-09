@@ -86,11 +86,11 @@ SYCL_EXTERNAL void Actor::setSeed(uint newSeed) { seed = newSeed; }
 SYCL_EXTERNAL void Actor::setForce(float newForce) { force = newForce; }
 
 SYCL_EXTERNAL void
-Actor::checkAtDestination(std::array<sycl::float2, 2> destination,
+Actor::checkAtDestination(sycl::float4 destination,
                           int pathSize) {
     // Destinations are defined as rectangular regions
-    if (pos[0] >= destination[0][0] && pos[0] <= destination[1][0] &&
-        pos[1] >= destination[0][1] && pos[1] <= destination[1][1]) {
+    if (pos[0] >= destination[0] && pos[0] <= destination[2] &&
+        pos[1] >= destination[1] && pos[1] <= destination[3]) {
         if (destinationIndex >= PATHALLOCATIONSIZE - 1 ||
             destinationIndex >= pathSize - 1) {
             this->setAtDestination(true);

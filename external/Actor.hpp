@@ -77,7 +77,7 @@ class Actor {
     SYCL_EXTERNAL void setForce(float newForce);
 
     SYCL_EXTERNAL void
-    checkAtDestination(std::array<sycl::float2, 2> destination, int pathSize);
+    checkAtDestination(sycl::float4 destination, int pathSize);
 };
 
 #endif
