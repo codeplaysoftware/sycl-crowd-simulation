@@ -76,10 +76,10 @@ void validateParameters(rapidjson::Document &jsonDoc) {
 }
 
 void parseInputFile(std::string filename, std::vector<Actor> &actors,
-                    Room &room, std::vector<Path> &paths, int &WIDTH,
-                    int &HEIGHT, int &SCALE, int &DELAY,
-                    std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR,
-                    bool &HEATMAPENABLED) {
+                    Room &room, std::vector<Path> &paths, int &width,
+                    int &height, int &scale, int &delay,
+                    std::array<int, 3> &bgColor, std::array<int, 3> &wallColor,
+                    bool &heatmapEnabled) {
     std::ifstream jsonFile(filename);
     if (!jsonFile.is_open()) {
         throw JSONException("Error opening file " + filename);
@@ -95,16 +95,16 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
 
     // Config
     auto &config = jsonDoc["config"];
-    WIDTH = config["width"].GetInt();
-    HEIGHT = config["height"].GetInt();
-    SCALE = config["scale"].GetInt();
-    DELAY = config["delay"].GetInt();
-    WALLCOLOR = {config["wallColor"][0].GetInt(),
+    width = config["width"].GetInt();
+    height = config["height"].GetInt();
+    scale = config["scale"].GetInt();
+    delay = config["delay"].GetInt();
+    wallColor = {config["wallColor"][0].GetInt(),
                  config["wallColor"][1].GetInt(),
                  config["wallColor"][2].GetInt()};
-    BGCOLOR = {config["bgColor"][0].GetInt(), config["bgColor"][1].GetInt(),
+    bgColor = {config["bgColor"][0].GetInt(), config["bgColor"][1].GetInt(),
                config["bgColor"][2].GetInt()};
-    HEATMAPENABLED = config["heatmapEnabled"].GetBool();
+    heatmapEnabled = config["heatmapEnabled"].GetBool();
 
     // Room
     auto jsonWalls = jsonDoc["room"]["walls"].GetArray();
@@ -120,8 +120,8 @@ void parseInputFile(std::string filename, std::vector<Actor> &actors,
     for (auto &p : jsonPaths) {
         int id = p["id"].GetInt();
         auto jsonCheckpoints = p["checkpoints"].GetArray();
-        std::array<sycl::float4, PATHALLOCATIONSIZE> checkpoints;
-        if (jsonCheckpoints.Size() > PATHALLOCATIONSIZE) {
+        std::array<sycl::float4, PATH_ALLOCATION_SIZE> checkpoints;
+        if (jsonCheckpoints.Size() > PATH_ALLOCATION_SIZE) {
             throw JSONException(
                 "Path Size exceeds amount allocated in memory\nEither reduce "
                 "path size or increase PATHALLOCATIONSIZE in 'Path.hpp'");

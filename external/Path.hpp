@@ -33,28 +33,28 @@
 // Constant denoting the size of the array used to store paths
 // SYCL kernels can't use dynamic vectors, so paths are stored in
 // a fixed-size array, so the path size can't exceed this constant
-const int PATHALLOCATIONSIZE = 10;
+const int PATH_ALLOCATION_SIZE = 10;
 
 class Path {
   private:
-    std::array<sycl::float4, PATHALLOCATIONSIZE> checkpoints;
+    std::array<sycl::float4, PATH_ALLOCATION_SIZE> checkpoints;
     int id;
     int pathSize;
 
   public:
     Path(int pId,
-         std::array<sycl::float4, PATHALLOCATIONSIZE>
+         std::array<sycl::float4, PATH_ALLOCATION_SIZE>
              pCheckpoints,
          int pPathSize);
 
     SYCL_EXTERNAL int getId() const;
-    SYCL_EXTERNAL std::array<sycl::float4, PATHALLOCATIONSIZE>
+    SYCL_EXTERNAL std::array<sycl::float4, PATH_ALLOCATION_SIZE>
     getCheckpoints() const;
     SYCL_EXTERNAL int getPathSize() const;
 
     void setId(int newId);
     void
-    setCheckpoints(std::array<sycl::float4, PATHALLOCATIONSIZE>
+    setCheckpoints(std::array<sycl::float4, PATH_ALLOCATION_SIZE>
                        newCheckpoints);
 };
 

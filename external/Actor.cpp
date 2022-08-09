@@ -91,7 +91,7 @@ Actor::checkAtDestination(sycl::float4 destination,
     // Destinations are defined as rectangular regions
     if (pos[0] >= destination[0] && pos[0] <= destination[2] &&
         pos[1] >= destination[1] && pos[1] <= destination[3]) {
-        if (destinationIndex >= PATHALLOCATIONSIZE - 1 ||
+        if (destinationIndex >= PATH_ALLOCATION_SIZE - 1 ||
             destinationIndex >= pathSize - 1) {
             this->setAtDestination(true);
         } else {

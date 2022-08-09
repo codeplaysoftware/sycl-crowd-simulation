@@ -45,17 +45,15 @@
 #include "Stats.hpp"
 #endif
 
-uint GLOBALSEED;
-
-void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY,
-          std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR,
-          bool &HEATMAPENABLED, std::vector<Actor> &actors, Room &room,
+void init(int &width, int &height, int &scale, int &delay,
+          std::array<int, 3> &bgColor, std::array<int, 3> &wallColor,
+          bool &heatmapEnabled, std::vector<Actor> &actors, Room &room,
           std::vector<Path> &paths, int argc, char **argv) {
     // Read from input file path JSON
     if (argc == 2) {
         std::string inputPath = argv[1];
-        parseInputFile(inputPath, actors, room, paths, WIDTH, HEIGHT, SCALE,
-                       DELAY, BGCOLOR, WALLCOLOR, HEATMAPENABLED);
+        parseInputFile(inputPath, actors, room, paths, width, height, scale,
+                       delay, bgColor, wallColor, heatmapEnabled);
     } else if (argc < 2) {
         throw std::invalid_argument(
             "Input configuration file must be supplied");
@@ -73,12 +71,12 @@ void init(int &WIDTH, int &HEIGHT, int &SCALE, int &DELAY,
 }
 
 #ifndef PROFILING_MODE
-void initSDL(int WIDTH, int HEIGHT, int SCALE, SDL_Window *&win,
+void initSDL(int width, int height, int scale, SDL_Window *&win,
              SDL_Renderer *&render) {
     SDL_Init(SDL_INIT_VIDEO);
     win = SDL_CreateWindow("SYCL Crowd Simulation", SDL_WINDOWPOS_UNDEFINED,
-                           SDL_WINDOWPOS_UNDEFINED, WIDTH * SCALE,
-                           HEIGHT * SCALE, SDL_WINDOW_SHOWN);
+                           SDL_WINDOWPOS_UNDEFINED, width * scale,
+                           height * scale, SDL_WINDOW_SHOWN);
     render = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
 }
 
@@ -96,29 +94,29 @@ void drawCircle(SDL_Renderer *&render, SDL_Point center, int radius,
     }
 }
 
-void draw(int SCALE, std::array<int, 3> BGCOLOR, std::array<int, 3> WALLCOLOR,
+void draw(int scale, std::array<int, 3> bgColor, std::array<int, 3> wallColor,
           SDL_Renderer *&render,
           sycl::host_accessor<Actor, 1, sycl::access::mode::read> actors,
           Room room) {
-    SDL_SetRenderDrawColor(render, BGCOLOR[0], BGCOLOR[1], BGCOLOR[2], 255);
+    SDL_SetRenderDrawColor(render, bgColor[0], bgColor[1], bgColor[2], 255);
     SDL_RenderClear(render);
 
     for (int i = 0; i < actors.size(); i++) {
         auto actor = actors[i];
-        SDL_Point pos = {int(actor.getPos()[0] * SCALE),
-                         int(actor.getPos()[1] * SCALE)};
+        SDL_Point pos = {int(actor.getPos()[0] * scale),
+                         int(actor.getPos()[1] * scale)};
         SDL_Color actorColor = {Uint8(actor.getColor()[0]),
                                 Uint8(actor.getColor()[1]),
                                 Uint8(actor.getColor()[2]), 255};
-        drawCircle(render, pos, actor.getRadius() * SCALE, actorColor);
+        drawCircle(render, pos, actor.getRadius() * scale, actorColor);
     }
 
-    SDL_SetRenderDrawColor(render, WALLCOLOR[0], WALLCOLOR[1], WALLCOLOR[2],
+    SDL_SetRenderDrawColor(render, wallColor[0], wallColor[1], wallColor[2],
                            255);
     auto walls = room.getWalls();
     for (auto wall : walls) {
-        SDL_RenderDrawLine(render, wall[0][0] * SCALE, wall[0][1] * SCALE,
-                           wall[1][0] * SCALE, wall[1][1] * SCALE);
+        SDL_RenderDrawLine(render, wall[0][0] * scale, wall[0][1] * scale,
+                           wall[1][0] * scale, wall[1][1] * scale);
     }
 
     SDL_RenderPresent(render);
@@ -183,14 +181,14 @@ void updateBBox(sycl::queue &myQueue, sycl::buffer<Actor> &actorBuf) {
 }
 
 int main(int argc, char *argv[]) {
-    int WIDTH;  // metres
-    int HEIGHT; // metres
-    int SCALE;
-    int DELAY;
-    bool HEATMAPENABLED;
+    int width;  // metres
+    int height; // metres
+    int scale;
+    int delay;
+    bool heatmapEnabled;
 
-    std::array<int, 3> BGCOLOR;
-    std::array<int, 3> WALLCOLOR;
+    std::array<int, 3> bgColor;
+    std::array<int, 3> wallColor;
 
     std::vector<Actor> actors;
     Room room = Room({});
@@ -204,13 +202,13 @@ int main(int argc, char *argv[]) {
 
     sycl::queue myQueue{sycl::gpu_selector(), asyncHandler};
 
-    init(WIDTH, HEIGHT, SCALE, DELAY, BGCOLOR, WALLCOLOR, HEATMAPENABLED,
+    init(width, height, scale, delay, bgColor, wallColor, heatmapEnabled,
          actors, room, paths, argc, argv);
 
 #ifndef PROFILING_MODE
     SDL_Window *win;
     SDL_Renderer *render;
-    initSDL(WIDTH, HEIGHT, SCALE, win, render);
+    initSDL(width, height, scale, win, render);
 #endif
 
     // Buffer creation
@@ -221,7 +219,7 @@ int main(int argc, char *argv[]) {
     wallsBuf.set_final_data(nullptr);
     auto pathsBuf = sycl::buffer<Path>(paths.data(), paths.size());
     pathsBuf.set_final_data(nullptr);
-    auto heatmapEnableBuf = sycl::buffer<bool>(&HEATMAPENABLED, 1);
+    auto heatmapEnableBuf = sycl::buffer<bool>(&heatmapEnabled, 1);
 
     int delayCounter = 0;
     int updateBBoxCounter = 0;
@@ -260,7 +258,7 @@ int main(int argc, char *argv[]) {
 #endif
 
         if (!isPause) {
-            if (delayCounter >= DELAY) {
+            if (delayCounter >= delay) {
                 delayCounter = 0;
 
 #ifdef STATS
@@ -294,7 +292,7 @@ int main(int argc, char *argv[]) {
                     actorHostAcc(actorBuf);
 
 #ifndef PROFILING_MODE
-                draw(SCALE, BGCOLOR, WALLCOLOR, render, actorHostAcc, room);
+                draw(scale, bgColor, wallColor, render, actorHostAcc, room);
 #endif
 
                 updateBBoxCounter--;

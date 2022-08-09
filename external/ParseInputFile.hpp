@@ -47,9 +47,9 @@ class JSONException : public std::runtime_error {
 void validateParameters(rapidjson::Document &jsonDoc);
 
 void parseInputFile(std::string filename, std::vector<Actor> &actors,
-                    Room &room, std::vector<Path> &paths, int &WIDTH,
-                    int &HEIGHT, int &SCALE, int &DELAY,
-                    std::array<int, 3> &BGCOLOR, std::array<int, 3> &WALLCOLOR,
-                    bool &HEATMAPENABLED);
+                    Room &room, std::vector<Path> &paths, int &width,
+                    int &height, int &scale, int &delay,
+                    std::array<int, 3> &bgColor, std::array<int, 3> &wallColor,
+                    bool &heatmapEnabled);
 
 #endif
