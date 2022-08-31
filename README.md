@@ -21,8 +21,6 @@ Dirk Helbing introduced the social force model in a paper in 1995, aimed at mode
 - If targeting the DPC++ CUDA backend, the [CUDA runtime](https://intel.github.io/llvm-docs/GetStartedGuide.html#build-dpc-toolchain-with-support-for-nvidia-cuda) is required
 - If targeting the DPC++ OpenCL backend, an [OpenCL runtime](https://intel.github.io/llvm-docs/GetStartedGuide.html#install-low-level-runtime) is required
 - Graphics are rendered with [SDL2](https://lazyfoo.net/tutorials/SDL/01_hello_SDL/linux/index.php), installed with apt: `$ apt install libsdl2-dev`
-- Input files are parsed using [RapidJSON](https://rapidjson.org/index.html)  
-RapidJSON is a header-only library, so can be installed by simply copying the directory `include/rapidjson` into your system include path
 - Python is needed to run scripts
 - Graphs are plotted using matplotlib, installed via pip: `$ pip install matplotlib`
 - To run simulations in headless mode and record video output, install [xvfb](https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml) and [ffmpeg](https://ffmpeg.org/download.html) using apt
