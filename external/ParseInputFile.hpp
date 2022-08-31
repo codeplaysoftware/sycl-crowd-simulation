@@ -29,10 +29,10 @@
 #include "Actor.hpp"
 #include "Path.hpp"
 #include "Room.hpp"
+#include "rapidjson/document.h"
 #include <array>
 #include <fstream>
 #include <iostream>
-#include <rapidjson/document.h>
 #include <sstream>
 #include <string>
 #include <sycl/sycl.hpp>
