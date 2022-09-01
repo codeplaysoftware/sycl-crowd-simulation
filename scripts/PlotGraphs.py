@@ -149,8 +149,8 @@ else:
         plt.plot(
             alteredDestinationTimes[0], alteredDestinationTimes[1], color="#22AEE7"
         )
-        plt.xlabel("No. of Actors at Destination")
-        plt.ylabel("Time (ms)")
+        plt.xlabel("Time (ms)")
+        plt.ylabel("No. of Actors at Destination")
         plt.title("Actor Arrival Times at Destination")
         plt.savefig("../output/images/destinationTimesGraph.png")
 
