@@ -118,6 +118,13 @@ The social force model itself can be tweaked by altering the constexprs defined 
 
 ## Benchmarks
 
+Ran on NVIDIA Titan RTX with `PROFLILING_MODE` enabled and `STATS` disabled
+
+|  | **500 iterations<br>1000 actors** | **500 iterations<br>10,000 actors** | **500 iterations<br>50,000 actors** |
+|---|---|---|---|
+| **Average kernel duration** | 0.0000321078s | 0.0000797784s | 0.00040853s |
+| **Total execution time** | 0.180193s | 2.29063s | 20.75141s |
+
 ## Citations
 
 - Helbing, D., Farkas, I. & Vicsek, T. Simulating dynamical features of escape panic. Nature 407, 487–490 (2000). https://doi.org/10.1038/35035023

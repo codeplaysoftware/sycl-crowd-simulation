@@ -146,7 +146,7 @@ void finalizeStats(sycl::queue myQueue, std::vector<float> averageForces,
             outputFile.open("../output/outputStats.txt", std::ios::out);
 
             outputFile << "No. of actors: " << numActors << std::endl;
-            outputFile << "Average kernel executation time: "
+            outputFile << "Average kernel execution time: "
                        << avgKernelDuration
                        << "μs   NOTE: First kernel time has been disregarded"
                        << std::endl;
