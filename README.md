@@ -19,7 +19,8 @@ Dirk Helbing introduced the social force model in a paper in 1995, aimed at mode
 
 - The [DPC++ compiler](https://intel.github.io/llvm-docs/GetStartedGuide.html) is required to compile SYCL code
 - If targeting the DPC++ CUDA backend, the [CUDA runtime](https://intel.github.io/llvm-docs/GetStartedGuide.html#build-dpc-toolchain-with-support-for-nvidia-cuda) is required
-- If targeting the DPC++ OpenCL backend, an [OpenCL runtime](https://intel.github.io/llvm-docs/GetStartedGuide.html#install-low-level-runtime) is required
+- If targeting the DPC++ OpenCL backend, an [OpenCL runtime](https://intel.github.io/llvm-docs/GetStartedGuide.html#install-low-level-runtime) is require
+- [CMake](https://cmake.org/install/) is used for build configuration
 - Graphics are rendered with [SDL2](https://lazyfoo.net/tutorials/SDL/01_hello_SDL/linux/index.php), installed with apt: `$ apt install libsdl2-dev`
 - Python is needed to run scripts
 - Graphs are plotted using matplotlib, installed via pip: `$ pip install matplotlib`
