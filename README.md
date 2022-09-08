@@ -34,14 +34,14 @@ The option `-DSYCL_BACKEND` allows you to select which backend to build for (spi
 
 When enabled, the `-DPROFILING_MODE` option builds a headless version which can be run without the SDL dependency.
 
-When enabled, the `-DSTATS` option will collect metrics whilst the simulation is running. Results are written to `output/outputStats`.txt. Graphs can be produced from these metrics by running the python script [PlotGraphs.py](scripts/PlotGraphs.py).
+When enabled, the `-DSTATS` option will collect metrics whilst the simulation is running. Results are written to `output/outputStats.txt`. Graphs can be produced from these metrics by running the python script [PlotGraphs.py](scripts/PlotGraphs.py).
 
 By default, CMake should generate example input files by running [InputFileGenerator.py](scripts/InputFileGenerator.py) when generating the project makefiles.
 
 The `crowdsim` executable takes an input configuration JSON as a command line argument.
 
 ```
-$ git clone https://[repo link]
+$ git clone https://github.com/codeplaysoftware/sycl-crowd-simulation.git
 $ cd crowd-simulation
 $ mkdir build && cd build
 $ cmake -DCMAKE_CXX_COMPILER=path/to/llvm/build/bin/clang++ -DSYCL_BACKEND=spir -DPROFILING_MODE=off -DSTATS=on ..
@@ -119,7 +119,7 @@ The social force model itself can be tweaked by altering the constexprs defined 
 
 ## Benchmarks
 
-Ran on NVIDIA Titan RTX with `PROFLILING_MODE` enabled and `STATS` disabled
+Ran on NVIDIA Titan RTX with `PROFLILING_MODE` enabled and `STATS` disabled.
 
 |  | **500 iterations<br>1000 actors** | **500 iterations<br>10,000 actors** | **500 iterations<br>50,000 actors** |
 |---|---|---|---|
