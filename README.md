@@ -17,7 +17,7 @@ Dirk Helbing introduced the social force model in a paper in 1995, aimed at mode
 
 ## Dependencies
 
-- The [DPC++ compiler](https://intel.github.io/llvm-docs/GetStartedGuide.html) is required to compile SYCL code
+- The [DPC++ compiler](https://intel.github.io/llvm-docs/GetStartedGuide.html) is the required version of clang compiler to compile SYCL code
 - If targeting the DPC++ CUDA backend, the [CUDA runtime](https://intel.github.io/llvm-docs/GetStartedGuide.html#build-dpc-toolchain-with-support-for-nvidia-cuda) is required
 - If targeting the DPC++ OpenCL backend, an [OpenCL runtime](https://intel.github.io/llvm-docs/GetStartedGuide.html#install-low-level-runtime) is require
 - [CMake](https://cmake.org/install/) is used for build configuration
@@ -36,7 +36,7 @@ When enabled, the `-DPROFILING_MODE` option builds a headless version which can 
 
 When enabled, the `-DSTATS` option will collect metrics whilst the simulation is running. Results are written to `output/outputStats.txt`. Graphs can be produced from these metrics by running the python script [PlotGraphs.py](scripts/PlotGraphs.py).
 
-By default, CMake should generate example input files by running [InputFileGenerator.py](scripts/InputFileGenerator.py) when generating the project makefiles.
+By default, CMake should generate example input files by running [InputFileGenerator.py](scripts/InputFileGenerator.py) when generating the project makefiles. Be sure to enter the path to the DPC++ clang compiler. This would normally reside in `/opt/intel/oneapi/latest/compiler/linux/bin-llvm/`. `latest` is an alias for the version of the oneAPI base toolkit installed.
 
 The `crowdsim` executable takes an input configuration JSON as a command line argument.
 
@@ -44,7 +44,7 @@ The `crowdsim` executable takes an input configuration JSON as a command line ar
 $ git clone https://github.com/codeplaysoftware/sycl-crowd-simulation.git
 $ cd crowd-simulation
 $ mkdir build && cd build
-$ cmake -DCMAKE_CXX_COMPILER=path/to/llvm/build/bin/clang++ -DSYCL_BACKEND=spir -DPROFILING_MODE=off -DSTATS=on ..
+$ cmake -DCMAKE_CXX_COMPILER=path/to/the/oneapi/llvm/build/bin/clang++ -DSYCL_BACKEND=spir -DPROFILING_MODE=off -DSTATS=on ..
 $ cmake --build .
 $ ./crowdsim ../input/evacuateRoom.json
 ```
