@@ -40,6 +40,7 @@ Description:
 import json
 import random
 import sys
+import os
 from threading import Thread
 import time
 
@@ -711,9 +712,11 @@ def main(argv):
 
     # Write configurations to JSON files
     for config in toGenerate:
-        with open("../input/" + config[0] + ".json", "w") as out:
+        outputDir = os.path.dirname(os.path.realpath(__file__)) + '/../input/'
+        outputFileName = outputDir + config[0] + ".json"
+        with open(outputFileName, "w") as out:
             json.dump(config[1], out, ensure_ascii=False, indent=4)
-        print("Finished Generating ../input/" + config[0] + ".json")
+        print("Finished Generating " + outputFileName)
 
 
 if __name__ == "__main__":
