@@ -32,7 +32,7 @@ endif()
 
 find_package(Python QUIET)
 if(Python_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/scripts/InputFileGenerator.py")
-    execute_process(COMMAND ${Python_EXECUTABLE} ../scripts/InputFileGenerator.py)
+    execute_process(COMMAND ${Python_EXECUTABLE} ${PROJECT_SOURCE_DIR}/scripts/InputFileGenerator.py)
 else()
     message(WARNING "Unable to generate input configuration files")
 endif()
