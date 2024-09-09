@@ -1,5 +1,7 @@
 # SYCL-Crowd-Simulation
 
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/codeplaysoftware/sycl-crowd-simulation/badge)](https://scorecard.dev/viewer/?uri=github.com/codeplaysoftware/sycl-crowd-simulation)
+
 SYCL GPU-accelerated crowd simulation engine based on Helbing et. al.'s social force model.
 
 Dirk Helbing introduced the social force model in a paper in 1995, aimed at modelling the behaviour of crowds using Langevin equations. He proposed a refined model in a 2000 paper, "Simulating Dynamical Features of Escape Panic". Helbing posits that human behaviour in large crowds is determined by three component forces: A personal impulse towards one's destination, the cumulative force exerted by neighbouring people, and the repulsive force of any nearby walls. Together, these forces form the basis of a differential equation which can subsequently be integrated in order to calculate the actor's velocity.
