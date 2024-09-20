@@ -8,7 +8,7 @@ on:
   schedule:
     - cron: '43 17 * * 1'
   push:
-    branches: [ "sycl-develop" ]
+    branches: [ "main" ]
 
 # Declare default permissions as read only.
 permissions: read-all
